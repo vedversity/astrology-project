@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<title>Janam Patrika</title>
+<style>{{ css|safe }}</style>
+</head>
+<body class="{{ lang }}">
+{% set pg = namespace(n=0) %}
+
+{% macro page_open() %}{% set pg.n = pg.n + 1 %}<section class="page"><div class="frame"></div><div class="fit">{% endmacro %}
+{% macro page_close() %}</div><div class="footer">Janam Patrika · {{ person.display_name }} · Page {{ pg.n }}</div></section>{% endmacro %}
+{% macro title(hi, en) %}<div class="title"><div class="hi">{{ hi }}</div><div class="en">{{ en }}</div><div class="stars">✦✦✦</div></div>{% endmacro %}
+{% macro bar(hi, en) %}<div class="bar">{{ hi }} · {{ en }}</div>{% endmacro %}
+
+{% macro glance() %}
+<table class="kv">
+  <tr><td>{{ L('राशि · नक्षत्र', 'Rashi · Nakshatra') }}{% if chart.lagna %} · {{ L('लग्न', 'Lagna') }}{% endif %}</td><td>{{ t(av.rashi) }} · {{ t(av.nakshatra) }} ({{ L('चरण', 'pada') }} {{ av.pada }}){% if chart.lagna %} · {{ t(chart.lagna.sign) }}{% endif %}</td></tr>
+  <tr><td>{{ L('नाम अक्षर', 'Naam Akshar') }}</td><td><b>{{ names.primary.hi }} ({{ names.primary.en }})</b> – {{ L('अन्य', 'also') }} {% for x in names.nakshatra if x.hi != names.primary.hi %}{{ x.hi }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>
+  <tr><td>{{ L('प्रमुख योग', 'Major yogas') }}</td><td>{% for y in content.summary.yogas %}{{ t(y) }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</td></tr>
+  <tr><td>{{ L('दोष', 'Doshas') }}</td><td>{% for d in content.summary.doshas %}{{ t(d.name) }} ({{ t(d.status) }}){% if not loop.last %} · {% endif %}{% else %}{{ L('कोई नहीं', 'None') }}{% endfor %}</td></tr>
+  <tr><td>{{ L('चल रही दशा', 'Running dasha') }}</td><td>{{ P(dasha.current_at_birth.mahadasha) }} {{ L('महादशा', 'Mahadasha') }} ({{ L('समाप्ति', 'till') }} {{ t(content.dasha[0].to) }})</td></tr>
+  <tr><td>{{ L('मूलांक · भाग्यांक · कुआ', 'Mulank · Bhagyank · Kua') }}</td><td>{{ num.mulank.number }} · {{ num.bhagyank.number }} · {{ num.kua.number }}</td></tr>
+  <tr><td>{{ L('श्रेष्ठ नामांक', 'Best name numbers') }}</td><td>{{ numbers.relationship.friendly|join(', ') }} · {{ L('त्याज्य', 'avoid') }} {{ numbers.relationship.avoid|join(', ') }}</td></tr>
+  {% if content.summary.strongest_areas %}<tr><td>{{ L('सबसे बली क्षेत्र', 'Strongest life areas') }}</td><td>{% for a in content.summary.strongest_areas %}{{ t(a) }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>{% endif %}
+</table>
+{% endmacro %}
+
+{# ================= 1. COVER ================= #}
+{{ page_open() }}
+<div class="cover">
+  <div class="invocation">{{ content.general.invocation }}</div>
+  {% if content.general.kuldevi_line %}<div class="kuldevi">{{ content.general.kuldevi_line.hi }}</div>{% endif %}
+  <div class="om">ॐ</div>
+  <h1>जन्म पत्रिका</h1>
+  <div class="latin">JANAM PATRIKA · VEDIC HOROSCOPE</div>
+  <div class="shloka">{{ content.general.cover_shloka }}</div>
+  <svg class="emblem" viewBox="-50 -50 100 100">
+    <circle r="48" fill="#fffdf6" stroke="#c9a24b" stroke-width="1.2"/>
+    <circle r="43" fill="none" stroke="#c9a24b" stroke-width="0.5"/>
+    {% for i in range(12) %}<ellipse cx="0" cy="-24" rx="8" ry="16" fill="#fbeecb" stroke="#c9a24b" stroke-width="0.8" transform="rotate({{ i * 30 }})"/>{% endfor %}
+    <circle r="11" fill="#fffdf6" stroke="#c9a24b" stroke-width="0.8"/>
+    <circle r="4" fill="#d9691a"/>
+  </svg>
+  <div class="box">
+    <table>
+      <tr><td>{{ 'बालक' if person.gender == 'male' else 'बालिका' }} / Child</td><td>{{ person.display_name }}</td></tr>
+      {% if person.father_name %}<tr><td>पिता / Father</td><td>{{ person.father_name }}</td></tr>{% endif %}
+      {% if person.mother_name %}<tr><td>माता / Mother</td><td>{{ person.mother_name }}</td></tr>{% endif %}
+      {% if person.gotra %}<tr><td>गोत्र / Gotra</td><td>{{ person.gotra }}</td></tr>{% endif %}
+      {% if person.kuldevi %}<tr><td>कुलदेवी / Kuldevi</td><td>{{ person.kuldevi }}</td></tr>{% endif %}
+      <tr><td>जन्म तिथि / Date of birth</td><td>{{ t(chart.panchang.vedic_weekday) if not chart.meta.time_known else t(weekday) }}, {{ long_date(chart.input.local_datetime) }}</td></tr>
+      <tr><td>जन्म समय / Time of birth</td><td>{% if chart.meta.time_known %}{{ clock(chart.input.local_datetime) }}{% else %}{{ L('ज्ञात नहीं', 'Not known') }}{% endif %}</td></tr>
+      {% if person.place %}<tr><td>जन्म स्थान / Place of birth</td><td>{{ person.place }}</td></tr>{% endif %}
+      <tr><td>राशि · नक्षत्र / Rashi · Nakshatra</td><td>{{ t(av.rashi) }} · {{ t(av.nakshatra) }} {{ L('चरण', 'pada') }} {{ av.pada }} · {{ L('नाम अक्षर', 'name letter') }} <b>{{ av.naam_akshar.hi }} / {{ av.naam_akshar.en }}</b></td></tr>
+      {% if chart.lagna %}<tr><td>लग्न / Lagna (Ascendant)</td><td>{{ t(chart.lagna.sign) }}</td></tr>{% endif %}
+    </table>
+  </div>
+  <div class="blessing">{{ content.general.cover_blessing }}</div>
+</div>
+{{ page_close() }}
+
+{# ================= 2. BIRTH DETAILS & PANCHANG ================= #}
+{{ page_open() }}
+{{ title('जन्म विवरण एवं पंचांग', 'Birth Details & Panchang') }}
+<div class="cols">
+  <div>
+    {{ bar('जन्म विवरण', 'Birth Particulars') }}
+    <table class="kv">
+      <tr><td>{{ L('दिनांक', 'Date') }}</td><td>{{ long_date(chart.input.local_datetime) }}</td></tr>
+      <tr><td>{{ L('वार', 'Day') }}</td><td>{{ t(weekday) }}</td></tr>
+      <tr><td>{{ L('समय', 'Time') }}</td><td>{% if chart.meta.time_known %}{{ clock(chart.input.local_datetime) }} ({{ utc_clock }} UTC){% else %}{{ L('ज्ञात नहीं', 'Not known') }}{% endif %}</td></tr>
+      <tr><td>{{ L('समय क्षेत्र', 'Time zone') }}</td><td>{{ chart.input.timezone }} ({{ utc_offset }})</td></tr>
+      {% if person.place %}<tr><td>{{ L('स्थान', 'Place') }}</td><td>{{ person.place }}</td></tr>{% endif %}
+      <tr><td>{{ L('अक्षांश', 'Latitude') }}</td><td>{{ dms(chart.input.latitude, 'N', 'S') }}</td></tr>
+      <tr><td>{{ L('देशांतर', 'Longitude') }}</td><td>{{ dms(chart.input.longitude, 'E', 'W') }}</td></tr>
+      <tr><td>{{ L('सूर्योदय', 'Sunrise') }}</td><td>{{ clock(pan.sunrise) }}</td></tr>
+      <tr><td>{{ L('सूर्यास्त', 'Sunset') }}</td><td>{{ clock(pan.sunset) }}</td></tr>
+      {% if chart.meta.time_known %}
+      <tr><td>{{ L('इष्टकाल', 'Ishta Kaal') }}</td><td>{{ pan.ishta_kaal.ghati }} {{ L('घटी', 'ghati') }} {{ pan.ishta_kaal.pal }} {{ L('पल', 'pal') }}</td></tr>
+      <tr><td>{{ L('जन्म होरा', 'Birth Hora') }}</td><td>{{ P(pan.hora_lord) }}</td></tr>
+      <tr><td>{{ L('दिन / रात्रि', 'Day / Night') }}</td><td>{{ L('दिन का जन्म', 'Day birth') if pan.is_day_birth else L('रात्रि का जन्म', 'Night birth') }}</td></tr>
+      {% endif %}
+      <tr><td>{{ L('अयनांश', 'Ayanamsa') }}</td><td>{{ L('लाहिरी', 'Lahiri') }} {{ chart.ayanamsa.text }}</td></tr>
+    </table>
+  </div>
+  <div>
+    {{ bar('पंचांग', 'Panchang at Birth') }}
+    <table class="kv">
+      <tr><td>{{ L('विक्रम संवत', 'Vikram Samvat') }}</td><td>{{ pan.vikram_samvat }}</td></tr>
+      <tr><td>{{ L('शक संवत', 'Shaka Samvat') }}</td><td>{{ pan.shaka_samvat }} · {{ t(pan.samvatsara) }}</td></tr>
+      <tr><td>{{ L('अयन', 'Ayana') }}</td><td>{{ t(pan.ayana) }}</td></tr>
+      <tr><td>{{ L('ऋतु', 'Ritu') }}</td><td>{{ t(pan.ritu) }}</td></tr>
+      <tr><td>{{ L('मास', 'Maas') }}</td><td>{{ L('अमांत', 'Amanta') }}: {{ t(pan.maas.amanta) }} · {{ L('पूर्णिमांत', 'Purnimanta') }}: {{ t(pan.maas.purnimanta) }}</td></tr>
+      <tr><td>{{ L('पक्ष', 'Paksha') }}</td><td>{{ t(pan.paksha) }}</td></tr>
+      <tr><td>{{ L('तिथि', 'Tithi') }}</td><td>{{ t(pan.tithi) }} <span class="muted">({{ L('समाप्ति', 'till') }} {{ day_clock(pan.tithi.end) }})</span></td></tr>
+      <tr><td>{{ L('नक्षत्र', 'Nakshatra') }}</td><td>{{ t(pan.nakshatra) }}, {{ L('चरण', 'pada') }} {{ pan.nakshatra.pada }} <span class="muted">({{ day_clock(pan.nakshatra.start) }} → {{ day_clock(pan.nakshatra.end) }})</span></td></tr>
+      <tr><td>{{ L('योग', 'Yoga') }}</td><td>{{ t(pan.yoga) }}</td></tr>
+      <tr><td>{{ L('करण', 'Karana') }}</td><td>{{ t(pan.karana) }}</td></tr>
+      <tr><td>{{ L('सूर्य नक्षत्र', 'Surya Nakshatra') }}</td><td>{{ t(pan.surya_nakshatra) }}</td></tr>
+      <tr><td>{{ L('राहु काल', 'Rahu Kaal') }}</td><td>{{ clock(pan.rahu_kaal.start) }} – {{ clock(pan.rahu_kaal.end) }}</td></tr>
+    </table>
+  </div>
+</div>
+
+{{ bar('अवकहड़ा चक्र', 'Avakahada Chakra') }}
+<table class="kv4">
+  <tr>
+    {% if chart.lagna %}<td>{{ L('लग्न', 'Lagna') }}</td><td>{{ t(chart.lagna.sign) }} · {{ L('स्वामी', 'Lord') }}: {{ P(lagna_lord) }}</td>
+    {% else %}<td>{{ L('लग्न', 'Lagna') }}</td><td class="muted">{{ L('जन्म समय आवश्यक', 'needs the birth time') }}</td>{% endif %}
+    <td>{{ L('राशि', 'Rashi') }}</td><td>{{ t(av.rashi) }} · {{ L('स्वामी', 'Lord') }}: {{ P(av.rashi_lord) }}</td>
+  </tr>
+  <tr>
+    <td>{{ L('नक्षत्र', 'Nakshatra') }}</td><td>{{ t(av.nakshatra) }} {{ L('चरण', 'pada') }} {{ av.pada }} · {{ L('स्वामी', 'Lord') }}: {{ P(av.nakshatra_lord) }}</td>
+    <td>{{ L('नक्षत्र देवता', 'Nakshatra Devta') }}</td><td>{{ t(content.nakshatra.deity) }}</td>
+  </tr>
+  <tr><td>{{ L('वर्ण', 'Varna') }}</td><td>{{ t(av.varna) }}</td><td>{{ L('वश्य', 'Vashya') }}</td><td>{{ t(av.vashya) }}</td></tr>
+  <tr><td>{{ L('योनि', 'Yoni') }}</td><td>{{ t(av.yoni) }}</td><td>{{ L('गण', 'Gana') }}</td><td>{{ t(av.gana) }}</td></tr>
+  <tr><td>{{ L('नाड़ी', 'Nadi') }}</td><td>{{ t(av.nadi) }}</td><td>{{ L('तत्व', 'Tatva') }}</td><td>{{ t(av.tatva) }}</td></tr>
+  <tr>
+    <td>{{ L('पाया', 'Paya') }}</td><td>{% if av.paya %}{{ t(av.paya) }}{% else %}<span class="muted">{{ L('जन्म समय आवश्यक', 'needs the birth time') }}</span>{% endif %}</td>
+    <td>{{ L('नाम अक्षर', 'Naam Akshar') }}</td><td><b>{{ av.naam_akshar.hi }} ({{ av.naam_akshar.en }})</b></td>
+  </tr>
+  <tr><td>{{ L('नक्षत्र चिह्न', 'Nakshatra Symbol') }}</td><td>{{ t(content.nakshatra.symbol) }}</td><td>{{ L('नक्षत्र वृक्ष', 'Nakshatra Tree') }}</td><td>{{ t(content.nakshatra.tree) }}</td></tr>
+  {% if chart.lagna %}
+  <tr><td>{{ L('लग्न नक्षत्र', 'Lagna Nakshatra') }}</td><td>{{ t(chart.lagna.nakshatra) }} {{ L('चरण', 'pada') }} {{ chart.lagna.pada }}</td><td>{{ L('आत्मकारक', 'Atmakaraka') }}</td><td>{{ P(chart.jaimini_karakas.atmakaraka) }}</td></tr>
+  {% endif %}
+</table>
+<p class="note">{{ t(content.general.milan_note) }}</p>
+{% if content.general.time_unknown %}<div class="disclaimer">{{ t(content.general.time_unknown) }}</div>{% endif %}
+{{ page_close() }}
+
+{# ================= 3. CHARTS & PLANETS ================= #}
+{{ page_open() }}
+{% if chart.lagna %}{{ title('लग्न कुंडली एवं चन्द्र कुंडली', 'Birth Chart (D-1) & Moon Chart') }}
+{% else %}{{ title('चन्द्र कुंडली', 'Moon Chart') }}{% endif %}
+<div class="cols">
+  {% if chart.lagna %}<div class="chart-card"><div class="cap">लग्न कुंडली · Lagna Chart (D-1)</div>{{ svg.lagna|safe }}</div>{% endif %}
+  <div class="chart-card"><div class="cap">चन्द्र कुंडली · Chandra Chart</div>{{ svg.moon|safe }}</div>
+</div>
+
+{{ bar('ग्रह स्पष्ट', 'Planetary Positions (Sidereal, Lahiri)') }}
+<table class="tight">
+  <tr><th>{{ L('ग्रह', 'Planet') }}</th><th>{{ L('राशि', 'Sign') }}</th><th>{{ L('अंश', 'Degree') }}</th><th>{{ L('नक्षत्र – चरण', 'Nakshatra – Pada') }}</th><th>{{ L('नक्षत्र स्वामी', 'Nak. Lord') }}</th>{% if chart.lagna %}<th class="center">{{ L('भाव', 'House') }}</th>{% endif %}<th>{{ L('अवस्था', 'Dignity') }}</th></tr>
+  {% if chart.lagna %}
+  <tr><td class="name">{{ L('लग्न', 'Ascendant') }}</td><td>{{ t(chart.lagna.sign) }}</td><td>{{ chart.lagna.degree_text }}</td><td>{{ t(chart.lagna.nakshatra) }} – {{ chart.lagna.pada }}</td><td>{{ P(chart.lagna.nakshatra_lord) }}</td><td class="center">1</td><td>—</td></tr>
+  {% endif %}
+  {% for key, p in chart.planets.items() %}
+  <tr>
+    <td class="name">{{ t(p.name) }}{% if p.retrograde %} (R){% endif %}</td>
+    <td>{{ t(p.sign) }}</td><td>{{ p.degree_text }}</td><td>{{ t(p.nakshatra) }} – {{ p.pada }}</td><td>{{ P(p.nakshatra_lord) }}</td>
+    {% if chart.lagna %}<td class="center">{{ p.house }}</td>{% endif %}
+    <td>{{ dignity_text(key) }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if chart.lagna %}
+<div class="cols">
+  <div>
+    {{ bar('चर कारक', 'Jaimini Chara Karakas') }}
+    <table class="tight">
+      {% for key, planet_key in chart.jaimini_karakas.items() %}<tr><td class="name">{{ t(labels.karakas[key]) }}</td><td>{{ P(planet_key) }}</td></tr>{% endfor %}
+    </table>
+  </div>
+  <div>
+    {{ bar('ग्रह दृष्टि', 'Key Aspects') }}
+    <ul>{% for line in content.aspects %}<li>{{ t(line) }}</li>{% endfor %}</ul>
+  </div>
+</div>
+{% endif %}
+{{ page_close() }}
+
+{% if variant != 'mini' and chart.lagna %}
+{# ================= 4. DIVISIONAL CHARTS ================= #}
+{{ page_open() }}
+{{ title('वर्ग कुंडलियाँ', 'Divisional Charts') }}
+<div class="cols">
+  <div class="chart-card"><div class="cap">नवांश कुंडली · Navamsa (D-9)</div>{{ svg.d9|safe }}<div class="foot">{{ L('विवाह, धर्म, आंतरिक बल', 'Marriage, dharma, inner strength') }}</div></div>
+  <div class="chart-card"><div class="cap">दशमांश कुंडली · Dashamsa (D-10)</div>{{ svg.d10|safe }}<div class="foot">{{ L('करियर एवं व्यवसाय', 'Career & profession') }}</div></div>
+</div>
+{{ bar('वर्ग तालिका', 'Divisional Chart Placements (Signs)') }}
+<table class="tight">
+  <tr><th>{{ L('ग्रह', 'Planet') }}</th>{% for v in varga_order %}<th>{{ t(labels.varga[v]) }}</th>{% endfor %}</tr>
+  {% for key in varga_keys %}
+  <tr><td class="name">{{ L('लग्न', 'Lagna') if key == 'lagna' else P(key) }}</td>
+    {% for v in varga_order %}<td>{{ t(chart.vargas[v][key].sign) }}</td>{% endfor %}</tr>
+  {% endfor %}
+</table>
+{{ bar('वर्ग निष्कर्ष', 'What the Vargas Show') }}
+<ul>{% for line in content.vargas %}<li>{{ t(line) }}</li>{% endfor %}</ul>
+{{ page_close() }}
+
+{# ================= 5. HOUSES ================= #}
+{{ page_open() }}
+{{ title('भाव विचार', 'House-by-House Analysis') }}
+<table class="tight">
+  <tr><th style="width:17%">{{ L('भाव', 'House') }}</th><th style="width:9%">{{ L('राशि', 'Sign') }}</th><th style="width:12%">{{ L('स्वामी → भाव', 'Lord → placed') }}</th><th style="width:11%">{{ L('ग्रह', 'Occupants') }}</th><th>{{ L('फल', 'Interpretation') }}</th></tr>
+  {% for h in content.houses %}
+  <tr>
+    <td class="name">{{ h.house }} · {{ t(h.name) }}</td>
+    <td>{{ t(h.sign) }}</td>
+    <td>{{ t(h.lord) }} → {{ h.lord_house }}</td>
+    <td>{% for p in h.occupants %}{{ t(p) }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</td>
+    <td>{{ t(h.text) }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{{ bar('ग्रह बल सारांश', 'Planetary Strength Summary') }}
+<div class="cards">
+  {% for level, group in content.strength.items() %}
+  <div class="card"><h4>{{ t(group.label) }}</h4>
+    {% for p in group.planets %}<div><b>{{ t(p.planet) }}</b>{% if t(p.reasons) %} <span class="muted">({{ t(p.reasons) }})</span>{% endif %}</div>{% else %}<div class="muted">—</div>{% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{{ page_close() }}
+{% endif %}
+
+{% if variant != 'mini' %}
+{# ================= 6. YOGAS & DOSHAS ================= #}
+{{ page_open() }}
+{{ title('योग एवं दोष विचार', 'Yogas & Doshas') }}
+{{ bar('शुभ योग', 'Auspicious Yogas Present') }}
+{% if content.yogas %}
+<table class="tight">
+  <tr><th style="width:21%">{{ L('योग', 'Yoga') }}</th><th style="width:33%">{{ L('निर्माण', 'Formation') }}</th><th>{{ L('फल', 'Result') }}</th></tr>
+  {% for y in content.yogas %}
+  <tr><td class="name"><span class="good">{{ y.name.hi }}</span>{% if lang == 'en' %}<span class="sub">{{ y.name.en }}</span>{% endif %}</td><td>{{ t(y.formation) }}</td><td>{{ t(y.result) }}</td></tr>
+  {% endfor %}
+</table>
+{% else %}<p>{{ L('इस कुंडली की शक्ति ग्रहों की स्थिति में है; कोई विशेष नामित योग नहीं बनता।', 'The strength of this chart lies in its planetary placements; no specially named yoga is formed.') }}</p>{% endif %}
+
+{{ bar('दोष विचार', 'Dosha Check') }}
+<table class="tight">
+  <tr><th style="width:19%">{{ L('दोष', 'Dosha') }}</th><th style="width:17%">{{ L('स्थिति', 'Status') }}</th><th>{{ L('विवरण', 'Details') }}</th></tr>
+  {% for d in content.doshas %}
+  <tr><td class="name">{{ d.name.hi }}{% if lang == 'en' %}<span class="sub">{{ d.name.en }}</span>{% endif %}</td>
+    <td class="{{ 'good' if d.status in ('not_present', 'cancelled', 'minor') else 'warm' }}">{{ t(d.status_label) }}</td>
+    <td>{{ t(d.details) }}</td></tr>
+  {% endfor %}
+</table>
+{{ page_close() }}
+
+{# ================= 7. DASHA ================= #}
+{{ page_open() }}
+{{ title('विंशोत्तरी दशा', 'Vimshottari Dasha (120-Year Cycle)') }}
+<p>{{ L('जन्म के समय दशा शेष', 'Balance of dasha at birth') }}: <b>{{ P(dasha.balance_at_birth.lord) }} {{ L('महादशा', 'Mahadasha') }}</b> –
+  {{ dasha.balance_at_birth.years }} {{ L('वर्ष', 'years') }} {{ dasha.balance_at_birth.months }} {{ L('माह', 'months') }} {{ dasha.balance_at_birth.days }} {{ L('दिन', 'days') }}.
+  {{ L('जन्म के समय अन्तर्दशा', 'Antardasha at birth') }}: <b>{{ P(dasha.current_at_birth.mahadasha) }}–{{ P(dasha.current_at_birth.antardasha) }}</b>.</p>
+<div class="cols">
+  <div>
+    {{ bar('महादशा', 'Mahadasha Periods') }}
+    <table class="tight">
+      <tr><th>{{ L('महादशा', 'Mahadasha') }}</th><th>{{ L('से', 'From') }}</th><th>{{ L('तक', 'To') }}</th><th>{{ L('आयु', 'Age') }}</th></tr>
+      {% for d in content.dasha %}
+      <tr><td class="name">{{ t(d.lord) }}</td><td>{{ L('जन्म', 'Birth') if loop.first else t(d.from) }}</td><td>{{ t(d.to) }}</td><td>{{ age(d.age_from) }} – {{ age(d.age_to) }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div>
+    {% for md in antardashas %}
+    {{ bar(md.lord.hi ~ ' महादशा अन्तर्दशा', md.lord.en ~ ' Antardashas') }}
+    <table class="tight">
+      {% for ad in md.periods %}<tr><td class="name">{{ t(md.lord) }}–{{ t(ad.lord) }}</td><td>{{ t(ad.from) }} → {{ t(ad.to) }}</td></tr>{% endfor %}
+    </table>
+    {% endfor %}
+  </div>
+</div>
+{{ bar('दशा फल', 'Dasha Results') }}
+<ul>{% for d in content.dasha %}<li><b>{{ t(d.lord) }} ({{ t(d.from) if not loop.first else L('जन्म', 'birth') }} – {{ t(d.to) }}):</b> {{ t(d.text) }}</li>{% endfor %}</ul>
+{{ page_close() }}
+
+{# ================= 8. LIFE PREDICTIONS ================= #}
+{{ page_open() }}
+{{ title('जीवन फलादेश', 'Life Predictions') }}
+{% if content.prediction_note %}<div class="disclaimer" style="margin:0 0 1em">{{ t(content.prediction_note) }}</div>{% endif %}
+{% for p in content.predictions %}
+<div class="block"><h4>{{ p.title.hi }} · <span class="en">{{ p.title.en }}</span></h4><p>{{ t(p.text) }}</p></div>
+{% endfor %}
+{% if not chart.lagna %}
+{{ bar('ग्रह बल सारांश', 'Planetary Strength Summary') }}
+<div class="cards">
+  {% for level, group in content.strength.items() %}
+  <div class="card"><h4>{{ t(group.label) }}</h4>{% for p in group.planets %}<div><b>{{ t(p.planet) }}</b></div>{% else %}<div class="muted">—</div>{% endfor %}</div>
+  {% endfor %}
+</div>
+{% endif %}
+{{ page_close() }}
+
+{# ================= 9. REMEDIES, SANSKAR, LUCKY ================= #}
+{{ page_open() }}
+{% if variant == 'premium' %}{{ title('उपाय, संस्कार एवं शुभ तत्व', 'Remedies · Sanskar Calendar · Lucky Factors') }}
+{% else %}{{ title('उपाय एवं शुभ तत्व', 'Remedies · Lucky Factors') }}{% endif %}
+{{ bar('उपाय', 'Remedies (' ~ content_remedies_intro ~ ')') }}
+<table class="tight">
+  <tr><th style="width:20%">{{ L('किसके लिए', 'For') }}</th><th>{{ L('उपाय', 'Remedy') }}</th></tr>
+  {% for r in content.remedies %}<tr><td class="name">{{ t(r.for) }}</td><td>{{ t(r.text) }}</td></tr>{% endfor %}
+</table>
+{% if variant == 'premium' %}
+{{ bar('संस्कार पंचांग', 'Suggested Sanskar Calendar') }}
+<table class="tight">
+  <tr><th style="width:17%">{{ L('संस्कार', 'Sanskar') }}</th><th style="width:41%">{{ L('सुझाया गया समय', 'Suggested time') }}</th><th>{{ L('टिप्पणी', 'Note') }}</th></tr>
+  {% for s in content.sanskar %}<tr><td class="name">{{ s.name.hi }}{% if lang == 'en' %}<span class="sub">{{ s.name.en }}</span>{% endif %}</td><td>{{ t(s.when) }}</td><td>{{ t(s.note) }}</td></tr>{% endfor %}
+</table>
+{% endif %}
+{{ bar('शुभ तत्व', 'Lucky Factors') }}
+<table class="kv4">
+  <tr><td>{{ L('शुभ दिन', 'Lucky days') }}</td><td>{{ t(content.lucky.days) }}</td><td>{{ L('शुभ रंग', 'Lucky colours') }}</td><td>{{ t(content.lucky.colours) }}</td></tr>
+  <tr><td>{{ L('शुभ अंक', 'Lucky numbers') }}</td><td>{{ content.lucky.numbers|join(', ') }}</td><td>{{ L('शुभ धातु', 'Lucky metal') }}</td><td>{{ t(content.lucky.metal) }}</td></tr>
+  <tr><td>{{ L('इष्ट देव', 'Ishta Devta') }}</td><td>{{ t(content.lucky.deity) }}</td><td>{{ L('शुभ दिशा', 'Lucky direction') }}</td><td>{{ t(content.lucky.direction) }}</td></tr>
+  <tr><td>{{ L('बीज मंत्र', 'Beeja mantra') }}</td><td colspan="3">{{ content.lucky.mantras|join(' · ') }}</td></tr>
+</table>
+{{ page_close() }}
+{% endif %}
+
+{# ================= 10. NAME LETTERS (all variants) ================= #}
+{{ page_open() }}
+{{ title('नामाक्षर विचार', 'Auspicious Name Letters') }}
+<p style="text-align:center">{{ L('जन्म नक्षत्र', 'Janma Nakshatra') }}: <b>{{ t(av.nakshatra) }} {{ L('चरण', 'pada') }} {{ av.pada }}</b> → {{ L('मुख्य अक्षर', 'primary letter') }}: <b>{{ names.primary.hi }} ({{ names.primary.en }})</b> · {{ L('जन्म राशि', 'Janma Rashi') }}: <b>{{ t(av.rashi) }}</b></p>
+<div class="cols">
+  <div>
+    {{ bar('नक्षत्र अक्षर', 'Nakshatra Letters') }}
+    <table class="tight">
+      <tr><th class="center">{{ L('चरण', 'Pada') }}</th><th class="center">हिन्दी</th><th class="center">English</th></tr>
+      {% for x in names.nakshatra %}
+      <tr><td class="center">{{ x.pada }}{% if x.pada == av.pada %} ★ <span class="muted">({{ L('जन्म चरण', 'birth pada') }})</span>{% endif %}</td><td class="center"><b>{{ x.hi }}</b></td><td class="center">{{ x.en }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div>
+    {{ bar('राशि अक्षर', 'Rashi Letters') }}
+    <div class="chips">{% for x in names.rashi %}<span{% if x.hi == names.primary.hi %} class="star"{% endif %}>{{ x.hi }} {{ x.en }}</span>{% endfor %}</div>
+    <p class="note">{{ L('परंपरा के अनुसार जन्म चरण का अक्षर सबसे उत्तम है; उसी नक्षत्र या राशि का कोई भी अक्षर पूर्णतः मान्य है।', 'By tradition the birth-pada letter is the first choice; any letter of the same nakshatra or rashi is fully acceptable.') }}</p>
+  </div>
+</div>
+{% if variant == 'premium' %}
+{{ bar('सुझाए गए नाम', 'Suggested Names (Astro + Numerology Compatible)') }}
+<table class="tight">
+  <tr><th>English</th><th>हिन्दी</th><th>{{ L('अर्थ', 'Meaning') }}</th><th>{{ L('नामांक', 'Name No.') }}</th>{% if person.surname %}<th>{{ L('उपनाम सहित', 'With surname') }}</th>{% endif %}</tr>
+  {% for n in names.suggestions %}
+  <tr><td class="name">{{ n.en }}</td><td><b>{{ n.hi }}</b></td><td>{{ t(n.meaning) }}</td>
+    <td>{{ n.numerology.compound }} → {{ n.numerology.number }}{% if not person.surname and n.numerology.stars %} {{ '★' * n.numerology.stars }}{% endif %}</td>
+    {% if person.surname %}<td>{{ n.numerology.full_name.compound }} → {{ n.numerology.full_name.number }} {{ '★' * n.numerology.stars }}</td>{% endif %}</tr>
+  {% endfor %}
+</table>
+<p class="note">{{ t(names.note) }}</p>
+{% endif %}
+{% if variant == 'mini' %}
+{{ bar('एक दृष्टि में', 'At a Glance') }}
+{{ glance() }}
+<div class="disclaimer">{{ t(content.general.disclaimer) }}</div>
+<div class="final"><div class="blessing">{{ content.general.closing_blessing }}</div><p>{{ t(content.summary.closing) }}</p><div class="om">ॐ</div><p class="muted">{{ L('तैयार की गई', 'Prepared on') }} {{ prepared_on }} · शुभमस्तु</p></div>
+{% endif %}
+{{ page_close() }}
+
+
+
+{% if variant != 'mini' %}
+{# ================= 11. NUMEROLOGY 1 ================= #}
+{{ page_open() }}
+{{ title('अंक ज्योतिष विश्लेषण – भाग 1', 'Numerology – In-Depth Analysis (Part 1)') }}
+<div class="cards">
+  <div class="card numcard"><h4>मूलांक · Mulank</h4><div class="big">{{ num.mulank.number }}</div><div class="small">{{ numbers.mulank.working }} · {{ L('स्वामी', 'Ruler') }}: {{ t(num.mulank.planet) }}</div></div>
+  <div class="card numcard"><h4>भाग्यांक · Bhagyank</h4><div class="big">{{ num.bhagyank.number }}</div><div class="small">{{ numbers.bhagyank.working }} · {{ L('स्वामी', 'Ruler') }}: {{ t(num.bhagyank.planet) }}</div></div>
+  <div class="card numcard"><h4>कुआ अंक · Kua</h4><div class="big">{{ num.kua.number }}</div><div class="small">{{ L('तत्व', 'Element') }}: {{ t(num.kua.element) }} · {{ t(num.kua.group) }}</div></div>
+</div>
+{{ bar('मूलांक ' ~ num.mulank.number, 'Psychic Number ' ~ num.mulank.number ~ ' (' ~ num.mulank.planet.en ~ ')') }}
+<p>{{ t(num.mulank.text) }}</p>
+{{ bar('भाग्यांक ' ~ num.bhagyank.number, 'Destiny Number ' ~ num.bhagyank.number ~ ' (' ~ num.bhagyank.planet.en ~ ')') }}
+<p>{{ t(num.bhagyank.text) }}</p>
+{{ bar('मूलांक ' ~ num.mulank.number ~ ' + भाग्यांक ' ~ num.bhagyank.number, 'Combination') }}
+<p>{{ t(num.combination) }}{% if num.surname %} {{ t(num.surname) }}{% endif %}</p>
+{{ bar('अंक मित्रता', 'Number Relationships') }}
+<div class="cards">
+  <div class="card numcard"><h4>{{ L('मित्र', 'Friendly') }}</h4><b class="good">{{ numbers.relationship.friendly|join(', ') }}</b></div>
+  <div class="card numcard"><h4>{{ L('सम', 'Neutral') }}</h4><b>{{ numbers.relationship.neutral|join(', ') }}</b></div>
+  <div class="card numcard"><h4>{{ L('त्याज्य', 'Avoid') }}</h4><b class="warm">{{ numbers.relationship.avoid|join(', ') }}</b></div>
+</div>
+{{ bar('शुभ अंक, तिथियाँ एवं रंग', 'Lucky Numbers, Dates & Colours') }}
+<table class="kv">
+  <tr><td>{{ L('शुभ अंक', 'Lucky numbers') }}</td><td>{{ numbers.lucky_numbers|join(', ') }}</td></tr>
+  <tr><td>{{ L('सर्वाधिक शुभ तिथियाँ', 'Most favourable dates') }}</td><td>{{ numbers.lucky_dates.best|join(', ') }}</td></tr>
+  <tr><td>{{ L('अन्य शुभ तिथियाँ', 'Other good dates') }}</td><td>{{ numbers.lucky_dates.good|join(', ') }}</td></tr>
+  <tr><td>{{ L('बड़े आरंभ के लिए त्याज्य तिथियाँ', 'Dates to avoid for major starts') }}</td><td>{{ numbers.lucky_dates.avoid|join(', ') }}</td></tr>
+  <tr><td>{{ L('शुभ दिन', 'Lucky days') }}</td><td>{{ t(num.lucky_days) }}</td></tr>
+  <tr><td>{{ L('शुभ रंग', 'Lucky colours') }}</td><td>{{ t(num.lucky_colours) }}</td></tr>
+  <tr><td>{{ L('कम प्रयोग करें', 'Colours to minimise') }}</td><td>{{ t(num.colours_to_minimise) }}</td></tr>
+</table>
+{{ page_close() }}
+
+{# ================= 12. NUMEROLOGY 2 ================= #}
+{{ page_open() }}
+{{ title('अंक ज्योतिष विश्लेषण – भाग 2', 'Numerology – Lo Shu Grid, Kua & Personal Years') }}
+<div class="cols">
+  <div>
+    {{ bar('लो शू ग्रिड', 'Lo Shu Grid') }}
+    <table class="loshu">
+      {% for row in numbers.lo_shu.grid %}<tr>{% for cell in row %}<td>{% if cell.count %}<span class="have">{{ (cell.number|string) * cell.count }}</span>{% else %}<span class="none">–</span>{% endif %}<span class="pos">{{ cell.number }}</span></td>{% endfor %}</tr>{% endfor %}
+    </table>
+    <p class="note" style="text-align:center">{{ L('जन्म तिथि के अंक', 'Birth-date digits') }} {{ numbers.lo_shu.date_digits|join(',') }} + {{ L('मूलांक, भाग्यांक, कुआ', 'Mulank, Bhagyank, Kua') }}</p>
+  </div>
+  <div>
+    {{ bar('ग्रिड के तल', 'Planes') }}
+    <table class="tight">
+      <tr><th>{{ L('तल', 'Plane') }}</th><th>{{ L('उपस्थित अंक', 'Numbers present') }}</th><th>{{ L('स्थिति', 'Status') }}</th></tr>
+      {% for p in num.lo_shu_planes %}<tr><td class="name">{{ t(p.name) }} <span class="muted">{{ p.numbers|join('-') }}</span></td><td>{{ p.present|join(', ') if p.present else '—' }}</td><td>{{ t(p.status) }}</td></tr>{% endfor %}
+    </table>
+  </div>
+</div>
+{{ bar('अंकों का अर्थ', 'Meaning of Present Numbers') }}
+<ul>
+  {% for x in num.lo_shu_present %}<li><b>{{ (x.number|string) * x.count }} ({{ t(x.planet) }}{% if x.count > 1 %} ×{{ x.count }}{% endif %}):</b> {{ t(x.text) }}</li>{% endfor %}
+  {% for p in num.lo_shu_planes if p.text %}<li>{{ t(p.text) }}</li>{% endfor %}
+</ul>
+{% if num.lo_shu_missing %}
+{{ bar('अनुपस्थित अंक एवं सरल उपाय', 'Missing Numbers & Simple Remedies') }}
+<table class="tight">
+  <tr><th style="width:16%">{{ L('अनुपस्थित', 'Missing') }}</th><th style="width:26%">{{ L('प्रभाव', 'Effect') }}</th><th>{{ L('बाल-सुलभ उपाय', 'Child-friendly remedy') }}</th></tr>
+  {% for m in num.lo_shu_missing %}<tr><td class="name">{{ m.number }} ({{ t(m.planet) }})</td><td>{{ t(m.effect) }}</td><td>{{ t(m.remedy) }}</td></tr>{% endfor %}
+</table>
+{% endif %}
+{{ bar('कुआ ' ~ num.kua.number, 'Kua Number ' ~ num.kua.number ~ ' – Favourable Directions') }}
+<div class="cards">{% for d in num.kua.directions %}<div class="card numcard"><h4>{{ t(d.use) }}</h4>{{ t(d.direction) }}</div>{% endfor %}</div>
+<p class="note">{{ t(num.kua.advice) }}</p>
+{{ bar('व्यक्तिगत वर्ष', 'Personal Year Numbers (next 9 years)') }}
+<table class="tight">
+  <tr>{% for y in numbers.personal_years %}<th class="center">{{ y.year }}</th>{% endfor %}</tr>
+  <tr>{% for y in numbers.personal_years %}<td class="center">{% if y.favourable %}<b class="good">{{ y.number }} ✓</b>{% else %}{{ y.number }}{% endif %}</td>{% endfor %}</tr>
+</table>
+{% if num.personal_years %}<p class="note">{{ t(num.personal_years) }}</p>{% endif %}
+{{ page_close() }}
+
+{# ================= 13. SUMMARY ================= #}
+{{ page_open() }}
+{{ title('सारांश एवं आशीर्वाद', 'Summary & Blessings') }}
+{{ bar('एक दृष्टि में', 'At a Glance') }}
+{{ glance() }}
+{{ bar('ज्योतिषी का वचन', "Astrologer's Note") }}
+<p>{{ t(content.summary.astrologer_note) }}</p>
+{{ bar('गणना पद्धति', 'Calculation Notes') }}
+<ul class="small">{% for n in content.general.calculation_notes %}<li>{{ t(n) }}</li>{% endfor %}{% if content.general.time_unknown %}<li>{{ t(content.general.time_unknown) }}</li>{% endif %}</ul>
+<div class="disclaimer">{{ t(content.general.disclaimer) }}</div>
+<div class="final">
+  <div class="blessing">{{ content.general.closing_blessing }}</div>
+  <p>{{ t(content.summary.closing) }}</p>
+  <div class="om">ॐ</div>
+  <p class="muted">{{ L('तैयार की गई', 'Prepared on') }} {{ prepared_on }} · शुभमस्तु</p>
+</div>
+{{ page_close() }}
+{% endif %}
+
+<script>{{ fit_js|safe }}</script>
+</body>
+</html>

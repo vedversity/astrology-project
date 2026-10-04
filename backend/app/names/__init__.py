@@ -85,6 +85,8 @@ def rate_name(name, numbers, surname=None):
         full_compound, full_single = name_number(name + surname)
         out["full_name"] = {"surname": surname, "compound": full_compound, "number": full_single}
     out["fit"] = "friendly" if single in rel["friendly"] else "avoid" if single in rel["avoid"] else "neutral"
+    # A full name that totals an unfriendly number is a poor match, however good the first name
+    out["full_name_avoid"] = full_single in rel["avoid"]
     # Two stars: first name matches the Mulank and the full name matches the Bhagyank
     if single == mulank and full_single == bhagyank:
         out["stars"] = 2
@@ -111,10 +113,14 @@ def suggest_names(chart, gender, numbers, surname=None, limit=10):
             continue
         rating = rate_name(entry["en"], numbers, surname)
         points = (4 - level) + {"friendly": 2, "neutral": 1, "avoid": 0}[rating["fit"]] + 2 * rating["stars"]
+        if rating["full_name_avoid"]:
+            points -= 2
         found.append({**entry, "match": MATCH_LABELS[level], "numerology": rating, "points": points})
 
     # Names with an unfriendly number are only used if there is nothing better
-    found.sort(key=lambda n: (n["numerology"]["fit"] == "avoid", -n["points"], n["en"]))
+    # On equal points, a friendly name number wins
+    found.sort(key=lambda n: (n["numerology"]["fit"] == "avoid", -n["points"],
+                              n["numerology"]["fit"] != "friendly", n["en"]))
     return found[:limit]
 
 

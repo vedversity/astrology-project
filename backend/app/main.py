@@ -4,6 +4,7 @@ POST /calculate  the raw chart (Phase 1)
 POST /preview    the free preview: Rashi, Nakshatra, Pada, name letters
 POST /report     everything a Janam Patrika needs: chart, yogas, doshas,
                  numerology, names and the wording in Hindi and English
+POST /pdf        the finished Janam Patrika as a PDF file
 
 Run it with:  .venv\\Scripts\\python -m uvicorn app.main:app --reload
 Then open:    http://127.0.0.1:8000/docs
@@ -13,10 +14,11 @@ import datetime as dt
 from typing import Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
 from pydantic import BaseModel, Field
 
 from app.astro import ENGINE_VERSION, calculate_chart
+from app.pdf import PdfError, generate_pdf
 from app.report import build_preview, build_report
 
 app = FastAPI(title="Janam Patrika API", version=ENGINE_VERSION)
@@ -36,6 +38,17 @@ class ReportInput(BirthInput):
     # Used only for name numerology and the wording; nothing is stored
     surname: Optional[str] = Field(default=None, max_length=60, examples=["Sharma"])
     kuldevi: Optional[str] = Field(default=None, max_length=60)
+
+
+class PdfInput(ReportInput):
+    variant: Literal["mini", "full", "premium"] = "full"
+    lang: Literal["hi", "en"] = "hi"
+    # Printed on the cover exactly as typed; nothing is stored
+    child_name: Optional[str] = Field(default=None, max_length=80)
+    father_name: Optional[str] = Field(default=None, max_length=80)
+    mother_name: Optional[str] = Field(default=None, max_length=80)
+    gotra: Optional[str] = Field(default=None, max_length=60)
+    place: Optional[str] = Field(default=None, max_length=160, examples=["Kharghar, Navi Mumbai"])
 
 
 def _checked(birth):
@@ -71,3 +84,17 @@ def preview(birth: BirthInput):
 def report(birth: ReportInput):
     return build_report(**_checked(birth), gender=birth.gender,
                         surname=birth.surname, kuldevi=birth.kuldevi)
+
+
+@app.post("/pdf")
+def pdf(birth: PdfInput):
+    report = build_report(**_checked(birth), gender=birth.gender,
+                          surname=birth.surname, kuldevi=birth.kuldevi)
+    person = birth.model_dump(include={"child_name", "gender", "father_name", "mother_name",
+                                       "gotra", "kuldevi", "place", "surname"})
+    try:
+        content = generate_pdf(report, person, birth.variant, birth.lang)
+    except PdfError as error:
+        raise HTTPException(status_code=500, detail=f"The PDF could not be produced: {error}")
+    return Response(content=content, media_type="application/pdf",
+                    headers={"Content-Disposition": 'inline; filename="janam-patrika.pdf"'})

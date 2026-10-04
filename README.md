@@ -10,7 +10,7 @@ Hindi or English Vedic Janam Patrika PDF. The full brief is in
 |---|---|---|
 | 1 | Astro engine (calculations) + `/calculate` API | Done and tested |
 | 2 | Rule engine, numerology, rule-book text, names | Built and tested; rule-book awaits astrologer review |
-| 3 | PDF generator | Not started |
+| 3 | PDF generator (Mini, Full, Premium; Hindi and English) | Built and tested |
 | 4 | Website | Not started |
 | 5 | Payments and delivery | Not started |
 | 6 | Admin and growth | Not started |
@@ -35,7 +35,11 @@ Close PowerShell, open it again, then set up the backend:
 cd "D:\Ved Development\Astro\backend"
 py -3.11 -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m playwright install chromium
 ```
+
+The last line downloads the Chromium browser (about 150 MB, once). The PDF
+generator uses it, without ever opening a window, to print the report.
 
 ## Phase 1: how to run and test
 
@@ -137,13 +141,70 @@ every nakshatra pada gets at least 10 suggestions for boys and for girls.
 - **Lo Shu grid** adds the Mulank, Bhagyank and Kua to the birth-date digits,
   as the sample does.
 
+## Phase 3: how to run and test
+
+All commands are run from the `backend` folder.
+
+**Make the sample PDFs and compare with the original**
+
+```powershell
+.venv\Scripts\python -m tests.make_sample_pdf
+```
+
+This writes six PDFs into `backend\output` (Mini, Full and Premium, each in
+Hindi and English) and a page called `compare.html`. Open `compare.html` in
+Chrome or Edge to see the original sample on the left and the new Premium PDF
+on the right.
+
+The script prints example names. To print the real family's names, create
+`backend\output\person.json` like this (the `output` folder never goes to Git):
+
+```json
+{"child_name": "Baby Boy ...", "father_name": "Shri ...", "mother_name": "Smt. ...",
+ "gotra": "...", "kuldevi": "...", "surname": "..."}
+```
+
+**Get a PDF from the API**
+
+Start the API, open http://127.0.0.1:8000/docs and use `POST /pdf`. Besides the
+birth details it takes `variant` (`mini`, `full` or `premium`), `lang` (`hi` or
+`en`) and the names to print on the cover. Click "Download file" in the
+response to open the PDF.
+
+### The three variants
+
+| Variant | Pages | Contents |
+|---|---|---|
+| Mini | 4 | Cover, birth details and Panchang, charts and planet positions, name letters with an at-a-glance summary |
+| Full | 13 | Everything in the sample, except the suggested names and the Sanskar calendar |
+| Premium | 13 | Full, plus 10 suggested names with numerology and the Sanskar calendar |
+
+If the birth time is not known, the Lagna, divisional-chart and house pages are
+left out (Full and Premium become 11 pages) and a note explains why.
+
+### How the PDF is made
+
+`app/pdf/templates/patrika.html` is the page layout and `style.css` is its
+look (colours, fonts, borders). The words come from the Phase 2 rule-book, so
+editing the rule-book changes the PDF. Headings are always printed in Hindi and
+English; the body text follows the chosen language. If a page has more text
+than fits, its text is shrunk slightly so that nothing is ever cut off.
+
+Fonts are the Noto families (free, SIL Open Font Licence), bundled in
+`app/pdf/fonts`, so the PDF looks the same on any computer or server.
+
 ## What is in the backend folder
 
 ```
 backend/
   app/
-    main.py            the web API (/calculate, /preview, /report, /health)
+    main.py            the web API (/calculate, /preview, /report, /pdf, /health)
     report.py          build_report() - runs the whole pipeline in one call
+    pdf/
+      __init__.py      generate_pdf() - fills the template and prints it to PDF
+      charts.py        draws the North Indian kundali charts as SVG
+      templates/       patrika.html (layout) and style.css (look)
+      fonts/           Noto fonts for Hindi and English
     rules/
       chartview.py     small helper: who sits where, who aspects whom
       yogas.py         detects 21 yogas (Hamsa, Malavya, Saraswati, Neecha-Bhanga ...)
@@ -178,6 +239,8 @@ backend/
     test_names.py          name letters and suggested names against the sample
     test_content.py        rule-book completeness and the /preview, /report API
     show_report.py         prints the sample report's wording
+    test_pdf.py            charts, page counts, variants, languages and the finished PDF
+    make_sample_pdf.py     writes the sample PDFs and compare.html
 ```
 
 ## Calculation settings

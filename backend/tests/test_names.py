@@ -22,9 +22,10 @@ def test_sample_name_letters():
 def test_sample_suggested_names():
     found = suggest_names(CHART, "male", NUMBERS, surname="Darak", limit=10)
     names = [n["en"] for n in found]
-    # Nine of the sample's ten names; the two the sample marks with two stars come first
+    # The same ten names as the sample; the two it marks with two stars come first
     assert names[:2] == ["Deepansh", "Dakssh"]
-    assert {"Devesh", "Devraj", "Devansh", "Devam", "Chinmay", "Chitransh", "Charvik"} <= set(names)
+    assert set(names) == {"Deepansh", "Dakssh", "Devesh", "Devraj", "Devansh", "Devam", "Dushyant",
+                          "Chinmay", "Chitransh", "Charvik"}
     best = found[0]["numerology"]
     assert (best["compound"], best["number"]) == (36, 9)
     assert (best["full_name"]["compound"], best["full_name"]["number"]) == (46, 1)
