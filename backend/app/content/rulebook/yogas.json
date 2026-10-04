@@ -1,0 +1,183 @@
+{
+  "_note": "DRAFT for astrologer review. Keys match app/rules/yogas.py. Keep the {placeholders} unchanged.",
+
+  "_where": {"en": " in the {house} house", "hi": " {house} भाव में"},
+
+  "_neecha_bhanga_reasons": {
+    "sign_lord_in_kendra": {"en": "the lord of its sign is in a kendra", "hi": "इसकी राशि का स्वामी केंद्र में है"},
+    "exalted_planet_of_sign_in_kendra": {"en": "the planet that is exalted in this sign is in a kendra", "hi": "इस राशि में उच्च होने वाला ग्रह केंद्र में है"},
+    "exaltation_lord_in_kendra": {"en": "the lord of its exaltation sign is in a kendra", "hi": "इसकी उच्च राशि का स्वामी केंद्र में है"},
+    "joined_by_exalted_planet": {"en": "it is joined by an exalted planet", "hi": "यह उच्च ग्रह के साथ बैठा है"},
+    "aspected_by_sign_lord": {"en": "it is aspected by the lord of its sign", "hi": "इस पर अपनी राशि के स्वामी की दृष्टि है"}
+  },
+
+  "ruchaka": {
+    "name": {"en": "Ruchaka Mahapurusha Yoga", "hi": "रुचक महापुरुष योग"},
+    "formation": {"en": "Mars {dignity} in a kendra ({house} house)", "hi": "मंगल {dignity} होकर केंद्र ({house} भाव) में"},
+    "result": {
+      "en": "Courage, strength, leadership and a commanding presence. Success in sports, defence, engineering and any field that needs bold action.",
+      "hi": "साहस, बल, नेतृत्व और प्रभावशाली व्यक्तित्व। खेल, रक्षा, इंजीनियरिंग और साहसिक कर्म वाले क्षेत्रों में सफलता।"
+    }
+  },
+  "bhadra": {
+    "name": {"en": "Bhadra Mahapurusha Yoga", "hi": "भद्र महापुरुष योग"},
+    "formation": {"en": "Mercury {dignity} in a kendra ({house} house)", "hi": "बुध {dignity} होकर केंद्र ({house} भाव) में"},
+    "result": {
+      "en": "Sharp intellect, fine speech, a good memory and business sense. Excellent for studies, writing, commerce and technology.",
+      "hi": "तीव्र बुद्धि, मधुर वाणी, अच्छी स्मरण-शक्ति और व्यापारिक समझ। पढ़ाई, लेखन, वाणिज्य और तकनीक के लिए उत्तम।"
+    }
+  },
+  "hamsa": {
+    "name": {"en": "Hamsa Mahapurusha Yoga", "hi": "हंस महापुरुष योग"},
+    "formation": {"en": "Jupiter {dignity} in a kendra ({house} house)", "hi": "गुरु {dignity} होकर केंद्र ({house} भाव) में"},
+    "result": {
+      "en": "Wisdom, righteousness, respect in society, good education, spiritual inclination and a blessed family life.",
+      "hi": "ज्ञान, धर्मपरायणता, समाज में सम्मान, उत्तम शिक्षा, आध्यात्मिक रुचि और सुखी पारिवारिक जीवन।"
+    }
+  },
+  "malavya": {
+    "name": {"en": "Malavya Mahapurusha Yoga", "hi": "मालव्य महापुरुष योग"},
+    "formation": {"en": "Venus {dignity} in a kendra ({house} house)", "hi": "शुक्र {dignity} होकर केंद्र ({house} भाव) में"},
+    "result": {
+      "en": "Charm, artistic taste, comforts, vehicles, a happy marriage and success in partnerships.",
+      "hi": "आकर्षण, कलात्मक रुचि, सुख-सुविधा, वाहन, सुखी विवाह और साझेदारी में सफलता।"
+    }
+  },
+  "shasha": {
+    "name": {"en": "Shasha Mahapurusha Yoga", "hi": "शश महापुरुष योग"},
+    "formation": {"en": "Saturn {dignity} in a kendra ({house} house)", "hi": "शनि {dignity} होकर केंद्र ({house} भाव) में"},
+    "result": {
+      "en": "Discipline, patience, organising ability and authority. Steady rise to a position of responsibility and public respect.",
+      "hi": "अनुशासन, धैर्य, संगठन की क्षमता और अधिकार। उत्तरदायित्व के पद और जन-सम्मान तक क्रमशः उन्नति।"
+    }
+  },
+  "neecha_bhanga": {
+    "name": {"en": "Neecha-Bhanga Raj Yoga", "hi": "नीचभंग राजयोग"},
+    "formation": {"en": "{planet} is debilitated, but the weakness is cancelled: {reasons}", "hi": "{planet} नीच है, पर नीचता भंग होती है: {reasons}"},
+    "result": {
+      "en": "Early effort turns into big success; the child rises after every challenge and builds strong determination.",
+      "hi": "आरंभिक परिश्रम बड़ी सफलता में बदलता है; हर चुनौती के बाद उन्नति और दृढ़ संकल्प का निर्माण।"
+    }
+  },
+  "guru_mangal": {
+    "name": {"en": "Guru-Mangal Yoga", "hi": "गुरु-मंगल योग"},
+    "formation": {"en": "Jupiter and Mars together{where}", "hi": "गुरु और मंगल{where} एक साथ"},
+    "result": {
+      "en": "Courage joined with wisdom; land, property, engineering or medical aptitude; a protective nature.",
+      "hi": "साहस के साथ विवेक; भूमि, संपत्ति, इंजीनियरिंग या चिकित्सा की योग्यता; रक्षा करने वाला स्वभाव।"
+    }
+  },
+  "budhaditya": {
+    "name": {"en": "Budhaditya Yoga", "hi": "बुधादित्य योग"},
+    "formation": {"en": "Sun and Mercury together{where}", "hi": "सूर्य और बुध{where} एक साथ"},
+    "result": {
+      "en": "Bright intelligence, skill with words and numbers, and recognition for one's abilities.",
+      "hi": "प्रखर बुद्धि, वाणी और गणित में निपुणता तथा अपनी योग्यता से मान-सम्मान।"
+    }
+  },
+  "chandra_mangal": {
+    "name": {"en": "Chandra-Mangal Yoga", "hi": "चन्द्र-मंगल योग"},
+    "formation": {"en": "Moon and Mars together{where}", "hi": "चन्द्र और मंगल{where} एक साथ"},
+    "result": {
+      "en": "Drive, enterprise and the ability to earn well; a warm and energetic temperament.",
+      "hi": "उद्यमशीलता, कर्मठता और अच्छा धन कमाने की क्षमता; स्नेही और ऊर्जावान स्वभाव।"
+    }
+  },
+  "gaja_kesari": {
+    "name": {"en": "Gaja-Kesari Yoga", "hi": "गजकेसरी योग"},
+    "formation": {"en": "Jupiter in a kendra from the Moon", "hi": "चन्द्र से केंद्र में गुरु"},
+    "result": {
+      "en": "Fame, emotional wisdom, a noble character and the blessings of the mother and teachers.",
+      "hi": "यश, भावनात्मक समझ, उदार चरित्र और माता तथा गुरुजनों का आशीर्वाद।"
+    }
+  },
+  "saraswati": {
+    "name": {"en": "Saraswati Yoga", "hi": "सरस्वती योग"},
+    "formation": {"en": "Jupiter, Venus and Mercury all in kendras, trikonas or the 2nd house, with Jupiter strong", "hi": "गुरु, शुक्र और बुध तीनों केंद्र, त्रिकोण या द्वितीय भाव में, और गुरु बली"},
+    "result": {
+      "en": "The blessing of Goddess Saraswati: learning, eloquence, fine arts and scholarship.",
+      "hi": "माँ सरस्वती का आशीर्वाद: विद्या, वाक्पटुता, ललित कला और विद्वत्ता।"
+    }
+  },
+  "lakshmi": {
+    "name": {"en": "Lakshmi Yoga", "hi": "लक्ष्मी योग"},
+    "formation": {"en": "A strong 9th lord ({ninth_lord}) in a kendra or trikona, supported by a strong {support}", "hi": "बली नवमेश ({ninth_lord}) केंद्र या त्रिकोण में, और साथ में बली {support}"},
+    "result": {
+      "en": "Prosperity, good fortune and a respected, comfortable life.",
+      "hi": "समृद्धि, सौभाग्य और सम्मानित, सुखमय जीवन।"
+    }
+  },
+  "parivartana": {
+    "name": {"en": "{a}-{b} Parivartana Yoga", "hi": "{a}-{b} परिवर्तन योग"},
+    "formation": {"en": "{a} in the sign of {b}, and {b} in the sign of {a}", "hi": "{a} {b} की राशि में, और {b} {a} की राशि में"},
+    "result": {
+      "en": "The mutual exchange strengthens both planets and joins the matters they rule, so each supports the other throughout life.",
+      "hi": "यह परस्पर राशि-परिवर्तन दोनों ग्रहों को बल देता है और उनके विषयों को जोड़ता है, जिससे दोनों जीवन भर एक-दूसरे का सहयोग करते हैं।"
+    }
+  },
+  "adhi": {
+    "name": {"en": "Adhi Yoga", "hi": "अधि योग"},
+    "partial_name": {"en": "Adhi Yoga (partial)", "hi": "अधि योग (आंशिक)"},
+    "formation": {"en": "{planets} in the 6th, 7th or 8th from the Moon", "hi": "चन्द्र से छठे, सातवें या आठवें भाव में {planets}"},
+    "result": {
+      "en": "Leadership, comfort and a calm victory over opposition.",
+      "hi": "नेतृत्व, सुख-सुविधा और विरोध पर सहज विजय।"
+    }
+  },
+  "vesi": {
+    "name": {"en": "Vesi Yoga", "hi": "वेशि योग"},
+    "formation": {"en": "{planets} in the 2nd from the Sun", "hi": "सूर्य से द्वितीय भाव में {planets}"},
+    "result": {
+      "en": "Truthful, balanced, good speech and steady wealth.",
+      "hi": "सत्यनिष्ठ, संतुलित स्वभाव, मधुर वाणी और स्थिर धन।"
+    }
+  },
+  "vasi": {
+    "name": {"en": "Vasi Yoga", "hi": "वाशि योग"},
+    "formation": {"en": "{planets} in the 12th from the Sun", "hi": "सूर्य से द्वादश भाव में {planets}"},
+    "result": {
+      "en": "Skilful, generous and well-regarded; good at whatever is taken up.",
+      "hi": "कुशल, उदार और सम्मानित; जो काम हाथ में लिया जाए उसमें निपुणता।"
+    }
+  },
+  "ubhayachari": {
+    "name": {"en": "Ubhayachari Yoga", "hi": "उभयचारी योग"},
+    "formation": {"en": "Planets on both sides of the Sun ({planets})", "hi": "सूर्य के दोनों ओर ग्रह ({planets})"},
+    "result": {
+      "en": "A balanced, capable personality with good speech, many friends and a comfortable life.",
+      "hi": "संतुलित और सक्षम व्यक्तित्व, मधुर वाणी, अनेक मित्र और सुखमय जीवन।"
+    }
+  },
+  "sunapha": {
+    "name": {"en": "Sunapha Yoga", "hi": "सुनफा योग"},
+    "formation": {"en": "{planets} in the 2nd from the Moon", "hi": "चन्द्र से द्वितीय भाव में {planets}"},
+    "result": {
+      "en": "Self-earned wealth, intelligence and a good reputation.",
+      "hi": "अपने परिश्रम से धन, बुद्धिमत्ता और अच्छी प्रतिष्ठा।"
+    }
+  },
+  "anapha": {
+    "name": {"en": "Anapha Yoga", "hi": "अनफा योग"},
+    "formation": {"en": "{planets} in the 12th from the Moon", "hi": "चन्द्र से द्वादश भाव में {planets}"},
+    "result": {
+      "en": "Good health, pleasant manners, dignity and contentment.",
+      "hi": "अच्छा स्वास्थ्य, मधुर व्यवहार, गरिमा और संतोष।"
+    }
+  },
+  "durudhara": {
+    "name": {"en": "Durudhara Yoga", "hi": "दुरुधरा योग"},
+    "formation": {"en": "Planets on both sides of the Moon ({planets})", "hi": "चन्द्र के दोनों ओर ग्रह ({planets})"},
+    "result": {
+      "en": "A well-supported mind: comforts, helpful people around and generosity.",
+      "hi": "सहयोग से घिरा मन: सुख-सुविधा, आसपास सहायक लोग और उदारता।"
+    }
+  },
+  "vargottama": {
+    "name": {"en": "Vargottama {planets}", "hi": "वर्गोत्तम {planets}"},
+    "formation": {"en": "{planets} in the same sign in the birth chart (D-1) and the Navamsa (D-9)", "hi": "{planets} जन्म कुंडली (D-1) और नवांश (D-9) में एक ही राशि में"},
+    "result": {
+      "en": "A vargottama planet is steady and dependable: its good qualities show clearly and last through life.",
+      "hi": "वर्गोत्तम ग्रह स्थिर और विश्वसनीय होता है: उसके शुभ गुण स्पष्ट दिखते हैं और जीवन भर साथ देते हैं।"
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "_note": "DRAFT for astrologer review. Each life area has three versions; the rule engine picks one from the strength of the houses and planets involved. Tone: warm and positive at every level. Keep the {placeholders} unchanged.",
+
+  "areas": {
+    "personality": {
+      "title": {"en": "Personality & Nature", "hi": "स्वभाव"}
+    },
+    "education": {
+      "title": {"en": "Education", "hi": "शिक्षा"},
+      "levels": {
+        "strong": {
+          "en": "Education is one of the strongest areas of this chart. The child is likely to do very well academically and in competitive exams, and higher studies are well indicated.",
+          "hi": "शिक्षा इस कुंडली के सबसे बली क्षेत्रों में से है। पढ़ाई और प्रतियोगी परीक्षाओं में बहुत अच्छा प्रदर्शन तथा उच्च शिक्षा के शुभ योग हैं।"
+        },
+        "medium": {
+          "en": "Education is well supported. With a regular study routine and encouragement at home, the child will do well and find the subjects that truly interest them.",
+          "hi": "शिक्षा को अच्छा सहयोग प्राप्त है। नियमित पढ़ाई और घर के प्रोत्साहन से अच्छा प्रदर्शन होगा और अपनी रुचि के विषय मिलेंगे।"
+        },
+        "weak": {
+          "en": "Learning blossoms best here with patient guidance. Practical, hands-on teaching, a fixed timetable and plenty of praise will bring out the child's real ability.",
+          "hi": "यहाँ विद्या धैर्यपूर्ण मार्गदर्शन से सबसे अच्छी तरह खिलती है। व्यावहारिक ढंग से सिखाना, निश्चित समय-सारिणी और भरपूर प्रशंसा बच्चे की वास्तविक क्षमता को उभारेगी।"
+        }
+      }
+    },
+    "career": {
+      "title": {"en": "Career", "hi": "करियर"},
+      "levels": {
+        "strong": {
+          "en": "The house of career is strong. The chart points to positions of responsibility and leadership, with recognition for the child's work.",
+          "hi": "कर्म भाव बली है। कुंडली उत्तरदायित्व और नेतृत्व के पदों तथा अपने कार्य से मान-सम्मान का संकेत देती है।"
+        },
+        "medium": {
+          "en": "The career path is steady. Success comes through skill and consistent effort, growing stronger with each stage of life.",
+          "hi": "कर्म-क्षेत्र का मार्ग स्थिर है। सफलता कौशल और निरंतर परिश्रम से मिलती है और जीवन के हर चरण में बढ़ती जाती है।"
+        },
+        "weak": {
+          "en": "Career success here is built step by step. Choosing a field that matches the child's natural interests, and patient effort, will bring lasting results.",
+          "hi": "यहाँ कर्म-क्षेत्र की सफलता क्रमशः बनती है। स्वाभाविक रुचि के अनुसार क्षेत्र चुनना और धैर्यपूर्ण परिश्रम स्थायी फल देगा।"
+        }
+      }
+    },
+    "wealth": {
+      "title": {"en": "Wealth", "hi": "धन"},
+      "levels": {
+        "strong": {
+          "en": "The houses of wealth and gains are strong, giving good earning power and more than one source of income. The child is likely to own property and vehicles.",
+          "hi": "धन और लाभ के भाव बली हैं, जिससे अच्छी अर्जन-शक्ति और आय के एक से अधिक स्रोत मिलते हैं। संपत्ति और वाहन का सुख प्राप्त होने की संभावना है।"
+        },
+        "medium": {
+          "en": "Financial life is comfortable and grows steadily. Teaching the habit of saving early will make it stronger still.",
+          "hi": "आर्थिक जीवन सुखद रहता है और निरंतर बढ़ता है। बचत की आदत आरंभ से सिखाने पर यह और सुदृढ़ होगा।"
+        },
+        "weak": {
+          "en": "Wealth here comes through the child's own skill and effort. The habit of saving and careful, disciplined planning should be taught early.",
+          "hi": "यहाँ धन अपने कौशल और परिश्रम से आता है। बचत की आदत और सोच-समझकर, अनुशासित योजना बनाना आरंभ से सिखाएँ।"
+        }
+      }
+    },
+    "health": {
+      "title": {"en": "Health", "hi": "स्वास्थ्य"},
+      "levels": {
+        "strong": {
+          "en": "Overall vitality is very good, with strong immunity and quick recovery.",
+          "hi": "कुल मिलाकर जीवन-शक्ति बहुत अच्छी है; रोग-प्रतिरोधक क्षमता प्रबल और स्वास्थ्य-लाभ शीघ्र होता है।"
+        },
+        "medium": {
+          "en": "Overall vitality is good. A regular routine of sleep, food and play keeps the child healthy.",
+          "hi": "कुल मिलाकर जीवन-शक्ति अच्छी है। नींद, भोजन और खेल की नियमित दिनचर्या बच्चे को स्वस्थ रखती है।"
+        },
+        "weak": {
+          "en": "Health responds well to care and routine. Regular sleep, fresh food, sunlight and timely check-ups build strong vitality over the years.",
+          "hi": "देखभाल और दिनचर्या से स्वास्थ्य अच्छा रहता है। नियमित नींद, ताज़ा भोजन, धूप और समय पर जाँच से वर्षों में प्रबल जीवन-शक्ति बनती है।"
+        }
+      }
+    },
+    "family": {
+      "title": {"en": "Family, Parents & Siblings", "hi": "परिवार"},
+      "levels": {
+        "strong": {
+          "en": "The chart shows a happy, prosperous home, a deep bond with the mother and a supportive father. The child will be devoted to family traditions.",
+          "hi": "कुंडली सुखी और समृद्ध घर, माता से गहरा स्नेह और सहयोगी पिता का संकेत देती है। पारिवारिक परंपराओं के प्रति निष्ठा रहेगी।"
+        },
+        "medium": {
+          "en": "Family life is warm and supportive. The child will be close to parents and will value time spent together.",
+          "hi": "पारिवारिक जीवन स्नेहपूर्ण और सहयोगी है। माता-पिता से निकटता रहेगी और साथ बिताया समय मूल्यवान लगेगा।"
+        },
+        "weak": {
+          "en": "The child thrives on closeness and reassurance from the family. Unhurried time together, shared meals and open conversation make the bond strong.",
+          "hi": "बच्चा परिवार के सान्निध्य और अपनेपन से खिलता है। साथ बिताया इत्मीनान का समय, साथ भोजन और खुली बातचीत संबंध को मज़बूत बनाते हैं।"
+        }
+      }
+    },
+    "marriage": {
+      "title": {"en": "Marriage", "hi": "विवाह"},
+      "levels": {
+        "strong": {
+          "en": "The house of marriage is strong, promising an educated, cultured and supportive life partner and a harmonious married life.",
+          "hi": "विवाह भाव बली है, जो सुशिक्षित, सुसंस्कृत और सहयोगी जीवनसाथी तथा मधुर वैवाहिक जीवन का संकेत देता है।"
+        },
+        "medium": {
+          "en": "Married life is indicated to be stable and caring, with a dependable partner.",
+          "hi": "वैवाहिक जीवन स्थिर और स्नेहपूर्ण रहने का संकेत है; जीवनसाथी विश्वसनीय होगा।"
+        },
+        "weak": {
+          "en": "A good marriage here is built on understanding and patience. Proper Kundali matching at the right time will help in choosing a well-suited partner.",
+          "hi": "यहाँ सुखी विवाह समझ और धैर्य पर टिकता है। उचित समय पर सही कुंडली-मिलान उपयुक्त जीवनसाथी चुनने में सहायक होगा।"
+        }
+      }
+    },
+    "foreign": {
+      "title": {"en": "Foreign Travel", "hi": "विदेश"},
+      "levels": {
+        "strong": {
+          "en": "There is a strong yoga for foreign education, work and travel, and possibly settlement abroad.",
+          "hi": "विदेश में शिक्षा, कार्य और यात्रा का प्रबल योग है; विदेश में बसने की भी संभावना है।"
+        },
+        "medium": {
+          "en": "Foreign travel for study or work is indicated at some stage of life.",
+          "hi": "जीवन के किसी चरण में पढ़ाई या कार्य के लिए विदेश यात्रा का संकेत है।"
+        },
+        "weak": {
+          "en": "The chart favours success close to the homeland. Travel abroad is possible for visits and short stays.",
+          "hi": "कुंडली अपने देश में ही सफलता के पक्ष में है। घूमने और अल्प प्रवास के लिए विदेश यात्रा संभव है।"
+        }
+      }
+    }
+  },
+
+  "supported_by": {"en": "This is supported by {yogas}.", "hi": "इसे {yogas} का बल प्राप्त है।"},
+  "career_fields": {"en": "Fields that suit this chart: {fields}.", "hi": "इस कुंडली के अनुकूल क्षेत्र: {fields}।"},
+  "health_watch": {"en": "Areas to look after: {areas}.", "hi": "ध्यान देने योग्य: {areas}।"},
+  "sade_sati_care": {
+    "en": "Take a little extra care in infancy while Sade Sati runs (till about {ends}).",
+    "hi": "साढ़े साती के दौरान (लगभग {ends} तक) शैशव में थोड़ी अधिक देखभाल रखें।"
+  },
+  "marriage_manglik": {
+    "cancelled": {"en": "Manglik status is effectively cancelled.", "hi": "मांगलिक दोष का परिहार हो जाता है।"},
+    "partial": {"en": "A mild (Anshik) Manglik placement should be mentioned at matching time.", "hi": "आंशिक मांगलिक योग का उल्लेख मिलान के समय करें।"},
+    "present": {"en": "The Manglik placement should be matched at the time of marriage.", "hi": "विवाह के समय मांगलिक योग का मिलान करें।"}
+  },
+  "time_unknown": {
+    "en": "Because the exact birth time is not known, house-based predictions are not included. The reading below is based on the Moon sign and nakshatra, which are reliable.",
+    "hi": "जन्म का सही समय ज्ञात न होने के कारण भाव-आधारित फलादेश शामिल नहीं है। नीचे का फलादेश चन्द्र राशि और नक्षत्र पर आधारित है, जो विश्वसनीय हैं।"
+  },
+
+  "dasha": {
+    "stage": {
+      "infancy": {"en": "In these early years it shows mainly in health, sleep and first learning.", "hi": "इन आरंभिक वर्षों में इसका प्रभाव मुख्यतः स्वास्थ्य, नींद और पहली सीख पर दिखता है।"},
+      "childhood": {"en": "In childhood it shapes schooling, friendships and habits.", "hi": "बाल्यावस्था में यह पढ़ाई, मित्रता और आदतों को आकार देता है।"},
+      "teen": {"en": "In the teenage years it shapes studies, interests and the choice of direction.", "hi": "किशोरावस्था में यह पढ़ाई, रुचियों और दिशा के चुनाव को आकार देता है।"},
+      "youth": {"en": "In youth it shapes higher education, career, marriage and the building of a home.", "hi": "युवावस्था में यह उच्च शिक्षा, करियर, विवाह और गृहस्थी के निर्माण को आकार देता है।"},
+      "midlife": {"en": "In the middle years it shapes position, wealth and family responsibilities.", "hi": "मध्य आयु में यह पद, धन और पारिवारिक उत्तरदायित्वों को आकार देता है।"},
+      "later": {"en": "In later life it shapes comfort, respect and spiritual growth.", "hi": "जीवन के उत्तरार्ध में यह सुख, सम्मान और आध्यात्मिक उन्नति को आकार देता है।"}
+    },
+    "strength": {
+      "strong": {"en": "{lord} is strong in this chart, so this is one of the best periods of life.", "hi": "इस कुंडली में {lord} बली है, इसलिए यह जीवन के श्रेष्ठ समयों में से एक है।"},
+      "weak": {"en": "{lord} needs support in this chart, so the simple remedies for it are helpful in this period.", "hi": "इस कुंडली में {lord} को सहयोग चाहिए, इसलिए इस समय उसके सरल उपाय लाभकारी हैं।"}
+    }
+  }
+}

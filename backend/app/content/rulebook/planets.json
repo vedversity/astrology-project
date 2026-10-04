@@ -1,0 +1,175 @@
+{
+  "_note": "DRAFT for astrologer review. One block per planet: lucky factors, remedy, career fields and dasha wording.",
+
+  "sun": {
+    "number": 1,
+    "day": {"en": "Sunday", "hi": "रविवार"},
+    "colours": {"en": ["Saffron", "Gold"], "hi": ["केसरिया", "सुनहरा"]},
+    "metal": {"en": "Gold, Copper", "hi": "स्वर्ण, ताँबा"},
+    "direction": {"en": "East", "hi": "पूर्व"},
+    "deity": {"en": "Surya Narayan", "hi": "सूर्य नारायण"},
+    "mantra": "ॐ घृणि सूर्याय नमः",
+    "gemstone": {"en": "Ruby (Manik)", "hi": "माणिक"},
+    "remedy": {
+      "en": "Show the child the rising Sun; a parent offers water to the Sun each morning. Teach respect for the father and elders.",
+      "hi": "बच्चे को उगते सूर्य के दर्शन कराएँ; माता या पिता प्रतिदिन प्रातः सूर्य को जल अर्पित करें। पिता और बड़ों का आदर सिखाएँ।"
+    },
+    "career": {"en": "administration, government service, leadership roles and medicine", "hi": "प्रशासन, सरकारी सेवा, नेतृत्व के पद और चिकित्सा"},
+    "dasha": {
+      "en": "This is a period of confidence, recognition and growing authority. Relations with the father and with those in senior positions come into focus.",
+      "hi": "आत्मविश्वास, मान-सम्मान और बढ़ते अधिकार का समय। पिता और वरिष्ठ जनों से संबंध प्रमुख रहते हैं।"
+    }
+  },
+  "moon": {
+    "number": 2,
+    "day": {"en": "Monday", "hi": "सोमवार"},
+    "colours": {"en": ["White", "Silver"], "hi": ["सफ़ेद", "चाँदी जैसा"]},
+    "metal": {"en": "Silver", "hi": "चाँदी"},
+    "direction": {"en": "North-West", "hi": "उत्तर-पश्चिम"},
+    "deity": {"en": "Lord Shiva", "hi": "भगवान शिव"},
+    "mantra": "ॐ सों सोमाय नमः",
+    "gemstone": {"en": "Pearl (Moti)", "hi": "मोती"},
+    "remedy": {
+      "en": "Give the child a small silver item (kada or chain) after the Namkaran. The mother offers water to the Shivling on Mondays. Keep the child's room calm and softly lit at night.",
+      "hi": "नामकरण के बाद बच्चे को चाँदी की छोटी वस्तु (कड़ा या चेन) पहनाएँ। माता सोमवार को शिवलिंग पर जल चढ़ाएँ। रात में बच्चे का कमरा शांत और हल्की रोशनी वाला रखें।"
+    },
+    "career": {"en": "care and healing, hospitality, the arts, and work with the public", "hi": "सेवा और चिकित्सा, आतिथ्य, कला और जन-संपर्क के कार्य"},
+    "dasha": {
+      "en": "This is a gentle, emotional period centred on the mother, the home and peace of mind. Imagination, travel and public goodwill grow.",
+      "hi": "माता, घर और मन की शांति से जुड़ा कोमल और भावनात्मक समय। कल्पना, यात्रा और लोगों का स्नेह बढ़ता है।"
+    }
+  },
+  "mars": {
+    "number": 9,
+    "day": {"en": "Tuesday", "hi": "मंगलवार"},
+    "colours": {"en": ["Red", "Coral"], "hi": ["लाल", "मूँगिया"]},
+    "metal": {"en": "Copper", "hi": "ताँबा"},
+    "direction": {"en": "South", "hi": "दक्षिण"},
+    "deity": {"en": "Shri Hanuman", "hi": "श्री हनुमान"},
+    "mantra": "ॐ अं अंगारकाय नमः",
+    "gemstone": {"en": "Red Coral (Moonga)", "hi": "मूँगा"},
+    "remedy": {
+      "en": "Hanuman ji puja on Tuesdays; offer sweets and share the prasad. Give the child plenty of active play, and later teach respect for brothers, sisters and elders.",
+      "hi": "मंगलवार को हनुमान जी की पूजा करें; मिठाई का भोग लगाकर प्रसाद बाँटें। बच्चे को भरपूर खेल-कूद दें और आगे चलकर भाई-बहन और बड़ों का आदर सिखाएँ।"
+    },
+    "career": {"en": "engineering, defence and police, surgery, sports and property", "hi": "इंजीनियरिंग, सेना और पुलिस, शल्य-चिकित्सा, खेल और भूमि-भवन"},
+    "dasha": {
+      "en": "This is an energetic, action-filled period. Courage, sports, technical skill and matters of land and property come forward.",
+      "hi": "ऊर्जा और कर्म से भरा समय। साहस, खेल, तकनीकी कौशल और भूमि-भवन के विषय आगे आते हैं।"
+    }
+  },
+  "mercury": {
+    "number": 5,
+    "day": {"en": "Wednesday", "hi": "बुधवार"},
+    "colours": {"en": ["Green"], "hi": ["हरा"]},
+    "metal": {"en": "Bronze", "hi": "काँसा"},
+    "direction": {"en": "North", "hi": "उत्तर"},
+    "deity": {"en": "Shri Ganesh", "hi": "श्री गणेश"},
+    "mantra": "ॐ बुं बुधाय नमः",
+    "gemstone": {"en": "Emerald (Panna)", "hi": "पन्ना"},
+    "remedy": {
+      "en": "Feed green grass to cows on Wednesdays; worship Shri Ganesh with durva grass. Read aloud to the child every day.",
+      "hi": "बुधवार को गाय को हरा चारा खिलाएँ; श्री गणेश को दूर्वा अर्पित करें। बच्चे को प्रतिदिन कुछ पढ़कर सुनाएँ।"
+    },
+    "career": {"en": "commerce and accounts, computers and technology, writing, teaching and communication", "hi": "वाणिज्य और लेखा, कंप्यूटर और तकनीक, लेखन, शिक्षण और संवाद"},
+    "dasha": {
+      "en": "This is a bright, playful, talkative and quick-learning period. Speech, memory, numbers, puzzles and languages develop well.",
+      "hi": "चंचल, हँसमुख, बातूनी और तेज़ी से सीखने का समय। वाणी, स्मरण-शक्ति, गिनती, पहेलियाँ और भाषा का अच्छा विकास होता है।"
+    }
+  },
+  "jupiter": {
+    "number": 3,
+    "day": {"en": "Thursday", "hi": "गुरुवार"},
+    "colours": {"en": ["Yellow"], "hi": ["पीला"]},
+    "metal": {"en": "Gold", "hi": "स्वर्ण"},
+    "direction": {"en": "North-East", "hi": "उत्तर-पूर्व"},
+    "deity": {"en": "Shri Vishnu", "hi": "श्री विष्णु"},
+    "mantra": "ॐ गुं गुरवे नमः",
+    "gemstone": {"en": "Yellow Sapphire (Pukhraj)", "hi": "पुखराज"},
+    "remedy": {
+      "en": "On Thursdays offer yellow sweets or chana dal at a temple. Teach the child to touch the feet of grandparents and teachers.",
+      "hi": "गुरुवार को मंदिर में पीली मिठाई या चने की दाल चढ़ाएँ। बच्चे को दादा-दादी, नाना-नानी और गुरुजनों के चरण छूना सिखाएँ।"
+    },
+    "career": {"en": "teaching, law, finance and banking, advisory work and religious or cultural fields", "hi": "शिक्षण, विधि, वित्त और बैंकिंग, सलाहकार कार्य और धर्म-संस्कृति के क्षेत्र"},
+    "dasha": {
+      "en": "This is a period of learning, good guidance and good fortune. Teachers, higher studies, values and family blessings grow.",
+      "hi": "विद्या, अच्छे मार्गदर्शन और सौभाग्य का समय। गुरुजन, उच्च शिक्षा, संस्कार और परिवार का आशीर्वाद बढ़ता है।"
+    }
+  },
+  "venus": {
+    "number": 6,
+    "day": {"en": "Friday", "hi": "शुक्रवार"},
+    "colours": {"en": ["White", "Pink"], "hi": ["सफ़ेद", "गुलाबी"]},
+    "metal": {"en": "Silver", "hi": "चाँदी"},
+    "direction": {"en": "South-East", "hi": "दक्षिण-पूर्व"},
+    "deity": {"en": "Maa Lakshmi", "hi": "माँ लक्ष्मी"},
+    "mantra": "ॐ शुं शुक्राय नमः",
+    "gemstone": {"en": "Diamond or Opal", "hi": "हीरा या ओपल"},
+    "remedy": {
+      "en": "On Fridays offer kheer or white sweets to Maa Lakshmi and share them with little girls. Keep the home clean and fragrant.",
+      "hi": "शुक्रवार को माँ लक्ष्मी को खीर या सफ़ेद मिठाई का भोग लगाएँ और छोटी कन्याओं में बाँटें। घर को स्वच्छ और सुगंधित रखें।"
+    },
+    "career": {"en": "the arts, design, media, fashion, hospitality and luxury goods", "hi": "कला, डिज़ाइन, मीडिया, फ़ैशन, आतिथ्य और विलासिता की वस्तुएँ"},
+    "dasha": {
+      "en": "This is a period of comfort, beauty and happy relationships. The arts, vehicles, the home and prosperity flourish.",
+      "hi": "सुख-सुविधा, सौंदर्य और मधुर संबंधों का समय। कला, वाहन, घर और समृद्धि फलती-फूलती है।"
+    }
+  },
+  "saturn": {
+    "number": 8,
+    "day": {"en": "Saturday", "hi": "शनिवार"},
+    "colours": {"en": ["Dark blue"], "hi": ["गहरा नीला"]},
+    "metal": {"en": "Iron", "hi": "लोहा"},
+    "direction": {"en": "West", "hi": "पश्चिम"},
+    "deity": {"en": "Shri Hanuman and Shani Dev", "hi": "श्री हनुमान और शनि देव"},
+    "mantra": "ॐ शं शनैश्चराय नमः",
+    "gemstone": {"en": "Blue Sapphire (Neelam)", "hi": "नीलम"},
+    "remedy": {
+      "en": "On Saturdays a parent lights a mustard-oil diya under a Peepal tree and recites the Hanuman Chalisa. Donate black urad or sesame now and then.",
+      "hi": "शनिवार को माता या पिता पीपल के नीचे सरसों के तेल का दीपक जलाएँ और हनुमान चालीसा का पाठ करें। समय-समय पर काली उड़द या तिल का दान करें।"
+    },
+    "career": {"en": "large organisations, industry, administration, law and research", "hi": "बड़े संस्थान, उद्योग, प्रशासन, विधि और शोध"},
+    "dasha": {
+      "en": "This is a period of steady effort, discipline and responsibility. Results come a little slowly but they are solid and lasting.",
+      "hi": "निरंतर परिश्रम, अनुशासन और ज़िम्मेदारी का समय। फल थोड़ा धीरे मिलता है पर ठोस और टिकाऊ होता है।"
+    }
+  },
+  "rahu": {
+    "number": 4,
+    "day": {"en": "Saturday", "hi": "शनिवार"},
+    "colours": {"en": ["Smoky blue"], "hi": ["धूम्र नीला"]},
+    "metal": {"en": "Mixed metal (Panchdhatu)", "hi": "पंचधातु"},
+    "direction": {"en": "South-West", "hi": "दक्षिण-पश्चिम"},
+    "deity": {"en": "Maa Durga", "hi": "माँ दुर्गा"},
+    "mantra": "ॐ रां राहवे नमः",
+    "gemstone": {"en": "Hessonite (Gomed)", "hi": "गोमेद"},
+    "remedy": {
+      "en": "Worship Maa Durga; feed birds with grain. Keep the child's screen time low and the daily routine regular.",
+      "hi": "माँ दुर्गा की उपासना करें; पक्षियों को दाना डालें। बच्चे का स्क्रीन-समय कम और दिनचर्या नियमित रखें।"
+    },
+    "career": {"en": "technology, digital and foreign-linked work, media and new-age businesses", "hi": "तकनीक, डिजिटल और विदेश से जुड़े कार्य, मीडिया और नए ज़माने के व्यवसाय"},
+    "dasha": {
+      "en": "This is an ambitious, fast-moving period. Technology, new places, foreign links and unusual opportunities appear; good company and routine keep it on track.",
+      "hi": "महत्वाकांक्षा और तेज़ गति का समय। तकनीक, नए स्थान, विदेश के संबंध और अनोखे अवसर मिलते हैं; अच्छी संगति और दिनचर्या इसे सही दिशा में रखती है।"
+    }
+  },
+  "ketu": {
+    "number": 7,
+    "day": {"en": "Tuesday", "hi": "मंगलवार"},
+    "colours": {"en": ["Light grey"], "hi": ["हल्का स्लेटी"]},
+    "metal": {"en": "Mixed metal (Panchdhatu)", "hi": "पंचधातु"},
+    "direction": {"en": "North-West", "hi": "उत्तर-पश्चिम"},
+    "deity": {"en": "Shri Ganesh", "hi": "श्री गणेश"},
+    "mantra": "ॐ कें केतवे नमः",
+    "gemstone": {"en": "Cat's Eye (Lehsunia)", "hi": "लहसुनिया"},
+    "remedy": {
+      "en": "Worship Shri Ganesh; feed a dog with roti. A fixed study timetable and a short daily prayer help the child stay focused.",
+      "hi": "श्री गणेश की पूजा करें; कुत्ते को रोटी खिलाएँ। निश्चित पढ़ाई का समय और रोज़ की छोटी प्रार्थना एकाग्रता में सहायक है।"
+    },
+    "career": {"en": "research, computing, mathematics, medicine and spiritual studies", "hi": "शोध, कंप्यूटर, गणित, चिकित्सा और आध्यात्मिक अध्ययन"},
+    "dasha": {
+      "en": "This is an inward-looking, research-minded period. Deep interests, intuition and spiritual leanings grow; steady guidance and a disciplined timetable help a lot.",
+      "hi": "अंतर्मुखी और शोध-प्रवृत्ति का समय। गहरी रुचियाँ, अंतर्ज्ञान और आध्यात्मिक झुकाव बढ़ता है; निरंतर मार्गदर्शन और अनुशासित दिनचर्या बहुत सहायक रहती है।"
+    }
+  }
+}

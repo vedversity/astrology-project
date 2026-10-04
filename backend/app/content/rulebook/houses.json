@@ -1,0 +1,165 @@
+{
+  "_note": "DRAFT for astrologer review. 'houses' lists the 12 houses in order. 'planets' gives one sentence for each planet in each house (12 per planet, 1st house first). Keep the {placeholders} unchanged.",
+
+  "houses": [
+    {"name": {"en": "Tanu (Self)", "hi": "तनु (स्वयं)"}, "topic": {"en": "personality and vitality", "hi": "व्यक्तित्व और जीवन-शक्ति"}},
+    {"name": {"en": "Dhana (Wealth, Speech)", "hi": "धन (संपत्ति, वाणी)"}, "topic": {"en": "family wealth and speech", "hi": "कुटुंब का धन और वाणी"}},
+    {"name": {"en": "Sahaja (Courage, Siblings)", "hi": "सहज (पराक्रम, भाई-बहन)"}, "topic": {"en": "courage, siblings and communication", "hi": "पराक्रम, भाई-बहन और संवाद"}},
+    {"name": {"en": "Sukha (Home, Mother, Education)", "hi": "सुख (घर, माता, शिक्षा)"}, "topic": {"en": "home, mother and early education", "hi": "घर, माता और आरंभिक शिक्षा"}},
+    {"name": {"en": "Putra (Intellect, Children)", "hi": "पुत्र (बुद्धि, संतान)"}, "topic": {"en": "intellect, creativity and children", "hi": "बुद्धि, रचनात्मकता और संतान"}},
+    {"name": {"en": "Ripu (Health, Competition)", "hi": "रिपु (स्वास्थ्य, प्रतिस्पर्धा)"}, "topic": {"en": "health, effort and competition", "hi": "स्वास्थ्य, परिश्रम और प्रतिस्पर्धा"}},
+    {"name": {"en": "Jaya (Marriage, Partners)", "hi": "जाया (विवाह, साझेदार)"}, "topic": {"en": "marriage and partnerships", "hi": "विवाह और साझेदारी"}},
+    {"name": {"en": "Ayu (Longevity)", "hi": "आयु (दीर्घायु)"}, "topic": {"en": "longevity, research and hidden strengths", "hi": "आयु, शोध और छिपी शक्तियाँ"}},
+    {"name": {"en": "Bhagya (Fortune, Father)", "hi": "भाग्य (सौभाग्य, पिता)"}, "topic": {"en": "fortune, father and dharma", "hi": "भाग्य, पिता और धर्म"}},
+    {"name": {"en": "Karma (Career)", "hi": "कर्म (आजीविका)"}, "topic": {"en": "career and reputation", "hi": "कर्म-क्षेत्र और प्रतिष्ठा"}},
+    {"name": {"en": "Labha (Gains)", "hi": "लाभ (आय)"}, "topic": {"en": "gains, friends and fulfilment of wishes", "hi": "आय, मित्र और इच्छाओं की पूर्ति"}},
+    {"name": {"en": "Vyaya (Expenses, Foreign)", "hi": "व्यय (खर्च, विदेश)"}, "topic": {"en": "foreign lands, charity and spiritual life", "hi": "विदेश, दान और आध्यात्मिक जीवन"}}
+  ],
+
+  "empty": {
+    "en": "This house is read through its lord {lord}, placed in the {lord_house} house, which links {topic} with {lord_topic}.",
+    "hi": "इस भाव का विचार इसके स्वामी {lord} से होता है, जो {lord_house} भाव में है; इससे {topic} का संबंध {lord_topic} से जुड़ता है।"
+  },
+  "lord_quality": {
+    "own": {"en": "The lord sits in its own house, which makes this area secure and self-sustaining.", "hi": "स्वामी अपने ही भाव में है, जिससे यह क्षेत्र सुरक्षित और स्वयं-समर्थ रहता है।"},
+    "good": {"en": "The lord is well placed, so this area of life is supported.", "hi": "स्वामी शुभ स्थान में है, इसलिए जीवन के इस क्षेत्र को बल मिलता है।"},
+    "effort": {"en": "The lord is in a house of effort, so results here come through patience and steady work.", "hi": "स्वामी परिश्रम के भाव में है, इसलिए यहाँ फल धैर्य और निरंतर प्रयास से मिलता है।"},
+    "steady": {"en": "Results here grow steadily with time.", "hi": "यहाँ फल समय के साथ क्रमशः बढ़ता है।"}
+  },
+  "lord_strong": {"en": "The lord is strong ({dignity}), a very good sign for this house.", "hi": "स्वामी बली है ({dignity}), जो इस भाव के लिए बहुत शुभ है।"},
+  "aspect": {
+    "jupiter": {"en": "Jupiter's aspect protects and expands this house.", "hi": "गुरु की दृष्टि इस भाव की रक्षा और वृद्धि करती है।"},
+    "benefic": {"en": "The aspect of {planets} adds grace and intelligence here.", "hi": "{planets} की दृष्टि यहाँ सौम्यता और बुद्धिमत्ता जोड़ती है।"},
+    "saturn": {"en": "Saturn's aspect adds discipline: growth is steady and comes with effort.", "hi": "शनि की दृष्टि अनुशासन जोड़ती है: उन्नति स्थिर रहती है और परिश्रम से मिलती है।"},
+    "mars": {"en": "Mars's aspect adds energy and drive.", "hi": "मंगल की दृष्टि ऊर्जा और जोश जोड़ती है।"}
+  },
+
+  "planets": {
+    "sun": [
+      {"en": "Sun in the 1st: confident, dignified and strong-willed, with good vitality and a natural air of leadership.", "hi": "प्रथम भाव में सूर्य: आत्मविश्वासी, गरिमामय और दृढ़ इच्छा-शक्ति; अच्छी जीवन-शक्ति और नेतृत्व का स्वाभाविक गुण।"},
+      {"en": "Sun in the 2nd: an authoritative voice and pride in family; wealth through position and self-effort.", "hi": "द्वितीय भाव में सूर्य: प्रभावशाली वाणी और कुल पर गर्व; पद और अपने परिश्रम से धन।"},
+      {"en": "Sun in the 3rd: courageous and self-reliant, with a bold, enterprising spirit.", "hi": "तृतीय भाव में सूर्य: साहसी और आत्मनिर्भर; उद्यमी और निडर स्वभाव।"},
+      {"en": "Sun in the 4th: pride in home and roots; a respected family and interest in property.", "hi": "चतुर्थ भाव में सूर्य: घर और जड़ों पर गर्व; प्रतिष्ठित परिवार और संपत्ति में रुचि।"},
+      {"en": "Sun in the 5th: a bright, creative intellect with leadership in studies and a noble mind.", "hi": "पंचम भाव में सूर्य: तेजस्वी और रचनात्मक बुद्धि; पढ़ाई में अग्रणी और उदार मन।"},
+      {"en": "Sun in the 6th: victory over competitors, success in exams, good immunity and a possible government connection.", "hi": "षष्ठ भाव में सूर्य: प्रतिस्पर्धियों पर विजय, परीक्षाओं में सफलता, अच्छी रोग-प्रतिरोधक शक्ति और सरकारी क्षेत्र से संबंध की संभावना।"},
+      {"en": "Sun in the 7th: a dignified, capable partner and partnerships with people of standing.", "hi": "सप्तम भाव में सूर्य: गरिमामय और योग्य जीवनसाथी; प्रतिष्ठित लोगों से साझेदारी।"},
+      {"en": "Sun in the 8th: an interest in research and hidden subjects; inner strength that grows with age.", "hi": "अष्टम भाव में सूर्य: शोध और गूढ़ विषयों में रुचि; भीतर की शक्ति जो आयु के साथ बढ़ती है।"},
+      {"en": "Sun in the 9th: righteous and fortunate, with respect for father, teachers and dharma.", "hi": "नवम भाव में सूर्य: धर्मपरायण और भाग्यशाली; पिता, गुरु और धर्म के प्रति आदर।"},
+      {"en": "Sun in the 10th: very strong for career, giving authority, recognition and success in administration.", "hi": "दशम भाव में सूर्य: कर्म-क्षेत्र के लिए अत्यंत बली; अधिकार, मान-सम्मान और प्रशासन में सफलता।"},
+      {"en": "Sun in the 11th: good gains, influential friends and fulfilment of ambitions.", "hi": "एकादश भाव में सूर्य: अच्छी आय, प्रभावशाली मित्र और महत्वाकांक्षाओं की पूर्ति।"},
+      {"en": "Sun in the 12th: links with distant places and a quiet, spiritual side; best energy in the mornings.", "hi": "द्वादश भाव में सूर्य: दूर स्थानों से संबंध और शांत, आध्यात्मिक पक्ष; प्रातःकाल में सर्वोत्तम ऊर्जा।"}
+    ],
+    "moon": [
+      {"en": "Moon in the 1st: a gentle, attractive and caring nature with a sensitive, imaginative mind.", "hi": "प्रथम भाव में चन्द्र: सौम्य, आकर्षक और स्नेही स्वभाव; संवेदनशील और कल्पनाशील मन।"},
+      {"en": "Moon in the 2nd: sweet speech, love of family and good food, and growing family wealth.", "hi": "द्वितीय भाव में चन्द्र: मधुर वाणी, परिवार और स्वादिष्ट भोजन से प्रेम, तथा बढ़ता कुटुंब-धन।"},
+      {"en": "Moon in the 3rd: a lively, curious mind; affectionate ties with brothers and sisters; fondness for short trips.", "hi": "तृतीय भाव में चन्द्र: चंचल और जिज्ञासु मन; भाई-बहनों से स्नेह; छोटी यात्राओं में रुचि।"},
+      {"en": "Moon in the 4th: very good for home happiness, with a deep bond with the mother, comforts and peace of mind.", "hi": "चतुर्थ भाव में चन्द्र: घर के सुख के लिए अत्यंत शुभ; माता से गहरा स्नेह, सुख-सुविधा और मन की शांति।"},
+      {"en": "Moon in the 5th: an imaginative, quick intellect, a good memory and love of the arts.", "hi": "पंचम भाव में चन्द्र: कल्पनाशील और तीव्र बुद्धि, अच्छी स्मरण-शक्ति और कला-प्रेम।"},
+      {"en": "Moon in the 6th: a helpful, service-minded nature; a regular routine keeps digestion and mood steady.", "hi": "षष्ठ भाव में चन्द्र: सहायक और सेवाभावी स्वभाव; नियमित दिनचर्या पाचन और मन को स्थिर रखती है।"},
+      {"en": "Moon in the 7th: a caring, attractive partner and a warm, sociable manner.", "hi": "सप्तम भाव में चन्द्र: स्नेही और आकर्षक जीवनसाथी; मिलनसार और आत्मीय व्यवहार।"},
+      {"en": "Moon in the 8th: strong intuition and depth of feeling; thrives on emotional security at home.", "hi": "अष्टम भाव में चन्द्र: प्रबल अंतर्ज्ञान और गहरी भावनाएँ; घर में भावनात्मक सुरक्षा से खिलता मन।"},
+      {"en": "Moon in the 9th: fortunate and devout, with love of travel and the blessings of mother and teachers.", "hi": "नवम भाव में चन्द्र: भाग्यशाली और श्रद्धालु; यात्रा-प्रेम तथा माता और गुरुजनों का आशीर्वाद।"},
+      {"en": "Moon in the 10th: popularity and public goodwill; a career that touches many people.", "hi": "दशम भाव में चन्द्र: लोकप्रियता और जन-स्नेह; अनेक लोगों से जुड़ा कर्म-क्षेत्र।"},
+      {"en": "Moon in the 11th: many friends, steady gains and wishes fulfilled.", "hi": "एकादश भाव में चन्द्र: अनेक मित्र, निरंतर आय और इच्छाओं की पूर्ति।"},
+      {"en": "Moon in the 12th: a strong link with foreign lands, a rich imagination and spiritual depth; a calm bedtime routine is helpful.", "hi": "द्वादश भाव में चन्द्र: विदेश से प्रबल संबंध, समृद्ध कल्पना और आध्यात्मिक गहराई; सोने की शांत दिनचर्या लाभकारी है।"}
+    ],
+    "mars": [
+      {"en": "Mars in the 1st: energetic, courageous and athletic, with a direct and active nature.", "hi": "प्रथम भाव में मंगल: ऊर्जावान, साहसी और खेल-प्रिय; स्पष्टवादी और सक्रिय स्वभाव।"},
+      {"en": "Mars in the 2nd: direct speech and strong earning drive; teach gentle words early.", "hi": "द्वितीय भाव में मंगल: स्पष्ट वाणी और धन कमाने का जोश; मधुर वचन आरंभ से सिखाएँ।"},
+      {"en": "Mars in the 3rd: excellent for courage, sports and initiative; a protector of brothers and sisters.", "hi": "तृतीय भाव में मंगल: साहस, खेल और पहल के लिए उत्तम; भाई-बहनों का रक्षक।"},
+      {"en": "Mars in the 4th: land, property and vehicles; a busy, lively home and a protective feeling for family.", "hi": "चतुर्थ भाव में मंगल: भूमि, संपत्ति और वाहन; चहल-पहल भरा घर और परिवार के प्रति रक्षा की भावना।"},
+      {"en": "Mars in the 5th: a sharp, competitive intellect with talent for sports, science and technical subjects.", "hi": "पंचम भाव में मंगल: तीव्र और प्रतिस्पर्धी बुद्धि; खेल, विज्ञान और तकनीकी विषयों में प्रतिभा।"},
+      {"en": "Mars in the 6th: victory over obstacles and rivals, stamina and good recovery power.", "hi": "षष्ठ भाव में मंगल: बाधाओं और प्रतिद्वंद्वियों पर विजय, दम-खम और शीघ्र स्वस्थ होने की शक्ति।"},
+      {"en": "Mars in the 7th: an energetic, capable partner and drive in partnerships.", "hi": "सप्तम भाव में मंगल: ऊर्जावान और सक्षम जीवनसाथी; साझेदारी में जोश।"},
+      {"en": "Mars in the 8th: resilience and an interest in research, surgery or engineering.", "hi": "अष्टम भाव में मंगल: सहनशक्ति तथा शोध, शल्य-चिकित्सा या इंजीनियरिंग में रुचि।"},
+      {"en": "Mars in the 9th: an energetic defender of principles; fortune through bold effort.", "hi": "नवम भाव में मंगल: सिद्धांतों की रक्षा में तत्पर; साहसिक प्रयास से भाग्योदय।"},
+      {"en": "Mars in the 10th: very strong for career, with drive, command and success in technical or leadership roles.", "hi": "दशम भाव में मंगल: कर्म-क्षेत्र के लिए अत्यंत बली; जोश, नेतृत्व और तकनीकी या प्रबंधन के पदों में सफलता।"},
+      {"en": "Mars in the 11th: strong gains through effort, helpful friends and ambitions achieved.", "hi": "एकादश भाव में मंगल: परिश्रम से अच्छी आय, सहायक मित्र और महत्वाकांक्षाओं की पूर्ति।"},
+      {"en": "Mars in the 12th: energy spent on distant goals and foreign links; active play by day helps restful sleep.", "hi": "द्वादश भाव में मंगल: दूर के लक्ष्यों और विदेश-संबंधों में ऊर्जा; दिन में भरपूर खेल से रात में अच्छी नींद।"}
+    ],
+    "mercury": [
+      {"en": "Mercury in the 1st: intelligent, youthful, witty and quick to learn.", "hi": "प्रथम भाव में बुध: बुद्धिमान, हँसमुख, हाज़िरजवाब और शीघ्र सीखने वाला।"},
+      {"en": "Mercury in the 2nd: fine speech, skill with numbers and wealth through intelligence.", "hi": "द्वितीय भाव में बुध: मधुर और कुशल वाणी, गणित में निपुणता और बुद्धि से धन।"},
+      {"en": "Mercury in the 3rd: a gifted communicator and writer; clever hands and friendly siblings.", "hi": "तृतीय भाव में बुध: संवाद और लेखन में प्रतिभा; कुशल हाथ और स्नेही भाई-बहन।"},
+      {"en": "Mercury in the 4th: a learned home, good schooling and a quick, well-informed mind.", "hi": "चतुर्थ भाव में बुध: विद्या का वातावरण, अच्छी स्कूली शिक्षा और तेज़, जानकार मन।"},
+      {"en": "Mercury in the 5th: excellent intellect, memory and skill in mathematics, languages and games of the mind.", "hi": "पंचम भाव में बुध: उत्तम बुद्धि, स्मरण-शक्ति तथा गणित, भाषा और बौद्धिक खेलों में निपुणता।"},
+      {"en": "Mercury in the 6th: analytical skill and success in competitive exams.", "hi": "षष्ठ भाव में बुध: विश्लेषण की क्षमता और प्रतियोगी परीक्षाओं में सफलता।"},
+      {"en": "Mercury in the 7th: an intelligent, youthful partner and a talent for business and negotiation.", "hi": "सप्तम भाव में बुध: बुद्धिमान और हँसमुख जीवनसाथी; व्यापार और बातचीत में कुशलता।"},
+      {"en": "Mercury in the 8th: a research-minded, investigative intellect.", "hi": "अष्टम भाव में बुध: शोध और खोज में रुचि रखने वाली बुद्धि।"},
+      {"en": "Mercury in the 9th: love of learning, higher studies and wise, well-spoken views.", "hi": "नवम भाव में बुध: विद्या-प्रेम, उच्च शिक्षा और सुविचारित, संतुलित मत।"},
+      {"en": "Mercury in the 10th: success through intelligence in commerce, technology, writing or advisory work.", "hi": "दशम भाव में बुध: बुद्धि के बल पर वाणिज्य, तकनीक, लेखन या सलाहकार कार्य में सफलता।"},
+      {"en": "Mercury in the 11th: gains through ideas, networks and many clever friends.", "hi": "एकादश भाव में बुध: विचारों और संपर्कों से आय; अनेक बुद्धिमान मित्र।"},
+      {"en": "Mercury in the 12th: an imaginative, reflective mind with interest in foreign languages and places.", "hi": "द्वादश भाव में बुध: कल्पनाशील और चिंतनशील मन; विदेशी भाषाओं और स्थानों में रुचि।"}
+    ],
+    "jupiter": [
+      {"en": "Jupiter in the 1st: wise, optimistic and well-regarded, with good health and a protective grace over life.", "hi": "प्रथम भाव में गुरु: विवेकी, आशावादी और सम्मानित; अच्छा स्वास्थ्य और जीवन पर कृपा की छाया।"},
+      {"en": "Jupiter in the 2nd: family wealth, truthful and sweet speech, and good values.", "hi": "द्वितीय भाव में गुरु: कुटुंब का धन, सत्य और मधुर वाणी तथा अच्छे संस्कार।"},
+      {"en": "Jupiter in the 3rd: wise in words and writing; helpful, well-meaning siblings.", "hi": "तृतीय भाव में गुरु: वाणी और लेखन में विवेक; सहायक और शुभचिंतक भाई-बहन।"},
+      {"en": "Jupiter in the 4th: property, vehicles, mother's blessings and a strong foundation in education.", "hi": "चतुर्थ भाव में गुरु: संपत्ति, वाहन, माता का आशीर्वाद और शिक्षा की मज़बूत नींव।"},
+      {"en": "Jupiter in the 5th: a brilliant, well-guided intellect, good values and success in studies.", "hi": "पंचम भाव में गुरु: प्रखर और सुमार्ग पर चलने वाली बुद्धि, अच्छे संस्कार और पढ़ाई में सफलता।"},
+      {"en": "Jupiter in the 6th: protection from difficulties and a helpful, service-minded nature.", "hi": "षष्ठ भाव में गुरु: कठिनाइयों से रक्षा और सहायक, सेवाभावी स्वभाव।"},
+      {"en": "Jupiter in the 7th: a wise, cultured and supportive partner; good fortune through partnerships.", "hi": "सप्तम भाव में गुरु: विवेकी, सुसंस्कृत और सहयोगी जीवनसाथी; साझेदारी से सौभाग्य।"},
+      {"en": "Jupiter in the 8th: good longevity, protection and interest in deep or spiritual subjects.", "hi": "अष्टम भाव में गुरु: अच्छी आयु, रक्षा और गूढ़ या आध्यात्मिक विषयों में रुचि।"},
+      {"en": "Jupiter in the 9th: excellent fortune, a supportive father, and a religious, righteous nature.", "hi": "नवम भाव में गुरु: उत्तम भाग्य, सहयोगी पिता और धार्मिक, सदाचारी स्वभाव।"},
+      {"en": "Jupiter in the 10th: an honourable career with respect, ethics and a guiding role.", "hi": "दशम भाव में गुरु: सम्मानजनक कर्म-क्षेत्र; प्रतिष्ठा, नैतिकता और मार्गदर्शक की भूमिका।"},
+      {"en": "Jupiter in the 11th: abundant gains, noble friends and wishes fulfilled.", "hi": "एकादश भाव में गुरु: भरपूर आय, सज्जन मित्र और इच्छाओं की पूर्ति।"},
+      {"en": "Jupiter in the 12th: a charitable, spiritual nature with protection in distant lands.", "hi": "द्वादश भाव में गुरु: दानशील और आध्यात्मिक स्वभाव; दूर देशों में भी रक्षा।"}
+    ],
+    "venus": [
+      {"en": "Venus in the 1st: charming, good-looking and pleasant, with a love of beauty and comfort.", "hi": "प्रथम भाव में शुक्र: आकर्षक, सुंदर और मधुर स्वभाव; सौंदर्य और सुख-सुविधा से प्रेम।"},
+      {"en": "Venus in the 2nd: sweet speech, a lovely voice and family wealth with fine tastes.", "hi": "द्वितीय भाव में शुक्र: मधुर वाणी, सुरीला स्वर और सुरुचिपूर्ण कुटुंब-धन।"},
+      {"en": "Venus in the 3rd: artistic skill in writing, music or design; affectionate siblings.", "hi": "तृतीय भाव में शुक्र: लेखन, संगीत या डिज़ाइन में कलात्मक कौशल; स्नेही भाई-बहन।"},
+      {"en": "Venus in the 4th: a beautiful, comfortable home, vehicles and a loving mother.", "hi": "चतुर्थ भाव में शुक्र: सुंदर और सुखद घर, वाहन और स्नेहमयी माता।"},
+      {"en": "Venus in the 5th: creative talent, love of the arts and a happy, affectionate mind.", "hi": "पंचम भाव में शुक्र: रचनात्मक प्रतिभा, कला-प्रेम और प्रसन्न, स्नेही मन।"},
+      {"en": "Venus in the 6th: a caring nature and a liking for service; a balanced diet keeps health good.", "hi": "षष्ठ भाव में शुक्र: सेवाभावी और स्नेही स्वभाव; संतुलित आहार से स्वास्थ्य उत्तम रहता है।"},
+      {"en": "Venus in the 7th: an attractive, educated and supportive partner; success in partnerships.", "hi": "सप्तम भाव में शुक्र: आकर्षक, सुशिक्षित और सहयोगी जीवनसाथी; साझेदारी में सफलता।"},
+      {"en": "Venus in the 8th: comforts in life and gains through family or partnership.", "hi": "अष्टम भाव में शुक्र: जीवन में सुख-सुविधा तथा परिवार या साझेदारी से लाभ।"},
+      {"en": "Venus in the 9th: good fortune, refined tastes and happiness through travel and culture.", "hi": "नवम भाव में शुक्र: सौभाग्य, परिष्कृत रुचि और यात्रा तथा संस्कृति से आनंद।"},
+      {"en": "Venus in the 10th: success in creative, design, media or people-facing careers.", "hi": "दशम भाव में शुक्र: रचनात्मक, डिज़ाइन, मीडिया या जन-संपर्क के क्षेत्रों में सफलता।"},
+      {"en": "Venus in the 11th: gains, comforts, many friends and pleasures fulfilled.", "hi": "एकादश भाव में शुक्र: आय, सुख-सुविधा, अनेक मित्र और मनोकामनाओं की पूर्ति।"},
+      {"en": "Venus in the 12th: comforts, foreign travel and generous spending on good things.", "hi": "द्वादश भाव में शुक्र: सुख-सुविधा, विदेश यात्रा और अच्छे कार्यों पर उदार व्यय।"}
+    ],
+    "saturn": [
+      {"en": "Saturn in the 1st: serious, patient and responsible, growing stronger and more successful with age.", "hi": "प्रथम भाव में शनि: गंभीर, धैर्यवान और ज़िम्मेदार; आयु के साथ बढ़ती शक्ति और सफलता।"},
+      {"en": "Saturn in the 2nd: measured speech and wealth built slowly and surely.", "hi": "द्वितीय भाव में शनि: नपी-तुली वाणी और धीरे-धीरे पर निश्चित रूप से बनता धन।"},
+      {"en": "Saturn in the 3rd: perseverance, courage and success through sustained effort.", "hi": "तृतीय भाव में शनि: लगन, साहस और निरंतर प्रयास से सफलता।"},
+      {"en": "Saturn in the 4th: a disciplined home and lasting property; extra warmth at home is valued.", "hi": "चतुर्थ भाव में शनि: अनुशासित घर और स्थायी संपत्ति; घर में अतिरिक्त स्नेह का महत्व।"},
+      {"en": "Saturn in the 5th: a deep, methodical thinker who learns thoroughly.", "hi": "पंचम भाव में शनि: गहरा और व्यवस्थित चिंतन; सीखना पूरी गहराई से।"},
+      {"en": "Saturn in the 6th: excellent for overcoming obstacles, with endurance and success in service.", "hi": "षष्ठ भाव में शनि: बाधाओं पर विजय के लिए उत्तम; सहनशक्ति और सेवा-क्षेत्र में सफलता।"},
+      {"en": "Saturn in the 7th: a mature, loyal and dependable partner; marriage is stable.", "hi": "सप्तम भाव में शनि: परिपक्व, निष्ठावान और विश्वसनीय जीवनसाथी; विवाह स्थिर रहता है।"},
+      {"en": "Saturn in the 8th: supports a long life and gives patience and staying power.", "hi": "अष्टम भाव में शनि: दीर्घायु का सहायक; धैर्य और टिके रहने की शक्ति।"},
+      {"en": "Saturn in the 9th: a disciplined sense of dharma; fortune grows steadily with effort.", "hi": "नवम भाव में शनि: धर्म के प्रति अनुशासित भाव; परिश्रम से भाग्य निरंतर बढ़ता है।"},
+      {"en": "Saturn in the 10th: strong for career, giving authority earned through hard work and organisation.", "hi": "दशम भाव में शनि: कर्म-क्षेत्र के लिए बली; परिश्रम और संगठन से अर्जित अधिकार।"},
+      {"en": "Saturn in the 11th: very good for lasting gains and loyal, long-term friends.", "hi": "एकादश भाव में शनि: स्थायी आय और निष्ठावान, दीर्घकालिक मित्रों के लिए अत्यंत शुभ।"},
+      {"en": "Saturn in the 12th: links with foreign lands and a thoughtful, spiritual depth; a good sleep routine helps.", "hi": "द्वादश भाव में शनि: विदेश से संबंध और विचारशील, आध्यात्मिक गहराई; नींद की अच्छी दिनचर्या लाभकारी।"}
+    ],
+    "rahu": [
+      {"en": "Rahu in the 1st: an unusual, magnetic personality with big ambitions.", "hi": "प्रथम भाव में राहु: अनोखा और आकर्षक व्यक्तित्व; बड़ी महत्वाकांक्षाएँ।"},
+      {"en": "Rahu in the 2nd: clever speech and unconventional ways of earning.", "hi": "द्वितीय भाव में राहु: चतुर वाणी और धन कमाने के नए ढंग।"},
+      {"en": "Rahu in the 3rd: very good for courage, enterprise, media and technology.", "hi": "तृतीय भाव में राहु: साहस, उद्यम, मीडिया और तकनीक के लिए अत्यंत शुभ।"},
+      {"en": "Rahu in the 4th: a modern home and interest in technology; quiet family time keeps the mind settled.", "hi": "चतुर्थ भाव में राहु: आधुनिक घर और तकनीक में रुचि; परिवार के साथ शांत समय मन को स्थिर रखता है।"},
+      {"en": "Rahu in the 5th: an inventive, out-of-the-box intellect drawn to new technology.", "hi": "पंचम भाव में राहु: नवीन सोच वाली, लीक से हटकर बुद्धि; नई तकनीक में रुचि।"},
+      {"en": "Rahu in the 6th: excellent for defeating obstacles and competitors.", "hi": "षष्ठ भाव में राहु: बाधाओं और प्रतिस्पर्धियों पर विजय के लिए उत्तम।"},
+      {"en": "Rahu in the 7th: partnerships with people from different backgrounds or places.", "hi": "सप्तम भाव में राहु: भिन्न पृष्ठभूमि या स्थान के लोगों से साझेदारी।"},
+      {"en": "Rahu in the 8th: interest in research, mysteries and hidden knowledge.", "hi": "अष्टम भाव में राहु: शोध, रहस्य और गूढ़ ज्ञान में रुचि।"},
+      {"en": "Rahu in the 9th: an independent outlook, foreign travel and fortune in distant places.", "hi": "नवम भाव में राहु: स्वतंत्र दृष्टिकोण, विदेश यात्रा और दूर स्थानों में भाग्योदय।"},
+      {"en": "Rahu in the 10th: strong worldly ambition and success in technology, media or public life.", "hi": "दशम भाव में राहु: प्रबल सांसारिक महत्वाकांक्षा; तकनीक, मीडिया या सार्वजनिक जीवन में सफलता।"},
+      {"en": "Rahu in the 11th: strong and sudden gains, large networks, technology-driven income and fulfilment of desires.", "hi": "एकादश भाव में राहु: प्रबल और आकस्मिक लाभ, बड़ा संपर्क-क्षेत्र, तकनीक से आय और इच्छाओं की पूर्ति।"},
+      {"en": "Rahu in the 12th: strong foreign connections and a vivid imagination.", "hi": "द्वादश भाव में राहु: विदेश से प्रबल संबंध और जीवंत कल्पना।"}
+    ],
+    "ketu": [
+      {"en": "Ketu in the 1st: an intuitive, modest and spiritually inclined nature.", "hi": "प्रथम भाव में केतु: अंतर्ज्ञानी, विनम्र और आध्यात्मिक झुकाव वाला स्वभाव।"},
+      {"en": "Ketu in the 2nd: few but meaningful words; simple needs and a detached view of money.", "hi": "द्वितीय भाव में केतु: कम पर सारगर्भित शब्द; सादी आवश्यकताएँ और धन के प्रति निर्लिप्त भाव।"},
+      {"en": "Ketu in the 3rd: quiet courage and strong intuition; good for skills that need practice.", "hi": "तृतीय भाव में केतु: शांत साहस और प्रबल अंतर्ज्ञान; अभ्यास वाले कौशलों के लिए शुभ।"},
+      {"en": "Ketu in the 4th: a spiritual atmosphere at home and an inward, reflective heart.", "hi": "चतुर्थ भाव में केतु: घर में आध्यात्मिक वातावरण और अंतर्मुखी, चिंतनशील हृदय।"},
+      {"en": "Ketu in the 5th: a deep, research-oriented intellect with interest in mathematics, computers and spirituality; needs guidance in focus.", "hi": "पंचम भाव में केतु: गहरी, शोध-प्रिय बुद्धि; गणित, कंप्यूटर और अध्यात्म में रुचि; एकाग्रता में मार्गदर्शन आवश्यक।"},
+      {"en": "Ketu in the 6th: excellent for overcoming obstacles and illness.", "hi": "षष्ठ भाव में केतु: बाधाओं और रोगों पर विजय के लिए उत्तम।"},
+      {"en": "Ketu in the 7th: a spiritual or independent-minded partner; values depth in relationships.", "hi": "सप्तम भाव में केतु: आध्यात्मिक या स्वतंत्र विचारों वाला जीवनसाथी; संबंधों में गहराई का महत्व।"},
+      {"en": "Ketu in the 8th: strong intuition and interest in healing and hidden subjects.", "hi": "अष्टम भाव में केतु: प्रबल अंतर्ज्ञान; चिकित्सा और गूढ़ विषयों में रुचि।"},
+      {"en": "Ketu in the 9th: a seeker by nature, drawn to pilgrimage and philosophy.", "hi": "नवम भाव में केतु: स्वभाव से जिज्ञासु; तीर्थ और दर्शन की ओर झुकाव।"},
+      {"en": "Ketu in the 10th: skill in specialised, technical or research work.", "hi": "दशम भाव में केतु: विशेषज्ञता, तकनीकी या शोध कार्य में कौशल।"},
+      {"en": "Ketu in the 11th: good gains with little attachment to them; a few true friends.", "hi": "एकादश भाव में केतु: अच्छी आय पर उससे कम आसक्ति; थोड़े पर सच्चे मित्र।"},
+      {"en": "Ketu in the 12th: very good for spiritual growth, intuition and peaceful sleep.", "hi": "द्वादश भाव में केतु: आध्यात्मिक उन्नति, अंतर्ज्ञान और शांत नींद के लिए अत्यंत शुभ।"}
+    ]
+  }
+}

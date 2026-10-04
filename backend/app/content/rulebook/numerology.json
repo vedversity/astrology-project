@@ -1,0 +1,333 @@
+{
+  "_note": "DRAFT for astrologer review. Edit the text freely; keep the keys and the {placeholders} unchanged.",
+
+  "relationships": {
+    "1": {"friendly": [1, 2, 3, 9], "neutral": [5, 6, 7], "avoid": [4, 8]},
+    "2": {"friendly": [1, 2, 3, 5], "neutral": [6, 7, 9], "avoid": [4, 8]},
+    "3": {"friendly": [1, 2, 3, 9], "neutral": [5, 7, 8], "avoid": [4, 6]},
+    "4": {"friendly": [4, 5, 6, 8], "neutral": [1, 3, 7], "avoid": [2, 9]},
+    "5": {"friendly": [1, 4, 5, 6], "neutral": [3, 7, 8], "avoid": [2, 9]},
+    "6": {"friendly": [4, 5, 6, 8], "neutral": [2, 7, 9], "avoid": [1, 3]},
+    "7": {"friendly": [1, 3, 7, 9], "neutral": [2, 5, 6], "avoid": [4, 8]},
+    "8": {"friendly": [4, 5, 6, 8], "neutral": [3, 7], "avoid": [1, 2, 9]},
+    "9": {"friendly": [1, 2, 3, 9], "neutral": [5, 6, 7], "avoid": [4, 8]}
+  },
+
+  "numbers": {
+    "1": {
+      "planet": "sun",
+      "day": {"en": "Sunday", "hi": "रविवार"},
+      "colours": {"en": ["Gold", "Orange", "Yellow"], "hi": ["सुनहरा", "नारंगी", "पीला"]},
+      "colours_avoid": {"en": ["Black", "Dark grey"], "hi": ["काला", "गहरा स्लेटी"]},
+      "mulank": {
+        "en": "Number 1 is the number of leadership and self-confidence. The child is independent, original and likes to do things in their own way. A natural captain in games and groups, with a bright and dignified presence. Gently teach sharing and listening, so that confidence never turns into stubbornness.",
+        "hi": "अंक 1 नेतृत्व और आत्मविश्वास का अंक है। स्वभाव स्वतंत्र और मौलिक रहता है, हर काम अपने ढंग से करने की इच्छा रहती है। खेल और समूह में स्वाभाविक रूप से आगे रहने का गुण होता है। बाँटना और दूसरों की बात सुनना प्रेम से सिखाएँ, ताकि आत्मविश्वास हठ न बने।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 1 is the number of the pioneer. Life leads the child towards positions of responsibility and authority: leading teams, starting new things, holding senior posts. Recognition comes through self-effort. Humility is the quality to nurture alongside.",
+        "hi": "भाग्यांक 1 अग्रणी व्यक्ति का अंक है। जीवन उत्तरदायित्व और अधिकार के पदों की ओर ले जाता है: नेतृत्व करना, नई शुरुआत करना, ऊँचे पद पर पहुँचना। मान-सम्मान अपने परिश्रम से मिलता है। साथ में विनम्रता का संस्कार दें।"
+      },
+      "present": {
+        "en": "expresses thoughts and feelings well; a clear communicator.",
+        "hi": "अपनी बात और भावनाएँ अच्छी तरह कह पाने का गुण; स्पष्ट वक्ता।"
+      },
+      "repeated": {
+        "en": "a confident, expressive speaker with a strong sense of self; teach listening as well as speaking.",
+        "hi": "आत्मविश्वासी और खुलकर बोलने वाला स्वभाव; बोलने के साथ सुनना भी सिखाएँ।"
+      },
+      "missing": {
+        "effect": {"en": "Self-expression, confidence", "hi": "आत्म-अभिव्यक्ति, आत्मविश्वास"},
+        "remedy": {"en": "Encourage the child to speak up; morning sunlight; small tasks done independently", "hi": "खुलकर बोलने के लिए प्रोत्साहित करें; सुबह की धूप; छोटे काम स्वयं करने दें"}
+      }
+    },
+    "2": {
+      "planet": "moon",
+      "day": {"en": "Monday", "hi": "सोमवार"},
+      "colours": {"en": ["White", "Cream", "Silver"], "hi": ["सफ़ेद", "क्रीम", "चाँदी जैसा"]},
+      "colours_avoid": {"en": ["Black", "Dark red"], "hi": ["काला", "गहरा लाल"]},
+      "mulank": {
+        "en": "Number 2 is the number of sensitivity and imagination. The child is gentle, affectionate and deeply attached to the mother and the home. Music, stories and art come naturally. Moods can change like the Moon, so a calm routine and plenty of reassurance work wonders.",
+        "hi": "अंक 2 संवेदनशीलता और कल्पना का अंक है। स्वभाव कोमल और स्नेही रहता है, माँ और घर से गहरा लगाव होता है। संगीत, कहानी और कला में सहज रुचि रहती है। मन चंद्रमा की तरह बदल सकता है, इसलिए शांत दिनचर्या और भरपूर स्नेह बहुत लाभ देते हैं।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 2 brings success through cooperation, care and creativity. The child shines in work that needs understanding of people: teaching, healing, the arts, counselling and partnerships. Building inner confidence is the life lesson.",
+        "hi": "भाग्यांक 2 सहयोग, सेवा और रचनात्मकता से सफलता देता है। लोगों को समझने वाले कामों में चमक मिलती है: शिक्षण, चिकित्सा, कला, परामर्श और साझेदारी। भीतर का आत्मविश्वास बढ़ाना जीवन की सीख है।"
+      },
+      "present": {
+        "en": "intuitive, sensitive and caring.",
+        "hi": "सहज बुद्धि, संवेदनशीलता और दूसरों की परवाह।"
+      },
+      "repeated": {
+        "en": "very intuitive, sensitive and caring; feelings are touched quickly. Use gentle words and never harsh comparison.",
+        "hi": "बहुत संवेदनशील और भावुक मन; बात जल्दी लग जाती है। कोमल शब्दों में समझाएँ, कठोर तुलना कभी न करें।"
+      },
+      "missing": {
+        "effect": {"en": "Sensitivity, patience with others", "hi": "संवेदनशीलता, दूसरों के प्रति धैर्य"},
+        "remedy": {"en": "Time near water; caring for a pet or plant; white or silver in the room", "hi": "जल के पास समय; पालतू जीव या पौधे की देखभाल; कमरे में सफ़ेद या चाँदी जैसा रंग"}
+      }
+    },
+    "3": {
+      "planet": "jupiter",
+      "day": {"en": "Thursday", "hi": "गुरुवार"},
+      "colours": {"en": ["Yellow", "Saffron", "Gold"], "hi": ["पीला", "केसरिया", "सुनहरा"]},
+      "colours_avoid": {"en": ["Dark blue", "Black"], "hi": ["गहरा नीला", "काला"]},
+      "mulank": {
+        "en": "Number 3 is the number of wisdom and good cheer. The child is curious, disciplined and loves to learn and to teach others. Respect for elders and teachers comes naturally. Give books, stories and a little responsibility; this child rises through knowledge.",
+        "hi": "अंक 3 ज्ञान और प्रसन्नता का अंक है। स्वभाव जिज्ञासु और अनुशासित रहता है, सीखने और सिखाने में आनंद आता है। बड़ों और गुरुजनों का आदर सहज होता है। पुस्तकें, कहानियाँ और थोड़ी ज़िम्मेदारी दें; उन्नति ज्ञान से होती है।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 3 leads towards learning, guidance and respect in society. Teaching, law, finance, advisory roles and religious or cultural work suit this path. Good fortune grows steadily with good conduct.",
+        "hi": "भाग्यांक 3 विद्या, मार्गदर्शन और समाज में सम्मान की ओर ले जाता है। शिक्षण, विधि, वित्त, सलाहकार कार्य और धर्म-संस्कृति से जुड़े क्षेत्र अनुकूल हैं। सदाचार के साथ भाग्य निरंतर बढ़ता है।"
+      },
+      "present": {
+        "en": "good imagination, memory and planning ability.",
+        "hi": "अच्छी कल्पना-शक्ति, स्मरण-शक्ति और योजना बनाने का गुण।"
+      },
+      "repeated": {
+        "en": "a rich imagination and a love of ideas; help the child finish what is started.",
+        "hi": "समृद्ध कल्पना और विचारों से प्रेम; शुरू किया काम पूरा करना सिखाएँ।"
+      },
+      "missing": {
+        "effect": {"en": "Imagination, planning", "hi": "कल्पना, योजना"},
+        "remedy": {"en": "Storytelling, reading and drawing; involve the child in small family plans", "hi": "कहानी, पढ़ना और चित्रकारी; घर की छोटी योजनाओं में शामिल करें"}
+      }
+    },
+    "4": {
+      "planet": "rahu",
+      "day": {"en": "Saturday", "hi": "शनिवार"},
+      "colours": {"en": ["Blue", "Grey"], "hi": ["नीला", "स्लेटी"]},
+      "colours_avoid": {"en": ["Black"], "hi": ["काला"]},
+      "mulank": {
+        "en": "Number 4 is the number of the original thinker. The child asks unusual questions, sees things differently and is practical and hard-working. A natural interest in machines, technology and how things work. A steady routine and patient explanations bring out the best.",
+        "hi": "अंक 4 मौलिक सोच का अंक है। अलग ढंग के प्रश्न पूछना, चीज़ों को नए नज़रिए से देखना और व्यावहारिक, परिश्रमी स्वभाव इसकी पहचान है। मशीन और तकनीक में सहज रुचि रहती है। नियमित दिनचर्या और धैर्य से समझाना सबसे अच्छा फल देता है।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 4 builds success step by step, through method, hard work and new ideas. Technology, engineering, research and organised systems suit this path. Results come a little slowly but they last.",
+        "hi": "भाग्यांक 4 व्यवस्था, परिश्रम और नए विचारों से क्रमशः सफलता देता है। तकनीक, इंजीनियरिंग, शोध और संगठित कार्य-प्रणाली अनुकूल हैं। फल थोड़ा धीरे मिलता है पर टिकाऊ होता है।"
+      },
+      "present": {
+        "en": "organised, practical and good with the hands.",
+        "hi": "व्यवस्थित, व्यावहारिक और हाथ के काम में निपुण।"
+      },
+      "repeated": {
+        "en": "very practical and detail-minded; add play and creativity to balance.",
+        "hi": "बहुत व्यावहारिक और बारीकी पर ध्यान; संतुलन के लिए खेल और रचनात्मकता जोड़ें।"
+      },
+      "missing": {
+        "effect": {"en": "Organisation, discipline", "hi": "व्यवस्था, अनुशासन"},
+        "remedy": {"en": "A tidy study table; a simple timetable; teach putting toys back", "hi": "साफ़-सुथरी पढ़ाई की मेज़; सरल समय-सारिणी; खिलौने वापस रखना सिखाएँ"}
+      }
+    },
+    "5": {
+      "planet": "mercury",
+      "day": {"en": "Wednesday", "hi": "बुधवार"},
+      "colours": {"en": ["Green", "Light green", "White"], "hi": ["हरा", "हल्का हरा", "सफ़ेद"]},
+      "colours_avoid": {"en": ["Dark red"], "hi": ["गहरा लाल"]},
+      "mulank": {
+        "en": "Number 5 is the number of quick intelligence. The child is lively, talkative, witty and learns very fast. Numbers, languages, puzzles and games of skill are favourites. Because the mind moves quickly, a little help with focus and finishing tasks goes a long way.",
+        "hi": "अंक 5 तीव्र बुद्धि का अंक है। स्वभाव चंचल, बातूनी और हाज़िरजवाब रहता है, सीखने की गति तेज़ होती है। गिनती, भाषा, पहेलियाँ और कौशल के खेल प्रिय रहते हैं। मन तेज़ चलता है, इसलिए एकाग्रता और काम पूरा करने में थोड़ा सहयोग बहुत लाभ देता है।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 5 brings success through communication, trade and adaptability. Business, finance, writing, media and technology suit this path. Travel and variety bring growth; steadiness is the lesson.",
+        "hi": "भाग्यांक 5 संवाद, व्यापार और परिस्थिति के अनुसार ढलने की क्षमता से सफलता देता है। व्यापार, वित्त, लेखन, मीडिया और तकनीक अनुकूल हैं। यात्रा और विविधता से उन्नति होती है; स्थिरता जीवन की सीख है।"
+      },
+      "present": {
+        "en": "balanced, adaptable and emotionally steady.",
+        "hi": "संतुलित, परिस्थिति के अनुसार ढलने वाला और भावनात्मक रूप से स्थिर।"
+      },
+      "repeated": {
+        "en": "great drive and enthusiasm; channel the energy into sport and learning.",
+        "hi": "भरपूर उत्साह और ऊर्जा; इसे खेल और पढ़ाई में लगाएँ।"
+      },
+      "missing": {
+        "effect": {"en": "Balance and consistency", "hi": "संतुलन और निरंतरता"},
+        "remedy": {"en": "Green in clothes and room; a fixed daily routine; puzzles and counting games", "hi": "कपड़ों और कमरे में हरा रंग; निश्चित दिनचर्या; पहेलियाँ और गिनती के खेल"}
+      }
+    },
+    "6": {
+      "planet": "venus",
+      "day": {"en": "Friday", "hi": "शुक्रवार"},
+      "colours": {"en": ["White", "Pink", "Light blue"], "hi": ["सफ़ेद", "गुलाबी", "हल्का नीला"]},
+      "colours_avoid": {"en": ["Dark red", "Black"], "hi": ["गहरा लाल", "काला"]},
+      "mulank": {
+        "en": "Number 6 is the number of love, beauty and harmony. The child is charming, affectionate and fond of family, good food, music and pretty things. A natural peacemaker with artistic taste. Teach the value of simplicity alongside comfort.",
+        "hi": "अंक 6 प्रेम, सौंदर्य और सामंजस्य का अंक है। स्वभाव आकर्षक और स्नेही रहता है, परिवार, स्वादिष्ट भोजन, संगीत और सुंदर वस्तुओं से लगाव होता है। मेल-मिलाप कराने का गुण और कलात्मक रुचि सहज होती है। सुख-सुविधा के साथ सादगी का महत्व भी सिखाएँ।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 6 brings comfort, a happy family life and success through art, design, hospitality, care and anything that makes life more beautiful. Responsibility towards loved ones is the theme of life.",
+        "hi": "भाग्यांक 6 सुख-सुविधा, सुखी पारिवारिक जीवन और कला, डिज़ाइन, आतिथ्य तथा सेवा से सफलता देता है। अपनों के प्रति ज़िम्मेदारी जीवन का मुख्य विषय रहती है।"
+      },
+      "present": {
+        "en": "love for family, home and beauty; a responsible nature.",
+        "hi": "परिवार, घर और सुंदरता से प्रेम; ज़िम्मेदार स्वभाव।"
+      },
+      "repeated": {
+        "en": "deep attachment to home and family; encourage friendships outside the home too.",
+        "hi": "घर-परिवार से गहरा लगाव; घर के बाहर मित्रता को भी प्रोत्साहित करें।"
+      },
+      "missing": {
+        "effect": {"en": "Sense of home and responsibility", "hi": "घर के प्रति लगाव और ज़िम्मेदारी"},
+        "remedy": {"en": "Small household duties; family meals together; art and music", "hi": "घर के छोटे काम; परिवार के साथ भोजन; कला और संगीत"}
+      }
+    },
+    "7": {
+      "planet": "ketu",
+      "day": {"en": "Monday", "hi": "सोमवार"},
+      "colours": {"en": ["Light green", "White", "Light yellow"], "hi": ["हल्का हरा", "सफ़ेद", "हल्का पीला"]},
+      "colours_avoid": {"en": ["Black", "Dark red"], "hi": ["काला", "गहरा लाल"]},
+      "mulank": {
+        "en": "Number 7 is the number of the thinker and seeker. The child is observant, thoughtful and enjoys quiet time, nature and asking deep questions. Strong intuition and an interest in the spiritual. Give space to think, and gently draw the child into company.",
+        "hi": "अंक 7 चिंतक और जिज्ञासु का अंक है। स्वभाव ध्यान से देखने-समझने वाला और विचारशील रहता है, एकांत, प्रकृति और गहरे प्रश्नों में रुचि होती है। अंतर्ज्ञान प्रबल और अध्यात्म की ओर झुकाव रहता है। सोचने का अवसर दें और प्रेम से लोगों के बीच लाएँ।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 7 leads towards research, analysis and inner wisdom. Science, medicine, technology, philosophy and spiritual studies suit this path. Travel and experience are the great teachers.",
+        "hi": "भाग्यांक 7 शोध, विश्लेषण और आंतरिक ज्ञान की ओर ले जाता है। विज्ञान, चिकित्सा, तकनीक, दर्शन और आध्यात्मिक अध्ययन अनुकूल हैं। यात्रा और अनुभव सबसे बड़े शिक्षक बनते हैं।"
+      },
+      "present": {
+        "en": "spiritual depth, good luck and learning through experience.",
+        "hi": "आध्यात्मिक गहराई, सौभाग्य और अनुभव से सीखना।"
+      },
+      "repeated": {
+        "en": "a deep, reflective mind; keep the child cheerful and connected with friends.",
+        "hi": "गहरा और चिंतनशील मन; प्रसन्न रखें और मित्रों से जोड़े रखें।"
+      },
+      "missing": {
+        "effect": {"en": "Reflection, faith", "hi": "चिंतन, आस्था"},
+        "remedy": {"en": "A short daily prayer; time in nature; quiet reading time", "hi": "रोज़ छोटी प्रार्थना; प्रकृति में समय; शांत पढ़ने का समय"}
+      }
+    },
+    "8": {
+      "planet": "saturn",
+      "day": {"en": "Saturday", "hi": "शनिवार"},
+      "colours": {"en": ["Dark blue", "Purple", "Grey"], "hi": ["गहरा नीला", "बैंगनी", "स्लेटी"]},
+      "colours_avoid": {"en": ["Bright red"], "hi": ["चटक लाल"]},
+      "mulank": {
+        "en": "Number 8 is the number of patience and perseverance. The child is serious, sincere, fair-minded and capable of great effort. Mature beyond their years, and loyal to the few they trust. Plenty of warmth, laughter and praise keep this strong nature light.",
+        "hi": "अंक 8 धैर्य और लगन का अंक है। स्वभाव गंभीर, सच्चा, न्यायप्रिय और परिश्रमी रहता है। उम्र से अधिक समझदारी और अपनों के प्रति निष्ठा होती है। भरपूर स्नेह, हँसी और प्रशंसा इस दृढ़ स्वभाव को सहज बनाए रखते हैं।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 8 gives lasting success through discipline, organisation and steady effort. Administration, law, industry, finance and large organisations suit this path. Rewards come with time and are solid.",
+        "hi": "भाग्यांक 8 अनुशासन, संगठन और निरंतर परिश्रम से स्थायी सफलता देता है। प्रशासन, विधि, उद्योग, वित्त और बड़े संस्थान अनुकूल हैं। फल समय के साथ और ठोस मिलता है।"
+      },
+      "present": {
+        "en": "patience, money sense and attention to detail.",
+        "hi": "धैर्य, धन की समझ और बारीकी पर ध्यान।"
+      },
+      "repeated": {
+        "en": "strong determination; teach flexibility and the joy of giving.",
+        "hi": "दृढ़ निश्चय; लचीलापन और देने का आनंद सिखाएँ।"
+      },
+      "missing": {
+        "effect": {"en": "Patience, money sense", "hi": "धैर्य, धन की समझ"},
+        "remedy": {"en": "A piggy bank and a saving habit; caring for plants or pets", "hi": "गुल्लक और बचत की आदत; पौधों या पालतू जीवों की देखभाल"}
+      }
+    },
+    "9": {
+      "planet": "mars",
+      "day": {"en": "Tuesday", "hi": "मंगलवार"},
+      "colours": {"en": ["Red", "Orange", "Saffron"], "hi": ["लाल", "नारंगी", "केसरिया"]},
+      "colours_avoid": {"en": ["Black", "Dark navy"], "hi": ["काला", "गहरा नीला"]},
+      "mulank": {
+        "en": "Number 9 is the number of courage, energy and protection. The child is brave, straightforward, action-oriented, loyal to family and friends, and quick to stand up for what is right. A natural leader in games, full of stamina. Impatience and a quick temper are the things to guide; sports, swimming, martial arts and yoga channel this energy beautifully.",
+        "hi": "अंक 9 साहस, ऊर्जा और रक्षा का अंक है। स्वभाव निडर, स्पष्टवादी, कर्मठ और परिवार तथा मित्रों के प्रति निष्ठावान रहता है; जो सही है उसके लिए खड़े होने का गुण होता है। खेलों में स्वाभाविक नेतृत्व और भरपूर दम-खम रहता है। अधीरता और जल्दी क्रोध को प्रेम से संभालें; खेल, तैराकी, मार्शल आर्ट और योग इस ऊर्जा को सुंदर दिशा देते हैं।"
+      },
+      "bhagyank": {
+        "en": "Destiny number 9 leads towards service, courage and big goals. Defence, medicine and surgery, engineering, sports, administration and social causes suit this path. The life lesson is to use strength to protect and to give.",
+        "hi": "भाग्यांक 9 सेवा, साहस और बड़े लक्ष्यों की ओर ले जाता है। रक्षा, चिकित्सा और शल्य-चिकित्सा, इंजीनियरिंग, खेल, प्रशासन और समाज-सेवा अनुकूल हैं। शक्ति का उपयोग रक्षा और दान में करना जीवन की सीख है।"
+      },
+      "present": {
+        "en": "intelligence, idealism and a helpful nature.",
+        "hi": "बुद्धिमत्ता, आदर्शवाद और सहायता करने वाला स्वभाव।"
+      },
+      "repeated": {
+        "en": "sharp intelligence, idealism and big ambitions; can become critical or impatient, so teach patience.",
+        "hi": "तीव्र बुद्धि, आदर्शवाद और बड़ी महत्वाकांक्षा; कभी आलोचक या अधीर स्वभाव, इसलिए धैर्य सिखाएँ।"
+      },
+      "missing": {
+        "effect": {"en": "Energy, compassion", "hi": "ऊर्जा, करुणा"},
+        "remedy": {"en": "Outdoor play and sports; sharing and helping others; red in small touches", "hi": "खुले में खेल-कूद; बाँटना और दूसरों की सहायता; थोड़ा लाल रंग"}
+      }
+    }
+  },
+
+  "combination": {
+    "friendly": {
+      "en": "Mulank {mulank} ({mulank_planet}) and Bhagyank {bhagyank} ({bhagyank_planet}) are friends, so this is a harmonious combination: nature and destiny pull in the same direction, and effort is rewarded smoothly.",
+      "hi": "मूलांक {mulank} ({mulank_planet}) और भाग्यांक {bhagyank} ({bhagyank_planet}) मित्र हैं, इसलिए यह एक सुंदर और सामंजस्यपूर्ण संयोग है: स्वभाव और भाग्य एक ही दिशा में चलते हैं और परिश्रम का फल सहजता से मिलता है।"
+    },
+    "neutral": {
+      "en": "Mulank {mulank} ({mulank_planet}) and Bhagyank {bhagyank} ({bhagyank_planet}) are neutral to each other: a balanced combination in which steady effort brings steady results.",
+      "hi": "मूलांक {mulank} ({mulank_planet}) और भाग्यांक {bhagyank} ({bhagyank_planet}) एक-दूसरे के प्रति सम हैं: यह संतुलित संयोग है जिसमें निरंतर परिश्रम से निरंतर फल मिलता है।"
+    },
+    "avoid": {
+      "en": "Mulank {mulank} ({mulank_planet}) and Bhagyank {bhagyank} ({bhagyank_planet}) have different natures. This teaches the child to balance two sides of the personality, which builds maturity and depth. A well-chosen name number helps to harmonise them.",
+      "hi": "मूलांक {mulank} ({mulank_planet}) और भाग्यांक {bhagyank} ({bhagyank_planet}) के स्वभाव अलग हैं। इससे व्यक्तित्व के दो पक्षों में संतुलन सीखने का अवसर मिलता है, जो परिपक्वता और गहराई देता है। सही नामांक इनमें सामंजस्य लाने में सहायक होता है।"
+    }
+  },
+
+  "surname": {
+    "en": "The surname {surname} = {compound} → {single}.",
+    "hi": "उपनाम {surname} = {compound} → {single}।"
+  },
+
+  "planes": {
+    "mental": {"en": "Mental", "hi": "मानसिक"},
+    "emotional": {"en": "Emotional", "hi": "भावनात्मक"},
+    "practical": {"en": "Practical", "hi": "व्यावहारिक"},
+    "thought": {"en": "Thought", "hi": "विचार"},
+    "will": {"en": "Will", "hi": "इच्छा-शक्ति"},
+    "action": {"en": "Action", "hi": "कर्म"}
+  },
+  "plane_status": {
+    "complete": {"en": "Complete", "hi": "पूर्ण"},
+    "good": {"en": "Good", "hi": "अच्छा"},
+    "develop": {"en": "Develop", "hi": "विकसित करें"},
+    "missing": {"en": "Missing", "hi": "अनुपस्थित"}
+  },
+  "plane_complete": {
+    "mental": {"en": "Complete Mental Plane: a sharp memory and a clear, thinking mind.", "hi": "पूर्ण मानसिक तल: तेज़ स्मरण-शक्ति और स्पष्ट सोच।"},
+    "emotional": {"en": "Complete Emotional Plane: a warm heart with balanced feelings.", "hi": "पूर्ण भावनात्मक तल: स्नेही हृदय और संतुलित भावनाएँ।"},
+    "practical": {"en": "Complete Practical Plane: skilful with hands, money and everyday matters.", "hi": "पूर्ण व्यावहारिक तल: हाथ के काम, धन और रोज़मर्रा के विषयों में निपुणता।"},
+    "thought": {"en": "Complete Thought Plane: a planner who thinks things through.", "hi": "पूर्ण विचार तल: सोच-समझकर योजना बनाने का गुण।"},
+    "will": {"en": "Complete Will Plane: strong determination to reach goals.", "hi": "पूर्ण इच्छा-शक्ति तल: लक्ष्य तक पहुँचने का दृढ़ निश्चय।"},
+    "action": {"en": "Complete Action Plane: turns ideas into action, a hard-working doer.", "hi": "पूर्ण कर्म तल: विचार को कर्म में बदलने वाला, परिश्रमी स्वभाव।"}
+  },
+
+  "kua": {
+    "elements": {
+      "water": {"en": "Water", "hi": "जल"}, "earth": {"en": "Earth", "hi": "पृथ्वी"},
+      "wood": {"en": "Wood", "hi": "काष्ठ"}, "metal": {"en": "Metal", "hi": "धातु"},
+      "fire": {"en": "Fire", "hi": "अग्नि"}
+    },
+    "groups": {
+      "east": {"en": "East group", "hi": "पूर्व समूह"},
+      "west": {"en": "West group", "hi": "पश्चिम समूह"}
+    },
+    "directions": {
+      "N": {"en": "North", "hi": "उत्तर"}, "S": {"en": "South", "hi": "दक्षिण"},
+      "E": {"en": "East", "hi": "पूर्व"}, "W": {"en": "West", "hi": "पश्चिम"},
+      "NE": {"en": "North-East", "hi": "उत्तर-पूर्व"}, "NW": {"en": "North-West", "hi": "उत्तर-पश्चिम"},
+      "SE": {"en": "South-East", "hi": "दक्षिण-पूर्व"}, "SW": {"en": "South-West", "hi": "दक्षिण-पश्चिम"}
+    },
+    "uses": {
+      "success": {"en": "Success", "hi": "सफलता"},
+      "health": {"en": "Health", "hi": "स्वास्थ्य"},
+      "relationships": {"en": "Relationships", "hi": "संबंध"},
+      "growth": {"en": "Growth / Study", "hi": "उन्नति / पढ़ाई"}
+    },
+    "advice": {
+      "en": "Let the child sleep with the head towards the {health} and face the {growth} or {success} while studying.",
+      "hi": "सोते समय सिर {health} की ओर रखें और पढ़ते समय मुख {growth} या {success} की ओर रखें।"
+    }
+  },
+
+  "personal_years": {
+    "en": "Years marked favourable ({years}) are especially good for starting school, admissions and new activities.",
+    "hi": "शुभ चिह्नित वर्ष ({years}) विद्यालय आरंभ, प्रवेश और नई गतिविधियों के लिए विशेष रूप से अच्छे हैं।"
+  },
+
+  "name_note": {
+    "en": "Preferred name numbers: {friendly}. Avoid spellings that total {avoid}. ★★ means the first name matches the Mulank and the full name matches the Bhagyank.",
+    "hi": "श्रेष्ठ नामांक: {friendly}। ऐसी वर्तनी से बचें जिसका योग {avoid} हो। ★★ का अर्थ है कि पहला नाम मूलांक से और पूरा नाम भाग्यांक से मेल खाता है।"
+  }
+}

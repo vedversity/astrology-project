@@ -1,0 +1,96 @@
+{
+  "_note": "Short labels used across the report. Edit the text freely; keep the keys unchanged.",
+
+  "ordinals": {
+    "en": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"],
+    "hi": ["प्रथम", "द्वितीय", "तृतीय", "चतुर्थ", "पंचम", "षष्ठ", "सप्तम", "अष्टम", "नवम", "दशम", "एकादश", "द्वादश"]
+  },
+  "and": {"en": " and ", "hi": " और "},
+
+  "dignity": {
+    "exalted": {"en": "exalted", "hi": "उच्च"},
+    "moolatrikona": {"en": "in moolatrikona", "hi": "मूलत्रिकोण में"},
+    "own": {"en": "in own sign", "hi": "स्वराशि में"},
+    "debilitated": {"en": "debilitated", "hi": "नीच"},
+    "none": {"en": "—", "hi": "—"}
+  },
+
+  "strength_level": {
+    "strong": {"en": "Strong", "hi": "बली"},
+    "medium": {"en": "Medium", "hi": "मध्यम"},
+    "weak": {"en": "Needs support", "hi": "सहयोग चाहिए"}
+  },
+  "strength_reason": {
+    "exalted": {"en": "exalted", "hi": "उच्च"},
+    "moolatrikona": {"en": "moolatrikona", "hi": "मूलत्रिकोण"},
+    "own": {"en": "own sign", "hi": "स्वराशि"},
+    "debilitated": {"en": "debilitated", "hi": "नीच"},
+    "kendra": {"en": "in a kendra", "hi": "केंद्र में"},
+    "trikona": {"en": "in a trikona", "hi": "त्रिकोण में"},
+    "upachaya": {"en": "well placed (upachaya)", "hi": "उपचय भाव में शुभ"},
+    "dusthana": {"en": "in the 6th, 8th or 12th", "hi": "छठे, आठवें या बारहवें भाव में"},
+    "vargottama": {"en": "vargottama", "hi": "वर्गोत्तम"},
+    "jupiter_support": {"en": "supported by Jupiter", "hi": "गुरु का सहयोग"},
+    "with_malefic": {"en": "joined by a malefic", "hi": "पाप ग्रह के साथ"},
+    "neecha_bhanga": {"en": "Neecha-Bhanga", "hi": "नीचभंग"},
+    "retrograde": {"en": "retrograde", "hi": "वक्री"}
+  },
+
+  "dosha_status": {
+    "not_present": {"en": "Not present", "hi": "नहीं है"},
+    "present": {"en": "Present", "hi": "है"},
+    "mild": {"en": "Present (mild)", "hi": "है (हल्का)"},
+    "partial": {"en": "Partial", "hi": "आंशिक"},
+    "cancelled": {"en": "Cancelled", "hi": "निरस्त"},
+    "minor": {"en": "No major dosha", "hi": "कोई बड़ा दोष नहीं"},
+    "running": {"en": "Running at birth", "hi": "जन्म के समय चल रही है"}
+  },
+
+  "name_match": {
+    "birth_pada": {"en": "Birth-pada letter", "hi": "जन्म चरण का अक्षर"},
+    "nakshatra": {"en": "Nakshatra letter", "hi": "नक्षत्र का अक्षर"},
+    "rashi": {"en": "Rashi letter", "hi": "राशि का अक्षर"},
+    "same_consonant": {"en": "Same starting sound", "hi": "समान आरंभिक ध्वनि"}
+  },
+  "number_fit": {
+    "friendly": {"en": "Friendly", "hi": "मित्र"},
+    "neutral": {"en": "Neutral", "hi": "सम"},
+    "avoid": {"en": "Avoid", "hi": "शत्रु"}
+  },
+
+  "sade_sati_phase": {
+    "rising": {"en": "the first phase", "hi": "पहला चरण"},
+    "peak": {"en": "the peak phase", "hi": "मध्य चरण"},
+    "setting": {"en": "the last phase", "hi": "अंतिम चरण"}
+  },
+
+  "months": {
+    "en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "hi": ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर", "अक्टूबर", "नवम्बर", "दिसम्बर"]
+  },
+
+  "child": {
+    "male": {"en": "Baby Boy", "hi": "चि. बालक"},
+    "female": {"en": "Baby Girl", "hi": "कु. बालिका"}
+  },
+
+  "varga": {
+    "D1": {"en": "Rashi (D-1)", "hi": "राशि (D-1)"},
+    "D2": {"en": "Hora (D-2)", "hi": "होरा (D-2)"},
+    "D3": {"en": "Drekkana (D-3)", "hi": "द्रेष्काण (D-3)"},
+    "D7": {"en": "Saptamsa (D-7)", "hi": "सप्तमांश (D-7)"},
+    "D9": {"en": "Navamsa (D-9)", "hi": "नवांश (D-9)"},
+    "D10": {"en": "Dashamsa (D-10)", "hi": "दशमांश (D-10)"},
+    "D12": {"en": "Dwadasamsa (D-12)", "hi": "द्वादशांश (D-12)"}
+  },
+
+  "karakas": {
+    "atmakaraka": {"en": "Atmakaraka (soul)", "hi": "आत्मकारक (आत्मा)"},
+    "amatyakaraka": {"en": "Amatyakaraka (career)", "hi": "अमात्यकारक (कर्म)"},
+    "bhratrikaraka": {"en": "Bhratrikaraka (siblings)", "hi": "भ्रातृकारक (भाई-बहन)"},
+    "matrikaraka": {"en": "Matrikaraka (mother)", "hi": "मातृकारक (माता)"},
+    "putrakaraka": {"en": "Putrakaraka (children)", "hi": "पुत्रकारक (संतान)"},
+    "gnatikaraka": {"en": "Gnatikaraka (relatives)", "hi": "ज्ञातिकारक (संबंधी)"},
+    "darakaraka": {"en": "Darakaraka (spouse)", "hi": "दाराकारक (जीवनसाथी)"}
+  }
+}

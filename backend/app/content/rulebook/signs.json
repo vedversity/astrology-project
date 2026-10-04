@@ -1,0 +1,72 @@
+{
+  "_note": "DRAFT for astrologer review. One block per sign, Aries first. 'lagna' = nature when it is the Ascendant, 'moon' = nature when it is the Moon sign, 'health' = areas to look after when it is the Ascendant.",
+
+  "signs": [
+    {
+      "lagna": {"en": "With an Aries Lagna, the child is energetic, brave, quick in action and a natural initiator who likes to be first.", "hi": "मेष लग्न होने से स्वभाव ऊर्जावान, साहसी और फुर्तीला रहता है; हर काम में पहल करने और आगे रहने का गुण होता है।"},
+      "moon": {"en": "The Moon in Aries gives a lively, enthusiastic and independent mind that loves action and new beginnings.", "hi": "मेष राशि का चन्द्र मन को उत्साही, स्वतंत्र और कर्मप्रिय बनाता है; नई शुरुआत में आनंद आता है।"},
+      "health": {"en": "the head, fevers and minor bumps from being very active", "hi": "सिर, ज्वर और अधिक चंचलता से लगने वाली छोटी चोटें"}
+    },
+    {
+      "lagna": {"en": "With a Taurus Lagna, the child is calm, steady, affectionate and patient, with a love of good food, music and comfort.", "hi": "वृषभ लग्न होने से स्वभाव शांत, स्थिर, स्नेही और धैर्यवान रहता है; स्वादिष्ट भोजन, संगीत और सुख-सुविधा से लगाव होता है।"},
+      "moon": {"en": "The Moon in Taurus, its sign of exaltation, gives a contented, loving and steady mind with fine artistic taste.", "hi": "वृषभ राशि में चन्द्र उच्च का होता है; मन संतुष्ट, स्नेही और स्थिर रहता है और कलात्मक रुचि उत्तम होती है।"},
+      "health": {"en": "the throat, tonsils and neck", "hi": "गला, टॉन्सिल और गर्दन"}
+    },
+    {
+      "lagna": {"en": "With a Gemini Lagna, the child is curious, talkative, witty and quick to learn, with many interests and many friends.", "hi": "मिथुन लग्न होने से स्वभाव जिज्ञासु, बातूनी, हाज़िरजवाब और शीघ्र सीखने वाला रहता है; रुचियाँ और मित्र दोनों अनेक होते हैं।"},
+      "moon": {"en": "The Moon in Gemini gives a bright, playful and communicative mind that loves stories, words and variety.", "hi": "मिथुन राशि का चन्द्र मन को चंचल, हँसमुख और संवादप्रिय बनाता है; कहानियों, शब्दों और विविधता से प्रेम होता है।"},
+      "health": {"en": "the chest, breathing and restlessness", "hi": "छाती, श्वास और बेचैनी"}
+    },
+    {
+      "lagna": {"en": "With a Cancer Lagna, the child is caring, sensitive, deeply attached to mother and home, and blessed with a strong memory.", "hi": "कर्क लग्न होने से स्वभाव स्नेही और संवेदनशील रहता है; माता और घर से गहरा लगाव तथा तेज़ स्मरण-शक्ति होती है।"},
+      "moon": {"en": "The Moon in Cancer, its own sign, gives a tender, nurturing and intuitive heart with deep family feeling.", "hi": "कर्क राशि में चन्द्र अपनी ही राशि में होता है; हृदय कोमल, पालन करने वाला और सहज ज्ञान से भरा रहता है।"},
+      "health": {"en": "the chest, digestion and seasonal coughs and colds", "hi": "छाती, पाचन और मौसमी सर्दी-खाँसी"}
+    },
+    {
+      "lagna": {"en": "With a Leo Lagna, the child is confident, generous, warm-hearted and dignified, a natural leader who loves to shine.", "hi": "सिंह लग्न होने से स्वभाव आत्मविश्वासी, उदार, स्नेही और गरिमामय रहता है; नेतृत्व का स्वाभाविक गुण होता है।"},
+      "moon": {"en": "The Moon in Leo gives a proud, loyal and big-hearted mind that thrives on appreciation.", "hi": "सिंह राशि का चन्द्र मन को स्वाभिमानी, निष्ठावान और उदार बनाता है; प्रशंसा से यह खिल उठता है।"},
+      "health": {"en": "the heart, back and body heat", "hi": "हृदय, पीठ और शरीर की गर्मी"}
+    },
+    {
+      "lagna": {"en": "With a Virgo Lagna, the child is intelligent, observant, neat and helpful, with a sharp eye for detail.", "hi": "कन्या लग्न होने से स्वभाव बुद्धिमान, सूक्ष्मदर्शी, सुव्यवस्थित और सहायक रहता है; बारीकियों पर पैनी दृष्टि होती है।"},
+      "moon": {"en": "The Moon in Virgo gives a thoughtful, modest and analytical mind that likes order and learning.", "hi": "कन्या राशि का चन्द्र मन को विचारशील, विनम्र और विश्लेषणात्मक बनाता है; व्यवस्था और सीखना प्रिय रहता है।"},
+      "health": {"en": "digestion and the stomach", "hi": "पाचन और पेट"}
+    },
+    {
+      "lagna": {"en": "With a Libra Lagna, the child is charming, fair-minded, sociable and artistic, with a gift for making friends.", "hi": "तुला लग्न होने से स्वभाव आकर्षक, न्यायप्रिय, मिलनसार और कलाप्रिय रहता है; मित्र बनाने का विशेष गुण होता है।"},
+      "moon": {"en": "The Moon in Libra gives a pleasant, balanced and affectionate mind that loves harmony and beauty.", "hi": "तुला राशि का चन्द्र मन को मधुर, संतुलित और स्नेही बनाता है; सामंजस्य और सौंदर्य प्रिय रहता है।"},
+      "health": {"en": "the lower back, kidneys and skin", "hi": "कमर, गुर्दे और त्वचा"}
+    },
+    {
+      "lagna": {"en": "With a Scorpio Lagna, the child is determined, brave, perceptive and intensely loyal, with great inner strength.", "hi": "वृश्चिक लग्न होने से स्वभाव दृढ़, साहसी, सूक्ष्मदर्शी और अत्यंत निष्ठावान रहता है; भीतर की शक्ति प्रबल होती है।"},
+      "moon": {"en": "The Moon in Scorpio gives deep feelings, strong willpower and a protective love for family.", "hi": "वृश्चिक राशि का चन्द्र गहरी भावनाएँ, प्रबल इच्छा-शक्ति और परिवार के प्रति रक्षात्मक प्रेम देता है।"},
+      "health": {"en": "body heat, the lower abdomen and minor infections", "hi": "शरीर की गर्मी, पेट का निचला भाग और छोटे संक्रमण"}
+    },
+    {
+      "lagna": {"en": "With a Sagittarius Lagna, the child is cheerful, honest, optimistic and principled, with a love of learning and the outdoors.", "hi": "धनु लग्न होने से स्वभाव प्रसन्नचित्त, सच्चा, आशावादी और सिद्धांतप्रिय रहता है; विद्या और खुले वातावरण से प्रेम होता है।"},
+      "moon": {"en": "The Moon in Sagittarius gives a hopeful, generous and freedom-loving mind with respect for teachers and dharma.", "hi": "धनु राशि का चन्द्र मन को आशावान, उदार और स्वतंत्रताप्रिय बनाता है; गुरुजनों और धर्म के प्रति आदर रहता है।"},
+      "health": {"en": "the hips, thighs and liver", "hi": "कूल्हे, जाँघें और यकृत"}
+    },
+    {
+      "lagna": {"en": "With a Capricorn Lagna, the child is patient, responsible, practical and hard-working, mature beyond their years.", "hi": "मकर लग्न होने से स्वभाव धैर्यवान, ज़िम्मेदार, व्यावहारिक और परिश्रमी रहता है; उम्र से अधिक समझदारी होती है।"},
+      "moon": {"en": "The Moon in Capricorn gives a serious, dutiful and steady mind that values discipline and achievement.", "hi": "मकर राशि का चन्द्र मन को गंभीर, कर्तव्यनिष्ठ और स्थिर बनाता है; अनुशासन और उपलब्धि का महत्व रहता है।"},
+      "health": {"en": "the knees, bones, teeth and skin", "hi": "घुटने, हड्डियाँ, दाँत और त्वचा"}
+    },
+    {
+      "lagna": {"en": "With an Aquarius Lagna, the child is thoughtful, friendly, original and humane, with an inventive and independent mind.", "hi": "कुंभ लग्न होने से स्वभाव विचारशील, मित्रवत, मौलिक और मानवीय रहता है; मन नवीन सोच वाला और स्वतंत्र होता है।"},
+      "moon": {"en": "The Moon in Aquarius gives a calm, friendly and idealistic mind with a wide circle of friends.", "hi": "कुंभ राशि का चन्द्र मन को शांत, मित्रवत और आदर्शवादी बनाता है; मित्र-मंडली बड़ी रहती है।"},
+      "health": {"en": "the calves, ankles and circulation", "hi": "पिंडलियाँ, टखने और रक्त-संचार"}
+    },
+    {
+      "lagna": {"en": "With a Pisces Lagna, the child is gentle, compassionate, imaginative and spiritual, with a generous and forgiving heart.", "hi": "मीन लग्न होने से स्वभाव कोमल, दयालु, कल्पनाशील और आध्यात्मिक रहता है; हृदय उदार और क्षमाशील होता है।"},
+      "moon": {"en": "The Moon in Pisces gives a soft, compassionate, imaginative and deeply caring heart, with strong intuition and a love of music, art and water.", "hi": "मीन राशि का चन्द्र हृदय को कोमल, करुणामय, कल्पनाशील और अत्यंत स्नेही बनाता है; अंतर्ज्ञान प्रबल रहता है और संगीत, कला तथा जल से प्रेम होता है।"},
+      "health": {"en": "the feet, sleep and coughs and colds", "hi": "पैर, नींद और सर्दी-खाँसी"}
+    }
+  ],
+
+  "gana": {
+    "Deva": {"en": "Deva Gana gives a kind, gentle and principled nature.", "hi": "देव गण स्वभाव को दयालु, सौम्य और सिद्धांतप्रिय बनाता है।"},
+    "Manushya": {"en": "Manushya Gana gives a practical, hard-working and family-loving nature.", "hi": "मनुष्य गण स्वभाव को व्यावहारिक, परिश्रमी और परिवार-प्रेमी बनाता है।"},
+    "Rakshasa": {"en": "Rakshasa Gana gives a strong-willed, fearless and independent nature.", "hi": "राक्षस गण स्वभाव को दृढ़ इच्छा-शक्ति वाला, निडर और स्वतंत्र बनाता है।"}
+  }
+}
