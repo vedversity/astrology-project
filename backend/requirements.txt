@@ -1,0 +1,10 @@
+# Swiss Ephemeris (AGPL or paid professional licence - see README)
+pyswisseph>=2.10.3
+# Web API
+fastapi>=0.110
+uvicorn>=0.29
+# Timezone database (Windows does not ship one)
+tzdata
+# Testing
+pytest>=8.0
+httpx>=0.27

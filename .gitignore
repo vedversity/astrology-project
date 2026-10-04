@@ -1,0 +1,19 @@
+# Secrets - never commit real keys
+.env
+
+# The sample report contains a real family's personal details - keep it out of Git
+Janam Patrika*.pdf
+Janam_Patrika*.pdf
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node (Phase 4 onwards)
+node_modules/
+.next/
+
+# Generated files
+backend/output/
