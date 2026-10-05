@@ -1,0 +1,511 @@
+// Every word shown on the website, in Hindi and English.
+//
+// To change the wording, edit the text between the quotes. Keep the names on
+// the left unchanged. Prices and plan details are NOT here: they come from
+// backend/app/config/site.json.
+//
+// Rule for all copy: say only what is true of the product today. No fear, no
+// guarantees, no invented reviews or astrologer details.
+
+import type { Lang } from "./site";
+
+const hi = {
+  nav: { patrika: "जन्म पत्रिका", panchang: "आज का पंचांग", about: "हमारे बारे में", otherLang: "English" },
+
+  home: {
+    title: "जन्म पत्रिका हिंदी में — सरल और सटीक",
+    description:
+      "जन्म तिथि, समय और स्थान डालें और अपनी राशि, नक्षत्र और नाम अक्षर मुफ्त देखें। विस्तृत जन्म पत्रिका PDF ₹{price} से।",
+    h1: "अपनी जन्म पत्रिका बनवाएं — सरल हिंदी में",
+    intro:
+      "स्विस एफेमेरिस और लाहिरी अयनांश से सटीक गणना, और हर फल का अर्थ सरल भाषा में। हम डराते नहीं, समझाते हैं।",
+    chips: ["लॉगिन ज़रूरी नहीं", "मुफ्त झलक", "डेटा सुरक्षित"],
+    freeTitle: "मुफ्त झलक में क्या मिलेगा",
+    free: [
+      { title: "जन्म राशि", text: "चंद्रमा जिस राशि में था, वही आपकी राशि।" },
+      { title: "नक्षत्र और चरण", text: "जन्म नक्षत्र और उसका चरण।" },
+      { title: "नाम के शुभ अक्षर", text: "नक्षत्र चरण और राशि के अनुसार नाम अक्षर।" },
+    ],
+    whyTitle: "हमारी जन्म पत्रिका अलग क्यों है",
+    why: [
+      "हर भाव, योग और दशा का सरल विवरण — हिंदी या अंग्रेज़ी में।",
+      "दोष के साथ उसके परिहार नियम भी, ताकि बेवजह चिंता न हो।",
+      "उपाय वैकल्पिक और सात्विक — कोई ज़बरदस्ती का रत्न या पूजा नहीं।",
+    ],
+    plansTitle: "विस्तृत जन्म पत्रिका PDF",
+    plansIntro: "एक बार भुगतान, कोई सदस्यता नहीं। पहले मुफ्त झलक देखें, फिर चुनें।",
+    sampleLink: "सैंपल पेज देखें",
+    trustTitle: "आप हम पर भरोसा क्यों कर सकते हैं",
+    trust: [
+      { title: "गणना पद्धति", text: "स्विस एफेमेरिस · लाहिरी अयनांश · विंशोत्तरी दशा। गणना कोड से होती है, अनुमान से नहीं।" },
+      { title: "कोई डर नहीं", text: "हम दोष के नाम पर डराकर पूजा या रत्न नहीं बेचते।" },
+      { title: "आपका डेटा आपका", text: "आपकी जानकारी किसी को नहीं बेची जाती।" },
+    ],
+    stickyCta: "मुफ्त झलक देखें",
+  },
+
+  form: {
+    title: "मुफ्त झलक देखें",
+    step: "चरण {n} / 2",
+    name: "नाम",
+    namePlaceholder: "जैसे: अनन्या",
+    nameHint: "नवजात का नाम अभी तय नहीं? खाली छोड़ दें।",
+    gender: "लिंग",
+    female: "महिला / बालिका",
+    male: "पुरुष / बालक",
+    date: "जन्म तिथि",
+    next: "आगे बढ़ें →",
+    time: "जन्म समय",
+    timeUnknown: "समय ठीक से नहीं पता",
+    timeUnknownNote: "कोई बात नहीं। राशि और नक्षत्र फिर भी मिलेंगे; लग्न और भाव नहीं दिखेंगे।",
+    place: "जन्म स्थान",
+    placePlaceholder: "शहर लिखें — जैसे: वाराणसी",
+    placeHint: "सूची में से अपना शहर चुनें। गाँव न मिले तो पास का शहर चुनें।",
+    placeNone: "कोई शहर नहीं मिला। पास के बड़े शहर का नाम अंग्रेज़ी में लिखकर देखें।",
+    submit: "मेरी झलक दिखाएं",
+    back: "← वापस",
+    privacy: "आपकी जानकारी किसी को नहीं बेची जाती।",
+    errors: {
+      gender: "कृपया लिंग चुनें।",
+      date: "कृपया सही जन्म तिथि चुनें।",
+      time: "कृपया जन्म समय डालें, या ‘समय ठीक से नहीं पता’ चुनें।",
+      place: "कृपया सूची में से जन्म स्थान चुनें।",
+    },
+  },
+
+  preview: {
+    title: "आपकी मुफ्त झलक",
+    loading: "गणना हो रही है…",
+    error: "अभी गणना नहीं हो पाई। कृपया थोड़ी देर बाद फिर कोशिश करें।",
+    retry: "फिर कोशिश करें",
+    noData: "पहले जन्म की जानकारी भरें।",
+    goHome: "फ़ॉर्म पर जाएं",
+    for: "{name} के लिए",
+    rashi: "जन्म राशि",
+    nakshatra: "जन्म नक्षत्र",
+    pada: "चरण",
+    letter: "नाम का मुख्य अक्षर",
+    nakshatraLetters: "नक्षत्र के अक्षर",
+    rashiLetters: "राशि के अक्षर",
+    birthPada: "जन्म चरण",
+    uncertain:
+      "जन्म समय न होने से यह दोपहर 12 बजे के आधार पर है। इस दिन चंद्रमा ने {what} बदला था, इसलिए सही परिणाम के लिए जन्म समय पता करें।",
+    uncertainParts: { rashi: "राशि", nakshatra: "नक्षत्र", pada: "चरण" },
+    timeNote: "जन्म समय नहीं दिया गया है, इसलिए लग्न और भाव पत्रिका में नहीं दिखेंगे।",
+    share: "WhatsApp पर भेजें",
+    shareText: "{name} की राशि {rashi} और नक्षत्र {nakshatra} (चरण {pada}) है। नाम अक्षर: {letter}।",
+    edit: "जानकारी बदलें",
+    nextTitle: "पूरी जन्म पत्रिका में और क्या मिलेगा",
+    choose: "यह चुनें",
+  },
+
+  order: {
+    title: "पत्रिका के लिए जानकारी",
+    plan: "चुनी गई पत्रिका",
+    changePlan: "बदलें",
+    language: "पत्रिका की भाषा",
+    langHi: "हिंदी",
+    langEn: "English",
+    coverTitle: "पत्रिका पर छपने वाले नाम",
+    coverHint: "जैसा लिखेंगे वैसा ही छपेगा। जो न चाहें, खाली छोड़ दें।",
+    childName: "नाम",
+    surname: "उपनाम (अंक ज्योतिष के लिए, अंग्रेज़ी में)",
+    father: "पिता का नाम",
+    mother: "माता का नाम",
+    gotra: "गोत्र",
+    kuldevi: "कुलदेवी / कुलदेवता",
+    contactTitle: "पत्रिका कहाँ भेजें",
+    whatsapp: "WhatsApp नंबर",
+    email: "ईमेल (वैकल्पिक)",
+    consent:
+      "मैं सहमत हूँ कि यह जानकारी केवल पत्रिका बनाने और भेजने के लिए उपयोग होगी। पत्रिका मार्गदर्शन के लिए है, गारंटी नहीं।",
+    pay: "₹{price} का भुगतान करें",
+    testMode: "टेस्ट मोड: भुगतान अभी जुड़ा नहीं है। नीचे का बटन बिना भुगतान के PDF बनाएगा।",
+    testButton: "PDF बनाएं (टेस्ट)",
+    working: "पत्रिका बन रही है… कृपया 10–20 सेकंड रुकें",
+    failed: "पत्रिका नहीं बन पाई। कृपया फिर कोशिश करें।",
+    errors: {
+      whatsapp: "कृपया 10 अंकों का WhatsApp नंबर डालें।",
+      email: "कृपया सही ईमेल डालें।",
+      consent: "आगे बढ़ने के लिए सहमति आवश्यक है।",
+    },
+  },
+
+  thanks: {
+    title: "आपकी जन्म पत्रिका तैयार है",
+    text: "नीचे के बटन से PDF डाउनलोड करें और सुरक्षित रखें।",
+    download: "PDF डाउनलोड करें",
+    lost: "डाउनलोड लिंक अब उपलब्ध नहीं है। कृपया पत्रिका फिर से बनाएं।",
+    again: "फिर से बनाएं",
+    another: "परिवार के किसी और सदस्य की पत्रिका बनाएं",
+    blessing: "॥ शुभं भवतु ॥",
+  },
+
+  patrika: {
+    title: "जन्म पत्रिका PDF हिंदी में — ₹{price} से",
+    description:
+      "विस्तृत जन्म पत्रिका: जन्म कुंडली, पंचांग, 12 भाव, योग-दोष, विंशोत्तरी दशा, उपाय और अंक ज्योतिष। सैंपल देखें, मुफ्त झलक से शुरू करें।",
+    h1: "विस्तृत जन्म पत्रिका — जीवन का सरल नक्शा",
+    intro:
+      "जन्म पत्रिका वह दस्तावेज़ है जिसे पीढ़ियों से संभालकर रखा जाता है — नामकरण से विवाह तक। हमारी पत्रिका पारंपरिक गणना को आज की भाषा में समझाती है।",
+    insideTitle: "पत्रिका में क्या-क्या शामिल है",
+    inside: [
+      { title: "जन्म विवरण और पंचांग", text: "तिथि, वार, नक्षत्र, योग, करण और अवकहड़ा चक्र।" },
+      { title: "कुंडली चार्ट", text: "लग्न, चंद्र, नवांश और दशमांश कुंडली, तथा सात वर्गों की तालिका।" },
+      { title: "12 भावों का फल", text: "हर भाव का सरल विवरण और ग्रहों का बल।" },
+      { title: "योग और दोष", text: "शुभ योग, और मांगलिक, कालसर्प, साढ़ेसाती जैसे दोष — परिहार नियमों सहित।" },
+      { title: "विंशोत्तरी दशा", text: "महादशा सारणी, अंतर्दशा और हर दशा का सार।" },
+      { title: "उपाय और अंक ज्योतिष", text: "सात्विक उपाय, शुभ तत्व, मूलांक, भाग्यांक और लो शू ग्रिड।" },
+    ],
+    sampleTitle: "सैंपल पेज",
+    sampleNote: "ये एक नमूना पत्रिका के पेज हैं। आपकी पत्रिका आपकी जन्म जानकारी से बनेगी।",
+    plansTitle: "तीन विकल्प",
+    start: "मुफ्त झलक से शुरू करें",
+  },
+
+  about: {
+    title: "हमारे बारे में — गणना पद्धति और हमारे वचन",
+    description: "हमारी गणना पद्धति और नैतिक सिद्धांतों के बारे में जानें: कोई डर नहीं, कोई गारंटी नहीं, आपका डेटा आपका।",
+    h1: "हम डराते नहीं, समझाते हैं",
+    intro: "जन्म पत्रिका परिवार की परंपरा है। हमारा काम उसे सटीक बनाना और सरल भाषा में समझाना है।",
+    methodTitle: "हमारी गणना पद्धति",
+    method: [
+      "ग्रहों की स्थिति स्विस एफेमेरिस से निकाली जाती है, जो खगोलीय गणना का मानक है।",
+      "निरयण राशिचक्र, लाहिरी (चित्रापक्ष) अयनांश, पूर्ण-राशि भाव और मध्यम राहु-केतु।",
+      "विंशोत्तरी दशा, 365.25 दिन के वर्ष से।",
+      "हर गणना कोड से होती है। योग और दोष तय नियमों से पहचाने जाते हैं।",
+    ],
+    promisesTitle: "हमारे तीन वचन",
+    promises: [
+      { title: "कोई डर नहीं", text: "हम दोष के नाम पर डराकर पूजा या रत्न नहीं बेचते। हर दोष के साथ उसके परिहार नियम बताते हैं।" },
+      { title: "कोई गारंटी नहीं", text: "ज्योतिष मार्गदर्शन है। स्वास्थ्य, कानून या धन के निर्णय विशेषज्ञ से लें।" },
+      { title: "आपका डेटा आपका", text: "आपकी जानकारी किसी को नहीं बेची जाती, और केवल पत्रिका बनाने के लिए उपयोग होती है।" },
+    ],
+    cta: "अपनी मुफ्त झलक देखें",
+  },
+
+  faqTitle: "अक्सर पूछे जाने वाले प्रश्न",
+  faqs: [
+    { q: "मुफ्त में क्या मिलता है?", a: "जन्म राशि, नक्षत्र, चरण और नाम के शुभ अक्षर हमेशा मुफ्त हैं। विस्तृत PDF पत्रिका वैकल्पिक है।" },
+    { q: "जन्म समय नहीं पता तो?", a: "‘समय ठीक से नहीं पता’ चुनें। राशि और नक्षत्र आधारित पत्रिका फिर भी बनेगी; लग्न, भाव और वर्ग कुंडलियाँ नहीं दिखेंगी क्योंकि वे सही समय पर निर्भर हैं।" },
+    { q: "क्या पत्रिका में भविष्य की गारंटी है?", a: "नहीं। ज्योतिष प्रवृत्तियाँ और संभावनाएँ बताता है; निर्णय आपके हैं।" },
+    { q: "मेरा डेटा सुरक्षित है?", a: "हम आपकी जानकारी किसी को नहीं बेचते। वह केवल आपकी पत्रिका बनाने के लिए उपयोग होती है।" },
+  ],
+  disclaimer: "ज्योतिष मार्गदर्शन है, गारंटी नहीं। स्वास्थ्य, कानून या धन संबंधी निर्णय विशेषज्ञ से लें।",
+
+  plans: {
+    pages: "{n} पेज",
+    recommended: "हमारी सलाह",
+    unavailable: "मूल्य अभी उपलब्ध नहीं हैं। कृपया थोड़ी देर बाद देखें।",
+  },
+  panchang: {
+    title: "आज का पंचांग — तिथि, नक्षत्र, राहु काल",
+    description: "अपने शहर का आज का पंचांग देखें: तिथि, नक्षत्र, योग, करण, सूर्योदय, सूर्यास्त और राहु काल।",
+    h1: "आज का पंचांग",
+    intro: "अपने शहर के सूर्योदय के अनुसार आज की तिथि, नक्षत्र और राहु काल। शहर बदलने के लिए नीचे नाम लिखें।",
+    city: "शहर",
+    date: "दिनांक",
+    loading: "पंचांग निकाला जा रहा है…",
+    error: "अभी पंचांग नहीं निकल पाया। कृपया थोड़ी देर बाद देखें।",
+    atSunrise: "सूर्योदय के समय की स्थिति",
+    till: "{time} तक",
+    rows: {
+      weekday: "वार",
+      tithi: "तिथि",
+      paksha: "पक्ष",
+      nakshatra: "नक्षत्र",
+      yoga: "योग",
+      karana: "करण",
+      moonSign: "चंद्र राशि",
+      sunrise: "सूर्योदय",
+      sunset: "सूर्यास्त",
+      rahuKaal: "राहु काल",
+      maas: "मास",
+      amanta: "अमांत",
+      purnimanta: "पूर्णिमांत",
+      ritu: "ऋतु",
+      samvat: "विक्रम संवत",
+    },
+    stripTitle: "आज का पंचांग",
+    stripMore: "पूरा पंचांग देखें →",
+    cta: "अपनी जन्म पत्रिका की मुफ्त झलक देखें",
+    what: [
+      { title: "तिथि क्या है?", text: "सूर्य और चंद्रमा के बीच की दूरी से तिथि बनती है। एक चंद्र मास में 30 तिथियाँ होती हैं।" },
+      { title: "राहु काल क्या है?", text: "दिन का लगभग डेढ़ घंटे का वह भाग जिसमें परंपरा से नया शुभ कार्य आरंभ नहीं किया जाता। चल रहे काम पर इसका कोई प्रभाव नहीं माना जाता।" },
+      { title: "शहर क्यों ज़रूरी है?", text: "सूर्योदय हर शहर में अलग समय पर होता है, इसलिए राहु काल और तिथि की समाप्ति का समय भी शहर के अनुसार बदलता है।" },
+    ],
+  },
+
+  notFound: { title: "यह पेज नहीं मिला", text: "हो सकता है पता गलत लिखा गया हो।", home: "मुख्य पेज पर जाएं" },
+
+  footer: {
+    dataCredit: "स्थान डेटा: GeoNames (CC BY 4.0)",
+    privacy: "गोपनीयता नीति",
+    terms: "नियम और शर्तें",
+    refund: "रिफंड नीति",
+    disclaimer: "अस्वीकरण",
+    contact: "संपर्क",
+  },
+  forget: {
+    title: "इस डिवाइस से मेरी जानकारी हटाएं",
+    text: "फ़ॉर्म में भरी जन्म जानकारी केवल आपके इसी फ़ोन या कंप्यूटर में याद रखी जाती है। नीचे का बटन उसे हटा देगा।",
+    button: "मेरी जानकारी हटाएं",
+    done: "आपकी जानकारी इस डिवाइस से हटा दी गई है।",
+  },
+};
+
+const en: typeof hi = {
+  nav: { patrika: "Janam Patrika", panchang: "Today's Panchang", about: "About", otherLang: "हिंदी" },
+
+  home: {
+    title: "Janam Patrika online — clear and accurate",
+    description:
+      "Enter the date, time and place of birth to see your Rashi, Nakshatra and name letters free. Detailed Janam Patrika PDF from ₹{price}.",
+    h1: "Get your Janam Patrika, explained in plain words",
+    intro:
+      "Accurate calculation with the Swiss Ephemeris and Lahiri ayanamsa, and every result explained simply. We explain, we never frighten.",
+    chips: ["No login needed", "Free preview", "Your data stays private"],
+    freeTitle: "What the free preview shows",
+    free: [
+      { title: "Janma Rashi", text: "The sign the Moon was in at birth." },
+      { title: "Nakshatra and pada", text: "The birth star and its quarter." },
+      { title: "Auspicious name letters", text: "Name letters by nakshatra pada and by rashi." },
+    ],
+    whyTitle: "Why our Janam Patrika is different",
+    why: [
+      "Every house, yoga and dasha explained simply, in Hindi or English.",
+      "Each dosha comes with its cancellation rules, so there is no needless worry.",
+      "Remedies are optional and gentle. No forced gemstones or pujas.",
+    ],
+    plansTitle: "Detailed Janam Patrika PDF",
+    plansIntro: "One payment, no subscription. See the free preview first, then choose.",
+    sampleLink: "See sample pages",
+    trustTitle: "Why you can trust us",
+    trust: [
+      { title: "How we calculate", text: "Swiss Ephemeris · Lahiri ayanamsa · Vimshottari dasha. Calculated by code, never guessed." },
+      { title: "No fear", text: "We do not use doshas to frighten people into buying pujas or gemstones." },
+      { title: "Your data is yours", text: "Your details are never sold to anyone." },
+    ],
+    stickyCta: "See free preview",
+  },
+
+  form: {
+    title: "See your free preview",
+    step: "Step {n} / 2",
+    name: "Name",
+    namePlaceholder: "e.g. Ananya",
+    nameHint: "Newborn not named yet? Leave this empty.",
+    gender: "Gender",
+    female: "Female / Girl",
+    male: "Male / Boy",
+    date: "Date of birth",
+    next: "Continue →",
+    time: "Time of birth",
+    timeUnknown: "I'm not sure of the exact time",
+    timeUnknownNote: "That's fine. Rashi and Nakshatra are still shown; the Lagna and houses are left out.",
+    place: "Place of birth",
+    placePlaceholder: "Type a city — e.g. Varanasi",
+    placeHint: "Pick your town from the list. If your village is missing, pick the nearest town.",
+    placeNone: "No town found. Try the name of the nearest larger town.",
+    submit: "Show my preview",
+    back: "← Back",
+    privacy: "Your details are never sold to anyone.",
+    errors: {
+      gender: "Please choose a gender.",
+      date: "Please choose a valid date of birth.",
+      time: "Please enter the time of birth, or tick ‘I'm not sure of the exact time’.",
+      place: "Please pick the place of birth from the list.",
+    },
+  },
+
+  preview: {
+    title: "Your free preview",
+    loading: "Calculating…",
+    error: "The calculation could not be done just now. Please try again in a little while.",
+    retry: "Try again",
+    noData: "Please fill in the birth details first.",
+    goHome: "Go to the form",
+    for: "For {name}",
+    rashi: "Janma Rashi",
+    nakshatra: "Janma Nakshatra",
+    pada: "Pada",
+    letter: "Primary name letter",
+    nakshatraLetters: "Nakshatra letters",
+    rashiLetters: "Rashi letters",
+    birthPada: "birth pada",
+    uncertain:
+      "Without a birth time this is based on 12 noon. The Moon changed {what} on this day, so please find out the birth time to be sure.",
+    uncertainParts: { rashi: "rashi", nakshatra: "nakshatra", pada: "pada" },
+    timeNote: "No birth time was given, so the Lagna and houses will not appear in the Patrika.",
+    share: "Send on WhatsApp",
+    shareText: "{name}: Rashi {rashi}, Nakshatra {nakshatra} (pada {pada}). Name letter: {letter}.",
+    edit: "Change details",
+    nextTitle: "What the full Janam Patrika adds",
+    choose: "Choose this",
+  },
+
+  order: {
+    title: "Details for the Patrika",
+    plan: "Chosen Patrika",
+    changePlan: "Change",
+    language: "Language of the Patrika",
+    langHi: "हिंदी",
+    langEn: "English",
+    coverTitle: "Names printed on the Patrika",
+    coverHint: "Printed exactly as you type them. Leave empty anything you do not want.",
+    childName: "Name",
+    surname: "Surname (for numerology, in English letters)",
+    father: "Father's name",
+    mother: "Mother's name",
+    gotra: "Gotra",
+    kuldevi: "Kuldevi / Kuldevta",
+    contactTitle: "Where to send the Patrika",
+    whatsapp: "WhatsApp number",
+    email: "Email (optional)",
+    consent:
+      "I agree that these details are used only to prepare and send the Patrika. The Patrika is for guidance, not a guarantee.",
+    pay: "Pay ₹{price}",
+    testMode: "Test mode: payment is not connected yet. The button below makes the PDF without payment.",
+    testButton: "Make the PDF (test)",
+    working: "Preparing your Patrika… please wait 10–20 seconds",
+    failed: "The Patrika could not be prepared. Please try again.",
+    errors: {
+      whatsapp: "Please enter a 10-digit WhatsApp number.",
+      email: "Please enter a valid email address.",
+      consent: "Your consent is needed to continue.",
+    },
+  },
+
+  thanks: {
+    title: "Your Janam Patrika is ready",
+    text: "Download the PDF with the button below and keep it safe.",
+    download: "Download the PDF",
+    lost: "The download link is no longer available. Please prepare the Patrika again.",
+    again: "Prepare it again",
+    another: "Make a Patrika for another family member",
+    blessing: "॥ शुभं भवतु ॥",
+  },
+
+  patrika: {
+    title: "Janam Patrika PDF — from ₹{price}",
+    description:
+      "Detailed Janam Patrika: birth charts, Panchang, 12 houses, yogas and doshas, Vimshottari dasha, remedies and numerology. See samples and start with a free preview.",
+    h1: "The detailed Janam Patrika — a simple map of life",
+    intro:
+      "A Janam Patrika is the document families keep for generations, from the naming ceremony to marriage. Ours explains the traditional calculation in today's language.",
+    insideTitle: "What the Patrika contains",
+    inside: [
+      { title: "Birth details and Panchang", text: "Tithi, weekday, nakshatra, yoga, karana and the Avakahada Chakra." },
+      { title: "Kundli charts", text: "Lagna, Moon, Navamsa and Dashamsa charts, and a table of seven divisional charts." },
+      { title: "All 12 houses", text: "A simple reading of each house and the strength of the planets." },
+      { title: "Yogas and doshas", text: "Auspicious yogas, and doshas such as Manglik, Kaal Sarp and Sade Sati — with cancellation rules." },
+      { title: "Vimshottari dasha", text: "The mahadasha table, antardashas and a summary of each period." },
+      { title: "Remedies and numerology", text: "Gentle remedies, lucky factors, Mulank, Bhagyank and the Lo Shu grid." },
+    ],
+    sampleTitle: "Sample pages",
+    sampleNote: "These pages are from a sample Patrika. Yours is prepared from your own birth details.",
+    plansTitle: "Three options",
+    start: "Start with a free preview",
+  },
+
+  about: {
+    title: "About us — our method and our promises",
+    description: "How we calculate and what we stand for: no fear, no guarantees, and your data stays yours.",
+    h1: "We explain, we never frighten",
+    intro: "A Janam Patrika is a family tradition. Our job is to make it accurate and explain it in simple words.",
+    methodTitle: "How we calculate",
+    method: [
+      "Planet positions come from the Swiss Ephemeris, the standard for astronomical calculation.",
+      "Sidereal zodiac, Lahiri (Chitrapaksha) ayanamsa, whole-sign houses and mean Rahu-Ketu.",
+      "Vimshottari dasha with a 365.25-day year.",
+      "Every calculation is done by code. Yogas and doshas are found by fixed rules.",
+    ],
+    promisesTitle: "Our three promises",
+    promises: [
+      { title: "No fear", text: "We do not use doshas to frighten people into buying pujas or gemstones. Every dosha is shown with its cancellation rules." },
+      { title: "No guarantees", text: "Astrology is guidance. For health, legal or money decisions, consult a qualified professional." },
+      { title: "Your data is yours", text: "Your details are never sold, and are used only to prepare your Patrika." },
+    ],
+    cta: "See your free preview",
+  },
+
+  faqTitle: "Frequently asked questions",
+  faqs: [
+    { q: "What is free?", a: "Your Janma Rashi, Nakshatra, pada and auspicious name letters are always free. The detailed PDF Patrika is optional." },
+    { q: "What if I don't know the birth time?", a: "Tick ‘I'm not sure of the exact time’. A Patrika based on the Rashi and Nakshatra is still prepared; the Lagna, houses and divisional charts are left out because they depend on the exact time." },
+    { q: "Does the Patrika guarantee the future?", a: "No. Astrology shows tendencies and possibilities; the decisions are yours." },
+    { q: "Is my data safe?", a: "We never sell your details. They are used only to prepare your Patrika." },
+  ],
+  disclaimer: "Astrology is guidance, not a guarantee. For health, legal or money decisions, consult a qualified professional.",
+
+  plans: {
+    pages: "{n} pages",
+    recommended: "Recommended",
+    unavailable: "Prices are not available right now. Please check again shortly.",
+  },
+  panchang: {
+    title: "Today's Panchang — tithi, nakshatra, Rahu Kaal",
+    description: "Today's Panchang for your city: tithi, nakshatra, yoga, karana, sunrise, sunset and Rahu Kaal.",
+    h1: "Today's Panchang",
+    intro: "Today's tithi, nakshatra and Rahu Kaal, worked out from sunrise in your city. Type a name below to change the city.",
+    city: "City",
+    date: "Date",
+    loading: "Working out the Panchang…",
+    error: "The Panchang could not be worked out just now. Please check again shortly.",
+    atSunrise: "As at sunrise",
+    till: "till {time}",
+    rows: {
+      weekday: "Day",
+      tithi: "Tithi",
+      paksha: "Paksha",
+      nakshatra: "Nakshatra",
+      yoga: "Yoga",
+      karana: "Karana",
+      moonSign: "Moon sign",
+      sunrise: "Sunrise",
+      sunset: "Sunset",
+      rahuKaal: "Rahu Kaal",
+      maas: "Month",
+      amanta: "Amanta",
+      purnimanta: "Purnimanta",
+      ritu: "Ritu",
+      samvat: "Vikram Samvat",
+    },
+    stripTitle: "Today's Panchang",
+    stripMore: "See the full Panchang →",
+    cta: "See the free preview of your Janam Patrika",
+    what: [
+      { title: "What is a tithi?", text: "A tithi is set by the distance between the Sun and the Moon. A lunar month has 30 tithis." },
+      { title: "What is Rahu Kaal?", text: "A stretch of about an hour and a half each day in which, by tradition, new auspicious work is not begun. It is not held to affect work already under way." },
+      { title: "Why does the city matter?", text: "Sunrise comes at a different time in each city, so Rahu Kaal and the time a tithi ends change with the city too." },
+    ],
+  },
+
+  notFound: { title: "This page was not found", text: "The address may have been typed incorrectly.", home: "Go to the home page" },
+
+  footer: {
+    dataCredit: "Place data: GeoNames (CC BY 4.0)",
+    privacy: "Privacy Policy",
+    terms: "Terms",
+    refund: "Refund Policy",
+    disclaimer: "Disclaimer",
+    contact: "Contact",
+  },
+  forget: {
+    title: "Remove my details from this device",
+    text: "The birth details typed into the form are remembered only on this phone or computer. The button below removes them.",
+    button: "Remove my details",
+    done: "Your details have been removed from this device.",
+  },
+};
+
+export type Content = typeof hi;
+
+export function content(lang: Lang): Content {
+  return lang === "hi" ? hi : en;
+}
+
+/** Put values into a text: fill("Step {n} / 2", { n: 1 }). */
+export function fill(text: string, values: Record<string, string | number>): string {
+  return text.replace(/\{(\w+)\}/g, (_, key) => String(values[key] ?? ""));
+}

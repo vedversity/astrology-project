@@ -5,6 +5,8 @@ numerology -> names -> wording from the rule-book. The PDF generator (Phase 3)
 and the website only read this result; they never calculate anything.
 """
 
+import datetime as dt
+
 from app.astro import calculate_chart
 from app.content.interpret import interpret
 from app.names import name_letters, suggest_names
@@ -25,6 +27,24 @@ def build_preview(date, time=None, latitude=0.0, longitude=0.0, timezone="Asia/K
         "time_known": chart["meta"]["time_known"],
         # Present only when the birth time is unknown: is the Moon's position certain that day?
         "certainty": chart.get("time_unknown"),
+    }
+
+
+def build_panchang(date, latitude, longitude, timezone="Asia/Kolkata"):
+    """The day's Panchang for a place, taken at sunrise as printed almanacs do."""
+    noon = calculate_chart(date, dt.time(12, 0), latitude, longitude, timezone)
+    sunrise = dt.datetime.fromisoformat(noon["panchang"]["sunrise"])
+    # One minute after sunrise, so the weekday and tithi are those of the new day
+    moment = (sunrise + dt.timedelta(minutes=1)).time().replace(microsecond=0)
+    chart = calculate_chart(date, moment, latitude, longitude, timezone)
+    p = chart["panchang"]
+    keep = ("tithi", "paksha", "nakshatra", "yoga", "karana", "maas", "ritu", "ayana", "weekday",
+            "vikram_samvat", "shaka_samvat", "samvatsara", "sunrise", "sunset", "rahu_kaal")
+    return {
+        "date": date.isoformat(),
+        **{key: p[key] for key in keep},
+        "moon_sign": chart["planets"]["moon"]["sign"],
+        "sun_sign": chart["planets"]["sun"]["sign"],
     }
 
 

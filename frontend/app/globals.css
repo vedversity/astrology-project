@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* Colours and fonts of the site. Change a value here and it changes everywhere. */
+@theme inline {
+  --color-kesar-50: #fff7ed;   /* page background (cream) */
+  --color-kesar-100: #ffedd5;
+  --color-kesar-500: #ea7a1a;  /* saffron: large buttons only */
+  --color-kesar-600: #c2410c;  /* darker saffron: small text and links */
+  --color-kesar-700: #9a3412;
+  --color-maroon-700: #7a1f2b; /* headings */
+  --color-maroon-800: #5e1720;
+  --color-haldi-300: #fcd34d;  /* small accents only */
+  --color-haldi-400: #f5b700;
+  --color-ink-900: #1f1a17;    /* body text */
+  --color-ink-600: #57504a;    /* secondary text */
+
+  --font-sans: var(--font-mukta), "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-serif: var(--font-tiro), "Noto Serif Devanagari", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-kesar-50);
+  color: var(--color-ink-900);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Devanagari matras need more room than Latin letters */
+html[lang="hi"] body {
+  line-height: 1.7;
+}
+
+/* Every text field and button is at least 48px tall: easy to tap on a small phone */
+@layer components {
+.field {
+  @apply mt-1 h-12 w-full rounded-xl border border-gray-300 bg-white px-4 text-[17px] outline-none focus:border-kesar-500 focus:ring-2 focus:ring-kesar-500/40;
+}
+.btn-primary {
+  @apply flex h-12 w-full items-center justify-center rounded-xl bg-kesar-600 px-6 text-lg font-semibold text-white transition-colors hover:bg-kesar-700 disabled:opacity-60;
+}
+.btn-secondary {
+  @apply flex h-12 w-full items-center justify-center rounded-xl border border-kesar-600 px-6 font-semibold text-kesar-700 hover:bg-kesar-50;
+}
+.card {
+  @apply rounded-2xl border border-kesar-100 bg-white p-5 shadow-sm;
+}
+.label {
+  @apply block text-sm font-semibold;
+}
+}

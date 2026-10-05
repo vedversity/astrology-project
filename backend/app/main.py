@@ -5,23 +5,38 @@ POST /preview    the free preview: Rashi, Nakshatra, Pada, name letters
 POST /report     everything a Janam Patrika needs: chart, yogas, doshas,
                  numerology, names and the wording in Hindi and English
 POST /pdf        the finished Janam Patrika as a PDF file
+GET  /panchang   the day's Panchang for a place (tithi, nakshatra, Rahu Kaal ...)
+GET  /places     birth-place search (name -> latitude, longitude, timezone)
+GET  /site       brand name, plans and prices (from app/config/site.json)
 
 Run it with:  .venv\\Scripts\\python -m uvicorn app.main:app --reload
 Then open:    http://127.0.0.1:8000/docs
 """
 
 import datetime as dt
+import os
 from typing import Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, HTTPException, Query, Response
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from app import config, places
 from app.astro import ENGINE_VERSION, calculate_chart
 from app.pdf import PdfError, generate_pdf
-from app.report import build_preview, build_report
+from app.report import build_panchang, build_preview, build_report
 
 app = FastAPI(title="Janam Patrika API", version=ENGINE_VERSION)
+
+# The website runs on a different address from this API, so it must be named here.
+# Set FRONTEND_ORIGINS in .env for the live site (comma-separated).
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.environ.get("FRONTEND_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(","),
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
+)
 
 
 class BirthInput(BaseModel):
@@ -68,6 +83,29 @@ def _checked(birth):
 @app.get("/health")
 def health():
     return {"status": "ok", "engine_version": ENGINE_VERSION}
+
+
+@app.get("/site")
+def site():
+    return config.site()
+
+
+@app.get("/places")
+def place_search(q: str = Query(min_length=2, max_length=60)):
+    return places.search(q)
+
+
+@app.get("/panchang")
+def panchang(latitude: float = Query(ge=-66, le=66), longitude: float = Query(ge=-180, le=180),
+             timezone: str = "Asia/Kolkata", date: Optional[dt.date] = None):
+    try:
+        zone = ZoneInfo(timezone)
+    except (ZoneInfoNotFoundError, ValueError):
+        raise HTTPException(status_code=422, detail=f"Unknown timezone: {timezone}")
+    day = date or dt.datetime.now(zone).date()
+    if not 1800 <= day.year <= 2200:
+        raise HTTPException(status_code=422, detail="Year must be between 1800 and 2200.")
+    return build_panchang(day, latitude, longitude, timezone)
 
 
 @app.post("/calculate")

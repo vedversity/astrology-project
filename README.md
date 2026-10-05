@@ -11,7 +11,7 @@ Hindi or English Vedic Janam Patrika PDF. The full brief is in
 | 1 | Astro engine (calculations) + `/calculate` API | Done and tested |
 | 2 | Rule engine, numerology, rule-book text, names | Built and tested; rule-book awaits astrologer review |
 | 3 | PDF generator (Mini, Full, Premium; Hindi and English) | Built and tested |
-| 4 | Website | Not started |
+| 4 | Website (Hindi at `/`, English at `/en`) | Built and tested; payment not connected yet |
 | 5 | Payments and delivery | Not started |
 | 6 | Admin and growth | Not started |
 | 7 | Launch checklist | Not started |
@@ -193,12 +193,94 @@ than fits, its text is shrunk slightly so that nothing is ever cut off.
 Fonts are the Noto families (free, SIL Open Font Licence), bundled in
 `app/pdf/fonts`, so the PDF looks the same on any computer or server.
 
+## Phase 4: the website
+
+The website lives in the `frontend` folder. It needs the backend API running at
+the same time, so use two PowerShell windows.
+
+**One-time setup**
+
+```powershell
+cd "D:\Ved Development\Astro\frontend"
+npm install
+```
+
+**Window 1: start the API** (from the `backend` folder)
+
+```powershell
+.venv\Scripts\python -m uvicorn app.main:app --reload
+```
+
+**Window 2: start the website** (from the `frontend` folder)
+
+```powershell
+npm run dev
+```
+
+On a computer with little free memory, `npm run dev` can stop with an "out of
+memory" message. Use the lighter way instead: `npm run build` once, then
+`npm run start` (repeat the build after changing any website file).
+
+Open http://localhost:3000 for Hindi and http://localhost:3000/en for English.
+To see it as a phone would, press F12 in Chrome and click the phone icon.
+
+**What to try**
+
+1. Fill the two-step form and pick a town from the list.
+2. The free preview shows Rashi, Nakshatra, Pada and name letters.
+3. Choose a plan, fill in the names to print, tick the consent box.
+4. Press the test button. The PDF is prepared and offered for download.
+
+Payment is not connected yet (that is Phase 5), so the order page shows a
+"test mode" notice and prepares the PDF without charging. The WhatsApp number
+and email typed there are not stored or sent anywhere yet.
+
+### Pages
+
+| Address | Page |
+|---|---|
+| `/` and `/en` | Home: the form, what is free, the plans, FAQ |
+| `/janam-patrika` | What the Patrika contains, sample pages, the plans |
+| `/panchang` | Today's Panchang for any city (tithi, nakshatra, sunrise, Rahu Kaal); also shown as a strip on the home page |
+| `/about` | Calculation method and the three promises |
+| `/privacy`, `/terms`, `/refund`, `/disclaimer` | Policy pages. Drafts: have a lawyer check them, then set `DRAFT = false` in `frontend/lib/legal.ts` |
+| `/preview`, `/order`, `/thank-you` | A visitor's own result, order and download (hidden from search engines) |
+
+### Changing things without coding
+
+| To change | Edit |
+|---|---|
+| Prices, plan names, plan bullet points, brand name | `backend/app/config/site.json` (shows on the site within five minutes) |
+| Any wording on the website | `frontend/lib/content.ts` |
+| Colours | the top of `frontend/app/globals.css` |
+| Sample pages on the site | run `.venv\Scripts\python -m scripts.make_site_samples` in `backend` |
+
+The brand name is a placeholder ("Janam Patrika") until the real name is chosen.
+
+### Place search
+
+The birth-place box searches a list bundled with the backend: about 6,500
+Indian towns and 11,000 cities abroad, each with latitude, longitude and
+timezone. Nothing a visitor types is sent to Google or any outside service, and
+no API key is needed. The list comes from GeoNames (licence CC BY 4.0, credited
+in the site footer). `backend/scripts/build_places.py` rebuilds it. A village
+not in the list is handled by picking the nearest town.
+
+### What is deliberately not on the site yet
+
+The Growth Blueprint also describes Kundli Milan, Panchang, Rashifal and
+Muhurat pages. Those need calculation engines that do not exist yet, so the
+site does not link to them. Nothing is claimed that the product cannot do: no
+reviews, no astrologer details, no "50+ pages".
+
 ## What is in the backend folder
 
 ```
 backend/
   app/
-    main.py            the web API (/calculate, /preview, /report, /pdf, /health)
+    main.py            the web API (/calculate, /preview, /report, /pdf, /places, /site, /health)
+    config/site.json   brand name, plans and prices (owner-editable)
+    places/            birth-place search and its bundled town list
     report.py          build_report() - runs the whole pipeline in one call
     pdf/
       __init__.py      generate_pdf() - fills the template and prints it to PDF

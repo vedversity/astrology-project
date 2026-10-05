@@ -1,0 +1,47 @@
+{
+  "_note": "Site settings that the owner may change: the brand name and the plans with their prices. Prices are in rupees. The website and the order flow read this file through the API (GET /site); nothing here is hard-coded anywhere else.",
+
+  "brand": {
+    "name": {"hi": "जन्म पत्रिका", "en": "Janam Patrika"},
+    "tagline": {"hi": "हम डराते नहीं, समझाते हैं", "en": "We explain, we never frighten"}
+  },
+
+  "contact": {"email": null, "whatsapp": null},
+
+  "plans": [
+    {
+      "id": "mini",
+      "price": 51,
+      "pages": 4,
+      "name": {"hi": "मिनी पत्रिका", "en": "Mini Patrika"},
+      "summary": {"hi": "जन्म विवरण, पंचांग, कुंडली चार्ट और नाम अक्षर", "en": "Birth details, Panchang, Kundli charts and name letters"},
+      "features": {
+        "hi": ["जन्म विवरण और पंचांग", "लग्न और चंद्र कुंडली", "ग्रहों की स्थिति", "नाम के शुभ अक्षर"],
+        "en": ["Birth details and Panchang", "Lagna and Moon charts", "Planet positions", "Auspicious name letters"]
+      }
+    },
+    {
+      "id": "full",
+      "price": 101,
+      "pages": 13,
+      "recommended": true,
+      "name": {"hi": "संपूर्ण जन्म पत्रिका", "en": "Full Janam Patrika"},
+      "summary": {"hi": "13 पेज की विस्तृत पत्रिका", "en": "The complete 13-page Patrika"},
+      "features": {
+        "hi": ["मिनी पत्रिका की सभी बातें", "नवांश और दशमांश कुंडली", "12 भावों का फल", "योग और दोष, परिहार नियमों सहित", "विंशोत्तरी दशा और जीवन फलादेश", "सात्विक उपाय और अंक ज्योतिष"],
+        "en": ["Everything in Mini", "Navamsa and Dashamsa charts", "All 12 houses explained", "Yogas and doshas, with cancellation rules", "Vimshottari dasha and life predictions", "Gentle remedies and numerology"]
+      }
+    },
+    {
+      "id": "premium",
+      "price": 251,
+      "pages": 13,
+      "name": {"hi": "प्रीमियम पत्रिका", "en": "Premium Patrika"},
+      "summary": {"hi": "संपूर्ण पत्रिका + नाम सुझाव + संस्कार पंचांग", "en": "Full Patrika + name suggestions + Sanskar calendar"},
+      "features": {
+        "hi": ["संपूर्ण पत्रिका की सभी बातें", "अंक ज्योतिष से मिलाए गए 10 नाम सुझाव", "संस्कार पंचांग (नामकरण, अन्नप्राशन, मुंडन, विद्यारंभ)"],
+        "en": ["Everything in Full", "10 name suggestions matched with numerology", "Sanskar calendar (Namkaran, Annaprashan, Mundan, Vidyarambh)"]
+      }
+    }
+  ]
+}
