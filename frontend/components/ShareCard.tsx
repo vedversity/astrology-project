@@ -46,23 +46,23 @@ export default function ShareCard({ brand, heading, rows, blessing, buttonLabel,
       pen.font = `64px ${serif}`;
       pen.fillText(heading, SIZE / 2, 350, SIZE - 180);
 
-      let y = 480;
+      let y = 450;
       for (const row of rows) {
         pen.fillStyle = "#57504a";
         pen.font = `38px ${body}`;
         pen.fillText(row.label, SIZE / 2, y);
         pen.fillStyle = "#5e1720";
-        pen.font = `76px ${serif}`;
-        pen.fillText(row.value, SIZE / 2, y + 84, SIZE - 180);
-        y += 170;
+        pen.font = `68px ${serif}`;
+        pen.fillText(row.value, SIZE / 2, y + 78, SIZE - 180);
+        y += 150;
       }
 
       pen.fillStyle = "#7a1f2b";
       pen.font = `40px ${serif}`;
-      pen.fillText(blessing, SIZE / 2, SIZE - 150);
+      pen.fillText(blessing, SIZE / 2, SIZE - 140);
       pen.fillStyle = "#c2410c";
       pen.font = `600 34px ${body}`;
-      pen.fillText(brand, SIZE / 2, SIZE - 90);
+      pen.fillText(brand, SIZE / 2, SIZE - 84);
 
       const blob: Blob = await new Promise((resolve) => canvas.toBlob((b) => resolve(b!), "image/png"));
       const file = new File([blob], "janam-patrika.png", { type: "image/png" });
