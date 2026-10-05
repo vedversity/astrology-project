@@ -7,7 +7,8 @@ and the website only read this result; they never calculate anything.
 
 import datetime as dt
 
-from app.astro import calculate_chart
+from app.astro import calculate_chart, sade_sati_on
+from app.content import audience_for
 from app.content.interpret import interpret
 from app.names import name_letters, suggest_names
 from app.numerology import numerology
@@ -49,16 +50,30 @@ def build_panchang(date, latitude, longitude, timezone="Asia/Kolkata"):
 
 
 def build_report(date, time=None, latitude=0.0, longitude=0.0, timezone="Asia/Kolkata",
-                 time_known=True, gender="male", surname=None, kuldevi=None, names_limit=10):
-    """gender: "male" or "female". surname and kuldevi are optional."""
+                 time_known=True, gender="male", surname=None, kuldevi=None, names_limit=10,
+                 today=None):
+    """gender: "male" or "female". surname and kuldevi are optional.
+
+    today: the day the report is prepared (defaults to the real date). From the age on
+    that day the report is written either for a child's parents or for an adult.
+    """
+    today = today or dt.date.today()
+    audience = audience_for(date, today)
     chart = calculate_chart(date, time, latitude, longitude, timezone, time_known)
+    if audience == "adult":
+        # What matters to an adult is whether Sade Sati is running now, not at birth
+        chart["sade_sati"] = {**sade_sati_on(chart, today), "as_of": today.isoformat()}
     analysis = analyze(chart)
     numbers = numerology(date, gender)
     letters = name_letters(chart)
-    suggestions = suggest_names(chart, gender, numbers, surname, names_limit)
+    # Name suggestions are for naming a baby; an adult already has a name
+    suggestions = suggest_names(chart, gender, numbers, surname, names_limit) if audience == "child" else []
     return {
+        "audience": audience,
+        "prepared_on": today.isoformat(),
         "chart": chart,
         "analysis": analysis,
         "numerology": numbers,
-        "content": interpret(chart, analysis, numbers, letters, suggestions, gender, kuldevi, surname),
+        "content": interpret(chart, analysis, numbers, letters, suggestions, gender, kuldevi, surname,
+                             audience, today),
     }

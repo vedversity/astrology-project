@@ -1,22 +1,29 @@
 {
   "_note": "DRAFT for astrologer review. Fixed wording used on the cover, the remedies page, the Sanskar calendar and the summary. Keep the {placeholders} unchanged.",
-
   "invocation": "॥ श्री गणेशाय नमः ॥",
   "cover_shloka": "जननी जन्म सौख्यानां वर्धनी कुलसम्पदाम् ।\nपदवी पूर्वपुण्यानां लिख्यते जन्मपत्रिका ॥",
   "cover_blessing": "॥ शुभं भवतु · कल्याणमस्तु · दीर्घायुरस्तु ॥",
   "closing_blessing": "॥ आयुष्मान भव · यशस्वी भव · विद्यावान भव ॥",
-  "kuldevi_line": {"en": "May Kuldevi {kuldevi} always protect the child.", "hi": "॥ श्री कुलदेवी {kuldevi} सदा सहाय ॥"},
-
+  "kuldevi_line": {
+    "en": "May Kuldevi {kuldevi} always protect the child.",
+    "hi": "॥ श्री कुलदेवी {kuldevi} सदा सहाय ॥",
+    "adult": {
+      "en": "May Kuldevi {kuldevi} always bless this family.",
+      "hi": "॥ श्री कुलदेवी {kuldevi} सदा सहाय ॥"
+    }
+  },
   "disclaimer": {
     "en": "This Janam Patrika is prepared for guidance and cultural purposes only. It is not medical, legal or financial advice. Astrology shows tendencies, not certainties; love, good values and effort shape a child's life most of all.",
-    "hi": "यह जन्म पत्रिका केवल मार्गदर्शन और सांस्कृतिक उद्देश्य के लिए तैयार की गई है। यह चिकित्सा, कानूनी या आर्थिक सलाह नहीं है। ज्योतिष प्रवृत्तियाँ बताता है, निश्चितता नहीं; बच्चे के जीवन को सबसे अधिक स्नेह, संस्कार और परिश्रम ही आकार देते हैं।"
+    "hi": "यह जन्म पत्रिका केवल मार्गदर्शन और सांस्कृतिक उद्देश्य के लिए तैयार की गई है। यह चिकित्सा, कानूनी या आर्थिक सलाह नहीं है। ज्योतिष प्रवृत्तियाँ बताता है, निश्चितता नहीं; बच्चे के जीवन को सबसे अधिक स्नेह, संस्कार और परिश्रम ही आकार देते हैं।",
+    "adult": {
+      "en": "This Janam Patrika is prepared for guidance and cultural purposes only. It is not medical, legal or financial advice. Astrology shows tendencies, not certainties; your own decisions, effort and values shape life most of all.",
+      "hi": "यह जन्म पत्रिका केवल मार्गदर्शन और सांस्कृतिक उद्देश्य के लिए तैयार की गई है। यह चिकित्सा, कानूनी या आर्थिक सलाह नहीं है। ज्योतिष प्रवृत्तियाँ बताता है, निश्चितता नहीं; जीवन को सबसे अधिक आपके अपने निर्णय, परिश्रम और संस्कार आकार देते हैं।"
+    }
   },
-
   "milan_note": {
     "en": "Nadi, Gana, Yoni and Varna are needed later for Kundali Milan (Guna matching) at the time of marriage. Keep this page safe.",
     "hi": "नाड़ी, गण, योनि और वर्ण आगे चलकर विवाह के समय कुंडली मिलान (गुण मिलान) में काम आते हैं। यह पृष्ठ सँभालकर रखें।"
   },
-
   "time_unknown_note": {
     "en": "The exact birth time was not known, so this report is based on the Moon (Chandra Kundali). The Lagna, houses and divisional charts are not shown, because they change every few minutes.",
     "hi": "जन्म का सही समय ज्ञात नहीं था, इसलिए यह पत्रिका चन्द्र (चन्द्र कुंडली) पर आधारित है। लग्न, भाव और वर्ग कुंडलियाँ नहीं दी गई हैं, क्योंकि ये कुछ ही मिनटों में बदल जाती हैं।"
@@ -26,11 +33,19 @@
     "hi": "इस दिन चन्द्र ने {what} बदला था, इसलिए इसकी पुष्टि के लिए जन्म समय अवश्य जाँच लें।"
   },
   "moon_change": {
-    "moon_sign": {"en": "sign (Rashi)", "hi": "राशि"},
-    "nakshatra": {"en": "nakshatra", "hi": "नक्षत्र"},
-    "pada": {"en": "pada", "hi": "चरण"}
+    "moon_sign": {
+      "en": "sign (Rashi)",
+      "hi": "राशि"
+    },
+    "nakshatra": {
+      "en": "nakshatra",
+      "hi": "नक्षत्र"
+    },
+    "pada": {
+      "en": "pada",
+      "hi": "चरण"
+    }
   },
-
   "calculation_notes": [
     {
       "en": "Sidereal zodiac, Lahiri (Chitrapaksha) ayanamsa; whole-sign houses; mean Rahu/Ketu; Vimshottari dasha (365.25-day year); Chaldean numerology.",
@@ -45,23 +60,46 @@
       "hi": "प्रयुक्त जन्म समय: {time}। लग्न और वर्ग कुंडलियाँ सटीक मिनट पर निर्भर हैं; यदि अस्पताल के अभिलेख में समय भिन्न हो, तो नई पत्रिका बनवाएँ।"
     }
   ],
-
   "vargas": {
     "purpose": {
-      "D7": {"en": "Saptamsa (children)", "hi": "सप्तमांश (संतान)"},
-      "D9": {"en": "Navamsa (marriage, dharma, inner strength)", "hi": "नवांश (विवाह, धर्म, आंतरिक बल)"},
-      "D10": {"en": "Dashamsa (career)", "hi": "दशमांश (करियर)"},
-      "D12": {"en": "Dwadasamsa (parents)", "hi": "द्वादशांश (माता-पिता)"}
+      "D7": {
+        "en": "Saptamsa (children)",
+        "hi": "सप्तमांश (संतान)"
+      },
+      "D9": {
+        "en": "Navamsa (marriage, dharma, inner strength)",
+        "hi": "नवांश (विवाह, धर्म, आंतरिक बल)"
+      },
+      "D10": {
+        "en": "Dashamsa (career)",
+        "hi": "दशमांश (करियर)"
+      },
+      "D12": {
+        "en": "Dwadasamsa (parents)",
+        "hi": "द्वादशांश (माता-पिता)"
+      }
     },
     "highlight": {
       "en": "{varga}: {planet} is {dignity}, which strengthens {topic}.",
       "hi": "{varga}: {planet} {dignity} है, जिससे {topic} को बल मिलता है।"
     },
     "topic": {
-      "D7": {"en": "the promise of children", "hi": "संतान-सुख"},
-      "D9": {"en": "inner confidence, character and married life", "hi": "आत्मबल, चरित्र और वैवाहिक जीवन"},
-      "D10": {"en": "career, authority and professional ability", "hi": "करियर, अधिकार और व्यावसायिक योग्यता"},
-      "D12": {"en": "comfort and support from parents and the family line", "hi": "माता-पिता और कुल-परंपरा का सुख तथा सहयोग"}
+      "D7": {
+        "en": "the promise of children",
+        "hi": "संतान-सुख"
+      },
+      "D9": {
+        "en": "inner confidence, character and married life",
+        "hi": "आत्मबल, चरित्र और वैवाहिक जीवन"
+      },
+      "D10": {
+        "en": "career, authority and professional ability",
+        "hi": "करियर, अधिकार और व्यावसायिक योग्यता"
+      },
+      "D12": {
+        "en": "comfort and support from parents and the family line",
+        "hi": "माता-पिता और कुल-परंपरा का सुख तथा सहयोग"
+      }
     },
     "vargottama": {
       "en": "{planets} vargottama (same sign in D-1 and D-9): steady and dependable results.",
@@ -72,89 +110,210 @@
       "hi": "वर्ग कुंडलियाँ संतुलित हैं, कोई ग्रह विशेष रूप से उभरा हुआ नहीं; फल जन्म कुंडली के अनुसार रहते हैं।"
     }
   },
-
   "aspects": {
-    "line": {"en": "{planet} (in the {house}) aspects the {houses}{planets}.", "hi": "{planet} ({house} भाव) की दृष्टि {houses} भाव पर है{planets}।"},
-    "onto": {"en": " ({planets})", "hi": " ({planets})"}
+    "line": {
+      "en": "{planet} (in the {house}) aspects the {houses}{planets}.",
+      "hi": "{planet} ({house} भाव) की दृष्टि {houses} भाव पर है{planets}।"
+    },
+    "onto": {
+      "en": " ({planets})",
+      "hi": " ({planets})"
+    }
   },
-
   "remedies": {
-    "intro": {"en": "Performed by the parents during childhood", "hi": "बाल्यावस्था में माता-पिता द्वारा किए जाने वाले"},
-    "for_planet": {"en": "{planet}", "hi": "{planet}"},
-    "for_lagna_lord": {"en": "{planet} (Lagna lord)", "hi": "{planet} (लग्नेश)"},
-    "for_rashi_lord": {"en": "{planet} (Rashi lord)", "hi": "{planet} (राशि स्वामी)"},
-    "for_dasha": {"en": "{planet} Mahadasha", "hi": "{planet} महादशा"},
-    "kuldevi_title": {"en": "Kuldevi & ancestors", "hi": "कुलदेवी एवं पितृ"},
+    "intro": {
+      "en": "Performed by the parents during childhood",
+      "hi": "बाल्यावस्था में माता-पिता द्वारा किए जाने वाले",
+      "adult": {
+        "en": "Optional, simple and sattvic",
+        "hi": "वैकल्पिक, सरल और सात्विक"
+      }
+    },
+    "for_planet": {
+      "en": "{planet}",
+      "hi": "{planet}"
+    },
+    "for_lagna_lord": {
+      "en": "{planet} (Lagna lord)",
+      "hi": "{planet} (लग्नेश)"
+    },
+    "for_rashi_lord": {
+      "en": "{planet} (Rashi lord)",
+      "hi": "{planet} (राशि स्वामी)"
+    },
+    "for_dasha": {
+      "en": "{planet} Mahadasha",
+      "hi": "{planet} महादशा"
+    },
+    "kuldevi_title": {
+      "en": "Kuldevi & ancestors",
+      "hi": "कुलदेवी एवं पितृ"
+    },
     "kuldevi": {
       "en": "First dhok and Mundan at Kuldevi {kuldevi} as per family tradition. Honour the ancestors every Pitru Paksha.",
-      "hi": "कुल परंपरा के अनुसार पहली धोक और मुंडन कुलदेवी {kuldevi} के यहाँ करें। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण करें।"
+      "hi": "कुल परंपरा के अनुसार पहली धोक और मुंडन कुलदेवी {kuldevi} के यहाँ करें। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण करें।",
+      "adult": {
+        "en": "Visit Kuldevi {kuldevi} with the family when you can, as per family tradition. Honour the ancestors every Pitru Paksha.",
+        "hi": "कुल परंपरा के अनुसार समय-समय पर परिवार सहित कुलदेवी {kuldevi} के दर्शन करें। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण करें।"
+      }
     },
     "kuldevi_unknown": {
       "en": "Take the child for the first darshan of the family deity as per family tradition. Honour the ancestors every Pitru Paksha.",
-      "hi": "कुल परंपरा के अनुसार बच्चे को कुलदेवता के प्रथम दर्शन कराएँ। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण करें।"
+      "hi": "कुल परंपरा के अनुसार बच्चे को कुलदेवता के प्रथम दर्शन कराएँ। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण करें।",
+      "adult": {
+        "en": "Visit the family deity when you can, as per family tradition. Honour the ancestors every Pitru Paksha.",
+        "hi": "कुल परंपरा के अनुसार समय-समय पर कुलदेवता के दर्शन करें। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण करें।"
+      }
     },
-    "gemstone_title": {"en": "Gemstones (later)", "hi": "रत्न (बाद में)"},
+    "gemstone_title": {
+      "en": "Gemstones (later)",
+      "hi": "रत्न (बाद में)",
+      "adult": {
+        "en": "Gemstones",
+        "hi": "रत्न"
+      }
+    },
     "gemstone": {
       "en": "No gemstones for an infant. After age 12–14, and only after a fresh consultation: {stones}.",
-      "hi": "शिशु को कोई रत्न न पहनाएँ। 12–14 वर्ष की आयु के बाद, और नए परामर्श के बाद ही: {stones}।"
+      "hi": "शिशु को कोई रत्न न पहनाएँ। 12–14 वर्ष की आयु के बाद, और नए परामर्श के बाद ही: {stones}।",
+      "adult": {
+        "en": "Wear a gemstone only after a personal consultation; it is never required. Those linked to this chart: {stones}.",
+        "hi": "रत्न केवल व्यक्तिगत परामर्श के बाद ही धारण करें; यह कभी अनिवार्य नहीं है। इस कुंडली से जुड़े रत्न: {stones}।"
+      }
     },
-    "gemstone_for": {"en": "{stone} for {planet}", "hi": "{planet} के लिए {stone}"}
-  },
-
-  "sanskar": {
-    "namkaran": {
-      "name": {"en": "Namkaran", "hi": "नामकरण"},
-      "normal": {"en": "On the 11th or 12th day ({day11} or {day12}), or on an auspicious day chosen by the family pandit", "hi": "11वें या 12वें दिन ({day11} या {day12}), अथवा कुल पंडित द्वारा चुने गए शुभ दिन"},
-      "gandmool": {"en": "After the Gandmool Shanti (after {return_date})", "hi": "गण्डमूल शांति के बाद ({return_date} के बाद)"},
-      "note": {"en": "The name is chosen from the letters given in this Patrika.", "hi": "नाम इस पत्रिका में दिए गए अक्षरों से चुना जाता है।"},
-      "pitru_note": {"en": "Pitru Paksha is traditionally avoided for auspicious ceremonies; choose a date after it ends.", "hi": "पितृ पक्ष में शुभ संस्कार नहीं किए जाते; इसके समाप्त होने के बाद की तिथि चुनें।"}
-    },
-    "annaprashan": {
-      "name": {"en": "Annaprashan", "hi": "अन्नप्राशन"},
-      "when": {"en": "{first} or {second} month (about {from} – {to})", "hi": "{first} या {second} माह (लगभग {from} – {to})"},
-      "note_male": {"en": "Even months are preferred for boys.", "hi": "बालकों के लिए सम माह श्रेष्ठ माने जाते हैं।"},
-      "note_female": {"en": "Odd months are preferred for girls.", "hi": "बालिकाओं के लिए विषम माह श्रेष्ठ माने जाते हैं।"}
-    },
-    "mundan": {
-      "name": {"en": "Mundan", "hi": "मुंडन"},
-      "when": {"en": "1st or 3rd year ({year1} / {year3})", "hi": "पहले या तीसरे वर्ष ({year1} / {year3})"},
-      "note": {"en": "At the Kuldevi {kuldevi}, as per family custom.", "hi": "कुल परंपरा के अनुसार कुलदेवी {kuldevi} के यहाँ।"},
-      "note_unknown": {"en": "At the family deity's temple, as per family custom.", "hi": "कुल परंपरा के अनुसार कुलदेवता के स्थान पर।"}
-    },
-    "vidyarambh": {
-      "name": {"en": "Vidyarambh", "hi": "विद्यारंभ"},
-      "when": {"en": "Vasant Panchami, age 3–5 ({year3} – {year5})", "hi": "वसंत पंचमी, 3–5 वर्ष की आयु ({year3} – {year5})"},
-      "note": {"en": "Begin with the worship of Maa Saraswati.", "hi": "माँ सरस्वती की पूजा से आरंभ करें।"},
-      "note_saraswati": {"en": "Saraswati Yoga is present, so this sanskar is especially auspicious.", "hi": "सरस्वती योग उपस्थित है, इसलिए यह संस्कार विशेष शुभ है।"}
+    "gemstone_for": {
+      "en": "{stone} for {planet}",
+      "hi": "{planet} के लिए {stone}"
     }
   },
-
+  "sanskar": {
+    "namkaran": {
+      "name": {
+        "en": "Namkaran",
+        "hi": "नामकरण"
+      },
+      "normal": {
+        "en": "On the 11th or 12th day ({day11} or {day12}), or on an auspicious day chosen by the family pandit",
+        "hi": "11वें या 12वें दिन ({day11} या {day12}), अथवा कुल पंडित द्वारा चुने गए शुभ दिन"
+      },
+      "gandmool": {
+        "en": "After the Gandmool Shanti (after {return_date})",
+        "hi": "गण्डमूल शांति के बाद ({return_date} के बाद)"
+      },
+      "note": {
+        "en": "The name is chosen from the letters given in this Patrika.",
+        "hi": "नाम इस पत्रिका में दिए गए अक्षरों से चुना जाता है।"
+      },
+      "pitru_note": {
+        "en": "Pitru Paksha is traditionally avoided for auspicious ceremonies; choose a date after it ends.",
+        "hi": "पितृ पक्ष में शुभ संस्कार नहीं किए जाते; इसके समाप्त होने के बाद की तिथि चुनें।"
+      }
+    },
+    "annaprashan": {
+      "name": {
+        "en": "Annaprashan",
+        "hi": "अन्नप्राशन"
+      },
+      "when": {
+        "en": "{first} or {second} month (about {from} – {to})",
+        "hi": "{first} या {second} माह (लगभग {from} – {to})"
+      },
+      "note_male": {
+        "en": "Even months are preferred for boys.",
+        "hi": "बालकों के लिए सम माह श्रेष्ठ माने जाते हैं।"
+      },
+      "note_female": {
+        "en": "Odd months are preferred for girls.",
+        "hi": "बालिकाओं के लिए विषम माह श्रेष्ठ माने जाते हैं।"
+      }
+    },
+    "mundan": {
+      "name": {
+        "en": "Mundan",
+        "hi": "मुंडन"
+      },
+      "when": {
+        "en": "1st or 3rd year ({year1} / {year3})",
+        "hi": "पहले या तीसरे वर्ष ({year1} / {year3})"
+      },
+      "note": {
+        "en": "At the Kuldevi {kuldevi}, as per family custom.",
+        "hi": "कुल परंपरा के अनुसार कुलदेवी {kuldevi} के यहाँ।"
+      },
+      "note_unknown": {
+        "en": "At the family deity's temple, as per family custom.",
+        "hi": "कुल परंपरा के अनुसार कुलदेवता के स्थान पर।"
+      }
+    },
+    "vidyarambh": {
+      "name": {
+        "en": "Vidyarambh",
+        "hi": "विद्यारंभ"
+      },
+      "when": {
+        "en": "Vasant Panchami, age 3–5 ({year3} – {year5})",
+        "hi": "वसंत पंचमी, 3–5 वर्ष की आयु ({year3} – {year5})"
+      },
+      "note": {
+        "en": "Begin with the worship of Maa Saraswati.",
+        "hi": "माँ सरस्वती की पूजा से आरंभ करें।"
+      },
+      "note_saraswati": {
+        "en": "Saraswati Yoga is present, so this sanskar is especially auspicious.",
+        "hi": "सरस्वती योग उपस्थित है, इसलिए यह संस्कार विशेष शुभ है।"
+      }
+    }
+  },
   "summary": {
     "note": {
       "blessed": {
         "en": "This is a blessed and strong horoscope. {count} auspicious yogas are present, including {top}. The child carries the promise of wisdom, good character, prosperity and respect.",
-        "hi": "यह एक सौभाग्यशाली और बली कुंडली है। इसमें {count} शुभ योग उपस्थित हैं, जिनमें {top} प्रमुख हैं। यह कुंडली ज्ञान, सच्चरित्रता, समृद्धि और सम्मान का आश्वासन देती है।"
+        "hi": "यह एक सौभाग्यशाली और बली कुंडली है। इसमें {count} शुभ योग उपस्थित हैं, जिनमें {top} प्रमुख हैं। यह कुंडली ज्ञान, सच्चरित्रता, समृद्धि और सम्मान का आश्वासन देती है।",
+        "adult": {
+          "en": "This is a blessed and strong horoscope. {count} auspicious yogas are present, including {top}. It carries the promise of wisdom, good character, prosperity and respect.",
+          "hi": "यह एक सौभाग्यशाली और बली कुंडली है। इसमें {count} शुभ योग उपस्थित हैं, जिनमें {top} प्रमुख हैं। यह कुंडली ज्ञान, सच्चरित्रता, समृद्धि और सम्मान का आश्वासन देती है।"
+        }
       },
       "good": {
         "en": "This is a good, well-balanced horoscope, with {top} among its strengths. With the right guidance the child will do well in the areas that matter most.",
-        "hi": "यह एक अच्छी और संतुलित कुंडली है, जिसकी शक्तियों में {top} शामिल हैं। सही मार्गदर्शन से जीवन के महत्वपूर्ण क्षेत्रों में अच्छी सफलता मिलेगी।"
+        "hi": "यह एक अच्छी और संतुलित कुंडली है, जिसकी शक्तियों में {top} शामिल हैं। सही मार्गदर्शन से जीवन के महत्वपूर्ण क्षेत्रों में अच्छी सफलता मिलेगी।",
+        "adult": {
+          "en": "This is a good, well-balanced horoscope, with {top} among its strengths. With steady effort, the areas that matter most go well.",
+          "hi": "यह एक अच्छी और संतुलित कुंडली है, जिसकी शक्तियों में {top} शामिल हैं। निरंतर प्रयास से जीवन के महत्वपूर्ण क्षेत्रों में अच्छी सफलता मिलती है।"
+        }
       },
       "steady": {
         "en": "This is a steady horoscope in which success is built through the child's own effort and good upbringing. Such charts often produce self-made, grounded and dependable people.",
-        "hi": "यह एक स्थिर कुंडली है जिसमें सफलता अपने परिश्रम और अच्छे संस्कारों से बनती है। ऐसी कुंडलियाँ प्रायः स्वनिर्मित, व्यावहारिक और विश्वसनीय व्यक्तित्व देती हैं।"
+        "hi": "यह एक स्थिर कुंडली है जिसमें सफलता अपने परिश्रम और अच्छे संस्कारों से बनती है। ऐसी कुंडलियाँ प्रायः स्वनिर्मित, व्यावहारिक और विश्वसनीय व्यक्तित्व देती हैं।",
+        "adult": {
+          "en": "This is a steady horoscope in which success is built through one's own effort and good values. Such charts often belong to self-made, grounded and dependable people.",
+          "hi": "यह एक स्थिर कुंडली है जिसमें सफलता अपने परिश्रम और अच्छे संस्कारों से बनती है। ऐसी कुंडलियाँ प्रायः स्वनिर्मित, व्यावहारिक और विश्वसनीय व्यक्तियों की होती हैं।"
+        }
       }
     },
     "challenges": {
       "en": "The few points to look after ({list}) are mild, and they are well handled through the simple remedies given here and, most of all, through love, discipline and good values at home.",
-      "hi": "ध्यान देने योग्य कुछ बातें ({list}) हल्की हैं, और यहाँ दिए सरल उपायों से तथा सबसे बढ़कर घर के स्नेह, अनुशासन और संस्कारों से इनका भली-भाँति समाधान हो जाता है।"
+      "hi": "ध्यान देने योग्य कुछ बातें ({list}) हल्की हैं, और यहाँ दिए सरल उपायों से तथा सबसे बढ़कर घर के स्नेह, अनुशासन और संस्कारों से इनका भली-भाँति समाधान हो जाता है।",
+      "adult": {
+        "en": "The few points to look after ({list}) are mild, and they are well handled through the simple remedies given here and, most of all, through a steady routine, patience and good values.",
+        "hi": "ध्यान देने योग्य कुछ बातें ({list}) हल्की हैं, और यहाँ दिए सरल उपायों से तथा सबसे बढ़कर नियमित दिनचर्या, धैर्य और संस्कारों से इनका भली-भाँति समाधान हो जाता है।"
+      }
     },
     "no_challenges": {
       "en": "No significant dosha is present. Love, discipline and good values at home will do the rest.",
-      "hi": "कोई विशेष दोष उपस्थित नहीं है। घर का स्नेह, अनुशासन और संस्कार शेष सब कर देंगे।"
+      "hi": "कोई विशेष दोष उपस्थित नहीं है। घर का स्नेह, अनुशासन और संस्कार शेष सब कर देंगे।",
+      "adult": {
+        "en": "No significant dosha is present. A steady routine and good values do the rest.",
+        "hi": "कोई विशेष दोष उपस्थित नहीं है। नियमित दिनचर्या और संस्कार शेष सब कर देते हैं।"
+      }
     },
     "closing": {
       "en": "May the child be blessed with long life, fame and wisdom.",
-      "hi": "शिशु को दीर्घायु, यश और विद्या का आशीर्वाद प्राप्त हो।"
+      "hi": "शिशु को दीर्घायु, यश और विद्या का आशीर्वाद प्राप्त हो।",
+      "adult": {
+        "en": "May you be blessed with long life, fame and wisdom.",
+        "hi": "आपको दीर्घायु, यश और विद्या का आशीर्वाद प्राप्त हो।"
+      }
     }
   }
 }

@@ -179,7 +179,8 @@ def test_wording_is_complete_on_many_charts():
     seen_yogas, seen_statuses = set(), set()
     for i, (date, time, lat, lon) in enumerate(random_births(120)):
         report = build_report(date, time if i % 6 else None, lat, lon, "Asia/Kolkata",
-                              gender="male" if i % 2 else "female", surname="Sharma" if i % 3 else None)
+                              gender="male" if i % 2 else "female", surname="Sharma" if i % 3 else None,
+                              today=date)                    # prepared at birth: the child's report
         check_wording(report["content"])
         seen_yogas |= {y["key"] for y in report["content"]["yogas"]}
         seen_statuses |= {(d["key"], d["status"]) for d in report["content"]["doshas"]}
@@ -209,10 +210,77 @@ def test_api_report():
     response = TestClient(app).post("/report", json={**BODY, "gender": "male", "surname": "Darak"})
     assert response.status_code == 200
     body = response.json()
-    assert set(body) == {"chart", "analysis", "numerology", "content"}
+    assert set(body) == {"audience", "prepared_on", "chart", "analysis", "numerology", "content"}
     assert body["content"]["names"]["suggestions"][0]["en"] == "Deepansh"
 
 
 def test_api_report_needs_gender():
     assert TestClient(app).post("/report", json=BODY).status_code == 422
     assert TestClient(app).post("/report", json={**BODY, "gender": "other"}).status_code == 422
+
+
+# ---------- a report for an adult ----------
+
+ADULT_BIRTH = dict(date=__import__("datetime").date(1990, 1, 15), time=__import__("datetime").time(4, 30),
+                   latitude=28.6139, longitude=77.2090, timezone="Asia/Kolkata")
+TODAY = __import__("datetime").date(2026, 10, 5)
+# ("infancy" alone is allowed: an adult's Gandmool note says the Shanti is done in infancy)
+CHILD_WORDING = re.compile(r"\bthe child\b|\bbaby\b|care in infancy|\btoys?\b|a parent (?:offers|lights)|बच्च|शिशु", re.I)
+
+
+def test_reader_is_chosen_by_age():
+    from app.content import audience_for
+    import datetime as dt
+    assert audience_for(dt.date(2026, 9, 27), TODAY) == "child"
+    assert audience_for(dt.date(2010, 10, 6), TODAY) == "child"      # 15, a day short of 16
+    assert audience_for(dt.date(2010, 10, 5), TODAY) == "adult"      # 16 today
+    assert build_report(**BIRTH, gender="male", today=TODAY)["audience"] == "child"
+
+
+def test_adult_report_is_written_for_an_adult():
+    report = build_report(**ADULT_BIRTH, gender="male", surname="Sharma", today=TODAY)
+    content = report["content"]
+    assert report["audience"] == "adult"
+    check_wording(content)
+    found = CHILD_WORDING.findall(json.dumps(content, ensure_ascii=False))
+    assert not found, found
+    # No childhood ceremonies and no baby names; the name letters are still shown
+    assert content["sanskar"] is None and content["names"]["suggestions"] == []
+    assert content["names"]["primary"]["en"]
+    # The dasha running today, and remedies and mantras for it rather than for the birth dasha
+    now = content["dasha_now"]
+    assert now["mahadasha"]["en"] == "Mars" and now["mahadasha_ends"]["en"] == "Aug 2027"
+    assert "Mars" in " ".join(r["for"]["en"] for r in content["remedies"])
+    assert "the native" in content["predictions"][0]["text"]["en"]
+    assert content["remedies"][-1]["for"]["en"] == "Gemstones"
+
+
+def test_adult_sade_sati_is_checked_for_today():
+    # Moon in Pisces, born 1970: Saturn was nowhere near at birth, but is in Pisces in October 2026
+    import datetime as dt
+    birth = dict(date=dt.date(1970, 3, 9), time=dt.time(10, 0), latitude=19.07, longitude=72.88, timezone="Asia/Kolkata")
+    report = build_report(**birth, gender="female", today=TODAY)
+    assert report["chart"]["planets"]["moon"]["sign"]["en"] == "Pisces"
+    dosha = next(d for d in report["content"]["doshas"] if d["key"] == "sade_sati")
+    assert dosha["status"] == "running" and dosha["status_label"]["en"] == "Running now"
+    assert "now transiting" in dosha["details"]["en"]
+    assert report["chart"]["sade_sati"]["as_of"] == "2026-10-05"
+
+
+def test_child_wording_is_unchanged_by_the_adult_versions():
+    child = build_report(**BIRTH, gender="male", today=TODAY)["content"]
+    assert "the child" in child["predictions"][0]["text"]["en"]
+    assert child["dasha_now"] is None and len(child["sanskar"]) == 4
+    assert "adult" not in json.dumps(child)
+
+
+def test_adult_wording_is_complete_on_many_charts():
+    for i, (date, time, lat, lon) in enumerate(random_births(60, seed=3)):
+        if date.year > 2005:
+            continue
+        report = build_report(date, time if i % 5 else None, lat, lon, "Asia/Kolkata",
+                              gender="male" if i % 2 else "female", today=TODAY)
+        assert report["audience"] == "adult"
+        check_wording(report["content"])
+        found = CHILD_WORDING.findall(json.dumps(report["content"], ensure_ascii=False))
+        assert not found, (date, found)

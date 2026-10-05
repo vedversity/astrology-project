@@ -14,6 +14,8 @@ export type Plan = {
   price: number;
   pages: number;
   recommended?: boolean;
+  /** "child" = offered only for a child under 16 (the newborn extras make no sense for an adult) */
+  audience?: "child";
   name: Text;
   summary: Text;
   features: { hi: string[]; en: string[] };
@@ -54,6 +56,15 @@ export async function api<T>(route: string, keepSeconds: number): Promise<T | nu
   } catch {
     return null;
   }
+}
+
+/** The plans that suit a person born on the given date (YYYY-MM-DD). */
+export function plansFor(plans: Plan[], birthDate: string): Plan[] {
+  const born = new Date(birthDate);
+  const now = new Date();
+  const hadBirthday = now.getMonth() > born.getMonth() || (now.getMonth() === born.getMonth() && now.getDate() >= born.getDate());
+  const age = now.getFullYear() - born.getFullYear() - (hadBirthday ? 0 : 1);
+  return plans.filter((plan) => plan.audience !== "child" || age < 16);
 }
 
 /** Address of a page in the chosen language: Hindi at the root, English under /en. */

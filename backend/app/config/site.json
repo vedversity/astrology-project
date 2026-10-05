@@ -1,5 +1,5 @@
 {
-  "_note": "Site settings that the owner may change: the brand name and the plans with their prices. Prices are in rupees. The website and the order flow read this file through the API (GET /site); nothing here is hard-coded anywhere else.",
+  "_note": "A plan marked \"audience\": \"child\" is offered only when the birth date is that of a child under 16. Site settings that the owner may change: the brand name and the plans with their prices. Prices are in rupees. The website and the order flow read this file through the API (GET /site); nothing here is hard-coded anywhere else.",
 
   "brand": {
     "name": {"hi": "जन्म पत्रिका", "en": "Janam Patrika"},
@@ -34,9 +34,10 @@
     },
     {
       "id": "premium",
+      "audience": "child",
       "price": 251,
       "pages": 13,
-      "name": {"hi": "प्रीमियम पत्रिका", "en": "Premium Patrika"},
+      "name": {"hi": "प्रीमियम पत्रिका (शिशु के लिए)", "en": "Premium Patrika (for a baby)"},
       "summary": {"hi": "संपूर्ण पत्रिका + नाम सुझाव + संस्कार पंचांग", "en": "Full Patrika + name suggestions + Sanskar calendar"},
       "features": {
         "hi": ["संपूर्ण पत्रिका की सभी बातें", "अंक ज्योतिष से मिलाए गए 10 नाम सुझाव", "संस्कार पंचांग (नामकरण, अन्नप्राशन, मुंडन, विद्यारंभ)"],

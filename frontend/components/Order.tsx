@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { apiBody, keepPdf, useBirth, type Birth } from "@/lib/birth";
 import { content, fill } from "@/lib/content";
-import { API_URL, path, PAYMENTS_ENABLED, type Lang, type Plan } from "@/lib/site";
+import { API_URL, path, PAYMENTS_ENABLED, plansFor, type Lang, type Plan } from "@/lib/site";
 
 /** Collects the names to print and the contact details, then gets the PDF. */
 export default function Order({ lang }: { lang: Lang }) {
@@ -49,9 +49,13 @@ function Fields({ lang, birth }: { lang: Lang; birth: Birth }) {
   useEffect(() => {
     fetch(`${API_URL}/site`)
       .then((response) => response.json())
-      .then((site) => setPlan(site.plans.find((p: Plan) => p.id === planId) ?? site.plans[0]))
+      .then((site) => {
+        // A plan that does not suit this birth date falls back to the Full Patrika
+        const offered = plansFor(site.plans as Plan[], birth.date);
+        setPlan(offered.find((p) => p.id === planId) ?? offered.find((p) => p.id === "full") ?? offered[0]);
+      })
       .catch(() => setPlan(null));
-  }, [planId]);
+  }, [planId, birth.date]);
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();

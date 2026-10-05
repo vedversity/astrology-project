@@ -100,6 +100,17 @@ def _moon_certainty(local_dt):
     }
 
 
+def sade_sati_on(chart, day):
+    """Sade Sati as it stands on a later day (for an adult's report), from a chart's Moon."""
+    tz = ZoneInfo(chart["input"]["timezone"])
+    jd = eph.to_jd(dt.datetime.combine(day, dt.time(12, 0), tzinfo=tz).astimezone(dt.timezone.utc))
+
+    def fmt(jd_value):
+        return eph.from_jd(jd_value).astimezone(tz).isoformat(timespec="seconds")
+
+    return sade_sati(jd, chart["planets"]["moon"]["longitude"], fmt)
+
+
 def calculate_chart(date, time=None, latitude=0.0, longitude=0.0,
                     timezone="Asia/Kolkata", time_known=True):
     """Calculate the full chart.

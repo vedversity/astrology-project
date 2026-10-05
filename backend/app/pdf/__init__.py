@@ -58,10 +58,10 @@ class PdfError(Exception):
     """The PDF could not be produced (used later to flag an automatic refund)."""
 
 
-def _display_name(person, lang):
+def _display_name(person, lang, audience):
     if person.get("child_name"):
         return person["child_name"]
-    label = load("labels")["child"][person["gender"]][lang]
+    label = load("labels", audience)["child"][person["gender"]][lang]
     return f"{label} {person['surname']}" if person.get("surname") else label
 
 
@@ -74,7 +74,11 @@ def build_html(report, person, variant="full", lang="hi", prepared_on=None):
 
     chart = report["chart"]
     content = report["content"]
-    labels = load("labels")
+    audience = report.get("audience", "child")
+    # Premium adds what a newborn needs (names, Sanskar calendar); for an adult it is the Full report
+    if audience == "adult" and variant == "premium":
+        variant = "full"
+    labels = load("labels", audience)
     months = labels["months"][lang]
     local = dt.datetime.fromisoformat(chart["input"]["local_datetime"])
     utc = dt.datetime.fromisoformat(chart["input"]["utc_datetime"])
@@ -127,9 +131,10 @@ def build_html(report, person, variant="full", lang="hi", prepared_on=None):
         text = " · ".join(parts)
         return text[:1].upper() + text[1:] if text else "—"
 
-    # Antardashas of the first two mahadashas, starting from the birth
+    # Antardashas of two mahadashas: from the birth for a child, from the running one for an adult
+    first = content["dasha_now"]["index"] if content.get("dasha_now") else 0
     antardashas = []
-    for period in chart["dasha"]["mahadashas"][:2]:
+    for period in chart["dasha"]["mahadashas"][first:first + 2]:
         rows = []
         for ad in period["antardashas"]:
             if ad["end"] <= local.date().isoformat():
@@ -152,7 +157,7 @@ def build_html(report, person, variant="full", lang="hi", prepared_on=None):
     offset = local.utcoffset()
     minutes = int(offset.total_seconds() // 60)
     person = {field: (person.get(field) or "").strip() or None for field in PERSON_FIELDS}
-    person["display_name"] = _display_name(person, lang)
+    person["display_name"] = _display_name(person, lang, audience)
 
     css = (TEMPLATES / "style.css").read_text(encoding="utf-8").replace("FONTS", FONTS.as_uri())
     return _env.get_template("patrika.html").render(
@@ -165,7 +170,8 @@ def build_html(report, person, variant="full", lang="hi", prepared_on=None):
         utc_clock=utc.strftime("%H:%M"),
         utc_offset=f"{'+' if minutes >= 0 else '-'}{abs(minutes) // 60:02d}:{abs(minutes) % 60:02d}",
         varga_order=VARGA_ORDER, varga_keys=["lagna"] + c.PLANET_KEYS, svg=svg,
-        antardashas=antardashas, content_remedies_intro=t(load("general")["remedies"]["intro"]),
+        antardashas=antardashas, audience=audience,
+        content_remedies_intro=t(load("general", audience)["remedies"]["intro"]),
         prepared_on=f"{prepared.day} {months[prepared.month - 1]} {prepared.year}",
         t=t, L=L, P=P, clock=clock, day_clock=day_clock, long_date=long_date, dms=dms, age=age,
         dignity_text=dignity_text,

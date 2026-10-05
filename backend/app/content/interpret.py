@@ -6,12 +6,20 @@ Every text is returned in both languages as {"en": "...", "hi": "..."}.
 """
 
 import datetime as dt
+from contextvars import ContextVar
 
 from app.astro import constants as c
 from app.numerology import name_number
 from app.rules.chartview import KENDRAS, SEVEN, STRONG_DIGNITIES, TRIKONAS
 
-from . import load
+from . import load as _load
+
+# Who the report being written speaks to; set by interpret()
+_audience = ContextVar("audience", default="child")
+
+
+def load(name):
+    return _load(name, _audience.get())
 
 LANGS = ("en", "hi")
 # Dosha statuses that deserve a remedy row and a mention among the points to look after
@@ -324,7 +332,18 @@ def _guiding_planets(chart, analysis):
     return [chart["avakahada"]["rashi_lord"]]
 
 
-def remedy_texts(chart, analysis, doshas, kuldevi=None):
+def dasha_on(chart, day):
+    """The mahadasha and antardasha running on a given day."""
+    day = day.isoformat()
+    for index, period in enumerate(chart["dasha"]["mahadashas"]):
+        if period["start"] <= day < period["end"]:
+            sub = next(ad for ad in period["antardashas"] if ad["start"] <= day < ad["end"])
+            return {"index": index, "mahadasha": period["lord"], "antardasha": sub["lord"],
+                    "mahadasha_ends": period["end"], "antardasha_ends": sub["end"]}
+    return None
+
+
+def remedy_texts(chart, analysis, doshas, kuldevi=None, running_lord=None):
     book = load("general")["remedies"]
     planet_book = load("planets")
     rows = [{"for": d["name"], "text": d["remedy"]} for d in doshas if d["remedy"]]
@@ -340,7 +359,7 @@ def remedy_texts(chart, analysis, doshas, kuldevi=None):
         if info["level"] == "weak" and key != main:
             add(key, "for_planet")
     add(main, "for_lagna_lord" if analysis["houses"] else "for_rashi_lord")
-    add(chart["dasha"]["current_at_birth"]["mahadasha"], "for_dasha")
+    add(running_lord or chart["dasha"]["current_at_birth"]["mahadasha"], "for_dasha")
 
     rows.append({"for": book["kuldevi_title"],
                  "text": fill(book["kuldevi"], kuldevi=kuldevi) if kuldevi else book["kuldevi_unknown"]})
@@ -352,10 +371,10 @@ def remedy_texts(chart, analysis, doshas, kuldevi=None):
     return rows
 
 
-def lucky_factors(chart, analysis):
+def lucky_factors(chart, analysis, running_lord=None):
     planet_book = load("planets")
     guides = _guiding_planets(chart, analysis)
-    dasha_lord = chart["dasha"]["current_at_birth"]["mahadasha"]
+    dasha_lord = running_lord or chart["dasha"]["current_at_birth"]["mahadasha"]
 
     def collect(field):
         return join([planet_book[p][field] for p in guides], last=both(", "))
@@ -558,8 +577,16 @@ def nakshatra_details(chart):
     return {key: entry[key] for key in ("deity", "symbol", "tree")}
 
 
-def interpret(chart, analysis, numbers, letters, suggestions, gender, kuldevi=None, surname=None):
-    """Build every piece of wording the report needs."""
+def interpret(chart, analysis, numbers, letters, suggestions, gender, kuldevi=None, surname=None,
+              audience="child", today=None):
+    """Build every piece of wording the report needs.
+
+    audience: "child" (written for the parents) or "adult" (written for the person).
+    today: the day the report is prepared; an adult's report shows the dasha running on it.
+    """
+    _audience.set(audience)
+    now = dasha_on(chart, today) if audience == "adult" and today else None
+    running_lord = now["mahadasha"] if now else None
     yogas = yoga_texts(analysis)
     doshas = dosha_texts(analysis)
     predictions, prediction_note = prediction_texts(chart, analysis, yogas, doshas)
@@ -576,9 +603,18 @@ def interpret(chart, analysis, numbers, letters, suggestions, gender, kuldevi=No
         "dasha": dasha_texts(chart, analysis),
         "predictions": predictions,
         "prediction_note": prediction_note,
-        "remedies": remedy_texts(chart, analysis, doshas, kuldevi),
-        "sanskar": sanskar_calendar(chart, analysis, gender, kuldevi),
-        "lucky": lucky_factors(chart, analysis),
+        "audience": audience,
+        # An adult's report shows what is running today, not only at birth
+        "dasha_now": now and {
+            "index": now["index"],
+            "mahadasha": planet(now["mahadasha"]), "antardasha": planet(now["antardasha"]),
+            "mahadasha_ends": fmt_date(now["mahadasha_ends"], day=False),
+            "antardasha_ends": fmt_date(now["antardasha_ends"], day=False),
+        },
+        "remedies": remedy_texts(chart, analysis, doshas, kuldevi, running_lord),
+        # The childhood ceremonies are only for a child's report
+        "sanskar": sanskar_calendar(chart, analysis, gender, kuldevi) if audience == "child" else None,
+        "lucky": lucky_factors(chart, analysis, running_lord),
         "numerology": numerology_texts(numbers, surname),
         "names": name_texts(letters, suggestions, numbers),
         "summary": summary_texts(yogas, doshas, predictions),

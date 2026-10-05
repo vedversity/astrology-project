@@ -1,8 +1,10 @@
 {
   "_note": "DRAFT for astrologer review. Keys match app/rules/doshas.py. Tone: calm and reassuring, never fearful. Keep the {placeholders} unchanged.",
-
   "gandmool": {
-    "name": {"en": "Gandmool", "hi": "गण्डमूल"},
+    "name": {
+      "en": "Gandmool",
+      "hi": "गण्डमूल"
+    },
     "details": {
       "not_present": {
         "en": "The birth nakshatra is not a Gandmool nakshatra.",
@@ -10,30 +12,62 @@
       },
       "mild": {
         "en": "{nakshatra} is a Gandmool nakshatra, and pada {pada} is one of its mild padas. A Gandmool Shanti is traditionally done on the 27th day, when the Moon returns to {nakshatra} (around {return_date}).",
-        "hi": "{nakshatra} गण्डमूल नक्षत्र है, और चरण {pada} इसका हल्का चरण है। परंपरा के अनुसार 27वें दिन, जब चन्द्र पुनः {nakshatra} में आता है ({return_date} के आसपास), गण्डमूल शांति की जाती है।"
+        "hi": "{nakshatra} गण्डमूल नक्षत्र है, और चरण {pada} इसका हल्का चरण है। परंपरा के अनुसार 27वें दिन, जब चन्द्र पुनः {nakshatra} में आता है ({return_date} के आसपास), गण्डमूल शांति की जाती है।",
+        "adult": {
+          "en": "{nakshatra} is a Gandmool nakshatra, and pada {pada} is one of its mild padas. By tradition a Gandmool Shanti is done in infancy; if it was not done, it can be done on any day the Moon is in {nakshatra}.",
+          "hi": "{nakshatra} गण्डमूल नक्षत्र है, और चरण {pada} इसका हल्का चरण है। परंपरा में गण्डमूल शांति शैशव में की जाती है; यदि नहीं हुई हो, तो जिस दिन चन्द्र {nakshatra} में हो, उस दिन कराई जा सकती है।"
+        }
       },
       "present": {
         "en": "{nakshatra} is a Gandmool nakshatra and pada {pada} lies at its junction point. A Gandmool Shanti on the 27th day, when the Moon returns to {nakshatra} (around {return_date}), is recommended by tradition and settles the matter fully.",
-        "hi": "{nakshatra} गण्डमूल नक्षत्र है और चरण {pada} इसके संधि-स्थान पर है। परंपरा के अनुसार 27वें दिन, जब चन्द्र पुनः {nakshatra} में आता है ({return_date} के आसपास), गण्डमूल शांति कराने से इसका पूर्ण शमन हो जाता है।"
+        "hi": "{nakshatra} गण्डमूल नक्षत्र है और चरण {pada} इसके संधि-स्थान पर है। परंपरा के अनुसार 27वें दिन, जब चन्द्र पुनः {nakshatra} में आता है ({return_date} के आसपास), गण्डमूल शांति कराने से इसका पूर्ण शमन हो जाता है।",
+        "adult": {
+          "en": "{nakshatra} is a Gandmool nakshatra and pada {pada} lies at its junction point. By tradition a Gandmool Shanti is done in infancy; if it was not done, it can be done on any day the Moon is in {nakshatra}, which settles the matter fully.",
+          "hi": "{nakshatra} गण्डमूल नक्षत्र है और चरण {pada} इसके संधि-स्थान पर है। परंपरा में गण्डमूल शांति शैशव में की जाती है; यदि नहीं हुई हो, तो जिस दिन चन्द्र {nakshatra} में हो, उस दिन कराने से इसका पूर्ण शमन हो जाता है।"
+        }
       }
     },
     "remedy": {
       "en": "Gandmool Nakshatra Shanti Puja on the 27th day, when the Moon returns to {nakshatra} (around {return_date}). Confirm the exact muhurat with the family pandit.",
-      "hi": "27वें दिन, जब चन्द्र पुनः {nakshatra} में आए ({return_date} के आसपास), गण्डमूल नक्षत्र शांति पूजा कराएँ। सही मुहूर्त अपने कुल पंडित से निश्चित करें।"
+      "hi": "27वें दिन, जब चन्द्र पुनः {nakshatra} में आए ({return_date} के आसपास), गण्डमूल नक्षत्र शांति पूजा कराएँ। सही मुहूर्त अपने कुल पंडित से निश्चित करें।",
+      "adult": {
+        "en": "If the Gandmool Shanti was not done in infancy, it can be done on any day the Moon is in {nakshatra}. Confirm the muhurat with the family pandit.",
+        "hi": "यदि शैशव में गण्डमूल शांति न हुई हो, तो जिस दिन चन्द्र {nakshatra} में हो, उस दिन कराई जा सकती है। मुहूर्त अपने कुल पंडित से निश्चित करें।"
+      }
     }
   },
-
   "manglik": {
-    "name": {"en": "Manglik", "hi": "मांगलिक"},
+    "name": {
+      "en": "Manglik",
+      "hi": "मांगलिक"
+    },
     "from": {
-      "lagna": {"en": "the Lagna", "hi": "लग्न"},
-      "moon": {"en": "the Moon", "hi": "चन्द्र"},
-      "venus": {"en": "Venus", "hi": "शुक्र"}
+      "lagna": {
+        "en": "the Lagna",
+        "hi": "लग्न"
+      },
+      "moon": {
+        "en": "the Moon",
+        "hi": "चन्द्र"
+      },
+      "venus": {
+        "en": "Venus",
+        "hi": "शुक्र"
+      }
     },
     "cancelled_by": {
-      "jupiter_conjunct": {"en": "Jupiter sits with Mars", "hi": "गुरु मंगल के साथ बैठा है"},
-      "jupiter_aspect": {"en": "Jupiter aspects Mars", "hi": "मंगल पर गुरु की दृष्टि है"},
-      "mars_strong": {"en": "Mars is in its own or exaltation sign", "hi": "मंगल स्वराशि या उच्च राशि में है"}
+      "jupiter_conjunct": {
+        "en": "Jupiter sits with Mars",
+        "hi": "गुरु मंगल के साथ बैठा है"
+      },
+      "jupiter_aspect": {
+        "en": "Jupiter aspects Mars",
+        "hi": "मंगल पर गुरु की दृष्टि है"
+      },
+      "mars_strong": {
+        "en": "Mars is in its own or exaltation sign",
+        "hi": "मंगल स्वराशि या उच्च राशि में है"
+      }
     },
     "details": {
       "not_present": {
@@ -54,9 +88,11 @@
       }
     }
   },
-
   "kaal_sarp": {
-    "name": {"en": "Kaal Sarp", "hi": "काल सर्प"},
+    "name": {
+      "en": "Kaal Sarp",
+      "hi": "काल सर्प"
+    },
     "details": {
       "not_present": {
         "en": "Planets lie on both sides of the Rahu-Ketu axis.",
@@ -69,12 +105,18 @@
     },
     "remedy": {
       "en": "A parent offers milk and water to the Shivling on Mondays. On Nag Panchami, offer prayers as a family.",
-      "hi": "माता या पिता सोमवार को शिवलिंग पर दूध और जल चढ़ाएँ। नाग पंचमी पर परिवार सहित पूजन करें।"
+      "hi": "माता या पिता सोमवार को शिवलिंग पर दूध और जल चढ़ाएँ। नाग पंचमी पर परिवार सहित पूजन करें।",
+      "adult": {
+        "en": "Offer milk and water to the Shivling on Mondays. On Nag Panchami, offer prayers with the family.",
+        "hi": "सोमवार को शिवलिंग पर दूध और जल चढ़ाएँ। नाग पंचमी पर परिवार सहित पूजन करें।"
+      }
     }
   },
-
   "vish": {
-    "name": {"en": "Vish Yoga", "hi": "विष योग"},
+    "name": {
+      "en": "Vish Yoga",
+      "hi": "विष योग"
+    },
     "details": {
       "not_present": {
         "en": "Saturn is not with the Moon.",
@@ -82,26 +124,52 @@
       },
       "mild": {
         "en": "Saturn is with the Moon, but Jupiter's influence greatly reduces it. It can show as seriousness or thoughtfulness; give lots of emotional warmth.",
-        "hi": "शनि चन्द्र के साथ है, पर गुरु के प्रभाव से यह बहुत कम हो जाता है। यह गंभीरता या विचारशीलता के रूप में दिख सकता है; भरपूर स्नेह और अपनापन दें।"
+        "hi": "शनि चन्द्र के साथ है, पर गुरु के प्रभाव से यह बहुत कम हो जाता है। यह गंभीरता या विचारशीलता के रूप में दिख सकता है; भरपूर स्नेह और अपनापन दें।",
+        "adult": {
+          "en": "Saturn is with the Moon, but Jupiter's influence greatly reduces it. It can show as seriousness or thoughtfulness; time with loved ones keeps the mind light.",
+          "hi": "शनि चन्द्र के साथ है, पर गुरु के प्रभाव से यह बहुत कम हो जाता है। यह गंभीरता या विचारशीलता के रूप में दिख सकता है; अपनों के साथ समय मन को हल्का रखता है।"
+        }
       },
       "present": {
         "en": "Saturn is with the Moon. This gives a serious, mature and responsible mind. The child thrives on warmth, praise and open conversation at home.",
-        "hi": "शनि चन्द्र के साथ है। इससे मन गंभीर, परिपक्व और ज़िम्मेदार बनता है। घर में स्नेह, प्रशंसा और खुली बातचीत से बच्चा खिल उठता है।"
+        "hi": "शनि चन्द्र के साथ है। इससे मन गंभीर, परिपक्व और ज़िम्मेदार बनता है। घर में स्नेह, प्रशंसा और खुली बातचीत से बच्चा खिल उठता है।",
+        "adult": {
+          "en": "Saturn is with the Moon. This gives a serious, mature and responsible mind. Warm company, open conversation and regular rest keep it balanced.",
+          "hi": "शनि चन्द्र के साथ है। इससे मन गंभीर, परिपक्व और ज़िम्मेदार बनता है। आत्मीय संगति, खुली बातचीत और नियमित विश्राम इसे संतुलित रखते हैं।"
+        }
       }
     },
     "remedy": {
       "en": "The mother offers water to the Shivling on Mondays; on Saturdays light a mustard-oil diya under a Peepal tree. Above all, give the child affection and a calm bedtime routine.",
-      "hi": "माता सोमवार को शिवलिंग पर जल चढ़ाएँ; शनिवार को पीपल के नीचे सरसों के तेल का दीपक जलाएँ। सबसे बढ़कर, बच्चे को स्नेह और शांत सोने की दिनचर्या दें।"
+      "hi": "माता सोमवार को शिवलिंग पर जल चढ़ाएँ; शनिवार को पीपल के नीचे सरसों के तेल का दीपक जलाएँ। सबसे बढ़कर, बच्चे को स्नेह और शांत सोने की दिनचर्या दें।",
+      "adult": {
+        "en": "Offer water to the Shivling on Mondays; on Saturdays light a mustard-oil diya under a Peepal tree. Above all, keep a calm routine and enough sleep.",
+        "hi": "सोमवार को शिवलिंग पर जल चढ़ाएँ; शनिवार को पीपल के नीचे सरसों के तेल का दीपक जलाएँ। सबसे बढ़कर, शांत दिनचर्या और पर्याप्त नींद रखें।"
+      }
     }
   },
-
   "kemadruma": {
-    "name": {"en": "Kemadruma", "hi": "केमद्रुम"},
+    "name": {
+      "en": "Kemadruma",
+      "hi": "केमद्रुम"
+    },
     "cancelled_by": {
-      "planet_with_moon": {"en": "a planet sits with the Moon", "hi": "चन्द्र के साथ ग्रह बैठा है"},
-      "jupiter_aspect": {"en": "Jupiter aspects the Moon", "hi": "चन्द्र पर गुरु की दृष्टि है"},
-      "planet_in_kendra_from_moon": {"en": "there are planets in a kendra from the Moon", "hi": "चन्द्र से केंद्र में ग्रह हैं"},
-      "planet_in_kendra_from_lagna": {"en": "there are planets in a kendra from the Lagna", "hi": "लग्न से केंद्र में ग्रह हैं"}
+      "planet_with_moon": {
+        "en": "a planet sits with the Moon",
+        "hi": "चन्द्र के साथ ग्रह बैठा है"
+      },
+      "jupiter_aspect": {
+        "en": "Jupiter aspects the Moon",
+        "hi": "चन्द्र पर गुरु की दृष्टि है"
+      },
+      "planet_in_kendra_from_moon": {
+        "en": "there are planets in a kendra from the Moon",
+        "hi": "चन्द्र से केंद्र में ग्रह हैं"
+      },
+      "planet_in_kendra_from_lagna": {
+        "en": "there are planets in a kendra from the Lagna",
+        "hi": "लग्न से केंद्र में ग्रह हैं"
+      }
     },
     "details": {
       "not_present": {
@@ -114,17 +182,27 @@
       },
       "present": {
         "en": "The Moon stands alone, with no planet beside it. This builds an independent, self-reliant mind. The child will value close family time and steady companionship.",
-        "hi": "चन्द्र अकेला है, उसके पास कोई ग्रह नहीं। इससे स्वतंत्र और आत्मनिर्भर मन बनता है। बच्चे के लिए परिवार का साथ और स्थिर संगति बहुत मूल्यवान रहेगी।"
+        "hi": "चन्द्र अकेला है, उसके पास कोई ग्रह नहीं। इससे स्वतंत्र और आत्मनिर्भर मन बनता है। बच्चे के लिए परिवार का साथ और स्थिर संगति बहुत मूल्यवान रहेगी।",
+        "adult": {
+          "en": "The Moon stands alone, with no planet beside it. This builds an independent, self-reliant mind. Close family ties and steady companionship are especially valuable.",
+          "hi": "चन्द्र अकेला है, उसके पास कोई ग्रह नहीं। इससे स्वतंत्र और आत्मनिर्भर मन बनता है। परिवार का साथ और स्थिर संगति विशेष रूप से मूल्यवान है।"
+        }
       }
     },
     "remedy": {
       "en": "The mother offers water to the Shivling on Mondays; give the child a small silver item to wear. Keep the family close and involved.",
-      "hi": "माता सोमवार को शिवलिंग पर जल चढ़ाएँ; बच्चे को चाँदी की छोटी वस्तु पहनाएँ। परिवार का साथ और अपनापन बनाए रखें।"
+      "hi": "माता सोमवार को शिवलिंग पर जल चढ़ाएँ; बच्चे को चाँदी की छोटी वस्तु पहनाएँ। परिवार का साथ और अपनापन बनाए रखें।",
+      "adult": {
+        "en": "Offer water to the Shivling on Mondays; wearing a small silver item is traditional. Stay close to family and friends.",
+        "hi": "सोमवार को शिवलिंग पर जल चढ़ाएँ; चाँदी की छोटी वस्तु धारण करना परंपरागत है। परिवार और मित्रों से जुड़े रहें।"
+      }
     }
   },
-
   "grahan": {
-    "name": {"en": "Grahan Yoga", "hi": "ग्रहण योग"},
+    "name": {
+      "en": "Grahan Yoga",
+      "hi": "ग्रहण योग"
+    },
     "details": {
       "not_present": {
         "en": "Rahu and Ketu do not join the Sun or the Moon.",
@@ -140,9 +218,11 @@
       "hi": "उगते सूर्य को जल दें और सोमवार को शिवलिंग पर जल चढ़ाएँ। घर में गायत्री मंत्र का जप करें।"
     }
   },
-
   "guru_chandal": {
-    "name": {"en": "Guru-Chandal Yoga", "hi": "गुरु-चांडाल योग"},
+    "name": {
+      "en": "Guru-Chandal Yoga",
+      "hi": "गुरु-चांडाल योग"
+    },
     "details": {
       "not_present": {
         "en": "Rahu and Ketu do not join Jupiter.",
@@ -155,12 +235,18 @@
     },
     "remedy": {
       "en": "On Thursdays offer yellow sweets at a temple; teach the child to respect teachers and elders.",
-      "hi": "गुरुवार को मंदिर में पीली मिठाई चढ़ाएँ; बच्चे को गुरुजनों और बड़ों का आदर सिखाएँ।"
+      "hi": "गुरुवार को मंदिर में पीली मिठाई चढ़ाएँ; बच्चे को गुरुजनों और बड़ों का आदर सिखाएँ।",
+      "adult": {
+        "en": "On Thursdays offer yellow sweets at a temple; honour your teachers and elders.",
+        "hi": "गुरुवार को मंदिर में पीली मिठाई चढ़ाएँ; गुरुजनों और बड़ों का आदर करें।"
+      }
     }
   },
-
   "angarak": {
-    "name": {"en": "Angarak Yoga", "hi": "अंगारक योग"},
+    "name": {
+      "en": "Angarak Yoga",
+      "hi": "अंगारक योग"
+    },
     "details": {
       "not_present": {
         "en": "Rahu and Ketu do not join Mars.",
@@ -173,12 +259,18 @@
     },
     "remedy": {
       "en": "Hanuman ji puja on Tuesdays; give the child plenty of outdoor play.",
-      "hi": "मंगलवार को हनुमान जी की पूजा करें; बच्चे को खुले में भरपूर खेलने दें।"
+      "hi": "मंगलवार को हनुमान जी की पूजा करें; बच्चे को खुले में भरपूर खेलने दें।",
+      "adult": {
+        "en": "Hanuman ji puja on Tuesdays; regular exercise or sport is the best outlet for this energy.",
+        "hi": "मंगलवार को हनुमान जी की पूजा करें; नियमित व्यायाम या खेल इस ऊर्जा की सर्वोत्तम दिशा है।"
+      }
     }
   },
-
   "pitru": {
-    "name": {"en": "Pitru Dosha", "hi": "पितृ दोष"},
+    "name": {
+      "en": "Pitru Dosha",
+      "hi": "पितृ दोष"
+    },
     "details": {
       "not_present": {
         "en": "The Sun and the 9th house are free of affliction.",
@@ -190,7 +282,11 @@
       },
       "present": {
         "en": "Rahu or Ketu influences the Sun or the 9th house. Honouring the ancestors each Pitru Paksha brings their blessings to the child.",
-        "hi": "सूर्य या नवम भाव पर राहु या केतु का प्रभाव है। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण और श्राद्ध करने से बच्चे को उनका आशीर्वाद मिलता है।"
+        "hi": "सूर्य या नवम भाव पर राहु या केतु का प्रभाव है। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण और श्राद्ध करने से बच्चे को उनका आशीर्वाद मिलता है।",
+        "adult": {
+          "en": "Rahu or Ketu influences the Sun or the 9th house. Honouring the ancestors each Pitru Paksha brings their blessings.",
+          "hi": "सूर्य या नवम भाव पर राहु या केतु का प्रभाव है। प्रत्येक पितृ पक्ष में पूर्वजों का स्मरण और श्राद्ध करने से उनका आशीर्वाद मिलता है।"
+        }
       }
     },
     "pitru_paksha_birth": {
@@ -202,22 +298,36 @@
       "hi": "प्रत्येक पितृ पक्ष में पूर्वजों का श्राद्ध करें; उगते सूर्य को जल अर्पित करें।"
     }
   },
-
   "sade_sati": {
-    "name": {"en": "Shani Sade Sati", "hi": "शनि साढ़े साती"},
+    "name": {
+      "en": "Shani Sade Sati",
+      "hi": "शनि साढ़े साती"
+    },
     "details": {
       "not_present": {
         "en": "Sade Sati is not running at birth.",
-        "hi": "जन्म के समय साढ़े साती नहीं चल रही है।"
+        "hi": "जन्म के समय साढ़े साती नहीं चल रही है।",
+        "adult": {
+          "en": "Sade Sati is not running at present.",
+          "hi": "इस समय साढ़े साती नहीं चल रही है।"
+        }
       },
       "running": {
         "en": "Saturn is transiting near the natal Moon sign ({moon_sign}); this is {phase}. It ends around {ends}. In infancy it mainly suggests a little extra care for health and sleep.",
-        "hi": "शनि जन्म राशि ({moon_sign}) के निकट गोचर कर रहा है; यह {phase} है। यह लगभग {ends} में समाप्त होगी। शैशव में इसका अर्थ मुख्यतः स्वास्थ्य और नींद की थोड़ी अधिक देखभाल है।"
+        "hi": "शनि जन्म राशि ({moon_sign}) के निकट गोचर कर रहा है; यह {phase} है। यह लगभग {ends} में समाप्त होगी। शैशव में इसका अर्थ मुख्यतः स्वास्थ्य और नींद की थोड़ी अधिक देखभाल है।",
+        "adult": {
+          "en": "Saturn is now transiting near the natal Moon sign ({moon_sign}); this is {phase}. It ends around {ends}. It is a time for steady effort, patience and a regular routine.",
+          "hi": "शनि इस समय जन्म राशि ({moon_sign}) के निकट गोचर कर रहा है; यह {phase} है। यह लगभग {ends} में समाप्त होगी। यह निरंतर परिश्रम, धैर्य और नियमित दिनचर्या का समय है।"
+        }
       }
     },
     "remedy": {
       "en": "On Saturdays a parent lights a mustard-oil diya under a Peepal tree and recites the Hanuman Chalisa. Donate black urad or sesame occasionally.",
-      "hi": "शनिवार को माता या पिता पीपल के नीचे सरसों के तेल का दीपक जलाएँ और हनुमान चालीसा का पाठ करें। कभी-कभी काली उड़द या तिल का दान करें।"
+      "hi": "शनिवार को माता या पिता पीपल के नीचे सरसों के तेल का दीपक जलाएँ और हनुमान चालीसा का पाठ करें। कभी-कभी काली उड़द या तिल का दान करें।",
+      "adult": {
+        "en": "On Saturdays light a mustard-oil diya under a Peepal tree and recite the Hanuman Chalisa. Donate black urad or sesame occasionally.",
+        "hi": "शनिवार को पीपल के नीचे सरसों के तेल का दीपक जलाएँ और हनुमान चालीसा का पाठ करें। कभी-कभी काली उड़द या तिल का दान करें।"
+      }
     }
   }
 }

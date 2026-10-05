@@ -179,3 +179,20 @@ def test_api_pdf(chromium):
     assert response.headers["content-type"] == "application/pdf"
     assert response.content.startswith(b"%PDF") and pdf_pages(response.content) == 4
     assert TestClient(app).post("/pdf", json={**body, "variant": "gold"}).status_code == 422
+
+
+# ---------- a PDF for an adult ----------
+
+def test_adult_pdf_layout():
+    import datetime as dt
+    adult = build_report(dt.date(1990, 1, 15), dt.time(4, 30), 28.6139, 77.2090, "Asia/Kolkata",
+                         gender="male", today=dt.date(2026, 10, 5))
+    html = build_html(adult, {"child_name": "Rohan Sharma", "gender": "male"}, "premium", "en")
+    assert pages(html) == 13
+    assert "नाम / Name" in html and "बालक / Child" not in html
+    assert "Running now" in html and "Mars–" in html           # antardashas of the running mahadasha
+    # Premium's newborn extras are left out for an adult
+    assert "Suggested Names" not in html and "Sanskar Calendar" not in html
+    assert "Child-friendly remedy" not in html and "Simple remedy" in html
+    nameless = build_html(adult, {"gender": "male"}, "mini", "hi")
+    assert "जातक" in nameless and "बालक" not in nameless

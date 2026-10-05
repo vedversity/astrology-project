@@ -120,6 +120,22 @@ their judgement most:
 | `planets.json` | Remedies, gemstones, mantras, career fields |
 | `predictions.json` | The strong / medium / needs-support paragraph for each life area |
 
+### One report for a child, another for an adult
+
+The report is written for whoever it is about, decided by age on the day it is
+prepared (under 16 = child, set by `ADULT_FROM_AGE` in `app/content/__init__.py`).
+
+| | Child (written for the parents) | Adult (written for the person) |
+|---|---|---|
+| Wording | "the child", remedies done by the parents | "the native", remedies done by oneself |
+| Dasha | from birth | also shows the dasha running today, and its antardashas |
+| Sade Sati | checked at birth | checked for today |
+| Sanskar calendar, suggested names | in Premium | left out; the site offers only Mini and Full |
+
+In the rule-book, a text that must read differently for an adult has an
+`"adult"` version right beside it, with its own `"en"` and `"hi"`. Edit either
+one. Where there is no adult version, the same text is used for both.
+
 ### Adding names
 
 Open `backend/app/names/data/names.json` and add a line: English spelling, Hindi

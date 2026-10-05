@@ -19,7 +19,7 @@
   <tr><td>{{ L('नाम अक्षर', 'Naam Akshar') }}</td><td><b>{{ names.primary.hi }} ({{ names.primary.en }})</b> – {{ L('अन्य', 'also') }} {% for x in names.nakshatra if x.hi != names.primary.hi %}{{ x.hi }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>
   <tr><td>{{ L('प्रमुख योग', 'Major yogas') }}</td><td>{% for y in content.summary.yogas %}{{ t(y) }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</td></tr>
   <tr><td>{{ L('दोष', 'Doshas') }}</td><td>{% for d in content.summary.doshas %}{{ t(d.name) }} ({{ t(d.status) }}){% if not loop.last %} · {% endif %}{% else %}{{ L('कोई नहीं', 'None') }}{% endfor %}</td></tr>
-  <tr><td>{{ L('चल रही दशा', 'Running dasha') }}</td><td>{{ P(dasha.current_at_birth.mahadasha) }} {{ L('महादशा', 'Mahadasha') }} ({{ L('समाप्ति', 'till') }} {{ t(content.dasha[0].to) }})</td></tr>
+  <tr><td>{{ L('चल रही दशा', 'Running dasha') }}</td><td>{% if content.dasha_now %}{{ t(content.dasha_now.mahadasha) }} {{ L('महादशा', 'Mahadasha') }} ({{ L('समाप्ति', 'till') }} {{ t(content.dasha_now.mahadasha_ends) }}){% else %}{{ P(dasha.current_at_birth.mahadasha) }} {{ L('महादशा', 'Mahadasha') }} ({{ L('समाप्ति', 'till') }} {{ t(content.dasha[0].to) }}){% endif %}</td></tr>
   <tr><td>{{ L('मूलांक · भाग्यांक · कुआ', 'Mulank · Bhagyank · Kua') }}</td><td>{{ num.mulank.number }} · {{ num.bhagyank.number }} · {{ num.kua.number }}</td></tr>
   <tr><td>{{ L('श्रेष्ठ नामांक', 'Best name numbers') }}</td><td>{{ numbers.relationship.friendly|join(', ') }} · {{ L('त्याज्य', 'avoid') }} {{ numbers.relationship.avoid|join(', ') }}</td></tr>
   {% if content.summary.strongest_areas %}<tr><td>{{ L('सबसे बली क्षेत्र', 'Strongest life areas') }}</td><td>{% for a in content.summary.strongest_areas %}{{ t(a) }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>{% endif %}
@@ -44,7 +44,7 @@
   </svg>
   <div class="box">
     <table>
-      <tr><td>{{ 'बालक' if person.gender == 'male' else 'बालिका' }} / Child</td><td>{{ person.display_name }}</td></tr>
+      <tr><td>{% if audience == 'adult' %}नाम / Name{% else %}{{ 'बालक' if person.gender == 'male' else 'बालिका' }} / Child{% endif %}</td><td>{{ person.display_name }}</td></tr>
       {% if person.father_name %}<tr><td>पिता / Father</td><td>{{ person.father_name }}</td></tr>{% endif %}
       {% if person.mother_name %}<tr><td>माता / Mother</td><td>{{ person.mother_name }}</td></tr>{% endif %}
       {% if person.gotra %}<tr><td>गोत्र / Gotra</td><td>{{ person.gotra }}</td></tr>{% endif %}
@@ -248,6 +248,10 @@
 <p>{{ L('जन्म के समय दशा शेष', 'Balance of dasha at birth') }}: <b>{{ P(dasha.balance_at_birth.lord) }} {{ L('महादशा', 'Mahadasha') }}</b> –
   {{ dasha.balance_at_birth.years }} {{ L('वर्ष', 'years') }} {{ dasha.balance_at_birth.months }} {{ L('माह', 'months') }} {{ dasha.balance_at_birth.days }} {{ L('दिन', 'days') }}.
   {{ L('जन्म के समय अन्तर्दशा', 'Antardasha at birth') }}: <b>{{ P(dasha.current_at_birth.mahadasha) }}–{{ P(dasha.current_at_birth.antardasha) }}</b>.</p>
+{% if content.dasha_now %}
+<p class="disclaimer" style="margin:0 0 0.8em">{{ L('अभी चल रही दशा', 'Running now') }}: <b>{{ t(content.dasha_now.mahadasha) }} {{ L('महादशा', 'Mahadasha') }}</b> ({{ L('समाप्ति', 'till') }} {{ t(content.dasha_now.mahadasha_ends) }}) ·
+  {{ L('अन्तर्दशा', 'Antardasha') }} <b>{{ t(content.dasha_now.mahadasha) }}–{{ t(content.dasha_now.antardasha) }}</b> ({{ L('समाप्ति', 'till') }} {{ t(content.dasha_now.antardasha_ends) }})</p>
+{% endif %}
 <div class="cols">
   <div>
     {{ bar('महादशा', 'Mahadasha Periods') }}
@@ -290,14 +294,14 @@
 
 {# ================= 9. REMEDIES, SANSKAR, LUCKY ================= #}
 {{ page_open() }}
-{% if variant == 'premium' %}{{ title('उपाय, संस्कार एवं शुभ तत्व', 'Remedies · Sanskar Calendar · Lucky Factors') }}
+{% if variant == 'premium' and content.sanskar %}{{ title('उपाय, संस्कार एवं शुभ तत्व', 'Remedies · Sanskar Calendar · Lucky Factors') }}
 {% else %}{{ title('उपाय एवं शुभ तत्व', 'Remedies · Lucky Factors') }}{% endif %}
 {{ bar('उपाय', 'Remedies (' ~ content_remedies_intro ~ ')') }}
 <table class="tight">
   <tr><th style="width:20%">{{ L('किसके लिए', 'For') }}</th><th>{{ L('उपाय', 'Remedy') }}</th></tr>
   {% for r in content.remedies %}<tr><td class="name">{{ t(r.for) }}</td><td>{{ t(r.text) }}</td></tr>{% endfor %}
 </table>
-{% if variant == 'premium' %}
+{% if variant == 'premium' and content.sanskar %}
 {{ bar('संस्कार पंचांग', 'Suggested Sanskar Calendar') }}
 <table class="tight">
   <tr><th style="width:17%">{{ L('संस्कार', 'Sanskar') }}</th><th style="width:41%">{{ L('सुझाया गया समय', 'Suggested time') }}</th><th>{{ L('टिप्पणी', 'Note') }}</th></tr>
@@ -334,7 +338,7 @@
     <p class="note">{{ L('परंपरा के अनुसार जन्म चरण का अक्षर सबसे उत्तम है; उसी नक्षत्र या राशि का कोई भी अक्षर पूर्णतः मान्य है।', 'By tradition the birth-pada letter is the first choice; any letter of the same nakshatra or rashi is fully acceptable.') }}</p>
   </div>
 </div>
-{% if variant == 'premium' %}
+{% if variant == 'premium' and names.suggestions %}
 {{ bar('सुझाए गए नाम', 'Suggested Names (Astro + Numerology Compatible)') }}
 <table class="tight">
   <tr><th>English</th><th>हिन्दी</th><th>{{ L('अर्थ', 'Meaning') }}</th><th>{{ L('नामांक', 'Name No.') }}</th>{% if person.surname %}<th>{{ L('उपनाम सहित', 'With surname') }}</th>{% endif %}</tr>
@@ -416,7 +420,7 @@
 {% if num.lo_shu_missing %}
 {{ bar('अनुपस्थित अंक एवं सरल उपाय', 'Missing Numbers & Simple Remedies') }}
 <table class="tight">
-  <tr><th style="width:16%">{{ L('अनुपस्थित', 'Missing') }}</th><th style="width:26%">{{ L('प्रभाव', 'Effect') }}</th><th>{{ L('बाल-सुलभ उपाय', 'Child-friendly remedy') }}</th></tr>
+  <tr><th style="width:16%">{{ L('अनुपस्थित', 'Missing') }}</th><th style="width:26%">{{ L('प्रभाव', 'Effect') }}</th><th>{{ L('सरल उपाय', 'Simple remedy') if audience == 'adult' else L('बाल-सुलभ उपाय', 'Child-friendly remedy') }}</th></tr>
   {% for m in num.lo_shu_missing %}<tr><td class="name">{{ m.number }} ({{ t(m.planet) }})</td><td>{{ t(m.effect) }}</td><td>{{ t(m.remedy) }}</td></tr>{% endfor %}
 </table>
 {% endif %}

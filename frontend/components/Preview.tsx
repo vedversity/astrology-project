@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Plans from "@/components/Plans";
 import { apiBody, useBirth } from "@/lib/birth";
 import { content, fill } from "@/lib/content";
-import { API_URL, path, type Lang, type Plan, type Text } from "@/lib/site";
+import { API_URL, path, plansFor, type Lang, type Plan, type Text } from "@/lib/site";
 
 type Letter = Text & { pada?: number };
 type PreviewData = {
@@ -180,7 +180,7 @@ export default function Preview({ lang }: { lang: Lang }) {
         <h2 className="mb-3 font-serif text-2xl text-maroon-800">{c.nextTitle}</h2>
         <Plans
           lang={lang}
-          plans={plans}
+          plans={plans && plansFor(plans, birth.date)}
           action={{ href: (plan) => `${path(lang, "/order")}?plan=${plan.id}`, label: c.choose }}
         />
       </section>
