@@ -4,7 +4,7 @@ import { DOSHA_SLUGS } from "@/lib/guides";
 import { api, path, SITE_URL } from "@/lib/site";
 
 const PAGES = [
-  "/", "/janam-patrika", "/rashi-nakshatra", "/panchang", "/naam", "/grah", "/dosh", "/about",
+  "/", "/janam-patrika", "/kundli-milan", "/rashi-nakshatra", "/panchang", "/naam", "/grah", "/dosh", "/about",
   "/privacy", "/terms", "/refund", "/disclaimer",
 ];
 

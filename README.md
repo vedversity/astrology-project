@@ -259,6 +259,7 @@ and email typed there are not stored or sent anywhere yet.
 | `/janam-patrika` | What the Patrika contains, sample pages, the plans |
 | `/panchang` | Today's Panchang for any city (tithi, nakshatra, sunrise, Rahu Kaal); also shown as a strip on the home page |
 | `/panchang/varanasi` (115 cities) | Today's Panchang for that city, by its own sunrise. Cities and their Hindi names are in `backend/app/places/data/cities_hi.json` |
+| `/kundli-milan` | Kundli Milan: free 36-guna (Ashtakoot) matching for two births, with a Manglik comparison and the classical exceptions. Tables are in `backend/app/astro/milan.py`, wording in `rulebook/milan.json` |
 | `/rashi-nakshatra` | Find your Rashi and Nakshatra: the form, with an explanation |
 | `/naam`, `/naam/revati` (27) | Baby names by nakshatra: the four letters and names from the names database |
 | `/grah`, `/grah/guru` (9) | What each planet means in the 12 houses, from the rule-book |
@@ -289,9 +290,9 @@ not in the list is handled by picking the nearest town.
 
 ### What is deliberately not on the site yet
 
-The Growth Blueprint also describes Kundli Milan, Panchang, Rashifal and
-Muhurat pages. Those need calculation engines that do not exist yet, so the
-site does not link to them. Nothing is claimed that the product cannot do: no
+The Growth Blueprint also describes Rashifal, Muhurat and Choghadiya pages.
+Those need calculation engines (and, for Rashifal, daily writing) that do not
+exist yet, so the site does not link to them. Nothing is claimed that the product cannot do: no
 reviews, no astrologer details, no "50+ pages".
 
 ## What is in the backend folder

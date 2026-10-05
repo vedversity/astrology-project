@@ -5,6 +5,7 @@ POST /preview    the free preview: Rashi, Nakshatra, Pada, name letters
 POST /report     everything a Janam Patrika needs: chart, yogas, doshas,
                  numerology, names and the wording in Hindi and English
 POST /pdf        the finished Janam Patrika as a PDF file
+POST /milan      Kundli Milan: 36-guna matching for two births
 GET  /panchang   the day's Panchang for a place (tithi, nakshatra, Rahu Kaal ...)
 GET  /places     birth-place search (name -> latitude, longitude, timezone)
 GET  /cities     the cities that have their own Panchang page
@@ -27,7 +28,7 @@ from pydantic import BaseModel, Field
 from app import config, guide, places
 from app.astro import ENGINE_VERSION, calculate_chart
 from app.pdf import PdfError, generate_pdf
-from app.report import build_panchang, build_preview, build_report
+from app.report import build_milan, build_panchang, build_preview, build_report
 
 app = FastAPI(title="Janam Patrika API", version=ENGINE_VERSION)
 
@@ -66,6 +67,11 @@ class PdfInput(ReportInput):
     mother_name: Optional[str] = Field(default=None, max_length=80)
     gotra: Optional[str] = Field(default=None, max_length=60)
     place: Optional[str] = Field(default=None, max_length=160, examples=["Kharghar, Navi Mumbai"])
+
+
+class MilanInput(BaseModel):
+    groom: BirthInput
+    bride: BirthInput
 
 
 def _checked(birth):
@@ -141,6 +147,11 @@ def calculate(birth: BirthInput):
 @app.post("/preview")
 def preview(birth: BirthInput):
     return build_preview(**_checked(birth))
+
+
+@app.post("/milan")
+def milan(pair: MilanInput):
+    return build_milan(_checked(pair.groom), _checked(pair.bride))
 
 
 @app.post("/report")

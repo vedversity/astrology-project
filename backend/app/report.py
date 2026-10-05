@@ -8,7 +8,8 @@ and the website only read this result; they never calculate anything.
 import datetime as dt
 
 from app.astro import calculate_chart, sade_sati_on
-from app.content import audience_for
+from app.astro.milan import ashtakoot
+from app.content import audience_for, load
 from app.content.interpret import interpret
 from app.names import name_letters, suggest_names
 from app.numerology import numerology
@@ -46,6 +47,60 @@ def build_panchang(date, latitude, longitude, timezone="Asia/Kolkata"):
         **{key: p[key] for key in keep},
         "moon_sign": chart["planets"]["moon"]["sign"],
         "sun_sign": chart["planets"]["sun"]["sign"],
+    }
+
+
+# Which fact of each person a koota is read from (shown beside its score)
+MILAN_FACT = {"varna": "varna", "vashya": "vashya", "tara": "nakshatra", "yoni": "yoni",
+              "maitri": "rashi_lord", "gana": "gana", "bhakoot": "rashi", "nadi": "nadi"}
+
+
+def build_milan(groom, bride):
+    """Ashtakoot Guna matching for two births, with a Manglik comparison.
+
+    groom, bride: the same details as build_preview takes (date, time, latitude ...).
+    """
+    book = load("milan")
+    charts = {"groom": calculate_chart(**groom), "bride": calculate_chart(**bride)}
+    result = ashtakoot(charts["groom"], charts["bride"])
+
+    def pair(value):
+        return {"en": value["en"], "hi": value["hi"]}
+
+    kootas = []
+    for key, koota in result["kootas"].items():
+        fact = MILAN_FACT[key]
+        kootas.append({
+            "key": key, "name": book["kootas"][key]["name"], "about": book["kootas"][key]["about"],
+            "points": koota["points"], "max": koota["max"],
+            "groom": pair(result["facts"]["groom"][fact]), "bride": pair(result["facts"]["bride"][fact]),
+        })
+
+    manglik = {}
+    for who, chart in charts.items():
+        status = next(d for d in analyze(chart)["doshas"] if d["key"] == "manglik")["status"]
+        manglik[who] = {"status": status, "label": book["manglik"]["status"][status]}
+    has = [m["status"] in ("partial", "present") for m in manglik.values()]
+    verdict = "both_manglik" if all(has) else "one_manglik" if any(has) else "both_clear"
+    times_known = all(chart["meta"]["time_known"] for chart in charts.values())
+
+    people = {
+        who: {"rashi": pair(result["facts"][who]["rashi"]), "nakshatra": pair(result["facts"][who]["nakshatra"]),
+              "pada": result["facts"][who]["pada"], "time_known": charts[who]["meta"]["time_known"]}
+        for who in charts
+    }
+    total = result["total"]
+    shown = int(total) if total == int(total) else total
+    return {
+        "total": total, "max": 36, "band": result["band"],
+        "label": book["bands"][result["band"]]["label"],
+        "text": {lang: book["bands"][result["band"]]["text"][lang].format(total=shown) for lang in ("en", "hi")},
+        "kootas": kootas,
+        "exceptions": [book["exceptions"][key] for key in result["exceptions"]],
+        "manglik": {**manglik, "text": book["manglik"][verdict],
+                    "note": None if times_known else book["manglik"]["unknown"]},
+        "people": people,
+        "note": book["note"],
     }
 
 

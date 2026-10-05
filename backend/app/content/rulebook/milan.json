@@ -1,0 +1,118 @@
+{
+  "_note": "DRAFT for astrologer review. Wording for Kundli Milan (Ashtakoot Guna matching). Tone: a signal for the family, never a verdict. Keep the {placeholders} unchanged.",
+
+  "kootas": {
+    "varna": {
+      "name": {"en": "Varna", "hi": "वर्ण"},
+      "about": {"en": "Outlook and compatibility of temperament", "hi": "स्वभाव और दृष्टिकोण का मेल"}
+    },
+    "vashya": {
+      "name": {"en": "Vashya", "hi": "वश्य"},
+      "about": {"en": "Mutual attraction and adjustment", "hi": "परस्पर आकर्षण और सामंजस्य"}
+    },
+    "tara": {
+      "name": {"en": "Tara", "hi": "तारा"},
+      "about": {"en": "Well-being and good fortune together", "hi": "साथ में सुख-स्वास्थ्य और सौभाग्य"}
+    },
+    "yoni": {
+      "name": {"en": "Yoni", "hi": "योनि"},
+      "about": {"en": "Closeness and physical compatibility", "hi": "निकटता और शारीरिक अनुकूलता"}
+    },
+    "maitri": {
+      "name": {"en": "Graha Maitri", "hi": "ग्रह मैत्री"},
+      "about": {"en": "Friendship and meeting of minds", "hi": "मित्रता और विचारों का मेल"}
+    },
+    "gana": {
+      "name": {"en": "Gana", "hi": "गण"},
+      "about": {"en": "Nature and everyday behaviour", "hi": "प्रकृति और दैनिक व्यवहार"}
+    },
+    "bhakoot": {
+      "name": {"en": "Bhakoot", "hi": "भकूट"},
+      "about": {"en": "Family harmony and prosperity", "hi": "पारिवारिक सामंजस्य और समृद्धि"}
+    },
+    "nadi": {
+      "name": {"en": "Nadi", "hi": "नाड़ी"},
+      "about": {"en": "Health and the next generation", "hi": "स्वास्थ्य और संतान"}
+    }
+  },
+
+  "bands": {
+    "excellent": {
+      "label": {"en": "Excellent match", "hi": "उत्तम मिलान"},
+      "text": {
+        "en": "{total} of 36 gunas match, which tradition counts as an excellent match. Also look at the Manglik comparison below and at how the two people and families feel about each other.",
+        "hi": "36 में से {total} गुण मिलते हैं, जिसे परंपरा में उत्तम मिलान माना जाता है। नीचे दिया मांगलिक मिलान और दोनों व्यक्तियों तथा परिवारों का आपसी भाव भी देखें।"
+      }
+    },
+    "good": {
+      "label": {"en": "Good match", "hi": "अच्छा मिलान"},
+      "text": {
+        "en": "{total} of 36 gunas match, which tradition counts as a good match. Also look at the Manglik comparison below and at how the two people and families feel about each other.",
+        "hi": "36 में से {total} गुण मिलते हैं, जिसे परंपरा में अच्छा मिलान माना जाता है। नीचे दिया मांगलिक मिलान और दोनों व्यक्तियों तथा परिवारों का आपसी भाव भी देखें।"
+      }
+    },
+    "acceptable": {
+      "label": {"en": "Acceptable match", "hi": "स्वीकार्य मिलान"},
+      "text": {
+        "en": "{total} of 36 gunas match. Tradition accepts 18 or more. The kootas that scored low show where a little more understanding will help.",
+        "hi": "36 में से {total} गुण मिलते हैं। परंपरा में 18 या अधिक गुण स्वीकार्य माने जाते हैं। जिन कूटों में अंक कम हैं, वे बताते हैं कि कहाँ थोड़ी अधिक समझ काम आएगी।"
+      }
+    },
+    "review": {
+      "label": {"en": "Needs a fuller look", "hi": "विस्तृत विचार आवश्यक"},
+      "text": {
+        "en": "{total} of 36 gunas match, below the traditional 18. This is a signal, not a final answer: the friendship of the lords, the exceptions below and the two full charts should be weighed by an astrologer before any decision.",
+        "hi": "36 में से {total} गुण मिलते हैं, जो परंपरागत 18 से कम है। यह एक संकेत है, अंतिम उत्तर नहीं: निर्णय से पहले ग्रह मैत्री, नीचे दिए परिहार और दोनों पूर्ण कुंडलियों पर ज्योतिषी से विचार कराएँ।"
+      }
+    }
+  },
+
+  "exceptions": {
+    "bhakoot_friendly_lords": {
+      "en": "Bhakoot scored 0, but the lords of the two Moon signs are the same or friends, which tradition treats as a cancellation (parihar) of Bhakoot dosha.",
+      "hi": "भकूट में 0 अंक हैं, पर दोनों चंद्र राशियों के स्वामी एक ही या मित्र हैं; परंपरा में इसे भकूट दोष का परिहार माना जाता है।"
+    },
+    "nadi_same_nakshatra_different_pada": {
+      "en": "Nadi scored 0, but both were born in the same nakshatra in different padas, a classical exception to Nadi dosha.",
+      "hi": "नाड़ी में 0 अंक हैं, पर दोनों का जन्म एक ही नक्षत्र के अलग-अलग चरणों में हुआ है, जो नाड़ी दोष का शास्त्रीय अपवाद है।"
+    },
+    "nadi_same_rashi_different_nakshatra": {
+      "en": "Nadi scored 0, but both have the same Rashi with different nakshatras, a classical exception to Nadi dosha.",
+      "hi": "नाड़ी में 0 अंक हैं, पर दोनों की राशि एक और नक्षत्र अलग हैं, जो नाड़ी दोष का शास्त्रीय अपवाद है।"
+    },
+    "nadi_same_nakshatra_different_rashi": {
+      "en": "Nadi scored 0, but both have the same nakshatra in different Rashis, a classical exception to Nadi dosha.",
+      "hi": "नाड़ी में 0 अंक हैं, पर दोनों का नक्षत्र एक और राशि अलग हैं, जो नाड़ी दोष का शास्त्रीय अपवाद है।"
+    }
+  },
+
+  "manglik": {
+    "both_clear": {
+      "en": "Neither chart is Manglik, so there is nothing to match here.",
+      "hi": "दोनों में से कोई कुंडली मांगलिक नहीं है, इसलिए यहाँ मिलान की आवश्यकता नहीं।"
+    },
+    "both_manglik": {
+      "en": "Both charts are Manglik. By tradition the two cancel each other, and the match is considered suitable on this count.",
+      "hi": "दोनों कुंडलियाँ मांगलिक हैं। परंपरा में दोनों एक-दूसरे का परिहार करती हैं, और इस दृष्टि से मिलान उपयुक्त माना जाता है।"
+    },
+    "one_manglik": {
+      "en": "One chart is Manglik and the other is not. Ask an astrologer to check the cancellation rules in both full charts before deciding.",
+      "hi": "एक कुंडली मांगलिक है और दूसरी नहीं। निर्णय से पहले ज्योतिषी से दोनों पूर्ण कुंडलियों में परिहार के नियम दिखवाएँ।"
+    },
+    "unknown": {
+      "en": "A Manglik check from the Lagna needs both birth times; it is shown here from the Moon and Venus only.",
+      "hi": "लग्न से मांगलिक जाँच के लिए दोनों के जन्म समय चाहिए; यहाँ यह केवल चंद्र और शुक्र से दिखाई गई है।"
+    },
+    "status": {
+      "not_present": {"en": "Not Manglik", "hi": "मांगलिक नहीं"},
+      "cancelled": {"en": "Manglik, cancelled", "hi": "मांगलिक, परिहार सहित"},
+      "partial": {"en": "Partly Manglik", "hi": "आंशिक मांगलिक"},
+      "present": {"en": "Manglik", "hi": "मांगलिक"}
+    }
+  },
+
+  "note": {
+    "en": "Guna matching is a signal, not the final decision. It is read only from the two Moons; a full matching also weighs both complete charts.",
+    "hi": "गुण मिलान एक संकेत है, अंतिम निर्णय नहीं। यह केवल दोनों चंद्रमाओं से देखा जाता है; पूर्ण मिलान में दोनों पूरी कुंडलियाँ भी देखी जाती हैं।"
+  }
+}

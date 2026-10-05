@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import KundliForm from "@/components/KundliForm";
+import Milan from "@/components/Milan";
 import Panchang, { type PanchangData } from "@/components/Panchang";
 import { Breadcrumbs, Cta, FaqList, Heading, Intro, LinkGrid } from "@/components/ui";
 import { content, fill } from "@/lib/content";
@@ -477,6 +478,59 @@ export async function CityPanchangPage({ lang, slug }: { lang: Lang; slug: strin
         ))}
       </section>
       <CityLinks lang={lang} except={slug} />
+      <Cta lang={lang} />
+    </>
+  );
+}
+
+// ---------- Kundli Milan ----------
+
+export function milanMetadata(lang: Lang) {
+  const g = guides(lang).milan;
+  return guideMetadata(lang, "/kundli-milan", g.title, g.description);
+}
+
+export function MilanPage({ lang }: { lang: Lang }) {
+  const g = guides(lang);
+  const m = g.milan;
+  return (
+    <>
+      <Breadcrumbs lang={lang} trail={[{ label: m.crumb }]} />
+      <Intro h1={m.h1} h2={m.h2} answer={m.answer} />
+      <section className="pb-8">
+        <Milan lang={lang} />
+      </section>
+
+      <section className="pb-8">
+        <Heading>{m.kootasTitle}</Heading>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          {m.kootas.map((koota) => (
+            <div key={koota.name} className="card">
+              <h3 className="font-semibold">{koota.name}</h3>
+              <p className="mt-1 text-sm text-ink-600">{koota.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-3 pb-8 md:grid-cols-3">
+        {m.sections.map((section) => (
+          <div key={section.h} className="card">
+            <h2 className="font-semibold">{section.h}</h2>
+            {section.p.map((paragraph) => (
+              <p key={paragraph} className="mt-1 text-sm text-ink-600">
+                {paragraph}
+              </p>
+            ))}
+            {section === m.sections[1] && (
+              <Link href={path(lang, "/dosh/manglik")} className="mt-2 inline-block text-sm font-semibold text-kesar-700 underline">
+                {g.dosh.read}
+              </Link>
+            )}
+          </div>
+        ))}
+      </section>
+      <FaqList title={content(lang).faqTitle} items={m.faqs} />
       <Cta lang={lang} />
     </>
   );
