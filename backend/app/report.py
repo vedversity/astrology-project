@@ -10,6 +10,7 @@ import datetime as dt
 from app.astro import calculate_chart, sade_sati_on
 from app.astro import constants as astro_constants
 from app.astro.daily import RASHI_SLUGS, choghadiya, moon_transit
+from app.astro import muhurat as muhurat_engine
 from app.astro.milan import ashtakoot
 from app.content import audience_for, load
 from app.content.interpret import interpret
@@ -86,6 +87,48 @@ def build_rashifal(date, timezone="Asia/Kolkata"):
         "moon_leaves_sign": transit["moon_leaves_sign"],
         "method": book["method"],
         "rashis": rashis,
+    }
+
+
+def build_muhurat_index(years):
+    """The ceremonies on offer, with how many shubh dates each has in each year."""
+    book = load("muhurat")
+    return {
+        "years": list(years),
+        "types": [{"type": kind, "name": book["types"][kind]["name"], "what": book["types"][kind]["what"],
+                   "counts": {str(year): len(muhurat_engine.shubh_dates(kind, year)) for year in years}}
+                  for kind in muhurat_engine.TYPES],
+    }
+
+
+def build_muhurat(kind, year):
+    """Shubh dates for one ceremony in one year, by month, with the periods left out and why."""
+    book = load("muhurat")
+    names = astro_constants
+
+    def tithi_name(day):
+        if day["tithi"] == 15:
+            return names.named(names.PURNIMA)
+        return names.named(names.TITHIS[day["tithi"] - 1])
+
+    dates = [{
+        "date": day["date"].isoformat(),
+        "weekday": {"en": names.WEEKDAYS[day["weekday"]][0], "hi": names.WEEKDAYS[day["weekday"]][1]},
+        "tithi": tithi_name(day),
+        "paksha": names.named(names.PAKSHAS[day["paksha"]]),
+        "nakshatra": names.named(names.NAKSHATRAS[day["nakshatra"]]),
+    } for day in muhurat_engine.shubh_dates(kind, year)]
+    months = [{"month": month, "dates": [d for d in dates if int(d["date"][5:7]) == month]} for month in range(1, 13)]
+    return {
+        "type": kind, "year": year,
+        "name": book["types"][kind]["name"], "what": book["types"][kind]["what"],
+        "rule": book["types"][kind]["rule"],
+        "count": len(dates),
+        "months": months,
+        "set_aside": [{"reason": book["reasons"][reason]["name"], "why": book["reasons"][reason]["why"],
+                       "from": start.isoformat(), "to": end.isoformat()}
+                      for reason, start, end in muhurat_engine.set_aside_periods(kind, year)],
+        "caution": book["caution"],
     }
 
 

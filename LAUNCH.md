@@ -31,7 +31,7 @@ The short version: the product is built. What stands between it and launch is **
 | Yogas, doshas, numerology and names checked against the sample | Done |
 | Kundli Milan checked against a hand-worked match | Done (`tests/test_milan.py`) |
 | Compare 5 real charts with another trusted program and with the astrologer | You. The blueprint asks for this; it has not been done. |
-| Confirm the choices listed under "Choices made in the rules" in `README.md` | You, with the astrologer. Also the Vashya and Gana tables and the band limits in `app/astro/milan.py`. |
+| Confirm the choices listed under "Choices made in the rules" in `README.md` | You, with the astrologer. Also the Vashya and Gana tables and the band limits in `app/astro/milan.py`, and the Muhurat rules (which nakshatras, tithis and weekdays qualify, and the combustion limits) in `app/astro/muhurat.py`. |
 
 ## 3. Payments and delivery
 
@@ -131,7 +131,7 @@ Not done yet; these files are ready but **have not been tried on a real host**.
 | Item | Status |
 |---|---|
 | Hindi at `/`, English at `/en`, paired with hreflang | Done |
-| Sitemap (about 360 addresses) and robots file | Done (`/sitemap.xml`, `/robots.txt`) |
+| Sitemap (about 390 addresses) and robots file | Done (`/sitemap.xml`, `/robots.txt`) |
 | Titles, descriptions, one H1 per page, breadcrumbs, FAQ and product data | Done |
 | Google Search Console: add the site, submit the sitemap | You, after the domain is live |
 | Real search volumes for the keyword map | You (Google Keyword Planner), as the Growth Blueprint asks |
@@ -149,6 +149,8 @@ Not done yet; these files are ready but **have not been tried on a real host**.
 
 ## 9. Not built, by decision or for want of inputs
 
-- **Muhurat pages** (vivah, griha pravesh, namkaran dates): need a muhurat engine.
 - **WhatsApp delivery and reminders**: need a WhatsApp Business API provider.
-- **Saved family profiles and login**: not started.
+- **Login and accounts**: not built, by decision. The form remembers up to six
+  family members on the visitor's own device instead; nothing is kept on the server.
+- **Time of day for a muhurat** (Lagna, the muhurat window): the Muhurat pages give
+  shubh dates only and say so.

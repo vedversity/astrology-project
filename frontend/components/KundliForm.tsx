@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import PlaceInput from "@/components/PlaceInput";
-import { saveBirth, useBirth, type Birth, type Place } from "@/lib/birth";
+import { removeProfile, saveBirth, useBirth, useProfiles, type Birth, type Place } from "@/lib/birth";
 import { content, fill } from "@/lib/content";
 import { path, type Lang } from "@/lib/site";
 
@@ -12,10 +12,24 @@ import { path, type Lang } from "@/lib/site";
 export default function KundliForm({ lang }: { lang: Lang }) {
   // A returning family finds their last entry already filled in
   const last = useBirth(true);
-  return <Fields key={last ? "remembered" : "empty"} lang={lang} last={last ?? null} />;
+  const profiles = useProfiles();
+  // A saved family member chosen from the list, or "new" for an empty form
+  const [picked, setPicked] = useState<Birth | "new" | null>(null);
+  const shown = picked === "new" ? null : (picked ?? last ?? null);
+  return (
+    <Fields
+      key={picked === "new" ? "new" : shown ? `${shown.name}|${shown.date}|${shown.gender}` : "empty"}
+      lang={lang}
+      last={shown}
+      profiles={profiles}
+      onPick={setPicked}
+    />
+  );
 }
 
-function Fields({ lang, last }: { lang: Lang; last: Birth | null }) {
+type FieldsProps = { lang: Lang; last: Birth | null; profiles: Birth[]; onPick: (pick: Birth | "new") => void };
+
+function Fields({ lang, last, profiles, onPick }: FieldsProps) {
   const c = content(lang).form;
   const router = useRouter();
   const [step, setStep] = useState(1);
@@ -56,6 +70,35 @@ function Fields({ lang, last }: { lang: Lang; last: Birth | null }) {
         <h2 className="text-lg font-semibold">{c.title}</h2>
         <span className="text-sm text-ink-600">{fill(c.step, { n: step })}</span>
       </div>
+
+      {step === 1 && profiles.length > 1 && (
+        <div className="mb-4 rounded-xl bg-kesar-50 p-3">
+          <p className="text-sm font-semibold">{c.saved}</p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {profiles.map((profile) => (
+              <li key={`${profile.name}|${profile.date}|${profile.gender}`} className="flex items-center rounded-full border border-kesar-100 bg-white">
+                <button type="button" className="h-10 pl-4 pr-2" onClick={() => onPick(profile)}>
+                  {profile.name || profile.date}
+                </button>
+                <button
+                  type="button"
+                  className="h-10 pl-1 pr-3 text-ink-600"
+                  aria-label={fill(c.savedRemove, { name: profile.name || profile.date })}
+                  onClick={() => removeProfile(profile)}
+                >
+                  ×
+                </button>
+              </li>
+            ))}
+            <li>
+              <button type="button" className="h-10 rounded-full border border-kesar-600 px-4 text-kesar-700" onClick={() => onPick("new")}>
+                {c.savedNew}
+              </button>
+            </li>
+          </ul>
+          <p className="mt-2 text-xs text-ink-600">{c.savedNote}</p>
+        </div>
+      )}
 
       {step === 1 && (
         <div>

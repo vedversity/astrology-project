@@ -12,7 +12,7 @@ Hindi or English Vedic Janam Patrika PDF. The full brief is in
 | 2 | Rule engine, numerology, rule-book text, names | Built and tested; rule-book awaits astrologer review |
 | 3 | PDF generator (Mini, Full, Premium; Hindi and English) | Built and tested |
 | 4 | Website (Hindi at `/`, English at `/en`) | Built and tested; payment not connected yet |
-| + | Reports for adults, Kundli Milan, Rashifal, Choghadiya, city Panchang, guides | Built and tested |
+| + | Reports for adults, Kundli Milan, Rashifal, Choghadiya, Muhurat, city Panchang, guides | Built and tested |
 | 5 | Payments and delivery | Built and tested with stand-ins; needs Razorpay and email keys to go live (see `LAUNCH.md`) |
 | 6 | Admin and growth | Settings, orders, revenue, coupons, share card, analytics hook: built |
 | 7 | Launch checklist | Written: see `LAUNCH.md`. Deployment files ready but not yet tried on a host |
@@ -265,6 +265,7 @@ same page takes payment instead. `LAUNCH.md` section 3 has the steps.
 | `/kundli-milan` | Kundli Milan: free 36-guna (Ashtakoot) matching for two births, with a Manglik comparison and the classical exceptions. Tables are in `backend/app/astro/milan.py`, wording in `rulebook/milan.json` |
 | `/rashifal`, `/rashifal/mesh` (12) | Daily Rashifal for each Rashi, today and tomorrow, read from the Moon's transit (wording in `rulebook/daily.json`) |
 | `/choghadiya` | The day's and night's Choghadiya slots for a city; also shown on every Panchang page |
+| `/muhurat`, `/muhurat/vivah/2027` | Shubh dates for Vivah, Griha Pravesh, Namkaran and Mundan, for this year and the next two, month by month, with the periods left out (Chaturmas, Kharmas and so on). Dates only, worked out for Delhi; the time of day is left to the family pandit. Rules are plain tables in `backend/app/astro/muhurat.py`, wording in `rulebook/muhurat.json`. **Draft: have the astrologer check the rules** |
 | `/admin` | The owner's settings page (see below). Not linked from the site |
 | `/rashi-nakshatra` | Find your Rashi and Nakshatra: the form, with an explanation |
 | `/naam`, `/naam/revati` (27) | Baby names by nakshatra: the four letters and names from the names database |
@@ -310,10 +311,14 @@ not in the list is handled by picking the nearest town.
 
 ### What is deliberately not on the site yet
 
-The Growth Blueprint also describes Rashifal, Muhurat and Choghadiya pages.
-Those need calculation engines (and, for Rashifal, daily writing) that do not
-exist yet, so the site does not link to them. Nothing is claimed that the product cannot do: no
-reviews, no astrologer details, no "50+ pages".
+There is no login. Instead the form remembers up to six family members on the
+visitor's own phone or computer, so a family can come back and pick a member
+without retyping. Nothing about them is kept on the server, and "Remove my
+details" on the privacy page clears them.
+
+WhatsApp delivery and reminders are not built (they need a WhatsApp Business
+provider). Nothing is claimed that the product cannot do: no reviews, no
+astrologer details, no "50+ pages".
 
 ## What is in the backend folder
 

@@ -62,7 +62,7 @@ export function RashiPage({ lang }: { lang: Lang }) {
   const g = guides(lang);
   return (
     <>
-      <Breadcrumbs lang={lang} trail={[{ label: g.tools.items[0].title }]} />
+      <Breadcrumbs lang={lang} trail={[{ label: g.tools.items.find((item) => item.href === "/rashi-nakshatra")!.title }]} />
       <div className="md:grid md:grid-cols-2 md:items-start md:gap-10">
         <Intro h1={g.rashi.h1} h2={g.rashi.h2} answer={g.rashi.answer} />
         <div className="pb-8 md:pt-4">

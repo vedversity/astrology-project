@@ -3,7 +3,8 @@
 // The birth details typed into the form, kept in the visitor's own browser.
 //
 // sessionStorage: carries the details from the form to the preview and order pages.
-// localStorage:   remembers the last entry so a returning family need not retype it.
+// localStorage:   remembers the last entry, and the last few family members,
+//                 so a returning family need not retype them.
 // Nothing here is sent anywhere except to our own API when a chart is requested.
 
 import { useMemo, useSyncExternalStore } from "react";
@@ -26,6 +27,50 @@ export function saveBirth(birth: Birth) {
   const json = JSON.stringify(birth);
   sessionStorage.setItem(KEY, json);
   localStorage.setItem(KEY, json);
+  // Newest first; the same person entered again replaces the older entry
+  writeProfiles([birth, ...readProfiles().filter((other) => !samePerson(other, birth))].slice(0, MAX_PROFILES));
+}
+
+// ---------- family members saved on this device ----------
+
+const PROFILES_KEY = "profiles";
+const MAX_PROFILES = 6;
+const watchers = new Set<() => void>();
+
+const samePerson = (a: Birth, b: Birth) =>
+  a.name.toLowerCase() === b.name.toLowerCase() && a.date === b.date && a.gender === b.gender;
+
+function parseProfiles(json: string | null | undefined): Birth[] {
+  try {
+    const list = json ? JSON.parse(json) : [];
+    return Array.isArray(list) ? (list as Birth[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+const readProfiles = () => parseProfiles(localStorage.getItem(PROFILES_KEY));
+
+function writeProfiles(list: Birth[]) {
+  localStorage.setItem(PROFILES_KEY, JSON.stringify(list));
+  watchers.forEach((changed) => changed());
+}
+
+export function removeProfile(birth: Birth) {
+  writeProfiles(readProfiles().filter((other) => !samePerson(other, birth)));
+}
+
+/** The family members entered on this device, newest first. Empty while the page is loading. */
+export function useProfiles(): Birth[] {
+  const json = useSyncExternalStore(
+    (changed) => {
+      watchers.add(changed);
+      return () => watchers.delete(changed);
+    },
+    () => localStorage.getItem(PROFILES_KEY),
+    () => undefined,
+  );
+  return useMemo(() => parseProfiles(json), [json]);
 }
 
 /**
@@ -64,7 +109,9 @@ export function apiBody(birth: Birth) {
 export function forgetEverything() {
   sessionStorage.removeItem(KEY);
   localStorage.removeItem(KEY);
+  localStorage.removeItem(PROFILES_KEY);
   localStorage.removeItem(CITY_KEY);
+  watchers.forEach((changed) => changed());
 }
 
 // The city chosen on the Panchang page, remembered for the next visit

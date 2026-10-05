@@ -1,0 +1,70 @@
+{
+  "_note": "DRAFT for astrologer review. Wording for the Muhurat pages. The rules themselves (which nakshatras, tithis and weekdays qualify) are in backend/app/astro/muhurat.py.",
+
+  "types": {
+    "vivah": {
+      "name": {"en": "Vivah Muhurat", "hi": "विवाह मुहूर्त"},
+      "what": {"en": "wedding", "hi": "विवाह"},
+      "rule": {
+        "en": "A date is listed when the Moon is in a nakshatra favourable for marriage (such as Rohini, Mrigashira, Uttara Phalguni, Hasta, Swati, Anuradha or Revati), the tithi is not Rikta (4th, 9th, 14th) or Amavasya, and the day is not Tuesday or Saturday.",
+        "hi": "तिथि तब दी जाती है जब चंद्रमा विवाह के अनुकूल नक्षत्र (जैसे रोहिणी, मृगशिरा, उत्तरा फाल्गुनी, हस्त, स्वाती, अनुराधा या रेवती) में हो, तिथि रिक्ता (चतुर्थी, नवमी, चतुर्दशी) या अमावस्या न हो, और वार मंगलवार या शनिवार न हो।"
+      }
+    },
+    "griha-pravesh": {
+      "name": {"en": "Griha Pravesh Muhurat", "hi": "गृह प्रवेश मुहूर्त"},
+      "what": {"en": "house-warming", "hi": "गृह प्रवेश"},
+      "rule": {
+        "en": "A date is listed when the Moon is in a steady or gentle nakshatra (Rohini, Mrigashira, Uttara Phalguni, Chitra, Anuradha, Uttara Ashadha, Uttara Bhadrapada or Revati), the tithi is the 2nd, 3rd, 5th, 7th, 10th, 11th, 12th or 13th, and the day is Monday, Wednesday, Thursday or Friday.",
+        "hi": "तिथि तब दी जाती है जब चंद्रमा स्थिर या मृदु नक्षत्र (रोहिणी, मृगशिरा, उत्तरा फाल्गुनी, चित्रा, अनुराधा, उत्तराषाढ़ा, उत्तरा भाद्रपद या रेवती) में हो, तिथि द्वितीया, तृतीया, पंचमी, सप्तमी, दशमी, एकादशी, द्वादशी या त्रयोदशी हो, और वार सोमवार, बुधवार, गुरुवार या शुक्रवार हो।"
+      }
+    },
+    "namkaran": {
+      "name": {"en": "Namkaran Muhurat", "hi": "नामकरण मुहूर्त"},
+      "what": {"en": "naming ceremony", "hi": "नामकरण"},
+      "rule": {
+        "en": "A date is listed when the Moon is in a nakshatra favourable for naming (such as Ashwini, Rohini, Pushya, Hasta, Swati, Shravana or Revati), the tithi is not Rikta or Amavasya, and the day is Monday, Wednesday, Thursday or Friday. By tradition the Namkaran is held on the 11th or 12th day after birth, or on the first shubh date after that.",
+        "hi": "तिथि तब दी जाती है जब चंद्रमा नामकरण के अनुकूल नक्षत्र (जैसे अश्विनी, रोहिणी, पुष्य, हस्त, स्वाती, श्रवण या रेवती) में हो, तिथि रिक्ता या अमावस्या न हो, और वार सोमवार, बुधवार, गुरुवार या शुक्रवार हो। परंपरा में नामकरण जन्म के 11वें या 12वें दिन, या उसके बाद की पहली शुभ तिथि पर किया जाता है।"
+      }
+    },
+    "mundan": {
+      "name": {"en": "Mundan Muhurat", "hi": "मुंडन मुहूर्त"},
+      "what": {"en": "Mundan (first haircut)", "hi": "मुंडन"},
+      "rule": {
+        "en": "A date is listed when the Moon is in a nakshatra favourable for Mundan (such as Ashwini, Mrigashira, Pushya, Hasta, Chitra, Swati, Shravana or Revati), the tithi is the 2nd, 3rd, 5th, 7th, 10th, 11th or 13th, and the day is Monday, Wednesday, Thursday or Friday. The Mundan is usually done in the child's 1st, 3rd or 5th year.",
+        "hi": "तिथि तब दी जाती है जब चंद्रमा मुंडन के अनुकूल नक्षत्र (जैसे अश्विनी, मृगशिरा, पुष्य, हस्त, चित्रा, स्वाती, श्रवण या रेवती) में हो, तिथि द्वितीया, तृतीया, पंचमी, सप्तमी, दशमी, एकादशी या त्रयोदशी हो, और वार सोमवार, बुधवार, गुरुवार या शुक्रवार हो। मुंडन प्रायः बच्चे के पहले, तीसरे या पाँचवें वर्ष में किया जाता है।"
+      }
+    }
+  },
+
+  "reasons": {
+    "chaturmas": {
+      "name": {"en": "Chaturmas", "hi": "चातुर्मास"},
+      "why": {"en": "The four months from Devshayani to Devuthani Ekadashi, when auspicious ceremonies are traditionally not held.", "hi": "देवशयनी से देवउठनी एकादशी तक के चार मास, जिनमें परंपरा से मांगलिक कार्य नहीं किए जाते।"}
+    },
+    "kharmas": {
+      "name": {"en": "Kharmas", "hi": "खरमास"},
+      "why": {"en": "The month the Sun spends in Sagittarius or Pisces.", "hi": "वह मास जब सूर्य धनु या मीन राशि में रहता है।"}
+    },
+    "adhik": {
+      "name": {"en": "Adhik Maas", "hi": "अधिक मास"},
+      "why": {"en": "The extra lunar month added every two to three years.", "hi": "हर दो-तीन वर्ष में आने वाला अतिरिक्त चंद्र मास।"}
+    },
+    "holashtak": {
+      "name": {"en": "Holashtak", "hi": "होलाष्टक"},
+      "why": {"en": "The eight days before Holi.", "hi": "होली से पहले के आठ दिन।"}
+    },
+    "guru_asta": {
+      "name": {"en": "Jupiter combust (Guru Asta)", "hi": "गुरु अस्त"},
+      "why": {"en": "Jupiter is too close to the Sun to be seen.", "hi": "गुरु सूर्य के इतने निकट है कि दिखाई नहीं देता।"}
+    },
+    "shukra_asta": {
+      "name": {"en": "Venus combust (Shukra Asta)", "hi": "शुक्र अस्त"},
+      "why": {"en": "Venus is too close to the Sun to be seen.", "hi": "शुक्र सूर्य के इतने निकट है कि दिखाई नहीं देता।"}
+    }
+  },
+
+  "caution": {
+    "en": "These are shubh dates by the general rules of the Panchang, worked out for Delhi. The exact time of day (Lagna and muhurat window), and the match with the birth stars of the people concerned, must be fixed by your family pandit. Regional traditions differ.",
+    "hi": "ये पंचांग के सामान्य नियमों के अनुसार शुभ तिथियाँ हैं, दिल्ली के लिए निकाली गई हैं। दिन का सही समय (लग्न और मुहूर्त) तथा संबंधित व्यक्तियों के जन्म नक्षत्र से मिलान अपने कुल पंडित से निश्चित कराएँ। क्षेत्रीय परंपराएँ भिन्न हो सकती हैं।"
+  }
+}

@@ -65,6 +65,10 @@ const hi = {
     submit: "मेरी झलक दिखाएं",
     back: "← वापस",
     privacy: "आपकी जानकारी किसी को नहीं बेची जाती।",
+    saved: "परिवार के सहेजे गए सदस्य",
+    savedNew: "+ नया",
+    savedRemove: "{name} को सूची से हटाएं",
+    savedNote: "ये केवल आपके इसी फ़ोन या कंप्यूटर में सहेजे हैं।",
     errors: {
       gender: "कृपया लिंग चुनें।",
       date: "कृपया सही जन्म तिथि चुनें।",
@@ -268,7 +272,7 @@ const hi = {
   },
   forget: {
     title: "इस डिवाइस से मेरी जानकारी हटाएं",
-    text: "फ़ॉर्म में भरी जन्म जानकारी केवल आपके इसी फ़ोन या कंप्यूटर में याद रखी जाती है। नीचे का बटन उसे हटा देगा।",
+    text: "फ़ॉर्म में भरी जन्म जानकारी और परिवार के सहेजे गए सदस्य केवल आपके इसी फ़ोन या कंप्यूटर में याद रखे जाते हैं। नीचे का बटन उन्हें हटा देगा।",
     button: "मेरी जानकारी हटाएं",
     done: "आपकी जानकारी इस डिवाइस से हटा दी गई है।",
   },
@@ -330,6 +334,10 @@ const en: typeof hi = {
     submit: "Show my preview",
     back: "← Back",
     privacy: "Your details are never sold to anyone.",
+    saved: "Saved family members",
+    savedNew: "+ New",
+    savedRemove: "Remove {name} from the list",
+    savedNote: "These are saved only on this phone or computer.",
     errors: {
       gender: "Please choose a gender.",
       date: "Please choose a valid date of birth.",
@@ -533,7 +541,7 @@ const en: typeof hi = {
   },
   forget: {
     title: "Remove my details from this device",
-    text: "The birth details typed into the form are remembered only on this phone or computer. The button below removes them.",
+    text: "The birth details typed into the form, and the family members saved from it, are remembered only on this phone or computer. The button below removes them.",
     button: "Remove my details",
     done: "Your details have been removed from this device.",
   },

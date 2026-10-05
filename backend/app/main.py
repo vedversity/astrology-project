@@ -9,6 +9,8 @@ POST /milan      Kundli Milan: 36-guna matching for two births
 POST /milan/pdf  the Kundli Milan result as a one-page PDF
 GET  /panchang   the day's Panchang and Choghadiya for a place
 GET  /rashifal   the day's Rashifal for the twelve Rashis
+GET  /muhurat    the ceremonies and years on offer
+GET  /muhurat/{type}/{year}  shubh dates for vivah, griha-pravesh, namkaran or mundan
 GET  /places     birth-place search (name -> latitude, longitude, timezone)
 GET  /cities     the cities that have their own Panchang page
 GET  /guide/...  reference pages: nakshatras with names, planets in houses
@@ -34,7 +36,8 @@ from app.astro import ENGINE_VERSION, calculate_chart
 from app.limits import pdf_limit
 from app.orders import router as orders_router
 from app.pdf import PdfError, generate_milan_pdf, generate_pdf
-from app.report import build_milan, build_panchang, build_preview, build_rashifal, build_report
+from app.astro.muhurat import TYPES as MUHURAT_TYPES
+from app.report import build_milan, build_muhurat, build_muhurat_index, build_panchang, build_preview, build_rashifal, build_report
 
 # On the live server (ENV=production) the interactive API pages are switched off
 _live = os.environ.get("ENV") == "production"
@@ -139,6 +142,24 @@ def rashifal(date: Optional[dt.date] = None):
     if not 1800 <= day.year <= 2200:
         raise HTTPException(status_code=422, detail="Year must be between 1800 and 2200.")
     return build_rashifal(day)
+
+
+def _muhurat_years():
+    # Only this year and the next two: enough for planning, and it keeps the work bounded
+    this_year = dt.datetime.now(ZoneInfo("Asia/Kolkata")).year
+    return range(this_year, this_year + 3)
+
+
+@app.get("/muhurat")
+def muhurat_index():
+    return build_muhurat_index(_muhurat_years())
+
+
+@app.get("/muhurat/{kind}/{year}")
+def muhurat(kind: str, year: int):
+    if kind not in MUHURAT_TYPES or year not in _muhurat_years():
+        raise HTTPException(status_code=404, detail="No muhurat list for this.")
+    return build_muhurat(kind, year)
 
 
 @app.post("/calculate")
