@@ -24,7 +24,7 @@ RUN apt-get update \
 COPY app ./app
 
 # Run as an ordinary user, not root
-RUN useradd --create-home runner && chown -R runner /srv /ms-playwright
+RUN useradd --create-home runner && mkdir -p /var/data && chown -R runner /srv /ms-playwright /var/data
 USER runner
 
 EXPOSE 8000

@@ -238,6 +238,21 @@ def build_milan_html(milan, groom, bride, lang="hi", prepared_on=None):
     )
 
 
+def build_receipt_html(order, plan, site):
+    """The one-page receipt for an order (order: a row from app.store; plan and site: from app.config)."""
+    css = (TEMPLATES / "style.css").read_text(encoding="utf-8").replace("FONTS", FONTS.as_uri())
+    made = dt.datetime.fromisoformat(order["created_at"])
+    months = load("labels")["months"]["en"]
+    contact = site.get("contact") or {}
+    return _env.get_template("receipt.html").render(
+        css=css, fit_js=FIT_JS, order=order, plan=plan,
+        brand_hi=site["brand"]["name"]["hi"], brand_en=site["brand"]["name"]["en"],
+        date=f"{made.day} {months[made.month - 1]} {made.year}",
+        name=order["request"]["person"].get("child_name"),
+        contact=contact.get("email") or "",
+    )
+
+
 def generate_milan_pdf(milan, groom, bride, lang="hi", prepared_on=None):
     return html_to_pdf(build_milan_html(milan, groom, bride, lang, prepared_on))
 
@@ -246,5 +261,6 @@ def generate_pdf(report, person, variant="full", lang="hi", prepared_on=None):
     return html_to_pdf(build_html(report, person, variant, lang, prepared_on))
 
 
-__all__ = ["PAGE_COUNT", "PdfError", "VARIANTS", "build_html", "build_milan_html", "generate_milan_pdf",
+__all__ = ["PAGE_COUNT", "PdfError", "VARIANTS", "build_html", "build_milan_html", "build_receipt_html",
+           "generate_milan_pdf",
            "generate_pdf", "html_to_pdf"]

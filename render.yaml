@@ -19,3 +19,27 @@ services:
       # The password for the /admin page: 12 or more characters
       - key: ADMIN_TOKEN
         sync: false
+      # The website's address again, for the download link in emails
+      - key: SITE_URL
+        sync: false
+      # Orders live on the disk below, so they survive restarts and deploys
+      - key: DATABASE_PATH
+        value: /var/data/app.db
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+    disk:
+      name: orders
+      mountPath: /var/data
+      sizeGB: 1

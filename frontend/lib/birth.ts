@@ -60,23 +60,6 @@ export function apiBody(birth: Birth) {
   };
 }
 
-// The finished PDF is held in memory between the order page and the download page.
-let pdf: { url: string; filename: string } | null = null;
-
-export function keepPdf(blob: Blob, filename: string) {
-  if (pdf) URL.revokeObjectURL(pdf.url);
-  pdf = { url: URL.createObjectURL(blob), filename };
-}
-
-/** The finished PDF, for use inside a component. undefined = the page is still loading. */
-export function usePdf() {
-  return useSyncExternalStore(
-    noChange,
-    () => pdf,
-    () => undefined,
-  );
-}
-
 /** Remove everything this site has remembered on this device. */
 export function forgetEverything() {
   sessionStorage.removeItem(KEY);

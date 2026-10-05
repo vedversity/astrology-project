@@ -8,6 +8,8 @@ What must be true before the site takes real customers. Each item is marked:
 
 Work top to bottom. Do not take live payments until every item in sections 1 to 5 is Done.
 
+The short version: the product is built. What stands between it and launch is **keys, reviews and a host**, not code.
+
 ## 1. Decisions and accounts (You)
 
 | Item | Why | Status |
@@ -31,20 +33,44 @@ Work top to bottom. Do not take live payments until every item in sections 1 to 
 | Compare 5 real charts with another trusted program and with the astrologer | You. The blueprint asks for this; it has not been done. |
 | Confirm the choices listed under "Choices made in the rules" in `README.md` | You, with the astrologer. Also the Vashya and Gana tables and the band limits in `app/astro/milan.py`. |
 
-## 3. Payments and delivery (Phase 5 - Open)
+## 3. Payments and delivery
 
-Nothing in this section is built. The order page runs in "test mode" and makes the PDF without charging.
+The code is built and tested with stand-ins for Razorpay and email. **It has never
+talked to the real Razorpay or sent a real email**, because no keys exist yet. The
+first run with TEST keys is the real test.
 
-- Razorpay account in TEST mode, then order creation and checkout
-- Webhook that verifies the payment signature before the PDF is made; safe against duplicate webhooks
-- Orders stored in a database (Supabase) with status; automatic refund flag if the PDF fails
-- PDF stored and delivered by download link and email; WhatsApp later
-- Invoice for each order
-- Coupon and referral codes; orders and revenue on the admin page
-- Run 20 to 30 real reports for friends and family in TEST mode before going live
-- Razorpay live mode: complete KYC, add the site's policy page links, switch keys, set `NEXT_PUBLIC_PAYMENTS_ENABLED=true`
+| Item | Status |
+|---|---|
+| Orders stored with status (created, paid, delivered, failed) | Done (`app/store.py`, one SQLite file) |
+| Price always taken from our settings, never from the browser | Done |
+| Razorpay order creation and checkout window | Built. Untested against Razorpay. |
+| Payment signature checked on our server before any PDF is released | Done |
+| Webhook with signature check; repeated webhooks acted on once | Done |
+| A payment reported by both the browser and the webhook is fulfilled once | Done |
+| If the PDF cannot be made after payment: order flagged "refund due" | Done. The refund itself is made by you in the Razorpay dashboard, then marked on `/admin`. |
+| Download page that can be reopened later; receipt with a running number | Done |
+| Email with the PDF attached | Built. Untested against a real sender. |
+| Coupons (percent off, optional use limit) | Done |
+| Orders, revenue, refunds due, "make PDF again", delete an order on `/admin` | Done |
+| Free report endpoints close once payments are on | Done |
+| WhatsApp delivery | Open (needs a WhatsApp Business API provider) |
+| Referral codes | Use a coupon per referrer for now |
 
-Until Phase 5 exists, the WhatsApp number and email typed on the order page are **not stored or sent anywhere**.
+**To switch payments on**
+
+1. Open a Razorpay account. In Test Mode, generate API keys.
+2. Put `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` in `backend/.env` (or the host's dashboard) and restart the API. The order page now shows "Pay".
+3. In Razorpay: Settings > Webhooks > add `https://<your-api-address>/webhooks/razorpay`, tick `payment.captured` and `order.paid`, choose a secret, and put the same secret in `RAZORPAY_WEBHOOK_SECRET`.
+4. Pay with Razorpay's test cards and test UPI. Check: the Patrika arrives, the order shows on `/admin`, the receipt opens.
+5. Close the payment window half-way and try a failed card: the order must stay unpaid and give no PDF.
+6. Run 20 to 30 orders for friends and family in Test Mode.
+7. Complete Razorpay KYC, add the links to the four policy pages, then replace the keys with LIVE keys.
+
+**To switch email on:** fill the `SMTP_...` and `MAIL_FROM` lines and `SITE_URL`. Place an order and check the inbox and the spam folder.
+
+**The receipt is a plain receipt, not a tax invoice.** If you register for GST, ask your accountant what it must show; the template is `backend/app/pdf/templates/receipt.html`.
+
+**The database is one file** (`backend/data/app.db`). It is right for one small server. Back it up (see section 8), and move to PostgreSQL before running more than one server.
 
 ## 4. Security
 
@@ -72,8 +98,8 @@ Until Phase 5 exists, the WhatsApp number and email typed on the order page are 
 | "Remove my details from this device" button on the privacy page | Done |
 | Personal result pages kept out of search engines | Done |
 | Consent checkbox before an order | Done |
-| Privacy policy matches what the product does | Draft. Re-read it after Phase 5 (stored orders) and before switching on analytics. |
-| Deletion on request for stored orders | Open (needs Phase 5). Name a person who will handle requests. |
+| Privacy policy matches what the product does | Draft. Orders, contact details and PDFs are now stored on the server; have the lawyer check the policy says how long. |
+| Deletion on request for stored orders | Done: the Delete button on `/admin` removes the order, the details and the stored PDF. Name a person who will handle requests. |
 | Analytics | Off by default. If you set `NEXT_PUBLIC_GA_ID`, say so in the privacy policy first. |
 
 ## 6. Deployment
@@ -98,7 +124,7 @@ Not done yet; these files are ready but **have not been tried on a real host**.
 
 - Make one PDF of each variant in each language on the live site.
 - Try the admin page; change a price and see it on the site within five minutes.
-- Note: prices and brand changed on the admin page are written to a file on the server. On hosts that reset files on each deploy (Render does), they return to the values in Git. Either commit the change to `site.json`, or move settings to the database in Phase 5.
+- Note: prices and brand changed on the admin page are written to a file on the server. On hosts that reset files on each deploy (Render does), they return to the values in Git, so also commit the change to `site.json`. Orders are different: they live on the attached disk and survive deploys.
 
 ## 7. Search engines
 
@@ -116,15 +142,13 @@ Not done yet; these files are ready but **have not been tried on a real host**.
 | Item | Status |
 |---|---|
 | Code | Git, once a remote exists |
-| Orders and PDFs | Open (Phase 5): enable daily database backups in Supabase |
+| Orders and PDFs | You: copy the `data` folder (the database file and the `pdfs` folder) off the server daily. On Render, enable disk snapshots. |
 | Uptime check | You: a free monitor (UptimeRobot or similar) on `/health` and the home page |
 | Error alerts | Open: add an error tracker (Sentry or similar) to both apps |
 | A monthly test order | You, once payments are live |
 
 ## 9. Not built, by decision or for want of inputs
 
-- **Phase 5** (payments, orders, delivery): skipped for now at the owner's request.
 - **Muhurat pages** (vivah, griha pravesh, namkaran dates): need a muhurat engine.
-- **Coupons, referral codes, order and revenue reports**: depend on Phase 5.
 - **WhatsApp delivery and reminders**: need a WhatsApp Business API provider.
 - **Saved family profiles and login**: not started.

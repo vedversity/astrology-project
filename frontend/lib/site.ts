@@ -3,8 +3,6 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
 // The public address of this website, used for search-engine tags
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-// Phase 5 switches this on. Until then the order page makes the PDF without payment.
-export const PAYMENTS_ENABLED = process.env.NEXT_PUBLIC_PAYMENTS_ENABLED === "true";
 
 export type Lang = "hi" | "en";
 export type Text = { hi: string; en: string };
@@ -27,6 +25,8 @@ export type Site = {
   /** Shown only once the owner has filled it in (admin page) */
   astrologer: { name: Text; experience_years: number; bio: Text } | null;
   plans: Plan[];
+  /** razorpay = take payment; test = deliver without charging (no keys set); off = not taking orders */
+  payments: "razorpay" | "test" | "off";
 };
 
 // The city whose Panchang is shown until the visitor chooses their own

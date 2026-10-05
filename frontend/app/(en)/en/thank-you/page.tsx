@@ -1,10 +1,14 @@
+import { Suspense } from "react";
+
 import Thanks from "@/components/Thanks";
 
-// A visitor's own result: kept out of search engines
-export const metadata = { robots: { index: false, follow: false } };
+// A customer's own order page: kept out of search engines
+export const metadata = { robots: { index: false, follow: false }, referrer: "no-referrer" as const };
 
 export default function Page() {
   return (
-    <Thanks lang="en" />
+    <Suspense>
+      <Thanks lang="en" />
+    </Suspense>
   );
 }

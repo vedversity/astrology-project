@@ -2,9 +2,9 @@
 
 POST /calculate  the raw chart (Phase 1)
 POST /preview    the free preview: Rashi, Nakshatra, Pada, name letters
-POST /report     everything a Janam Patrika needs: chart, yogas, doshas,
-                 numerology, names and the wording in Hindi and English
-POST /pdf        the finished Janam Patrika as a PDF file
+POST /report     everything a Janam Patrika needs (development only; off once payments are on)
+POST /pdf        the finished Janam Patrika as a PDF file (development only, likewise)
+POST /orders ... placing an order, payment, download and receipt: see app/orders.py
 POST /milan      Kundli Milan: 36-guna matching for two births
 POST /milan/pdf  the Kundli Milan result as a one-page PDF
 GET  /panchang   the day's Panchang and Choghadiya for a place
@@ -20,18 +20,19 @@ Then open:    http://127.0.0.1:8000/docs
 """
 
 import datetime as dt
-import hmac
 import os
 from typing import Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, Response
+from fastapi import Depends, FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from app import config, guide, places
+from app import config, guide, payments, places
+from app.api_common import BirthInput, PdfInput, ReportInput, admin_only, checked, free_only
 from app.astro import ENGINE_VERSION, calculate_chart
-from app.limits import admin_limit, pdf_limit
+from app.limits import pdf_limit
+from app.orders import router as orders_router
 from app.pdf import PdfError, generate_milan_pdf, generate_pdf
 from app.report import build_milan, build_panchang, build_preview, build_rashifal, build_report
 
@@ -50,33 +51,6 @@ app.add_middleware(
 )
 
 
-class BirthInput(BaseModel):
-    date: dt.date = Field(examples=["2026-09-27"])
-    time: Optional[dt.time] = Field(default=None, examples=["20:00"])
-    latitude: float = Field(ge=-90, le=90, examples=[19.0473])
-    longitude: float = Field(ge=-180, le=180, examples=[73.0718])
-    timezone: str = Field(default="Asia/Kolkata", examples=["Asia/Kolkata"])
-    time_known: bool = True
-
-
-class ReportInput(BirthInput):
-    gender: Literal["male", "female"] = Field(examples=["male"])
-    # Used only for name numerology and the wording; nothing is stored
-    surname: Optional[str] = Field(default=None, max_length=60, examples=["Sharma"])
-    kuldevi: Optional[str] = Field(default=None, max_length=60)
-
-
-class PdfInput(ReportInput):
-    variant: Literal["mini", "full", "premium"] = "full"
-    lang: Literal["hi", "en"] = "hi"
-    # Printed on the cover exactly as typed; nothing is stored
-    child_name: Optional[str] = Field(default=None, max_length=80)
-    father_name: Optional[str] = Field(default=None, max_length=80)
-    mother_name: Optional[str] = Field(default=None, max_length=80)
-    gotra: Optional[str] = Field(default=None, max_length=60)
-    place: Optional[str] = Field(default=None, max_length=160, examples=["Kharghar, Navi Mumbai"])
-
-
 class MilanInput(BaseModel):
     groom: BirthInput
     bride: BirthInput
@@ -90,20 +64,6 @@ class MilanPdfInput(MilanInput):
     bride_place: Optional[str] = Field(default=None, max_length=160)
 
 
-def _checked(birth):
-    """Reject impossible input, then return the birth details as plain arguments."""
-    if not 1800 <= birth.date.year <= 2200:
-        raise HTTPException(status_code=422, detail="Year must be between 1800 and 2200.")
-    try:
-        ZoneInfo(birth.timezone)
-    except (ZoneInfoNotFoundError, ValueError):
-        raise HTTPException(status_code=422, detail=f"Unknown timezone: {birth.timezone}")
-    return {
-        "date": birth.date, "time": birth.time, "latitude": birth.latitude,
-        "longitude": birth.longitude, "timezone": birth.timezone, "time_known": birth.time_known,
-    }
-
-
 @app.get("/health")
 def health():
     return {"status": "ok", "engine_version": ENGINE_VERSION}
@@ -111,25 +71,20 @@ def health():
 
 @app.get("/site")
 def site():
-    return config.site()
+    # "payments" tells the website how the order page should behave:
+    # razorpay = take payment, test = make the PDF without charging, off = not accepting orders
+    return {**config.site(), "payments": payments.mode()}
 
 
-def _admin(request: Request, x_admin_token: str = Header(default="")):
-    """Guard for the owner's pages. The password is the ADMIN_TOKEN line in backend/.env."""
-    expected = os.environ.get("ADMIN_TOKEN", "")
-    if len(expected) < 12:
-        raise HTTPException(status_code=503, detail="The admin page is switched off. Set ADMIN_TOKEN (12+ characters) to use it.")
-    if not hmac.compare_digest(x_admin_token.encode(), expected.encode()):
-        admin_limit(request)
-        raise HTTPException(status_code=401, detail="Wrong admin password.")
+app.include_router(orders_router)
 
 
-@app.get("/admin/site", dependencies=[Depends(_admin)])
+@app.get("/admin/site", dependencies=[Depends(admin_only)])
 def admin_site():
     return config.site()
 
 
-@app.put("/admin/site", dependencies=[Depends(_admin)])
+@app.put("/admin/site", dependencies=[Depends(admin_only)])
 def admin_save(update: config.SiteUpdate):
     try:
         return config.save_site(update)
@@ -188,22 +143,22 @@ def rashifal(date: Optional[dt.date] = None):
 
 @app.post("/calculate")
 def calculate(birth: BirthInput):
-    return calculate_chart(**_checked(birth))
+    return calculate_chart(**checked(birth))
 
 
 @app.post("/preview")
 def preview(birth: BirthInput):
-    return build_preview(**_checked(birth))
+    return build_preview(**checked(birth))
 
 
 @app.post("/milan")
 def milan(pair: MilanInput):
-    return build_milan(_checked(pair.groom), _checked(pair.bride))
+    return build_milan(checked(pair.groom), checked(pair.bride))
 
 
 @app.post("/milan/pdf", dependencies=[Depends(pdf_limit)])
 def milan_pdf(pair: MilanPdfInput):
-    result = build_milan(_checked(pair.groom), _checked(pair.bride))
+    result = build_milan(checked(pair.groom), checked(pair.bride))
 
     def person(birth, name, place):
         return {"name": name, "place": place, "date": birth.date,
@@ -218,15 +173,15 @@ def milan_pdf(pair: MilanPdfInput):
                     headers={"Content-Disposition": 'inline; filename="kundli-milan.pdf"'})
 
 
-@app.post("/report")
+@app.post("/report", dependencies=[Depends(free_only)])
 def report(birth: ReportInput):
-    return build_report(**_checked(birth), gender=birth.gender,
+    return build_report(**checked(birth), gender=birth.gender,
                         surname=birth.surname, kuldevi=birth.kuldevi)
 
 
-@app.post("/pdf", dependencies=[Depends(pdf_limit)])
+@app.post("/pdf", dependencies=[Depends(pdf_limit), Depends(free_only)])
 def pdf(birth: PdfInput):
-    report = build_report(**_checked(birth), gender=birth.gender,
+    report = build_report(**checked(birth), gender=birth.gender,
                           surname=birth.surname, kuldevi=birth.kuldevi)
     person = birth.model_dump(include={"child_name", "gender", "father_name", "mother_name",
                                        "gotra", "kuldevi", "place", "surname"})

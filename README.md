@@ -13,8 +13,8 @@ Hindi or English Vedic Janam Patrika PDF. The full brief is in
 | 3 | PDF generator (Mini, Full, Premium; Hindi and English) | Built and tested |
 | 4 | Website (Hindi at `/`, English at `/en`) | Built and tested; payment not connected yet |
 | + | Reports for adults, Kundli Milan, Rashifal, Choghadiya, city Panchang, guides | Built and tested |
-| 5 | Payments and delivery | Skipped for now (owner's decision) |
-| 6 | Admin and growth | Settings page, share card, analytics hook built; orders, coupons and referrals wait for Phase 5 |
+| 5 | Payments and delivery | Built and tested with stand-ins; needs Razorpay and email keys to go live (see `LAUNCH.md`) |
+| 6 | Admin and growth | Settings, orders, revenue, coupons, share card, analytics hook: built |
 | 7 | Launch checklist | Written: see `LAUNCH.md`. Deployment files ready but not yet tried on a host |
 
 ## One-time setup (Windows)
@@ -248,9 +248,11 @@ To see it as a phone would, press F12 in Chrome and click the phone icon.
 3. Choose a plan, fill in the names to print, tick the consent box.
 4. Press the test button. The PDF is prepared and offered for download.
 
-Payment is not connected yet (that is Phase 5), so the order page shows a
-"test mode" notice and prepares the PDF without charging. The WhatsApp number
-and email typed there are not stored or sent anywhere yet.
+With no Razorpay keys in `backend\.env`, the site runs in **test mode**: the
+order page shows a notice and delivers the Patrika without charging. Every order
+is saved (in `backend\data\app.db`) and appears on the `/admin` page, marked
+"test". Paste Razorpay keys into `backend\.env` and restart the API, and the
+same page takes payment instead. `LAUNCH.md` section 3 has the steps.
 
 ### Pages
 
@@ -276,7 +278,9 @@ and email typed there are not stored or sent anywhere yet.
 
 Open http://localhost:3000/admin and enter the admin password. There you can
 change the prices, the brand name and tagline, the contact email and WhatsApp
-number, and the astrologer's name, years of practice and short bio.
+number, and the astrologer's name, years of practice and short bio. The same
+page lists every order with revenue and refunds due, lets you make a PDF again,
+delete a customer's order on request, and add or remove coupon codes.
 
 The password is the `ADMIN_TOKEN` line in the file `backend\.env` (copy
 `.env.example` from the project folder to `backend\.env` if it does not exist,
@@ -320,6 +324,11 @@ backend/
     config/site.json   brand name, plans and prices (owner-editable)
     places/            birth-place search and its bundled town list
     report.py          build_report() - runs the whole pipeline in one call
+    orders.py          placing an order, payment checks, delivery, receipt, coupons, owner's view
+    store.py           the orders database (one SQLite file in backend/data)
+    payments.py        Razorpay: order creation and signature checks
+    mailer.py          emails the finished Patrika (any SMTP sender)
+    limits.py          per-address request limits
     pdf/
       __init__.py      generate_pdf() - fills the template and prints it to PDF
       charts.py        draws the North Indian kundali charts as SVG

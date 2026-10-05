@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Receipt {{ order.invoice_no }}</title>
+<style>{{ css|safe }}
+.amount td { font-size: 1.15em; font-weight: 600; }
+td.right, th.right { text-align: right; }
+</style>
+</head>
+<body class="en">
+<section class="page"><div class="frame"></div><div class="fit" style="font-size:10pt">
+  <div class="title" style="margin-top:2em">
+    <div class="hi">{{ brand_hi }}</div>
+    <div class="en">{{ brand_en }}</div>
+    <div class="stars">✦✦✦</div>
+  </div>
+
+  <div class="bar">रसीद · Receipt</div>
+  <table class="kv">
+    <tr><td>Receipt number</td><td>{{ order.invoice_no }}</td></tr>
+    <tr><td>Date</td><td>{{ date }}</td></tr>
+    <tr><td>Order reference</td><td>{{ order.id[:12] }}</td></tr>
+    {% if order.gateway_payment_id %}<tr><td>Payment reference</td><td>{{ order.gateway_payment_id }}</td></tr>{% endif %}
+    {% if name %}<tr><td>Prepared for</td><td>{{ name }}</td></tr>{% endif %}
+    <tr><td>WhatsApp</td><td>{{ order.whatsapp }}</td></tr>
+    {% if order.email %}<tr><td>Email</td><td>{{ order.email }}</td></tr>{% endif %}
+  </table>
+
+  <div class="bar">विवरण · Details</div>
+  <table>
+    <tr><th>Item</th><th class="right">Amount (₹)</th></tr>
+    <tr><td>{{ plan.name.en }} · {{ plan.name.hi }} <span class="muted">({{ plan.pages }} pages, PDF)</span></td><td class="right">{{ order.price }}</td></tr>
+    {% if order.discount %}<tr><td>Coupon {{ order.coupon }}</td><td class="right">− {{ order.discount }}</td></tr>{% endif %}
+    <tr class="amount"><td>Amount paid</td><td class="right">₹ {{ order.amount }}</td></tr>
+  </table>
+  {% if order.test %}<p class="disclaimer">TEST ORDER: no payment was taken. This is not a receipt for money.</p>{% endif %}
+
+  <p class="note" style="margin-top:1.5em">This receipt is for a digital product delivered by download. For any question about this order, quote the receipt number.{% if contact %} Contact: {{ contact }}.{% endif %}</p>
+  <div class="final"><div class="blessing">॥ शुभं भवतु ॥</div></div>
+</div><div class="footer">{{ brand_en }} · Receipt {{ order.invoice_no }}</div></section>
+<script>{{ fit_js|safe }}</script>
+</body>
+</html>

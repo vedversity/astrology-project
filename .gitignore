@@ -17,3 +17,6 @@ node_modules/
 
 # Generated files
 backend/output/
+
+# Orders database and customers' PDFs: never committed
+backend/data/
