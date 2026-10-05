@@ -6,7 +6,9 @@ POST /report     everything a Janam Patrika needs: chart, yogas, doshas,
                  numerology, names and the wording in Hindi and English
 POST /pdf        the finished Janam Patrika as a PDF file
 POST /milan      Kundli Milan: 36-guna matching for two births
-GET  /panchang   the day's Panchang for a place (tithi, nakshatra, Rahu Kaal ...)
+POST /milan/pdf  the Kundli Milan result as a one-page PDF
+GET  /panchang   the day's Panchang and Choghadiya for a place
+GET  /rashifal   the day's Rashifal for the twelve Rashis
 GET  /places     birth-place search (name -> latitude, longitude, timezone)
 GET  /cities     the cities that have their own Panchang page
 GET  /guide/...  reference pages: nakshatras with names, planets in houses
@@ -27,8 +29,8 @@ from pydantic import BaseModel, Field
 
 from app import config, guide, places
 from app.astro import ENGINE_VERSION, calculate_chart
-from app.pdf import PdfError, generate_pdf
-from app.report import build_milan, build_panchang, build_preview, build_report
+from app.pdf import PdfError, generate_milan_pdf, generate_pdf
+from app.report import build_milan, build_panchang, build_preview, build_rashifal, build_report
 
 app = FastAPI(title="Janam Patrika API", version=ENGINE_VERSION)
 
@@ -72,6 +74,14 @@ class PdfInput(ReportInput):
 class MilanInput(BaseModel):
     groom: BirthInput
     bride: BirthInput
+
+
+class MilanPdfInput(MilanInput):
+    lang: Literal["hi", "en"] = "hi"
+    groom_name: Optional[str] = Field(default=None, max_length=80)
+    bride_name: Optional[str] = Field(default=None, max_length=80)
+    groom_place: Optional[str] = Field(default=None, max_length=160)
+    bride_place: Optional[str] = Field(default=None, max_length=160)
 
 
 def _checked(birth):
@@ -139,6 +149,14 @@ def panchang(latitude: float = Query(ge=-66, le=66), longitude: float = Query(ge
     return build_panchang(day, latitude, longitude, timezone)
 
 
+@app.get("/rashifal")
+def rashifal(date: Optional[dt.date] = None):
+    day = date or dt.datetime.now(ZoneInfo("Asia/Kolkata")).date()
+    if not 1800 <= day.year <= 2200:
+        raise HTTPException(status_code=422, detail="Year must be between 1800 and 2200.")
+    return build_rashifal(day)
+
+
 @app.post("/calculate")
 def calculate(birth: BirthInput):
     return calculate_chart(**_checked(birth))
@@ -152,6 +170,23 @@ def preview(birth: BirthInput):
 @app.post("/milan")
 def milan(pair: MilanInput):
     return build_milan(_checked(pair.groom), _checked(pair.bride))
+
+
+@app.post("/milan/pdf")
+def milan_pdf(pair: MilanPdfInput):
+    result = build_milan(_checked(pair.groom), _checked(pair.bride))
+
+    def person(birth, name, place):
+        return {"name": name, "place": place, "date": birth.date,
+                "time": birth.time if birth.time_known else None}
+
+    try:
+        content = generate_milan_pdf(result, person(pair.groom, pair.groom_name, pair.groom_place),
+                                     person(pair.bride, pair.bride_name, pair.bride_place), pair.lang)
+    except PdfError as error:
+        raise HTTPException(status_code=500, detail=f"The PDF could not be produced: {error}")
+    return Response(content=content, media_type="application/pdf",
+                    headers={"Content-Disposition": 'inline; filename="kundli-milan.pdf"'})
 
 
 @app.post("/report")

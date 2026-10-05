@@ -8,6 +8,8 @@ and the website only read this result; they never calculate anything.
 import datetime as dt
 
 from app.astro import calculate_chart, sade_sati_on
+from app.astro import constants as astro_constants
+from app.astro.daily import RASHI_SLUGS, choghadiya, moon_transit
 from app.astro.milan import ashtakoot
 from app.content import audience_for, load
 from app.content.interpret import interpret
@@ -42,11 +44,48 @@ def build_panchang(date, latitude, longitude, timezone="Asia/Kolkata"):
     p = chart["panchang"]
     keep = ("tithi", "paksha", "nakshatra", "yoga", "karana", "maas", "ritu", "ayana", "weekday",
             "vikram_samvat", "shaka_samvat", "samvatsara", "sunrise", "sunset", "rahu_kaal")
+    names = load("daily")
+    slots = choghadiya(date, latitude, longitude, timezone)
+    for part in slots.values():
+        for slot in part:
+            slot["name"] = names["choghadiya"][slot["key"]]["name"]
+            slot["use"] = names["choghadiya"][slot["key"]]["use"]
+            slot["quality_label"] = names["quality"][slot["quality"]]
     return {
         "date": date.isoformat(),
         **{key: p[key] for key in keep},
         "moon_sign": chart["planets"]["moon"]["sign"],
         "sun_sign": chart["planets"]["sun"]["sign"],
+        "choghadiya": slots,
+    }
+
+
+def build_rashifal(date, timezone="Asia/Kolkata"):
+    """The day's Rashifal for all twelve Rashis, read from the Moon's transit."""
+    book = load("daily")["rashifal"]
+    ordinals = load("labels")["ordinals"]
+    transit = moon_transit(date, timezone)
+    rashis = []
+    for index, house in enumerate(transit["houses"]):
+        entry = book["houses"][house - 1]
+        name = astro_constants.named(astro_constants.SIGNS[index])
+        rashis.append({
+            "slug": RASHI_SLUGS[index],
+            "name": name,
+            "lord": astro_constants.named(astro_constants.PLANETS[astro_constants.SIGN_LORDS[index]]),
+            "house": house,
+            "mood": entry["mood"], "text": entry["text"],
+            "good_for": entry["good_for"], "go_easy": entry["go_easy"],
+            "basis": {lang: book["basis"][lang].format(
+                moon_sign=transit["moon_sign"][lang], nakshatra=transit["moon_nakshatra"][lang],
+                house=ordinals[lang][house - 1], rashi=name[lang]) for lang in ("en", "hi")},
+        })
+    return {
+        "date": transit["date"],
+        "moon_sign": transit["moon_sign"], "moon_nakshatra": transit["moon_nakshatra"],
+        "moon_leaves_sign": transit["moon_leaves_sign"],
+        "method": book["method"],
+        "rashis": rashis,
     }
 
 

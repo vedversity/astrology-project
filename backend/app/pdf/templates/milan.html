@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<title>Kundli Milan</title>
+<style>{{ css|safe }}
+.score { text-align: center; border: 0.14em solid var(--gold); border-radius: 0.8em; background: var(--paper); padding: 0.8em 1em; margin: 0.6em 0 1em; }
+.score .big { font-family: "Noto Serif Devanagari", "Noto Sans"; font-size: 4em; font-weight: 700; color: var(--maroon); line-height: 1.15; }
+.score .big small { font-size: 0.45em; color: #6b5a44; font-weight: 400; }
+.score .label { font-size: 1.3em; font-weight: 600; color: var(--saffron); }
+td.pts { text-align: right; font-weight: 600; white-space: nowrap; }
+</style>
+</head>
+<body class="{{ lang }}">
+{% macro footer(n) %}<div class="footer">Kundli Milan · {{ groom_name }} · {{ bride_name }} · Page {{ n }}</div>{% endmacro %}
+{% macro bar(hi, en) %}<div class="bar">{{ hi }} · {{ en }}</div>{% endmacro %}
+
+<section class="page"><div class="frame"></div><div class="fit">
+  <div class="title" style="margin-top:1.5em">
+    <div class="hi" style="font-size:1.3em">{{ invocation }}</div>
+    <div class="hi" style="font-size:2.6em">कुंडली मिलान</div>
+    <div class="en">Kundli Milan · Ashtakoot Guna Matching</div>
+    <div class="stars">✦✦✦</div>
+  </div>
+
+  <div class="cols">
+    {% for who, label_hi, label_en, name in [('groom', 'वर', 'Groom', groom_name), ('bride', 'वधू', 'Bride', bride_name)] %}
+    <div class="card">
+      <h4>{{ label_hi }} · {{ label_en }}</h4>
+      <table class="kv">
+        <tr><td>{{ L('नाम', 'Name') }}</td><td>{{ name }}</td></tr>
+        <tr><td>{{ L('जन्म', 'Born') }}</td><td>{{ births[who] }}</td></tr>
+        <tr><td>{{ L('राशि', 'Rashi') }}</td><td>{{ t(m.people[who].rashi) }}</td></tr>
+        <tr><td>{{ L('नक्षत्र', 'Nakshatra') }}</td><td>{{ t(m.people[who].nakshatra) }} · {{ L('चरण', 'pada') }} {{ m.people[who].pada }}</td></tr>
+        <tr><td>{{ L('मांगलिक', 'Manglik') }}</td><td>{{ t(m.manglik[who].label) }}</td></tr>
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="score">
+    <div class="big">{{ total }}<small> / 36</small></div>
+    <div class="label">{{ t(m.label) }}</div>
+    <p style="margin:0.5em 0 0">{{ t(m.text) }}</p>
+  </div>
+
+  {{ bar('अष्टकूट', 'The Eight Kootas') }}
+  <table class="tight">
+    <tr><th>{{ L('कूट', 'Koota') }}</th><th>{{ L('क्या देखता है', 'What it looks at') }}</th><th>{{ L('वर', 'Groom') }}</th><th>{{ L('वधू', 'Bride') }}</th><th style="text-align:right">{{ L('अंक', 'Points') }}</th></tr>
+    {% for k in m.kootas %}
+    <tr><td class="name">{{ k.name.hi }}{% if lang == 'en' %}<span class="sub">{{ k.name.en }}</span>{% endif %}</td><td>{{ t(k.about) }}</td><td>{{ t(k.groom) }}</td><td>{{ t(k.bride) }}</td><td class="pts">{{ num(k.points) }} / {{ k.max }}</td></tr>
+    {% endfor %}
+    <tr><th colspan="4">{{ L('कुल गुण', 'Total gunas') }}</th><th style="text-align:right">{{ total }} / 36</th></tr>
+  </table>
+
+  {% if m.exceptions %}
+  {{ bar('परिहार', 'Classical Exceptions') }}
+  <ul>{% for e in m.exceptions %}<li>{{ t(e) }}</li>{% endfor %}</ul>
+  {% endif %}
+
+  {{ bar('मांगलिक मिलान', 'Manglik Comparison') }}
+  <p>{{ t(m.manglik.text) }}</p>
+  {% if m.manglik.note %}<p class="note">{{ t(m.manglik.note) }}</p>{% endif %}
+
+  <div class="disclaimer">{{ t(m.note) }} {{ t(disclaimer) }}</div>
+  <div class="final"><div class="blessing">॥ शुभं भवतु ॥</div><p class="muted">{{ L('तैयार की गई', 'Prepared on') }} {{ prepared_on }}</p></div>
+</div>{{ footer(1) }}</section>
+
+<script>{{ fit_js|safe }}</script>
+</body>
+</html>

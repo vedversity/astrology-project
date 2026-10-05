@@ -14,11 +14,12 @@ export default async function Shell({ lang, children }: { lang: Lang; children: 
   const links = [
     { href: path(lang, "/janam-patrika"), label: c.nav.patrika },
     { href: path(lang, "/kundli-milan"), label: guides(lang).milan.crumb },
+    { href: path(lang, "/rashifal"), label: guides(lang).rashifal.crumb },
     { href: path(lang, "/panchang"), label: c.nav.panchang },
     { href: path(lang, "/about"), label: c.nav.about },
   ];
   const tools = guides(lang)
-    .tools.items.filter((item) => !["/panchang", "/kundli-milan"].includes(item.href))
+    .tools.items.filter((item) => !["/panchang", "/kundli-milan", "/rashifal"].includes(item.href))
     .map((item) => ({ href: path(lang, item.href), label: item.title }));
   const policies = [
     { href: path(lang, "/privacy"), label: c.footer.privacy },

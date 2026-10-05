@@ -35,6 +35,7 @@ export default function Milan({ lang }: { lang: Lang }) {
   const [error, setError] = useState("");
   const [working, setWorking] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
+  const [pdfState, setPdfState] = useState<"idle" | "working" | "failed">("idle");
   const resultBox = useRef<HTMLDivElement>(null);
   const today = new Date().toISOString().slice(0, 10);
 
@@ -52,7 +53,26 @@ export default function Milan({ lang }: { lang: Lang }) {
     }
     setError("");
     setWorking(true);
-    const body = Object.fromEntries(
+    const body = requestBody();
+    try {
+      const response = await fetch(`${API_URL}/milan`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      setResult(await response.json());
+      setTimeout(() => resultBox.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+    } catch {
+      setError(c.failed);
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  /** The two births in the shape the API expects. */
+  function requestBody() {
+    return Object.fromEntries(
       WHO.map((who) => {
         const p = people[who];
         return [
@@ -68,19 +88,32 @@ export default function Milan({ lang }: { lang: Lang }) {
         ];
       }),
     );
+  }
+
+  async function downloadPdf() {
+    setPdfState("working");
     try {
-      const response = await fetch(`${API_URL}/milan`, {
+      const response = await fetch(`${API_URL}/milan/pdf`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+          ...requestBody(),
+          lang,
+          groom_name: people.groom.name.trim() || null,
+          bride_name: people.bride.name.trim() || null,
+          groom_place: people.groom.place?.label ?? null,
+          bride_place: people.bride.place?.label ?? null,
+        }),
       });
       if (!response.ok) throw new Error(String(response.status));
-      setResult(await response.json());
-      setTimeout(() => resultBox.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(await response.blob());
+      link.download = "kundli-milan.pdf";
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 60000);
+      setPdfState("idle");
     } catch {
-      setError(c.failed);
-    } finally {
-      setWorking(false);
+      setPdfState("failed");
     }
   }
 
@@ -254,6 +287,14 @@ export default function Milan({ lang }: { lang: Lang }) {
             {result.manglik.note && <p className="mt-1 text-sm text-ink-600">{result.manglik.note[lang]}</p>}
           </div>
           <p className="mt-3 text-sm text-ink-600">{result.note[lang]}</p>
+          <button type="button" onClick={downloadPdf} disabled={pdfState === "working"} className="btn-secondary mt-4 md:mx-auto md:max-w-md">
+            {pdfState === "working" ? c.pdfWorking : c.pdf}
+          </button>
+          {pdfState === "failed" && (
+            <p role="alert" className="mt-2 text-center text-sm font-semibold text-red-700">
+              {c.failed}
+            </p>
+          )}
         </div>
       )}
     </>

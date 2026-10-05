@@ -121,3 +121,34 @@ def test_api_milan():
     assert response.status_code == 200
     assert response.json()["max"] == 36 and len(response.json()["kootas"]) == 8
     assert client.post("/milan", json={"groom": person}).status_code == 422
+
+
+def test_milan_pdf_page():
+    from app.pdf import build_milan_html
+    groom = dict(BIRTH)
+    bride = dict(date=dt.date(2027, 3, 14), time=dt.time(9, 15), latitude=26.9124, longitude=75.7873,
+                 timezone="Asia/Kolkata")
+    result = build_milan(groom, bride)
+    people = ({"name": "Rohan <b>", "date": groom["date"], "time": groom["time"], "place": "Kharghar"},
+              {"name": None, "date": bride["date"], "time": None, "place": None})
+    for lang, title in (("hi", "कुल गुण"), ("en", "Total gunas")):
+        html = build_milan_html(result, *people, lang=lang)
+        assert html.count('<section class="page">') == 1 and title in html
+        assert "{{" not in html and "Rohan &lt;b&gt;" in html          # typed text is escaped
+        assert f"{result['total']:g} / 36" in html
+    assert "27 Sep 2026, 08:00 PM · Kharghar" in build_milan_html(result, *people, lang="en")
+    assert "Bride" in build_milan_html(result, *people, lang="en")       # no name given
+
+
+def test_api_milan_pdf():
+    import pytest
+    sync_api = pytest.importorskip("playwright.sync_api")
+    try:
+        with sync_api.sync_playwright() as p:
+            p.chromium.launch().close()
+    except Exception as error:
+        pytest.skip(f"Chromium is not installed: {error}")
+    person = {"date": "2026-09-27", "time": "20:00", "latitude": 19.0473, "longitude": 73.0718}
+    response = TestClient(app).post("/milan/pdf", json={
+        "groom": person, "bride": {**person, "date": "2027-03-14"}, "groom_name": "रोहन", "lang": "hi"})
+    assert response.status_code == 200 and response.content.startswith(b"%PDF")

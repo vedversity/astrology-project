@@ -200,8 +200,51 @@ def html_to_pdf(html):
                 browser.close()
 
 
+def build_milan_html(milan, groom, bride, lang="hi", prepared_on=None):
+    """Fill the one-page Kundli Milan report.
+
+    milan: the result of app.report.build_milan(). groom, bride: {"name", "date", "time", "place"}
+    as typed by the customer (date and time are printed, not recalculated).
+    """
+    if lang not in LANGS:
+        raise ValueError(f"lang must be one of {LANGS}")
+    labels = load("labels")
+    months = labels["months"][lang]
+    prepared = prepared_on or dt.date.today()
+
+    def t(pair):
+        return pair[lang] if pair else ""
+
+    def born(person):
+        d = person["date"]
+        text = f"{d.day} {months[d.month - 1]} {d.year}"
+        if person.get("time"):
+            text += ", " + person["time"].strftime("%I:%M %p")
+        return text + (f" · {person['place']}" if person.get("place") else "")
+
+    def num(value):
+        return f"{value:g}"
+
+    fallback = {"groom": {"hi": "वर", "en": "Groom"}, "bride": {"hi": "वधू", "en": "Bride"}}
+    css = (TEMPLATES / "style.css").read_text(encoding="utf-8").replace("FONTS", FONTS.as_uri())
+    return _env.get_template("milan.html").render(
+        css=css, fit_js=FIT_JS, lang=lang, m=milan, t=t, num=num, total=num(milan["total"]),
+        L=lambda hindi, english: hindi if lang == "hi" else english,
+        groom_name=(groom.get("name") or "").strip() or fallback["groom"][lang],
+        bride_name=(bride.get("name") or "").strip() or fallback["bride"][lang],
+        births={"groom": born(groom), "bride": born(bride)},
+        invocation=load("general")["invocation"], disclaimer=load("general", "adult")["disclaimer"],
+        prepared_on=f"{prepared.day} {months[prepared.month - 1]} {prepared.year}",
+    )
+
+
+def generate_milan_pdf(milan, groom, bride, lang="hi", prepared_on=None):
+    return html_to_pdf(build_milan_html(milan, groom, bride, lang, prepared_on))
+
+
 def generate_pdf(report, person, variant="full", lang="hi", prepared_on=None):
     return html_to_pdf(build_html(report, person, variant, lang, prepared_on))
 
 
-__all__ = ["PAGE_COUNT", "PdfError", "VARIANTS", "build_html", "generate_pdf", "html_to_pdf"]
+__all__ = ["PAGE_COUNT", "PdfError", "VARIANTS", "build_html", "build_milan_html", "generate_milan_pdf",
+           "generate_pdf", "html_to_pdf"]

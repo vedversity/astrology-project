@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import PlaceInput from "@/components/PlaceInput";
 import { saveCity, useCity, type Place } from "@/lib/birth";
 import { content, fill } from "@/lib/content";
+import { guides } from "@/lib/guides";
 import { API_URL, DEFAULT_CITY, path, type Lang, type Text } from "@/lib/site";
 
 type Timed = Text & { end?: string };
+type Slot = { key: string; quality: "good" | "neutral" | "avoid"; start: string; end: string; name: Text; use: Text };
 export type PanchangData = {
   date: string;
   weekday: Text;
@@ -24,7 +26,43 @@ export type PanchangData = {
   sunrise: string;
   sunset: string;
   rahu_kaal: { start: string; end: string };
+  choghadiya: { day: Slot[]; night: Slot[] };
 };
+
+const SLOT_STYLE = {
+  good: "border-l-4 border-green-600",
+  neutral: "border-l-4 border-haldi-400",
+  avoid: "border-l-4 border-gray-300",
+};
+
+/** One Choghadiya table (day or night). The slot running right now is marked. */
+function Slots({ lang, title, slots }: { lang: Lang; title: string; slots: Slot[] }) {
+  const [now] = useState(() => Date.now());
+  return (
+    <div className="card">
+      <h3 className="font-semibold text-maroon-800">{title}</h3>
+      <ul className="mt-2 space-y-1">
+        {slots.map((slot) => {
+          const running = now >= Date.parse(slot.start) && now < Date.parse(slot.end);
+          return (
+            <li key={slot.start} className={`rounded-r-lg px-3 py-2 ${SLOT_STYLE[slot.quality]} ${running ? "bg-kesar-100" : "bg-kesar-50"}`}>
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="font-semibold">
+                  {slot.name[lang]}
+                  {running && <span className="ml-2 rounded-full bg-kesar-600 px-2 py-0.5 text-xs text-white">{guides(lang).choghadiya.now}</span>}
+                </span>
+                <span className="text-sm whitespace-nowrap">
+                  {clock(slot.start)} – {clock(slot.end)}
+                </span>
+              </div>
+              <p className="text-sm text-ink-600">{slot.use[lang]}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
 
 /** "2026-09-27T16:59:27+05:30" -> "4:59 PM". The time is already in the city's own clock. */
 function clock(iso: string) {
@@ -83,7 +121,18 @@ function useChosenCity() {
  * The full Panchang: pick a city and a date, see the day's details.
  * A city's own page passes "fixed", and then only the date can be changed.
  */
-export default function Panchang({ lang, initial, fixed }: { lang: Lang; initial: PanchangData | null; fixed?: Place }) {
+export default function Panchang({
+  lang,
+  initial,
+  fixed,
+  only,
+}: {
+  lang: Lang;
+  initial: PanchangData | null;
+  fixed?: Place;
+  /** "choghadiya" shows the Choghadiya tables without the Panchang rows */
+  only?: "choghadiya";
+}) {
   const c = content(lang).panchang;
   const chosen = useChosenCity();
   const place = fixed ?? chosen.place;
@@ -144,7 +193,7 @@ export default function Panchang({ lang, initial, fixed }: { lang: Lang; initial
         </div>
       </div>
 
-      <div className="card mt-3">
+      <div className={only ? "hidden" : "card mt-3"}>
         {failed && <p role="alert">{c.error}</p>}
         {!failed && !data && <p className="text-ink-600">{c.loading}</p>}
         {data && (
@@ -161,6 +210,15 @@ export default function Panchang({ lang, initial, fixed }: { lang: Lang; initial
           </>
         )}
       </div>
+
+      {only && failed && <p role="alert" className="card mt-3">{c.error}</p>}
+      {only && !failed && !data && <p className="card mt-3 text-ink-600">{c.loading}</p>}
+      {data?.choghadiya && (
+        <div className="mt-3 grid gap-3 md:grid-cols-2">
+          <Slots lang={lang} title={guides(lang).choghadiya.dayTitle} slots={data.choghadiya.day} />
+          <Slots lang={lang} title={guides(lang).choghadiya.nightTitle} slots={data.choghadiya.night} />
+        </div>
+      )}
     </>
   );
 }

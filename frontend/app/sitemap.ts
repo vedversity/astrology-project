@@ -3,8 +3,9 @@ import type { MetadataRoute } from "next";
 import { DOSHA_SLUGS } from "@/lib/guides";
 import { api, path, SITE_URL } from "@/lib/site";
 
+const RASHIS = ["mesh", "vrishabh", "mithun", "kark", "singh", "kanya", "tula", "vrishchik", "dhanu", "makar", "kumbh", "meen"];
 const PAGES = [
-  "/", "/janam-patrika", "/kundli-milan", "/rashi-nakshatra", "/panchang", "/naam", "/grah", "/dosh", "/about",
+  "/", "/janam-patrika", "/kundli-milan", "/rashifal", "/choghadiya", "/rashi-nakshatra", "/panchang", "/naam", "/grah", "/dosh", "/about",
   "/privacy", "/terms", "/refund", "/disclaimer",
 ];
 
@@ -20,6 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(nakshatras ?? []).map((item) => `/naam/${item.slug}`),
     ...(planets ?? []).map((item) => `/grah/${item.slug}`),
     ...DOSHA_SLUGS.map((slug) => `/dosh/${slug}`),
+    ...RASHIS.map((slug) => `/rashifal/${slug}`),
     ...(cities ?? []).map((item) => `/panchang/${item.slug}`),
   ];
   return pages.flatMap((page) =>

@@ -1,0 +1,103 @@
+{
+  "_note": "DRAFT for astrologer review. Wording for Choghadiya and for the daily Rashifal. The Rashifal is read from the Moon's transit: the house the Moon occupies today, counted from each Rashi. Tone: practical and calm, never fearful.",
+
+  "choghadiya": {
+    "amrit": {"name": {"en": "Amrit", "hi": "अमृत"}, "use": {"en": "Best: good for every kind of work", "hi": "सर्वोत्तम: हर प्रकार के कार्य के लिए शुभ"}},
+    "shubh": {"name": {"en": "Shubh", "hi": "शुभ"}, "use": {"en": "Good: ceremonies, marriage talks, new beginnings", "hi": "शुभ: संस्कार, विवाह की बात, नई शुरुआत"}},
+    "labh": {"name": {"en": "Labh", "hi": "लाभ"}, "use": {"en": "Good: business, learning, starting work", "hi": "शुभ: व्यापार, विद्या, कार्य आरंभ"}},
+    "char": {"name": {"en": "Char", "hi": "चर"}, "use": {"en": "Fair: travel and anything that moves", "hi": "सामान्य: यात्रा और चल कार्य"}},
+    "udveg": {"name": {"en": "Udveg", "hi": "उद्वेग"}, "use": {"en": "Avoid new work; government matters are fine", "hi": "नया कार्य टालें; सरकारी कार्य ठीक हैं"}},
+    "rog": {"name": {"en": "Rog", "hi": "रोग"}, "use": {"en": "Avoid new work; routine work continues", "hi": "नया कार्य टालें; चालू काम करते रहें"}},
+    "kaal": {"name": {"en": "Kaal", "hi": "काल"}, "use": {"en": "Avoid new work; routine work continues", "hi": "नया कार्य टालें; चालू काम करते रहें"}}
+  },
+  "quality": {
+    "good": {"en": "Auspicious", "hi": "शुभ"},
+    "neutral": {"en": "Fair", "hi": "सामान्य"},
+    "avoid": {"en": "Avoid new starts", "hi": "नई शुरुआत टालें"}
+  },
+
+  "rashifal": {
+    "houses": [
+      {
+        "mood": {"en": "A comfortable, self-assured day", "hi": "सुखद और आत्मविश्वास भरा दिन"},
+        "text": {"en": "The Moon is in your own sign, so the mind is fresh and people respond warmly to you. It is a good day to begin something, meet people and look after yourself.", "hi": "चंद्रमा आपकी ही राशि में है, इसलिए मन प्रसन्न रहेगा और लोग आपसे आत्मीयता से मिलेंगे। कुछ नया आरंभ करने, लोगों से मिलने और अपना ध्यान रखने के लिए अच्छा दिन है।"},
+        "good_for": {"en": "New beginnings, meetings, self-care", "hi": "नई शुरुआत, मुलाकातें, अपनी देखभाल"},
+        "go_easy": {"en": "Acting on a passing mood", "hi": "क्षणिक भावना में निर्णय"}
+      },
+      {
+        "mood": {"en": "A day for family and money matters", "hi": "परिवार और धन के विषयों का दिन"},
+        "text": {"en": "Attention turns to family, food and finances. Speak gently and check before you spend; time at home with family is the best use of the day.", "hi": "ध्यान परिवार, भोजन और धन की ओर रहेगा। मधुर वाणी रखें और खर्च से पहले सोच लें; घर पर परिवार के साथ समय बिताना दिन का सबसे अच्छा उपयोग है।"},
+        "good_for": {"en": "Family time, sorting accounts", "hi": "परिवार के साथ समय, हिसाब-किताब"},
+        "go_easy": {"en": "Impulse buying, sharp words", "hi": "बिना सोचे खरीदारी, कठोर वचन"}
+      },
+      {
+        "mood": {"en": "An energetic, confident day", "hi": "ऊर्जा और साहस का दिन"},
+        "text": {"en": "Courage and initiative are high, and effort pays off quickly. Good for short trips, calls, writing and anything that needs a bold first step.", "hi": "साहस और पहल की भावना प्रबल रहेगी, और परिश्रम का फल शीघ्र मिलेगा। छोटी यात्रा, बातचीत, लेखन और साहस भरे पहले कदम के लिए अच्छा दिन है।"},
+        "good_for": {"en": "Short travel, communication, initiative", "hi": "छोटी यात्रा, संवाद, पहल"},
+        "go_easy": {"en": "Taking on too much at once", "hi": "एक साथ बहुत काम उठाना"}
+      },
+      {
+        "mood": {"en": "A quiet, homely day", "hi": "शांत और घरेलू दिन"},
+        "text": {"en": "The mind wants rest and the comfort of home. Keep the day simple, spend time with your mother or elders, and leave big decisions for another day.", "hi": "मन विश्राम और घर का सुख चाहेगा। दिन को सरल रखें, माता या बड़ों के साथ समय बिताएँ और बड़े निर्णय किसी और दिन के लिए छोड़ दें।"},
+        "good_for": {"en": "Rest, home, time with elders", "hi": "विश्राम, घर, बड़ों के साथ समय"},
+        "go_easy": {"en": "Major decisions, arguments at home", "hi": "बड़े निर्णय, घर में बहस"}
+      },
+      {
+        "mood": {"en": "A thoughtful, creative day", "hi": "विचार और रचनात्मकता का दिन"},
+        "text": {"en": "Ideas come easily and study goes well. Give time to children, learning or a creative interest; decide slowly where money is concerned.", "hi": "विचार सहजता से आएँगे और पढ़ाई अच्छी होगी। संतान, विद्या या किसी रचनात्मक रुचि को समय दें; धन से जुड़े निर्णय धीरे-धीरे लें।"},
+        "good_for": {"en": "Study, creative work, time with children", "hi": "अध्ययन, रचनात्मक कार्य, संतान के साथ समय"},
+        "go_easy": {"en": "Speculation, hurried choices", "hi": "सट्टा, जल्दबाज़ी के निर्णय"}
+      },
+      {
+        "mood": {"en": "A productive day that favours effort", "hi": "परिश्रम का फल देने वाला दिन"},
+        "text": {"en": "Work gets done and obstacles give way. A good day to clear pending tasks, face a competition and attend to health routines.", "hi": "काम पूरे होंगे और बाधाएँ हटेंगी। रुके हुए काम निपटाने, प्रतिस्पर्धा का सामना करने और स्वास्थ्य की दिनचर्या पर ध्यान देने के लिए अच्छा दिन है।"},
+        "good_for": {"en": "Pending work, competition, health routine", "hi": "रुके काम, प्रतिस्पर्धा, स्वास्थ्य की दिनचर्या"},
+        "go_easy": {"en": "Lending money", "hi": "उधार देना"}
+      },
+      {
+        "mood": {"en": "A pleasant, sociable day", "hi": "सुखद और मिलनसार दिन"},
+        "text": {"en": "Relationships are in focus and company is enjoyable. Good for time with your partner, meetings and agreements made together.", "hi": "संबंध केंद्र में रहेंगे और संगति आनंद देगी। जीवनसाथी के साथ समय, मुलाकातों और मिलकर किए जाने वाले निर्णयों के लिए अच्छा दिन है।"},
+        "good_for": {"en": "Partner, meetings, agreements", "hi": "जीवनसाथी, मुलाकातें, समझौते"},
+        "go_easy": {"en": "Insisting on your own way", "hi": "अपनी ही बात पर अड़ना"}
+      },
+      {
+        "mood": {"en": "A day to slow down", "hi": "धीमे चलने का दिन"},
+        "text": {"en": "Energy is lower than usual, so keep the day light and routine. Rest well, drive and travel with care, and hold new beginnings for a couple of days.", "hi": "ऊर्जा सामान्य से कम रहेगी, इसलिए दिन को हल्का और नियमित रखें। अच्छा विश्राम करें, वाहन और यात्रा में सावधानी रखें और नई शुरुआत दो दिन के लिए टाल दें।"},
+        "good_for": {"en": "Rest, routine work, prayer", "hi": "विश्राम, नियमित कार्य, प्रार्थना"},
+        "go_easy": {"en": "New ventures, late nights", "hi": "नए कार्य, देर रात तक जागना"}
+      },
+      {
+        "mood": {"en": "A day of faith and good counsel", "hi": "आस्था और अच्छे मार्गदर्शन का दिन"},
+        "text": {"en": "Luck is supportive and advice from elders or teachers proves useful. Good for prayer, learning, planning a journey and helping someone.", "hi": "भाग्य साथ देगा और बड़ों या गुरुजनों की सलाह काम आएगी। पूजा-पाठ, अध्ययन, यात्रा की योजना और किसी की सहायता के लिए अच्छा दिन है।"},
+        "good_for": {"en": "Prayer, learning, seeking advice", "hi": "पूजा, अध्ययन, सलाह लेना"},
+        "go_easy": {"en": "Ignoring good advice", "hi": "अच्छी सलाह की उपेक्षा"}
+      },
+      {
+        "mood": {"en": "A strong day for work", "hi": "कार्य के लिए बली दिन"},
+        "text": {"en": "Effort at work is noticed and tasks move forward. Good for important meetings, taking responsibility and finishing what matters.", "hi": "कार्य-क्षेत्र में आपका परिश्रम दिखेगा और काम आगे बढ़ेंगे। महत्वपूर्ण बैठकों, ज़िम्मेदारी लेने और आवश्यक काम पूरे करने के लिए अच्छा दिन है।"},
+        "good_for": {"en": "Career tasks, meetings, responsibility", "hi": "कार्य-क्षेत्र, बैठकें, उत्तरदायित्व"},
+        "go_easy": {"en": "Bringing work stress home", "hi": "काम का तनाव घर लाना"}
+      },
+      {
+        "mood": {"en": "A day of gains and good company", "hi": "लाभ और अच्छी संगति का दिन"},
+        "text": {"en": "Wishes move closer and friends are helpful. Good for meeting people, following up on money owed and making plans with others.", "hi": "मनोकामनाएँ पूरी होने की ओर बढ़ेंगी और मित्र सहायक रहेंगे। लोगों से मिलने, रुका धन माँगने और मिलकर योजना बनाने के लिए अच्छा दिन है।"},
+        "good_for": {"en": "Friends, income matters, plans", "hi": "मित्र, आय के विषय, योजनाएँ"},
+        "go_easy": {"en": "Over-promising", "hi": "आवश्यकता से अधिक वादे"}
+      },
+      {
+        "mood": {"en": "A day to rest and reflect", "hi": "विश्राम और चिंतन का दिन"},
+        "text": {"en": "The mind turns inward and expenses can rise a little. Keep the day calm: finish old tasks, give something in charity and sleep early.", "hi": "मन अंतर्मुखी रहेगा और खर्च थोड़ा बढ़ सकता है। दिन को शांत रखें: पुराने काम निपटाएँ, कुछ दान करें और जल्दी सो जाएँ।"},
+        "good_for": {"en": "Rest, charity, finishing old tasks", "hi": "विश्राम, दान, पुराने काम निपटाना"},
+        "go_easy": {"en": "Large purchases, new commitments", "hi": "बड़ी खरीदारी, नई ज़िम्मेदारियाँ"}
+      }
+    ],
+    "basis": {
+      "en": "Today the Moon is in {moon_sign}, in {nakshatra} nakshatra, the {house} from {rashi}.",
+      "hi": "आज चंद्रमा {moon_sign} राशि और {nakshatra} नक्षत्र में है, जो {rashi} राशि से {house} भाव है।"
+    },
+    "method": {
+      "en": "This Rashifal is read from the Moon's transit counted from your Janma Rashi (Moon sign), the traditional basis of a daily forecast. It is the same for everyone of that Rashi; your own chart and running dasha shape the day far more.",
+      "hi": "यह राशिफल आपकी जन्म राशि (चंद्र राशि) से चंद्रमा के गोचर पर आधारित है, जो दैनिक फल का परंपरागत आधार है। यह उस राशि के सभी लोगों के लिए समान है; आपकी अपनी कुंडली और चल रही दशा दिन को कहीं अधिक प्रभावित करती है।"
+    }
+  }
+}
