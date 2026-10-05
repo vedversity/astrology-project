@@ -6,7 +6,10 @@ import Link from "next/link";
 
 import ForgetButton from "@/components/ForgetButton";
 import KundliForm from "@/components/KundliForm";
+import { CityLinks } from "@/components/guides";
 import Panchang, { PanchangStrip, type PanchangData } from "@/components/Panchang";
+import { Breadcrumbs, LinkGrid, Schema } from "@/components/ui";
+import { guides } from "@/lib/guides";
 import Plans from "@/components/Plans";
 import { content, fill, type Content } from "@/lib/content";
 import { DRAFT, LAST_UPDATED, legal, type LegalKey } from "@/lib/legal";
@@ -70,6 +73,7 @@ export async function pageMetadata(
 
 export async function HomePage({ lang }: { lang: Lang }) {
   const c = content(lang);
+  const g = guides(lang);
   const site = await getSite();
 
   return (
@@ -89,6 +93,11 @@ export async function HomePage({ lang }: { lang: Lang }) {
         <div className="mt-6 md:mt-0">
           <KundliForm lang={lang} />
         </div>
+      </section>
+
+      <section className="pb-8">
+        <Heading>{g.tools.title}</Heading>
+        <LinkGrid items={g.tools.items.map((item) => ({ ...item, href: path(lang, item.href) }))} />
       </section>
 
       <section className="pb-8">
@@ -160,11 +169,33 @@ export async function HomePage({ lang }: { lang: Lang }) {
 
 export async function PatrikaPage({ lang }: { lang: Lang }) {
   const c = content(lang);
+  const g = guides(lang);
   const site = await getSite();
 
   return (
     <>
-      <section className="pt-6 pb-8">
+      <Breadcrumbs lang={lang} trail={[{ label: c.nav.patrika }]} />
+      {site && (
+        <Schema
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: c.patrika.h1,
+            description: c.patrika.description,
+            image: SITE_URL + `/sample/${lang}-1.jpg`,
+            brand: { "@type": "Brand", name: site.brand.name[lang] },
+            offers: site.plans.map((plan) => ({
+              "@type": "Offer",
+              name: plan.name[lang],
+              price: plan.price,
+              priceCurrency: "INR",
+              availability: "https://schema.org/InStock",
+              url: SITE_URL + path(lang, "/janam-patrika"),
+            })),
+          }}
+        />
+      )}
+      <section className="pt-4 pb-8">
         <h1 className="font-serif text-[28px] leading-tight text-maroon-800 md:text-4xl">{c.patrika.h1}</h1>
         <p className="mt-3 max-w-3xl text-ink-600">{c.patrika.intro}</p>
       </section>
@@ -206,6 +237,22 @@ export async function PatrikaPage({ lang }: { lang: Lang }) {
       </section>
 
       <section className="pb-8">
+        <Heading>{g.positioning.title}</Heading>
+        <div className="overflow-hidden rounded-2xl border border-kesar-100 bg-white">
+          <div className="grid grid-cols-2 bg-kesar-50 text-sm font-semibold text-maroon-800">
+            <p className="px-4 py-2">{g.positioning.themLabel}</p>
+            <p className="px-4 py-2">{g.positioning.usLabel}</p>
+          </div>
+          {g.positioning.rows.map((row) => (
+            <div key={row.us} className="grid grid-cols-2 border-t border-kesar-100">
+              <p className="px-4 py-3 text-ink-600">{row.them}</p>
+              <p className="px-4 py-3 font-semibold">{row.us}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="pb-8">
         <Heading>{c.patrika.plansTitle}</Heading>
         <Plans lang={lang} plans={site?.plans ?? null} />
         <Link href={path(lang) + "#kundli"} className="btn-primary mt-4 md:mx-auto md:max-w-sm">
@@ -223,7 +270,8 @@ export async function AboutPage({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <section className="pt-6 pb-8">
+      <Breadcrumbs lang={lang} trail={[{ label: c.nav.about }]} />
+      <section className="pt-4 pb-8">
         <h1 className="font-serif text-[28px] leading-tight text-maroon-800 md:text-4xl">{c.about.h1}</h1>
         <p className="mt-3 max-w-3xl text-ink-600">{c.about.intro}</p>
       </section>
@@ -282,7 +330,8 @@ export async function PanchangPage({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <section className="pt-6 pb-6">
+      <Breadcrumbs lang={lang} trail={[{ label: c.nav.panchang }]} />
+      <section className="pt-4 pb-6">
         <h1 className="font-serif text-[28px] leading-tight text-maroon-800 md:text-4xl">{c.panchang.h1}</h1>
         <p className="mt-3 max-w-3xl text-ink-600">{c.panchang.intro}</p>
       </section>
@@ -301,6 +350,8 @@ export async function PanchangPage({ lang }: { lang: Lang }) {
           ))}
         </div>
       </section>
+
+      <CityLinks lang={lang} />
 
       <section className="pb-10">
         <Link href={path(lang) + "#kundli"} className="btn-primary md:mx-auto md:max-w-md">

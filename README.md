@@ -242,6 +242,11 @@ and email typed there are not stored or sent anywhere yet.
 | `/` and `/en` | Home: the form, what is free, the plans, FAQ |
 | `/janam-patrika` | What the Patrika contains, sample pages, the plans |
 | `/panchang` | Today's Panchang for any city (tithi, nakshatra, sunrise, Rahu Kaal); also shown as a strip on the home page |
+| `/panchang/varanasi` (115 cities) | Today's Panchang for that city, by its own sunrise. Cities and their Hindi names are in `backend/app/places/data/cities_hi.json` |
+| `/rashi-nakshatra` | Find your Rashi and Nakshatra: the form, with an explanation |
+| `/naam`, `/naam/revati` (27) | Baby names by nakshatra: the four letters and names from the names database |
+| `/grah`, `/grah/guru` (9) | What each planet means in the 12 houses, from the rule-book |
+| `/dosh`, `/dosh/manglik` (4) | Fear-free dosha guides with cancellation rules (wording in `frontend/lib/guides.ts`) |
 | `/about` | Calculation method and the three promises |
 | `/privacy`, `/terms`, `/refund`, `/disclaimer` | Policy pages. Drafts: have a lawyer check them, then set `DRAFT = false` in `frontend/lib/legal.ts` |
 | `/preview`, `/order`, `/thank-you` | A visitor's own result, order and download (hidden from search engines) |

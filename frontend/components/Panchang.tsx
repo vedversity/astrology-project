@@ -37,9 +37,9 @@ function until(iso: string, day: string) {
   return iso.slice(0, 10) === day ? clock(iso) : `${clock(iso)} (${iso.slice(8, 10)}/${iso.slice(5, 7)})`;
 }
 
-function usePanchang(place: Place, date: string, initial: PanchangData | null) {
+function usePanchang(place: Place, date: string, initial: PanchangData | null, initialCity: Place = DEFAULT_CITY) {
   const [result, setResult] = useState<{ key: string; data: PanchangData | null; failed: boolean }>({
-    key: initial ? `${DEFAULT_CITY.label}|` : "",
+    key: initial ? `${initialCity.label}|` : "",
     data: initial,
     failed: false,
   });
@@ -79,12 +79,17 @@ function useChosenCity() {
   return { place, choose };
 }
 
-/** The full Panchang page: pick a city and a date, see the day's details. */
-export default function Panchang({ lang, initial }: { lang: Lang; initial: PanchangData | null }) {
+/**
+ * The full Panchang: pick a city and a date, see the day's details.
+ * A city's own page passes "fixed", and then only the date can be changed.
+ */
+export default function Panchang({ lang, initial, fixed }: { lang: Lang; initial: PanchangData | null; fixed?: Place }) {
   const c = content(lang).panchang;
-  const { place, choose } = useChosenCity();
+  const chosen = useChosenCity();
+  const place = fixed ?? chosen.place;
+  const choose = chosen.choose;
   const [date, setDate] = useState("");
-  const { data, failed } = usePanchang(place ?? DEFAULT_CITY, date, initial);
+  const { data, failed } = usePanchang(place ?? DEFAULT_CITY, date, initial, fixed);
 
   const rows: [string, React.ReactNode][] = data
     ? [
@@ -111,7 +116,8 @@ export default function Panchang({ lang, initial }: { lang: Lang; initial: Panch
           <label className="label" htmlFor="city">
             {c.city}
           </label>
-          {place && (
+          {fixed && <p className="field flex items-center bg-gray-50">{fixed.label}</p>}
+          {!fixed && place && (
             <PlaceInput
               key={place.label}
               id="city"

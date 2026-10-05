@@ -1,7 +1,9 @@
 import Link from "next/link";
 
 import { content } from "@/lib/content";
-import { getSite, path, type Lang } from "@/lib/site";
+import { Schema } from "@/components/ui";
+import { guides } from "@/lib/guides";
+import { getSite, path, SITE_URL, type Lang } from "@/lib/site";
 
 /** Header and footer wrapped around every page. */
 export default async function Shell({ lang, children }: { lang: Lang; children: React.ReactNode }) {
@@ -14,6 +16,9 @@ export default async function Shell({ lang, children }: { lang: Lang; children: 
     { href: path(lang, "/panchang"), label: c.nav.panchang },
     { href: path(lang, "/about"), label: c.nav.about },
   ];
+  const tools = guides(lang)
+    .tools.items.filter((item) => !["/panchang", "/janam-patrika"].includes(item.href))
+    .map((item) => ({ href: path(lang, item.href), label: item.title }));
   const policies = [
     { href: path(lang, "/privacy"), label: c.footer.privacy },
     { href: path(lang, "/terms"), label: c.footer.terms },
@@ -55,11 +60,20 @@ export default async function Shell({ lang, children }: { lang: Lang; children: 
       </header>
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-4">{children}</main>
+      <Schema
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "Organization", "@id": SITE_URL + "/#org", name: brand, url: SITE_URL },
+            { "@type": "WebSite", url: SITE_URL + path(lang), name: brand, inLanguage: lang === "hi" ? "hi-IN" : "en-IN", publisher: { "@id": SITE_URL + "/#org" } },
+          ],
+        }}
+      />
 
       <footer className="border-t border-kesar-100 bg-white">
         <div className="mx-auto max-w-5xl px-4 py-6 text-sm text-ink-600">
           <nav className="flex flex-wrap gap-x-5 gap-y-1">
-            {[...links, ...policies].map((link) => (
+            {[...links, ...tools, ...policies].map((link) => (
               <Link key={link.href} href={link.href} className="flex min-h-8 items-center hover:text-kesar-600">
                 {link.label}
               </Link>

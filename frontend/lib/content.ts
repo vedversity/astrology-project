@@ -389,7 +389,7 @@ const en: typeof hi = {
   patrika: {
     title: "Janam Patrika PDF — from ₹{price}",
     description:
-      "Detailed Janam Patrika: birth charts, Panchang, 12 houses, yogas and doshas, Vimshottari dasha, remedies and numerology. See samples and start with a free preview.",
+      "Detailed Janam Patrika: charts, Panchang, 12 houses, yogas, doshas, dasha, remedies and numerology. See samples; start with a free preview.",
     h1: "The detailed Janam Patrika — a simple map of life",
     intro:
       "A Janam Patrika is the document families keep for generations, from the naming ceremony to marriage. Ours explains the traditional calculation in today's language.",

@@ -7,6 +7,8 @@ POST /report     everything a Janam Patrika needs: chart, yogas, doshas,
 POST /pdf        the finished Janam Patrika as a PDF file
 GET  /panchang   the day's Panchang for a place (tithi, nakshatra, Rahu Kaal ...)
 GET  /places     birth-place search (name -> latitude, longitude, timezone)
+GET  /cities     the cities that have their own Panchang page
+GET  /guide/...  reference pages: nakshatras with names, planets in houses
 GET  /site       brand name, plans and prices (from app/config/site.json)
 
 Run it with:  .venv\\Scripts\\python -m uvicorn app.main:app --reload
@@ -22,7 +24,7 @@ from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from app import config, places
+from app import config, guide, places
 from app.astro import ENGINE_VERSION, calculate_chart
 from app.pdf import PdfError, generate_pdf
 from app.report import build_panchang, build_preview, build_report
@@ -93,6 +95,29 @@ def site():
 @app.get("/places")
 def place_search(q: str = Query(min_length=2, max_length=60)):
     return places.search(q)
+
+
+@app.get("/cities")
+def city_list():
+    return places.cities()
+
+
+@app.get("/guide/nakshatras")
+def guide_nakshatras():
+    return guide.nakshatras()
+
+
+@app.get("/guide/nakshatras/{slug}")
+def guide_nakshatra(slug: str):
+    found = guide.nakshatra(slug)
+    if not found:
+        raise HTTPException(status_code=404, detail="Unknown nakshatra.")
+    return found
+
+
+@app.get("/guide/planets")
+def guide_planets():
+    return guide.planets()
 
 
 @app.get("/panchang")

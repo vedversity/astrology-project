@@ -43,6 +43,19 @@ export async function getSite(): Promise<Site | null> {
   }
 }
 
+/**
+ * Read reference data from the backend, kept for the given number of seconds.
+ * Returns null if the backend cannot be reached or does not know the item.
+ */
+export async function api<T>(route: string, keepSeconds: number): Promise<T | null> {
+  try {
+    const response = await fetch(API_URL + route, { next: { revalidate: keepSeconds } });
+    return response.ok ? ((await response.json()) as T) : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Address of a page in the chosen language: Hindi at the root, English under /en. */
 export function path(lang: Lang, page: string = "/"): string {
   if (lang === "hi") return page;

@@ -10,6 +10,7 @@ from functools import lru_cache
 from pathlib import Path
 
 DATA = Path(__file__).parent / "data" / "places.json"
+CITIES = Path(__file__).parent / "data" / "cities_hi.json"
 COUNTRY_NAMES = {"IN": "India", "US": "USA", "GB": "UK", "CA": "Canada", "AU": "Australia",
                  "AE": "UAE", "SG": "Singapore", "NP": "Nepal", "NZ": "New Zealand"}
 
@@ -49,4 +50,23 @@ def search(query, limit=8):
     ]
 
 
-__all__ = ["search"]
+@lru_cache(maxsize=None)
+def cities():
+    """The Indian cities that have their own Panchang page, largest first."""
+    with open(CITIES, encoding="utf-8") as f:
+        hindi = {name: value for name, value in json.load(f).items() if not name.startswith("_")}
+    out = []
+    for name, state, country, lat, lon, tz, population, keys in _places():
+        # A city may be listed under its newer or older spelling, so the search keys are checked too
+        wanted = next((n for n in hindi if country == "IN" and (n == name or n.lower() in keys)), None)
+        if wanted and not any(city["name"] == wanted for city in out):
+            out.append({"slug": wanted.lower().replace(" ", "-"), "name": wanted, "hi": hindi[wanted],
+                        "state": state, "latitude": lat, "longitude": lon, "timezone": tz})
+    return out
+
+
+def city(slug):
+    return next((c for c in cities() if c["slug"] == slug), None)
+
+
+__all__ = ["cities", "city", "search"]

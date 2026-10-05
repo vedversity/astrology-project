@@ -94,3 +94,43 @@ def test_api_panchang_defaults_to_today_and_checks_input():
     bad_zone = client.get("/panchang", params={"latitude": 28.6, "longitude": 77.2, "timezone": "Mars/Olympus"})
     assert bad_zone.status_code == 422
     assert client.get("/panchang", params={"latitude": 95, "longitude": 77.2}).status_code == 422
+
+
+def test_cities_with_their_own_panchang_page():
+    cities = client.get("/cities").json()
+    assert len(cities) >= 100
+    assert len({c["slug"] for c in cities}) == len(cities)
+    by_slug = {c["slug"]: c for c in cities}
+    assert by_slug["varanasi"]["hi"] == "वाराणसी" and by_slug["navi-mumbai"]["name"] == "Navi Mumbai"
+    for name in ("delhi", "bengaluru", "prayagraj", "mysuru", "gurugram", "lucknow"):
+        assert name in by_slug, name
+    assert all(c["timezone"] == "Asia/Kolkata" and 6 < c["latitude"] < 36 for c in cities)
+
+
+def test_guide_nakshatras():
+    listing = client.get("/guide/nakshatras").json()
+    assert len(listing) == 27 and listing[0]["slug"] == "ashwini" and listing[26]["slug"] == "revati"
+    revati = client.get("/guide/nakshatras/revati").json()
+    assert [l["en"] for l in revati["letters"]] == ["De", "Do", "Cha", "Chi"]
+    assert revati["lord"]["en"] == "Mercury" and revati["rashis"][0]["en"] == "Pisces" and revati["gandmool"]
+    assert revati["tree"]["en"] == "Mahua" and revati["previous"] == "uttara-bhadrapada" and revati["next"] == "ashwini"
+    names = {n["en"]: n for n in revati["names"]}
+    assert names["Devesh"]["pada"] == 1 and names["Chinmay"]["pada"] == 4 and names["Devesh"]["number"] == 1
+    assert names["Deepansh"]["pada"] is None                 # same sound, different vowel
+    assert "Aarav" not in names
+    # Krittika spans two rashis
+    assert [r["en"] for r in client.get("/guide/nakshatras/krittika").json()["rashis"]] == ["Aries", "Taurus"]
+    assert client.get("/guide/nakshatras/nowhere").status_code == 404
+    for item in listing:                                     # every nakshatra page has names to show
+        page = client.get(f"/guide/nakshatras/{item['slug']}").json()
+        assert len(page["names"]) >= 5, item["slug"]
+
+
+def test_guide_planets():
+    planets = client.get("/guide/planets").json()
+    assert [p["slug"] for p in planets] == ["surya", "chandra", "mangal", "budh", "guru", "shukra",
+                                           "shani", "rahu", "ketu"]
+    for planet in planets:
+        assert len(planet["houses"]) == 12
+        assert all(h["text"]["hi"] and h["text"]["en"] for h in planet["houses"])
+    assert planets[4]["name"]["hi"] == "गुरु" and "4th" in planets[4]["houses"][3]["text"]["en"]
