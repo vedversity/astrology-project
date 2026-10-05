@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { apiBody, keepPdf, useBirth, type Birth } from "@/lib/birth";
 import { content, fill } from "@/lib/content";
 import { API_URL, path, PAYMENTS_ENABLED, plansFor, type Lang, type Plan } from "@/lib/site";
+import { track } from "@/lib/track";
 
 /** Collects the names to print and the contact details, then gets the PDF. */
 export default function Order({ lang }: { lang: Lang }) {
@@ -80,6 +81,7 @@ function Fields({ lang, birth }: { lang: Lang; birth: Birth }) {
       });
       if (!response.ok) throw new Error(String(response.status));
       keepPdf(await response.blob(), "janam-patrika.pdf");
+      track("pdf_made", { plan: plan?.id ?? planId, lang: reportLang });
       router.push(path(lang, "/thank-you"));
     } catch {
       setError(c.failed);

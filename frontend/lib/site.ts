@@ -24,6 +24,8 @@ export type Plan = {
 export type Site = {
   brand: { name: Text; tagline: Text };
   contact: { email: string | null; whatsapp: string | null };
+  /** Shown only once the owner has filled it in (admin page) */
+  astrologer: { name: Text; experience_years: number; bio: Text } | null;
   plans: Plan[];
 };
 

@@ -154,14 +154,38 @@ export async function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
+      {site?.astrologer && (
+        <section className="pb-8">
+          <Heading>{c.about.astrologerTitle}</Heading>
+          <div className="card">
+            <h3 className="font-serif text-xl text-maroon-800">{site.astrologer.name[lang]}</h3>
+            <p className="text-sm font-semibold text-kesar-700">{fill(c.about.astrologerYears, { n: site.astrologer.experience_years })}</p>
+            <p className="mt-2 text-ink-600">{site.astrologer.bio[lang]}</p>
+          </div>
+        </section>
+      )}
+
       <Faq c={c} />
 
       {/* Room for, and then the bar itself: always within thumb reach on a phone */}
       <div className="h-16 md:hidden" />
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-kesar-100 bg-white p-3 md:hidden">
-        <a href="#kundli" className="btn-primary">
-          {c.home.stickyCta}
-        </a>
+        <div className="flex gap-2">
+          <a href="#kundli" className="btn-primary">
+            {c.home.stickyCta}
+          </a>
+          {site?.contact?.whatsapp && (
+            <a
+              href={`https://wa.me/${site.contact.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={c.about.whatsapp}
+              className="flex h-12 shrink-0 items-center rounded-xl border border-kesar-600 px-4 font-semibold text-kesar-700"
+            >
+              WhatsApp
+            </a>
+          )}
+        </div>
       </div>
     </>
   );
@@ -267,6 +291,7 @@ export async function PatrikaPage({ lang }: { lang: Lang }) {
 
 export async function AboutPage({ lang }: { lang: Lang }) {
   const c = content(lang);
+  const site = await getSite();
 
   return (
     <>
@@ -289,6 +314,17 @@ export async function AboutPage({ lang }: { lang: Lang }) {
           ))}
         </ul>
       </section>
+
+      {site?.astrologer && (
+        <section className="pb-8">
+          <Heading>{c.about.astrologerTitle}</Heading>
+          <div className="card">
+            <h3 className="font-serif text-xl text-maroon-800">{site.astrologer.name[lang]}</h3>
+            <p className="text-sm font-semibold text-kesar-700">{fill(c.about.astrologerYears, { n: site.astrologer.experience_years })}</p>
+            <p className="mt-2 text-ink-600">{site.astrologer.bio[lang]}</p>
+          </div>
+        </section>
+      )}
 
       <section className="pb-8">
         <Heading>{c.about.promisesTitle}</Heading>

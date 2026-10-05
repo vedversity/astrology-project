@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import Plans from "@/components/Plans";
+import ShareCard from "@/components/ShareCard";
 import { apiBody, useBirth } from "@/lib/birth";
 import { content, fill } from "@/lib/content";
 import { API_URL, path, plansFor, type Lang, type Plan, type Text } from "@/lib/site";
+import { track } from "@/lib/track";
 
 type Letter = Text & { pada?: number };
 type PreviewData = {
@@ -24,6 +26,7 @@ export default function Preview({ lang }: { lang: Lang }) {
   const birth = useBirth();
   const [data, setData] = useState<PreviewData | null>(null);
   const [plans, setPlans] = useState<Plan[] | null>(null);
+  const [brand, setBrand] = useState("");
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0); // goes up by one for each "try again"
 
@@ -41,16 +44,18 @@ export default function Preview({ lang }: { lang: Lang }) {
       .then(async ([preview, site]) => {
         if (!preview.ok) throw new Error(String(preview.status));
         const result = await preview.json();
-        const sitePlans = site.ok ? (await site.json()).plans : null;
+        const siteData = site.ok ? await site.json() : null;
         if (!current) return;
         setData(result);
-        setPlans(sitePlans);
+        setPlans(siteData?.plans ?? null);
+        setBrand(siteData?.brand.name[lang] ?? "");
+        track("preview_shown");
       })
       .catch(() => current && setFailed(true));
     return () => {
       current = false;
     };
-  }, [birth, attempt]);
+  }, [birth, attempt, lang]);
 
   if (birth === null) {
     return (
@@ -161,6 +166,18 @@ export default function Preview({ lang }: { lang: Lang }) {
           )}
 
           <div className="mt-5 grid gap-2 md:grid-cols-2">
+            <ShareCard
+              brand={brand}
+              heading={fill(c.cardHeading, { name: birth.name || (lang === "hi" ? "शिशु" : "Baby") })}
+              rows={[
+                { label: c.rashi, value: data.rashi[lang] },
+                { label: c.nakshatra, value: `${data.nakshatra[lang]} · ${c.pada} ${data.pada}` },
+                { label: c.letter, value: `${letters.primary.hi} (${letters.primary.en})` },
+              ]}
+              blessing={c.cardBlessing}
+              buttonLabel={c.card}
+              shareText={shareText}
+            />
             <a
               href={`https://wa.me/?text=${encodeURIComponent(shareText)}`}
               target="_blank"
@@ -169,10 +186,10 @@ export default function Preview({ lang }: { lang: Lang }) {
             >
               {c.share}
             </a>
-            <Link href={path(lang) + "#kundli"} className="flex h-12 items-center justify-center text-ink-600 underline">
-              {c.edit}
-            </Link>
           </div>
+          <Link href={path(lang) + "#kundli"} className="mt-2 flex h-10 items-center justify-center text-ink-600 underline">
+            {c.edit}
+          </Link>
         </div>
       </section>
 

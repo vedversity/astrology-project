@@ -12,9 +12,10 @@ Hindi or English Vedic Janam Patrika PDF. The full brief is in
 | 2 | Rule engine, numerology, rule-book text, names | Built and tested; rule-book awaits astrologer review |
 | 3 | PDF generator (Mini, Full, Premium; Hindi and English) | Built and tested |
 | 4 | Website (Hindi at `/`, English at `/en`) | Built and tested; payment not connected yet |
-| 5 | Payments and delivery | Not started |
-| 6 | Admin and growth | Not started |
-| 7 | Launch checklist | Not started |
+| + | Reports for adults, Kundli Milan, Rashifal, Choghadiya, city Panchang, guides | Built and tested |
+| 5 | Payments and delivery | Skipped for now (owner's decision) |
+| 6 | Admin and growth | Settings page, share card, analytics hook built; orders, coupons and referrals wait for Phase 5 |
+| 7 | Launch checklist | Written: see `LAUNCH.md`. Deployment files ready but not yet tried on a host |
 
 ## One-time setup (Windows)
 
@@ -260,6 +261,9 @@ and email typed there are not stored or sent anywhere yet.
 | `/panchang` | Today's Panchang for any city (tithi, nakshatra, sunrise, Rahu Kaal); also shown as a strip on the home page |
 | `/panchang/varanasi` (115 cities) | Today's Panchang for that city, by its own sunrise. Cities and their Hindi names are in `backend/app/places/data/cities_hi.json` |
 | `/kundli-milan` | Kundli Milan: free 36-guna (Ashtakoot) matching for two births, with a Manglik comparison and the classical exceptions. Tables are in `backend/app/astro/milan.py`, wording in `rulebook/milan.json` |
+| `/rashifal`, `/rashifal/mesh` (12) | Daily Rashifal for each Rashi, today and tomorrow, read from the Moon's transit (wording in `rulebook/daily.json`) |
+| `/choghadiya` | The day's and night's Choghadiya slots for a city; also shown on every Panchang page |
+| `/admin` | The owner's settings page (see below). Not linked from the site |
 | `/rashi-nakshatra` | Find your Rashi and Nakshatra: the form, with an explanation |
 | `/naam`, `/naam/revati` (27) | Baby names by nakshatra: the four letters and names from the names database |
 | `/grah`, `/grah/guru` (9) | What each planet means in the 12 houses, from the rule-book |
@@ -268,11 +272,23 @@ and email typed there are not stored or sent anywhere yet.
 | `/privacy`, `/terms`, `/refund`, `/disclaimer` | Policy pages. Drafts: have a lawyer check them, then set `DRAFT = false` in `frontend/lib/legal.ts` |
 | `/preview`, `/order`, `/thank-you` | A visitor's own result, order and download (hidden from search engines) |
 
+### The settings page (/admin)
+
+Open http://localhost:3000/admin and enter the admin password. There you can
+change the prices, the brand name and tagline, the contact email and WhatsApp
+number, and the astrologer's name, years of practice and short bio.
+
+The password is the `ADMIN_TOKEN` line in the file `backend\.env` (copy
+`.env.example` from the project folder to `backend\.env` if it does not exist,
+and choose a password of 12 or more characters). Without a password the page is
+switched off. The `.env` file never goes to Git.
+
 ### Changing things without coding
 
 | To change | Edit |
 |---|---|
-| Prices, plan names, plan bullet points, brand name | `backend/app/config/site.json` (shows on the site within five minutes) |
+| Prices, brand name, contact details, astrologer | the `/admin` page (shows on the site within five minutes) |
+| Plan names and bullet points | `backend/app/config/site.json` |
 | Any wording on the website | `frontend/lib/content.ts` |
 | Colours | the top of `frontend/app/globals.css` |
 | Sample pages on the site | run `.venv\Scripts\python -m scripts.make_site_samples` in `backend` |

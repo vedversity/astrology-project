@@ -7,6 +7,7 @@ import type { Place } from "@/lib/birth";
 import { content, fill } from "@/lib/content";
 import { guides } from "@/lib/guides";
 import { API_URL, type Lang, type Text } from "@/lib/site";
+import { track } from "@/lib/track";
 
 type Person = { name: string; date: string; time: string; timeKnown: boolean; place: Place | null };
 type Koota = { key: string; name: Text; about: Text; points: number; max: number; groom: Text; bride: Text };
@@ -62,6 +63,7 @@ export default function Milan({ lang }: { lang: Lang }) {
       });
       if (!response.ok) throw new Error(String(response.status));
       setResult(await response.json());
+      track("milan_done");
       setTimeout(() => resultBox.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     } catch {
       setError(c.failed);

@@ -13,34 +13,40 @@ GET  /places     birth-place search (name -> latitude, longitude, timezone)
 GET  /cities     the cities that have their own Panchang page
 GET  /guide/...  reference pages: nakshatras with names, planets in houses
 GET  /site       brand name, plans and prices (from app/config/site.json)
+GET/PUT /admin/site  the owner's settings page (needs the ADMIN_TOKEN password)
 
 Run it with:  .venv\\Scripts\\python -m uvicorn app.main:app --reload
 Then open:    http://127.0.0.1:8000/docs
 """
 
 import datetime as dt
+import hmac
 import os
 from typing import Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from fastapi import FastAPI, HTTPException, Query, Response
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from app import config, guide, places
 from app.astro import ENGINE_VERSION, calculate_chart
+from app.limits import admin_limit, pdf_limit
 from app.pdf import PdfError, generate_milan_pdf, generate_pdf
 from app.report import build_milan, build_panchang, build_preview, build_rashifal, build_report
 
-app = FastAPI(title="Janam Patrika API", version=ENGINE_VERSION)
+# On the live server (ENV=production) the interactive API pages are switched off
+_live = os.environ.get("ENV") == "production"
+app = FastAPI(title="Janam Patrika API", version=ENGINE_VERSION,
+              docs_url=None if _live else "/docs", redoc_url=None, openapi_url=None if _live else "/openapi.json")
 
 # The website runs on a different address from this API, so it must be named here.
 # Set FRONTEND_ORIGINS in .env for the live site (comma-separated).
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.environ.get("FRONTEND_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(","),
-    allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type"],
+    allow_methods=["GET", "POST", "PUT"],
+    allow_headers=["Content-Type", "X-Admin-Token"],
 )
 
 
@@ -108,6 +114,29 @@ def site():
     return config.site()
 
 
+def _admin(request: Request, x_admin_token: str = Header(default="")):
+    """Guard for the owner's pages. The password is the ADMIN_TOKEN line in backend/.env."""
+    expected = os.environ.get("ADMIN_TOKEN", "")
+    if len(expected) < 12:
+        raise HTTPException(status_code=503, detail="The admin page is switched off. Set ADMIN_TOKEN (12+ characters) to use it.")
+    if not hmac.compare_digest(x_admin_token.encode(), expected.encode()):
+        admin_limit(request)
+        raise HTTPException(status_code=401, detail="Wrong admin password.")
+
+
+@app.get("/admin/site", dependencies=[Depends(_admin)])
+def admin_site():
+    return config.site()
+
+
+@app.put("/admin/site", dependencies=[Depends(_admin)])
+def admin_save(update: config.SiteUpdate):
+    try:
+        return config.save_site(update)
+    except ValueError as error:
+        raise HTTPException(status_code=422, detail=str(error))
+
+
 @app.get("/places")
 def place_search(q: str = Query(min_length=2, max_length=60)):
     return places.search(q)
@@ -172,7 +201,7 @@ def milan(pair: MilanInput):
     return build_milan(_checked(pair.groom), _checked(pair.bride))
 
 
-@app.post("/milan/pdf")
+@app.post("/milan/pdf", dependencies=[Depends(pdf_limit)])
 def milan_pdf(pair: MilanPdfInput):
     result = build_milan(_checked(pair.groom), _checked(pair.bride))
 
@@ -195,7 +224,7 @@ def report(birth: ReportInput):
                         surname=birth.surname, kuldevi=birth.kuldevi)
 
 
-@app.post("/pdf")
+@app.post("/pdf", dependencies=[Depends(pdf_limit)])
 def pdf(birth: PdfInput):
     report = build_report(**_checked(birth), gender=birth.gender,
                           surname=birth.surname, kuldevi=birth.kuldevi)

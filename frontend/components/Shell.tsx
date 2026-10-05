@@ -81,6 +81,13 @@ export default async function Shell({ lang, children }: { lang: Lang; children: 
               </Link>
             ))}
           </nav>
+          {site?.contact?.whatsapp && (
+            <p className="mt-3">
+              <a href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="underline">
+                {c.about.whatsapp}
+              </a>
+            </p>
+          )}
           {site?.contact?.email && (
             <p className="mt-3">
               {c.footer.contact}:{" "}

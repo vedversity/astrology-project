@@ -1,0 +1,21 @@
+# Render "Blueprint" for the backend API (https://render.com). NOT YET TESTED.
+# In Render: New > Blueprint > pick this repository. Then fill in the two
+# values marked "sync: false" in the dashboard.
+services:
+  - type: web
+    name: janam-patrika-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    # Headless Chromium needs memory: use at least 1 GB (the free plan is too small for PDFs)
+    plan: standard
+    healthCheckPath: /health
+    envVars:
+      - key: ENV
+        value: production
+      # The website's address, so its pages are allowed to call this API
+      - key: FRONTEND_ORIGINS
+        sync: false
+      # The password for the /admin page: 12 or more characters
+      - key: ADMIN_TOKEN
+        sync: false
