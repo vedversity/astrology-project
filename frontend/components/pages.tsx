@@ -8,7 +8,7 @@ import ForgetButton from "@/components/ForgetButton";
 import KundliForm from "@/components/KundliForm";
 import { CityLinks } from "@/components/guides";
 import Panchang, { PanchangStrip, type PanchangData } from "@/components/Panchang";
-import { Breadcrumbs, LinkGrid, Schema } from "@/components/ui";
+import { Breadcrumbs, Schema, ToolIcon, Wheel } from "@/components/ui";
 import { guides } from "@/lib/guides";
 import Plans from "@/components/Plans";
 import { content, fill, type Content } from "@/lib/content";
@@ -18,7 +18,7 @@ import { API_URL, DEFAULT_CITY, getSite, path, SITE_URL, type Lang } from "@/lib
 const SAMPLE_PAGES = [1, 2, 3, 4];
 
 function Heading({ children }: { children: React.ReactNode }) {
-  return <h2 className="mb-3 font-serif text-2xl text-maroon-800">{children}</h2>;
+  return <h2 className="section-title">{children}</h2>;
 }
 
 /** Questions and answers, also given to search engines as FAQ data. */
@@ -36,8 +36,8 @@ function Faq({ c }: { c: Content }) {
     <section className="pb-10">
       <Heading>{c.faqTitle}</Heading>
       {c.faqs.map((item) => (
-        <details key={item.q} className="mb-2 rounded-xl border border-kesar-100 bg-white p-4">
-          <summary className="cursor-pointer font-semibold">{item.q}</summary>
+        <details key={item.q} className="faq">
+          <summary>{item.q}</summary>
           <p className="mt-2 text-ink-600">{item.a}</p>
         </details>
       ))}
@@ -78,76 +78,101 @@ export async function HomePage({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <section className="pt-6 pb-8 md:grid md:grid-cols-2 md:items-center md:gap-10">
-        <div>
-          <h1 className="font-serif text-[28px] leading-tight text-maroon-800 md:text-4xl">{c.home.h1}</h1>
-          <p className="mt-3 text-ink-600">{c.home.intro}</p>
-          <ul className="mt-4 flex flex-wrap gap-2 text-sm">
-            {c.home.chips.map((chip) => (
-              <li key={chip} className="rounded-full border border-kesar-100 bg-white px-3 py-1">
-                ✓ {chip}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="mt-6 md:mt-0">
-          <KundliForm lang={lang} />
+      <section className="bleed night rounded-b-[2rem] pt-8 pb-10 md:rounded-b-[3rem] md:pt-14 md:pb-16">
+        <Wheel className="absolute -top-24 -right-28 size-[26rem] text-haldi-300/20 md:top-[-6rem] md:right-[38%] md:size-[34rem]" />
+        <div className="relative md:grid md:grid-cols-[1.1fr_1fr] md:items-center md:gap-12">
+          <div>
+            {site?.brand.tagline[lang] && (
+              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-haldi-300/40 bg-white/10 px-3 py-1 text-sm text-haldi-300">
+                <span aria-hidden>✦</span>
+                {site.brand.tagline[lang]}
+              </p>
+            )}
+            <h1 className="font-serif text-[32px] leading-tight md:text-5xl md:leading-[1.15]">{c.home.h1}</h1>
+            <p className="mt-4 text-[17px] text-white/85 md:text-lg">{c.home.intro}</p>
+            <ul className="mt-5 flex flex-wrap gap-2 text-sm">
+              {c.home.chips.map((chip) => (
+                <li key={chip} className="rounded-full border border-white/20 bg-white/10 px-3 py-1 backdrop-blur">
+                  <span aria-hidden className="text-haldi-300">✓</span> {chip}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-7 text-ink-900 md:mt-0 [&>form]:shadow-2xl [&>form]:ring-1 [&>form]:ring-haldi-300/40">
+            <KundliForm lang={lang} />
+          </div>
         </div>
       </section>
 
-      <section className="pb-8">
+      <section className="pt-10 pb-10">
         <Heading>{g.tools.title}</Heading>
-        <LinkGrid items={g.tools.items.map((item) => ({ ...item, href: path(lang, item.href) }))} />
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+          {g.tools.items.map((item) => (
+            <Link key={item.href} href={path(lang, item.href)} className="card flex flex-col gap-3 last:col-span-2 last:flex-row last:items-center md:flex-row md:items-center md:last:col-span-1">
+              <ToolIcon page={item.href} />
+              <span>
+                <span className="block font-semibold text-maroon-800">{item.title}</span>
+                <span className="mt-0.5 block text-sm text-ink-600">{item.text}</span>
+              </span>
+            </Link>
+          ))}
+        </div>
       </section>
 
-      <section className="pb-8">
+      <section className="pb-10">
         <Heading>{c.home.freeTitle}</Heading>
         <div className="grid gap-3 md:grid-cols-3">
-          {c.home.free.map((item) => (
-            <div key={item.title} className="card">
-              <h3 className="font-semibold">{item.title}</h3>
-              <p className="mt-1 text-sm text-ink-600">{item.text}</p>
+          {c.home.free.map((item, index) => (
+            <div key={item.title} className="card flex gap-4">
+              <span className="badge font-serif text-xl">{index + 1}</span>
+              <div>
+                <h3 className="font-semibold text-maroon-800">{item.title}</h3>
+                <p className="mt-1 text-sm text-ink-600">{item.text}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="pb-8">
+      <section className="pb-10">
         <Heading>{c.home.plansTitle}</Heading>
-        <p className="mb-3 text-ink-600">{c.home.plansIntro}</p>
+        <p className="mb-4 text-ink-600">{c.home.plansIntro}</p>
         <Plans lang={lang} plans={site?.plans ?? null} />
         <Link
           href={path(lang, "/janam-patrika") + "#sample"}
-          className="mt-3 inline-block font-semibold text-kesar-700 underline"
+          className="mt-4 inline-block font-semibold text-kesar-700 underline decoration-kesar-500/50 underline-offset-4"
         >
           {c.home.sampleLink} →
         </Link>
       </section>
 
-      <section className="pb-8">
-        <Heading>{c.home.whyTitle}</Heading>
-        <ul className="card space-y-2">
-          {c.home.why.map((line) => (
-            <li key={line} className="flex gap-2">
-              <span aria-hidden className="text-kesar-600">
-                ✦
-              </span>
-              {line}
-            </li>
-          ))}
-        </ul>
+      <section className="pb-10">
+        <div className="night rounded-3xl p-6 shadow-xl md:p-10">
+          <Wheel className="absolute -right-20 -bottom-24 size-72 text-haldi-300/20" />
+          <h2 className="relative font-serif text-2xl md:text-3xl">{c.home.whyTitle}</h2>
+          <ul className="relative mt-5 grid gap-x-8 gap-y-3 md:grid-cols-2">
+            {c.home.why.map((line) => (
+              <li key={line} className="flex gap-3 text-white/90">
+                <span aria-hidden className="mt-0.5 text-haldi-300">
+                  ✦
+                </span>
+                {line}
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      <section className="pb-8">
+      <section className="pb-10">
         <PanchangStrip lang={lang} />
       </section>
 
-      <section className="pb-8">
+      <section className="pb-10">
         <Heading>{c.home.trustTitle}</Heading>
         <div className="grid gap-3 md:grid-cols-3">
           {c.home.trust.map((item) => (
-            <div key={item.title} className="card">
-              <h3 className="font-semibold">{item.title}</h3>
+            <div key={item.title} className="card border-t-4 border-t-haldi-400">
+              <h3 className="font-semibold text-maroon-800">{item.title}</h3>
               <p className="mt-1 text-sm text-ink-600">{item.text}</p>
             </div>
           ))}
@@ -169,7 +194,7 @@ export async function HomePage({ lang }: { lang: Lang }) {
 
       {/* Room for, and then the bar itself: always within thumb reach on a phone */}
       <div className="h-16 md:hidden" />
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-kesar-100 bg-white p-3 md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-kesar-100 bg-white/95 p-3 shadow-[0_-8px_24px_-12px_rgb(122_31_43/0.3)] backdrop-blur md:hidden">
         <div className="flex gap-2">
           <a href="#kundli" className="btn-primary">
             {c.home.stickyCta}

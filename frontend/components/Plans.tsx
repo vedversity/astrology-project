@@ -16,28 +16,31 @@ export default function Plans({ lang, plans, action }: Props) {
   if (!plans) return <p className="card text-ink-600">{c.unavailable}</p>;
 
   return (
-    <div className="grid gap-3 md:grid-cols-3">
+    <div className="grid gap-4 md:grid-cols-3 md:items-stretch md:pt-3">
       {plans.map((plan) => (
         <div
           key={plan.id}
-          className={`flex flex-col rounded-2xl bg-white p-5 ${
-            plan.recommended ? "border-2 border-kesar-500" : "border border-kesar-100"
+          className={`card relative flex flex-col ${
+            plan.recommended ? "border-2 border-kesar-500 bg-linear-to-b from-kesar-50 to-white shadow-xl md:-translate-y-3" : ""
           }`}
         >
           {plan.recommended && (
-            <span className="mb-2 self-start rounded-full bg-kesar-600 px-3 py-0.5 text-xs font-semibold text-white">
-              {c.recommended}
+            <span className="mb-2 self-start rounded-full bg-linear-to-r from-kesar-600 to-maroon-700 px-3 py-0.5 text-xs font-semibold text-white shadow">
+              ★ {c.recommended}
             </span>
           )}
-          <h3 className="font-serif text-xl text-maroon-800">{plan.name[lang]}</h3>
+          <h3 className="font-serif text-2xl text-maroon-800">{plan.name[lang]}</h3>
           <p className="text-sm text-ink-600">
             {fill(c.pages, { n: plan.pages })} · {plan.summary[lang]}
           </p>
-          <p className="mt-2 text-3xl font-bold">₹{plan.price}</p>
-          <ul className="mt-3 flex-1 space-y-1 text-ink-600">
+          <p className="mt-3 flex items-start font-bold text-maroon-800">
+            <span className="mt-1 text-xl">₹</span>
+            <span className="text-5xl leading-none">{plan.price}</span>
+          </p>
+          <ul className="mt-4 flex-1 space-y-2 border-t border-kesar-100 pt-4 text-ink-600">
             {plan.features[lang].map((feature) => (
               <li key={feature} className="flex gap-2">
-                <span aria-hidden className="text-kesar-600">
+                <span aria-hidden className="mt-1 flex size-5 shrink-0 items-center justify-center rounded-full bg-kesar-100 text-xs text-kesar-700">
                   ✓
                 </span>
                 {feature}
@@ -45,7 +48,7 @@ export default function Plans({ lang, plans, action }: Props) {
             ))}
           </ul>
           {action && (
-            <Link href={action.href(plan)} className={`mt-4 ${plan.recommended ? "btn-primary" : "btn-secondary"}`}>
+            <Link href={action.href(plan)} className={`mt-5 ${plan.recommended ? "btn-primary" : "btn-secondary"}`}>
               {action.label}
             </Link>
           )}

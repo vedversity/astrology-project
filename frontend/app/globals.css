@@ -9,6 +9,7 @@
   --color-kesar-700: #9a3412;
   --color-maroon-700: #7a1f2b; /* headings */
   --color-maroon-800: #5e1720;
+  --color-maroon-900: #3d0d15; /* the dark bands: hero and footer */
   --color-haldi-300: #fcd34d;  /* small accents only */
   --color-haldi-400: #f5b700;
   --color-ink-900: #1f1a17;    /* body text */
@@ -23,8 +24,14 @@ html {
 }
 
 body {
-  background: var(--color-kesar-50);
+  /* Cream, with a soft glow of haldi at the top right and kesar at the left */
+  background:
+    radial-gradient(60rem 32rem at 105% -5%, rgb(252 211 77 / 0.2), transparent 60%),
+    radial-gradient(48rem 30rem at -15% 30%, rgb(234 122 26 / 0.1), transparent 60%),
+    var(--color-kesar-50);
+  background-repeat: no-repeat;
   color: var(--color-ink-900);
+  overflow-x: clip;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -33,21 +40,90 @@ html[lang="hi"] body {
   line-height: 1.7;
 }
 
+/* A band that runs the full width of the screen, while its contents stay in line with the page */
+.bleed {
+  margin-inline: calc(50% - 50vw);
+  padding-inline: max(1rem, calc(50vw - 50%));
+}
+
+/* The dark maroon band with a scatter of stars: home page top, call-to-action, footer */
+.night {
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 22%, rgb(252 211 77 / 0.9), transparent 60%),
+    radial-gradient(1px 1px at 28% 68%, rgb(255 255 255 / 0.7), transparent 60%),
+    radial-gradient(1.5px 1.5px at 46% 14%, rgb(255 255 255 / 0.6), transparent 60%),
+    radial-gradient(1px 1px at 63% 78%, rgb(252 211 77 / 0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 82% 34%, rgb(255 255 255 / 0.7), transparent 60%),
+    radial-gradient(1px 1px at 93% 82%, rgb(252 211 77 / 0.7), transparent 60%),
+    radial-gradient(38rem 24rem at 85% -10%, rgb(234 122 26 / 0.45), transparent 65%),
+    linear-gradient(135deg, var(--color-maroon-900), var(--color-maroon-700) 60%, #8a2a1c);
+}
+
+@keyframes turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.wheel {
+  animation: turn 180s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wheel {
+    animation: none;
+  }
+}
+
 /* Every text field and button is at least 48px tall: easy to tap on a small phone */
 @layer components {
 .field {
-  @apply mt-1 h-12 w-full rounded-xl border border-gray-300 bg-white px-4 text-[17px] outline-none focus:border-kesar-500 focus:ring-2 focus:ring-kesar-500/40;
+  @apply mt-1 h-12 w-full rounded-xl border border-gray-300 bg-white px-4 text-[17px] outline-none transition-shadow focus:border-kesar-500 focus:ring-2 focus:ring-kesar-500/40;
 }
 .btn-primary {
-  @apply flex h-12 w-full items-center justify-center rounded-xl bg-kesar-600 px-6 text-lg font-semibold text-white transition-colors hover:bg-kesar-700 disabled:opacity-60;
+  @apply flex h-12 w-full items-center justify-center rounded-xl bg-linear-to-b from-kesar-600 to-kesar-700 px-6 text-lg font-semibold text-white shadow-lg shadow-kesar-600/30 transition hover:brightness-110 active:scale-[0.98] disabled:opacity-60;
 }
 .btn-secondary {
-  @apply flex h-12 w-full items-center justify-center rounded-xl border border-kesar-600 px-6 font-semibold text-kesar-700 hover:bg-kesar-50;
+  @apply flex h-12 w-full items-center justify-center rounded-xl border border-kesar-600 bg-white px-6 font-semibold text-kesar-700 transition hover:bg-kesar-50 active:scale-[0.98];
 }
 .card {
-  @apply rounded-2xl border border-kesar-100 bg-white p-5 shadow-sm;
+  @apply rounded-2xl border border-kesar-100 bg-white p-5 shadow-[0_1px_2px_rgb(122_31_43/0.06),0_10px_28px_-14px_rgb(122_31_43/0.22)];
+}
+/* A card that is a link: lifts a little under the finger or the mouse */
+a.card {
+  @apply transition duration-200 hover:-translate-y-0.5 hover:border-kesar-500 hover:shadow-[0_2px_4px_rgb(122_31_43/0.08),0_16px_32px_-14px_rgb(122_31_43/0.32)];
 }
 .label {
   @apply block text-sm font-semibold;
+}
+/* Section heading with a short saffron-to-gold rule under it */
+.section-title {
+  @apply mb-4 font-serif text-2xl text-maroon-800 md:text-3xl;
+}
+.section-title::after {
+  content: "";
+  @apply mt-2 block h-[3px] w-14 rounded-full bg-linear-to-r from-kesar-500 to-haldi-400;
+}
+/* A small round badge that holds an icon or a number */
+.badge {
+  @apply flex size-11 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-kesar-100 to-haldi-300/60 text-kesar-700;
+}
+/* Questions that open and close */
+.faq {
+  @apply mb-2 rounded-xl border border-kesar-100 bg-white p-4 transition-shadow open:shadow-md;
+}
+.faq summary {
+  @apply flex cursor-pointer list-none items-start justify-between gap-3 font-semibold;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: "+";
+  @apply flex size-6 shrink-0 items-center justify-center rounded-full bg-kesar-50 text-lg leading-none text-kesar-700 transition-transform;
+}
+.faq[open] summary::after {
+  transform: rotate(45deg);
 }
 }
